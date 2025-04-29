@@ -11,6 +11,9 @@
 .fs-14 {
   font-size: 14px;
 }
+.fs-13 {
+  font-size: 13px;
+}
 
 /* Text-Size - End */
 
@@ -41,6 +44,12 @@
 
 .bg-F0F5F6 {
   background-color: #F0F5F6;
+}
+.bg-4FD1C5 {
+  background-color: #4FD1C5;
+}
+.bg-E84D4D {
+  background-color: #E84D4D;
 }
 
 /* Background-Color-End */
