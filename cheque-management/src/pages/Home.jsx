@@ -17,7 +17,7 @@ const Home = () => {
               <div className="main-content">
                 <div className="container-fluid p-4">
                   {/* Status Cards */}
-                  <div className="row mb-4">
+                  <div className="row mb-2">
                     <div className="col-md-4 mb-3">
                       <div className="card shadow-sm border-0 rounded-4">
                         <div className="card-body">
@@ -28,7 +28,7 @@ const Home = () => {
                               </svg>
                             </div>
                             <div>
-                              <h6 className="mb-1 fw-medium text-muted">Today's Status</h6>
+                              <h6 className="mb-1 fw-medium text-445B64 fs-14">Today's Status</h6>
                               <h4 className="mb-0 text-00C7BE fw-bold">$1,000</h4>
                             </div>
                           </div>
@@ -50,7 +50,7 @@ const Home = () => {
                               </svg>
                             </div>
                             <div>
-                              <h6 className="mb-1 fw-medium text-muted">Weekly Status</h6>
+                              <h6 className="mb-1 fw-medium text-445B64 fs-14">Weekly Status</h6>
                               <h4 className="mb-0 text-00C7BE fw-bold">$25,000</h4>
                             </div>
                           </div>
@@ -72,7 +72,7 @@ const Home = () => {
                               </svg>
                             </div>
                             <div>
-                              <h6 className="mb-1 fw-medium text-muted">Monthly Status</h6>
+                              <h6 className="mb-1 fw-medium text-445B64 fs-14">Monthly Status</h6>
                               <h4 className="mb-0 text-00C7BE fw-bold">$53,000</h4>
                             </div>
                           </div>
@@ -92,32 +92,46 @@ const Home = () => {
                       <svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" viewBox="0 0 15 16" fill="none">
                         <path d="M9.16667 12.1667H3.33333V10.5H9.16667M11.6667 8.83333H3.33333V7.16667H11.6667M11.6667 5.5H3.33333V3.83333H11.6667M13.3333 0.5H1.66667C0.741667 0.5 0 1.24167 0 2.16667V13.8333C0 14.2754 0.175595 14.6993 0.488155 15.0118C0.800716 15.3244 1.22464 15.5 1.66667 15.5H13.3333C13.7754 15.5 14.1993 15.3244 14.5118 15.0118C14.8244 14.6993 15 14.2754 15 13.8333V2.16667C15 1.72464 14.8244 1.30072 14.5118 0.988155C14.1993 0.675595 13.7754 0.5 13.3333 0.5Z" fill="#445B64" />
                       </svg>
-                      <h6 className='ms-2 mb-0 text-445B64'>New Checks</h6>
+                      <h6 className='ms-2 mb-0 text-445B64 fs-14'>New Checks</h6>
                     </div>
                     <div className="card-body">
                       <div className="row g-3 new-cheque-form">
                         <div className="col-md-6">
                           <label className="form-label text-445B64">License Image</label>
                           <div className="d-flex gap-3">
-                            <div className="form-control text-center position-relative">
-                              <input class="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" />
-                              <i class="fa-solid fa-arrow-up-from-bracket"></i>
-                              <div className="text-445B64">Upload License Image </div>
+                            <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
+                              <input class="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" style={{ opacity: 0, cursor: 'pointer' }} />
+                              <div className="">
+                                <i class="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
+                                <div className="text-445B64">Upload License Image </div>
+                              </div>
                             </div>
-                            <button className="form-control border dashed text-center py-4">
-                              <i className="bi bi-camera"></i> Capture License Image
-                            </button>
+                            <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
+                              <input class="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" style={{ opacity: 0, cursor: 'pointer' }} />
+                              <div className="">
+                                <i class="fa-solid fa-camera fs-4 text-01A99A"></i>
+                                <div className="text-445B64">Capture License Image</div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                         <div className="col-md-6">
-                          <label className="form-label text-445B64">Check Image</label>
+                          <label className="form-label text-445B64">Cheque Image</label>
                           <div className="d-flex gap-3">
-                            <button className="form-control border dashed text-center py-4">
-                              <i className="bi bi-upload"></i> Upload Image
-                            </button>
-                            <button className="form-control border dashed text-center py-4">
-                              <i className="bi bi-camera"></i> Capture Image
-                            </button>
+                            <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
+                              <input class="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" style={{ opacity: 0, cursor: 'pointer' }} />
+                              <div className="">
+                                <i class="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
+                                <div className="text-445B64">Upload Cheque Image </div>
+                              </div>
+                            </div>
+                            <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
+                              <input class="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" style={{ opacity: 0, cursor: 'pointer' }} />
+                              <div className="">
+                                <i class="fa-solid fa-camera fs-4 text-01A99A"></i>
+                                <div className="text-445B64">Capture Cheque Image</div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                         <div className="col-lg-8">
@@ -158,7 +172,7 @@ const Home = () => {
                           <textarea className="form-control h-100">Lorem Ipsum..</textarea>
                         </div>
 
-                        <div className="col-lg-4 me-auto  text-center">
+                        <div className="col-lg-4 me-auto mt-0 text-center">
                           <button className="btn theme-btn px-5 py-2 rounded-3 mt-3 w-100">Save</button>
                         </div>
                       </div>

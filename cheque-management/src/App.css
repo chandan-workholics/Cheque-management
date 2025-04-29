@@ -7,6 +7,12 @@
   font-family: "DM Sans", sans-serif;
 }
 
+/* Text-Size - Start */
+.fs-14{
+  font-size: 14px;
+}
+/* Text-Size - End */
+
 /* Background-Color-Start */
 .bg-EEEEEE {
   background-color: #EEEEEE;
@@ -194,6 +200,11 @@
     border: 1px solid #DEE6E9;
     background: #F0F5F6;
     color: #445B64;
+  }
+
+  .inputFile{
+    border: 1px dashed #D7D7D7;
+    background: #F6FFFE;
   }
 }
 
