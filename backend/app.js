@@ -5,6 +5,8 @@ const { scanCheck } = require('./controllers/visionController');
 
 require('dotenv').config();
 
+require('./db/conn');
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
