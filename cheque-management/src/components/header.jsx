@@ -14,7 +14,7 @@ const Header = () => {
                         </a>
                     </div>
                     {/* Navbar right-side */}
-                    <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <ul className="navbar-nav ms-auto mb-2 mb-lg-0 d-flex">
                         <li className="nav-item">
                             <a className="nav-link" href="#">
                                 <i className="fa-solid fa-bell fs-5"></i>
