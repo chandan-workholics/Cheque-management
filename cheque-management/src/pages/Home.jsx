@@ -37,7 +37,7 @@ const Home = () => {
     const formData = new FormData();
     formData.append('image', file);
     try {
-      const response = await fetch('http://localhost:5000/scan-check', {
+      const response = await fetch('http://206.189.130.102:5000/scan-check', {
         method: 'POST',
         body: formData,
       });
