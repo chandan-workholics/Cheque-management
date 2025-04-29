@@ -8,9 +8,10 @@
 }
 
 /* Text-Size - Start */
-.fs-14{
+.fs-14 {
   font-size: 14px;
 }
+
 /* Text-Size - End */
 
 /* Background-Color-Start */
@@ -36,6 +37,10 @@
 
 .bg-FFF6F6 {
   background-color: #FFF6F6;
+}
+
+.bg-F0F5F6 {
+  background-color: #F0F5F6;
 }
 
 /* Background-Color-End */
@@ -202,10 +207,54 @@
     color: #445B64;
   }
 
-  .inputFile{
+  .inputFile {
     border: 1px dashed #D7D7D7;
     background: #F6FFFE;
   }
 }
 
 /* Home - CSS - End */
+
+
+/* Main-Content - CSS - Start */
+.main-content {
+  .table-circular-icon {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #DEE6E9;
+    color: #445B64;
+    border-radius: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  table {
+    th {
+      color: #445B64 !important;
+      font-weight: normal;
+    }
+    td {
+      color: #0D161A !important;
+      font-weight: 500;
+    }
+
+    th,
+    th i,
+    td,
+    td i {
+      vertical-align: middle;
+      font-size: 12px;
+    }
+  }
+
+  .table-checkbox {
+    width: 20px;
+    height: 20px;
+    box-shadow: rgb(204, 219, 232) 0px -1px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 0px 0px inset;
+    border-radius: 5px !important;
+    border: #DEE6E9;
+  }
+}
+
+/* Main-Content - CSS - End */

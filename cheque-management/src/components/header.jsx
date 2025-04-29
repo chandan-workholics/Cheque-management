@@ -10,7 +10,7 @@ const Header = () => {
                     <div className="d-flex align-items-center">
                         <a className="navbar-brand d-flex align-items-center" href="#">
                             <img src={logo} alt="" className="me-2" />
-                            <span>Check Management</span>
+                            <span className='fs-6 fw-semibold'>Check Management</span>
                         </a>
                     </div>
                     {/* Navbar right-side */}
