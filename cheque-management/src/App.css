@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "DM Sans", sans-serif;
+}
+
+/* Background-Color-Start */
+.bg-EEEEEE {
+  background-color: #EEEEEE;
+}
+
+.bg-00C7BE {
+  background-color: #00C7BE;
+}
+
+.bg-F6F6F6 {
+  background-color: #F6F6F6;
+}
+
+/* Background-Color-End */
+
+/* Text-Color-Start */
+.text-445B64 {
+  color: #445B64;
+}
+
+.text-00C7BE {
+  color: #00C7BE;
+}
+
+/* Text-Color-End */
+
+/* SignIn - CSS - Start */
+.sign-main-container {
+  height: 100vh;
+}
+
+.sign-left-bg {
+  background-image: url('./assets/images/signLeftImg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.sign-btn {
+  background-color: #00C7BE;
+  border: 1px solid #00C7BE;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  border-radius: 10px;
+  color: #FFFFFF;
+  padding: 12px;
+}
+
+.sign-btn:hover {
+  border: 1px solid #00C7BE;
+  color: #00C7BE;
+  background-color: #FFFFFF;
+}
+
+.form-control {
+  border: 1px solid #EEEEEE;
+  box-shadow: none;
+  padding: 12px;
+}
+
+.form-control:focus {
+  border-color: #00C7BE;
+  box-shadow: none;
+}
+
+.form-switch .form-check-input {
+  width: 2.8em;
+  height: 1.4em;
+  margin-right: 7px;
+}
+
+.form-switch .form-check-input:focus {
+  box-shadow: none;
+}
+
+.form-switch {
+  display: flex;
+  align-items: center;
+}
+
+/* SignIn - CSS - End */
+
+/* Header - CSS - Start */
+.header {
+  border-bottom: 1px solid #F0F5F6;
+}
+
+.header-icon {
+  width: 45px;
+  height: 45px;
+  border: 1px solid #F0F5F6;
+  background: #F8FDFF;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+/* Header - CSS - End */
+
+/* Sidebar - CSS - Start */
+.sidebar {
+  height: 92.3vh;
+  background-color: #FFFFFF;
+  color: #445B64;
+}
+
+.sidebar .nav-link {
+  color: #445B64;
+  transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+  background-color: #EAF9F7;
+  color: #445B64;
+
+  .sidebar-icon {
+    background: #00C7BE;
+
+    svg path{
+      fill: #FFFFFF;
+    }
+  }
+}
+
+.sidebar-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 12px;
+  padding: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 3.5px 5.5px 0px #00000005;
+}
+
+
+
+/* Sidebar - CSS - End */
+
+
+/* MainContent - CSS - Start */
+
+/* MainContent - CSS - End */
