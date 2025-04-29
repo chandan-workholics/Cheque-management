@@ -74,7 +74,7 @@ const Home = () => {
             </div>
             <div className="col-lg-10 bg-F6F6F6">
               <div className="main-content">
-                <div className="container-fluid p-4">
+                <div className="container-fluid p-3 px-2">
                   {/* Status Cards */}
                   <div className="row mb-2">
                     <div className="col-md-4 mb-3">
