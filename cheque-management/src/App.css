@@ -20,6 +20,18 @@
   background-color: #F6F6F6;
 }
 
+.bg-F5EEFF {
+  background-color: #F5EEFF;
+}
+
+.bg-EFFFFE {
+  background-color: #EFFFFE;
+}
+
+.bg-FFF6F6 {
+  background-color: #FFF6F6;
+}
+
 /* Background-Color-End */
 
 /* Text-Color-Start */
@@ -29,6 +41,18 @@
 
 .text-00C7BE {
   color: #00C7BE;
+}
+
+.text-515151 {
+  color: #515151;
+}
+
+.text-01A99A {
+  color: #01A99A;
+}
+
+.text-E84D4D {
+  color: #E84D4D;
 }
 
 /* Text-Color-End */
@@ -45,7 +69,8 @@
   background-position: center;
 }
 
-.sign-btn {
+.sign-btn,
+.theme-btn {
   background-color: #00C7BE;
   border: 1px solid #00C7BE;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
@@ -60,13 +85,14 @@
   background-color: #FFFFFF;
 }
 
-.form-control {
+.sign-page .form-control {
   border: 1px solid #EEEEEE;
   box-shadow: none;
   padding: 12px;
 }
 
-.form-control:focus {
+.form-control:focus,
+.form-select:focus {
   border-color: #00C7BE;
   box-shadow: none;
 }
@@ -133,7 +159,7 @@
   .sidebar-icon {
     background: #00C7BE;
 
-    svg path{
+    svg path {
       fill: #FFFFFF;
     }
   }
@@ -150,11 +176,25 @@
   box-shadow: 0px 3.5px 5.5px 0px #00000005;
 }
 
-
-
 /* Sidebar - CSS - End */
 
 
-/* MainContent - CSS - Start */
+/* Home - CSS - Start */
 
-/* MainContent - CSS - End */
+.new-cheque-form {
+  .form-label {
+    font-size: 14px;
+    color: #445B64;
+  }
+
+  .form-control,
+  .form-select {
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #DEE6E9;
+    background: #F0F5F6;
+    color: #445B64;
+  }
+}
+
+/* Home - CSS - End */
