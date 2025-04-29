@@ -1,8 +1,77 @@
 import React from 'react';
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
+import { useState } from 'react';
+import axios from 'axios';
 
 const Home = () => {
+  const [chequeImage, setChequeImage] = useState(null);
+  const [extractedText, setExtractedText] = useState('');
+  const [formData, setFormData] = useState({
+    customerName: '',
+    licenseNo: '',
+    date: '',
+    company: '',
+    checkType: '',
+    amount: '',
+  });
+ 
+  const handleChequeImageChange = (e) => {
+        const file = e.target.files[0];
+        setChequeImage(file);
+      };
+
+      const handleLicenseImageChange = (e) => {
+            const file = e.target.files[0];
+            setLicenseImage(file);
+          };
+
+          const handleSubmit = async (e) => {
+            e.preventDefault();
+          
+            if (!chequeImage) {
+              alert("Please upload a cheque image.");
+              return;
+            }
+            const formData = new FormData();
+            formData.append('image', chequeImage); 
+            try {
+              const response = await fetch('http://localhost:5000/scan-check', {
+                method: 'POST',
+                body: formData,
+              });
+              const result = await response.json();
+              console.log('Extracted Data:', result); 
+              // Assuming result is in the form of an object with extracted data
+              if (result && result.customerName) {
+                const parsedData = {
+                  customerName: result.customerName || '',
+                  licenseNo: result.licenseNo || '',
+                  date: result.date || '',
+                  company: result.company || '',
+                  checkType: result.checkType || '',
+                  amount: result.amount || ''
+                };
+                
+                setFormData(parsedData); // Populate the form fields with the extracted data
+              }
+            } catch (error) {
+              console.error('Error during image upload:', error);
+            }
+          };
+          
+        
+          const parseExtractedData = (extractedText) => {
+            const data = {
+              customerName: 'Rohit Sharma', 
+              licenseNo: '4464644646',
+              date: '2025-04-29', 
+              company: 'State Bank of India', 
+              checkType: 'Type 1',
+              amount: '50,0000', 
+            }
+            return data;
+          };
 
   return (
     <>
@@ -119,14 +188,14 @@ const Home = () => {
                           <label className="form-label text-445B64">Cheque Image</label>
                           <div className="d-flex gap-3">
                             <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
-                              <input class="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" style={{ opacity: 0, cursor: 'pointer' }} />
+                              <input class="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile"  onChange={handleChequeImageChange} style={{ opacity: 0, cursor: 'pointer' }} />
                               <div className="">
                                 <i class="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
                                 <div className="text-445B64">Upload Cheque Image </div>
                               </div>
                             </div>
                             <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
-                              <input class="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" style={{ opacity: 0, cursor: 'pointer' }} />
+                              <input class="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleLicenseImageChange} style={{ opacity: 0, cursor: 'pointer' }} />
                               <div className="">
                                 <i class="fa-solid fa-camera fs-4 text-01A99A"></i>
                                 <div className="text-445B64">Capture Cheque Image</div>
@@ -138,24 +207,24 @@ const Home = () => {
                           <div className="row">
                             <div className="col-md-4 mb-3">
                               <label className="form-label text-445B64">Customer Name</label>
-                              <input type="text" className="form-control" placeholder="Rohit Sharma" />
+                              <input type="text" className="form-control" placeholder="Rohit Sharma"  value={formData.customerName || ''} onChange={(e) => setFormData({ ...formData, customerName: e.target.value })}/>
                             </div>
                             <div className="col-md-4 mb-3">
                               <label className="form-label text-445B64">License No</label>
-                              <input type="text" className="form-control" placeholder="4464644646" />
+                              <input type="text" className="form-control" placeholder="4464644646"  value={formData.licenseNo || ''} onChange={(e) => setFormData({ ...formData, licenseNo: e.target.value })} />
                             </div>
                             <div className="col-md-4 mb-3">
                               <label className="form-label text-445B64">Date</label>
-                              <input type="date" className="form-control" />
+                              <input type="date" className="form-control"   value={formData.date || ''} onChange={(e) => setFormData({ ...formData, date: e.target.value })}/>
                             </div>
 
                             <div className="col-md-4 mb-3">
                               <label className="form-label text-445B64">Company</label>
-                              <input type="text" className="form-control" placeholder="State Bank of India" />
+                              <input type="text" className="form-control" placeholder="State Bank of India" value={formData.company || ''} onChange={(e) => setFormData({ ...formData, company: e.target.value })}/>
                             </div>
                             <div className="col-md-4 mb-3">
                               <label className="form-label text-445B64">Check Type</label>
-                              <select className="form-select">
+                              <select className="form-select" value={formData.checkType || ''} onChange={(e) => setFormData({ ...formData, checkType: e.target.value })}>
                                 <option>Select</option>
                                 <option>Type 1</option>
                                 <option>Type 2</option>
@@ -163,7 +232,7 @@ const Home = () => {
                             </div>
                             <div className="col-md-4 mb-3">
                               <label className="form-label text-445B64">Amount</label>
-                              <input type="text" className="form-control" placeholder="50,0000" />
+                              <input type="text" className="form-control" placeholder="50,0000"  value={formData.amount || ''} onChange={(e) => setFormData({ ...formData, amount: e.target.value })}/>
                             </div>
                           </div>
                         </div>
@@ -173,7 +242,7 @@ const Home = () => {
                         </div>
 
                         <div className="col-lg-4 me-auto mt-0 text-center">
-                          <button className="btn theme-btn px-5 py-2 rounded-3 mt-3 w-100">Save</button>
+                          <button className="btn theme-btn px-5 py-2 rounded-3 mt-3 w-100" onClick={handleSubmit}>Save</button>
                         </div>
                       </div>
                     </div>
@@ -189,3 +258,5 @@ const Home = () => {
 }
 
 export default Home
+
+
