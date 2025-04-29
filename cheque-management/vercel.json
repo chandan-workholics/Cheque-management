@@ -1,0 +1,9 @@
+{
+    "rewrites": [
+      {
+        "source": "/api/scan-check",
+        "destination": "http://206.189.130.102:5000/scan-check"
+      }
+    ]
+  }
+  
