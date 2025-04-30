@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const cors = require('cors');
 const path = require('path');
+const bcrypt = require('bcrypt');
 const routes = require('./router');
 const { scanCheck } = require('./controllers/visionController');
 const { scanLicense } = require('./controllers/visionController');
