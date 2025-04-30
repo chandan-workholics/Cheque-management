@@ -2,11 +2,9 @@ import React from 'react';
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import { useState } from 'react';
-import axios from 'axios';
+const URL = process.env.REACT_APP_URL;
 
 const Home = () => {
-  const [chequeImage, setChequeImage] = useState(null);
-  const [licenseImage, setLicenseImage] = useState();
 
   const [formData, setFormData] = useState({
     customerName: '',
@@ -18,15 +16,7 @@ const Home = () => {
     imageUrl: '',
   });
 
-  const handleChequeImageChange = (e) => {
-    const file = e.target.files[0];
-    setChequeImage(file);
-  };
 
-  const handleLicenseImageChange = (e) => {
-    const file = e.target.files[0];
-    setLicenseImage(file);
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,7 +28,7 @@ const Home = () => {
     const formData = new FormData();
     formData.append('image', file);
     try {
-      const response = await fetch('http://206.189.130.102:5000/scan-check', {
+      const response = await fetch(`${URL}/scan-check`, {
         method: 'POST',
         body: formData,
       });
@@ -160,16 +150,16 @@ const Home = () => {
                           <label className="form-label text-445B64">License Image</label>
                           <div className="d-flex gap-3">
                             <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
-                              <input class="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" style={{ opacity: 0, cursor: 'pointer' }} />
+                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmit} style={{ opacity: 0, cursor: 'pointer' }} />
                               <div className="">
-                                <i class="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
+                                <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
                                 <div className="text-445B64">Upload License Image </div>
                               </div>
                             </div>
                             <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
-                              <input class="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" style={{ opacity: 0, cursor: 'pointer' }} />
+                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmit} style={{ opacity: 0, cursor: 'pointer' }} />
                               <div className="">
-                                <i class="fa-solid fa-camera fs-4 text-01A99A"></i>
+                                <i className="fa-solid fa-camera fs-4 text-01A99A"></i>
                                 <div className="text-445B64">Capture License Image</div>
                               </div>
                             </div>
@@ -179,16 +169,16 @@ const Home = () => {
                           <label className="form-label text-445B64">Cheque Image</label>
                           <div className="d-flex gap-3">
                             <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
-                              <input class="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmit} style={{ opacity: 0, cursor: 'pointer' }} />
+                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmit} style={{ opacity: 0, cursor: 'pointer' }} />
                               <div className="">
-                                <i class="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
+                                <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
                                 <div className="text-445B64">Upload Cheque Image </div>
                               </div>
                             </div>
                             <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
-                              <input class="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleLicenseImageChange} style={{ opacity: 0, cursor: 'pointer' }} />
+                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmit} style={{ opacity: 0, cursor: 'pointer' }} />
                               <div className="">
-                                <i class="fa-solid fa-camera fs-4 text-01A99A"></i>
+                                <i className="fa-solid fa-camera fs-4 text-01A99A"></i>
                                 <div className="text-445B64">Capture Cheque Image</div>
                               </div>
                             </div>
@@ -196,7 +186,7 @@ const Home = () => {
                         </div>
                         <div className='col-lg-6'>
                           <div className='row'>
-                            <img src={formData?.imageUrl} alt="" />
+                            {formData?.imageUrl && <img src={formData.imageUrl} alt="Profile" />}
                           </div>
                         </div>
                         <div className="col-lg-8">
@@ -221,7 +211,6 @@ const Home = () => {
                             <div className="col-md-4 mb-3">
                               <label className="form-label text-445B64">Check Type</label>
                               <input type="text" className="form-control" value={formData.checkType || ''} onChange={(e) => setFormData({ ...formData, checkType: e.target.value })} />
-
                             </div>
                             <div className="col-md-4 mb-3">
                               <label className="form-label text-445B64">Amount</label>
@@ -231,7 +220,7 @@ const Home = () => {
                         </div>
                         <div className="col-md-4 mb-3 pb-4">
                           <label className="form-label text-445B64">Comments</label>
-                          <textarea className="form-control h-100">Lorem Ipsum..</textarea>
+                          <textarea className="form-control h-100" defaultValue="Lorem Ipsum.." />
                         </div>
 
                         <div className="col-lg-4 me-auto mt-0 text-center">

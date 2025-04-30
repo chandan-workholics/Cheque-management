@@ -12,7 +12,7 @@ import User from "./pages/User";
 function App() {
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <Routes>
           <Route path="/cheque-management/" element={<SignIn />} />
           <Route path="/cheque-management/sign-up" element={<SignUp />} />
