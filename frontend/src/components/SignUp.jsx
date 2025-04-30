@@ -8,13 +8,13 @@ const URL = process.env.REACT_APP_URL;
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const[formData,setFormData] = useState({
-    name:'',
-    email:'',
-    password:'',
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
   })
-  const[formErrors,setFormErrors] = useState({});
-  const[loading,setLoading] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
 
   const validateForm = () => {
@@ -37,51 +37,51 @@ const SignUp = () => {
     return errors;
   };
 
-  const handleChange = (e) =>{
-    const{name,value} = e.target;
-    setFormData({...formData, [name]:value })
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value })
   };
 
-  const handleSubmit = async(e) =>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errors = validateForm();
     setFormErrors(errors);
     if (Object.keys(errors).length > 0) {
       return;
     }
-    
+
     setLoading(true);
     try {
-      const response = await axios.post(`${URL}/auth/register-vendor`,formData,{
+      const response = await axios.post(`${URL}/auth/register-vendor`, formData, {
         headers: {
           'Content-Type': 'application/json',
         }
       })
       console.log("response");
-      if(response.status >= 200 && response.status < 300){
+      if (response.status >= 200 && response.status < 300) {
         setTimeout(() => {
           toast.success('OTP send successfully');
           navigate('/cheque-management/verify-otp')
           localStorage.setItem("email", formData.email)
         }, 1000);
-      }else{
+      } else {
         setTimeout(() => {
           toast.error("Failed to send OTP")
         }, 2000);
       }
     } catch (error) {
-      console.log("Error occured in submitting form",error);
-      toast.error('An error occured while submitting the form');
-    }finally{
+      console.log("Error in register user", error);
+      toast.error('Error in register user');
+    } finally {
       setLoading(false);
     }
   }
-  
+
   return (
     <>
       <div className="container-fluid sign-page">
         <div className="row sign-main-container">
-        <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="colored"  />
+          <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="colored" />
           <div className="col-lg-6 sign-left-bg h-100 d-flex justify-content-center align-items-center">
             <img src={logoLeft} alt="" className="" />
           </div>
@@ -94,14 +94,15 @@ const SignUp = () => {
                   <input className="form-control mb-3 rounded-3" type="text" id='name' name='name' value={formData.name} onChange={handleChange} placeholder="Full name" aria-label="example" />
                   <input className="form-control mb-3 rounded-3" type="email" id='email' name='email' value={formData.email} onChange={handleChange} placeholder="Your email address" aria-label="example" />
                   <input className="form-control mb-3 rounded-3" type="password" id='password' name='password' value={formData.password} onChange={handleChange} placeholder="Password" aria-label="example" />
-                  <div className="form-check form-switch mb-4 p-0">
-                    <div className="form-check form-switch">
-                      <input className="form-check-input" type="checkbox" role="switch" id="switchCheckDefault" />
-                      <label className="form-check-label text-445B64" htmlFor="switchCheckDefault">Remember me </label>
-                    </div>
-                  </div>
-                  <button type="button" className="btn w-100 sign-btn mb-3" onClick={handleSubmit}>Sign Up</button>
-                  <h6 className="text-center text-445B64">Don't have an account? <Link to='/cheque-management/' className='text-00C7BE text-decoration-none'> Sign up</Link></h6>
+                  <button type="button" className="btn w-100 sign-btn mb-3" onClick={handleSubmit}>  {loading ? (
+                    <>
+                      <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                      Signing up...
+                    </>
+                  ) : (
+                    "Sign Up"
+                  )}</button>
+                  <h6 className="text-center text-445B64">Don't have an account? <Link to='/cheque-management/' className='text-00C7BE text-decoration-none'> Sign in</Link></h6>
                 </div>
               </div>
             </div>
