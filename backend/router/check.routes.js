@@ -7,5 +7,7 @@ router.get('/get-all-check', checkController.getAllChecks);
 router.get('/get-checkById/:id', checkController.getCheckById);
 router.put('/update-check/:id', checkController.updateCheckById);
 router.delete('/delete-check/:id', checkController.deleteCheckById);
+router.get('/statuss', checkController.getCheckStatuss);
+router.get('/status', checkController.getCheckStatus);
 
 module.exports = router;

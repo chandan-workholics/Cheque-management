@@ -9,6 +9,7 @@ const checkSchema = new mongoose.Schema({
   company: String,
   checkType: String,
   amount: String,
+  status: { type: String, enum: ['bad', 'good'], default: 'good' },
   createdAt: {
     type: Date,
     default: Date.now
