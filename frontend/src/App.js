@@ -8,6 +8,8 @@ import ChequeDetails from "./pages/ChequeDetails";
 import Report from "./pages/Report";
 import ReportExport from "./pages/ReportExport";
 import User from "./pages/User";
+import Support from "./pages/Support";
+import Otp from "./pages/Otp";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
           <Route path="/cheque-management/report" element={<Report />} />
           <Route path="/cheque-management/export-report" element={<ReportExport />} />
           <Route path="/cheque-management/user" element={<User />} />
+          <Route path="/cheque-management/support" element={<Support />} />
+          <Route path="/cheque-management/verify-otp" element={<Otp />} />
         </Routes>
       </BrowserRouter>
     </>
