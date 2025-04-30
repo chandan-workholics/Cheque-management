@@ -6,6 +6,7 @@ import axios from 'axios';
 
 const Home = () => {
   const [chequeImage, setChequeImage] = useState(null);
+  const [licenseImage, setLicenseImage] = useState();
 
   const [formData, setFormData] = useState({
     customerName: '',
