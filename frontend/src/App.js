@@ -10,6 +10,10 @@ import ReportExport from "./pages/ReportExport";
 import User from "./pages/User";
 import Support from "./pages/Support";
 import Otp from "./pages/Otp";
+import VerifyEmail from "./pages/VerifyEmail";
+import VerifyEmailExpired from "./pages/VerifyEmailExpired";
+import VerifyEmailSuccess from "./pages/VerifyEmailSuccess";
+import MyTicket from "./pages/MyTicket";
 
 function App() {
   return (
@@ -26,6 +30,10 @@ function App() {
           <Route path="/cheque-management/user" element={<User />} />
           <Route path="/cheque-management/support" element={<Support />} />
           <Route path="/cheque-management/verify-otp" element={<Otp />} />
+          <Route path="/cheque-management/verify-email" element={<VerifyEmail />} />
+          <Route path="/cheque-management/email-verification-expired" element={<VerifyEmailExpired />} />
+          <Route path="/cheque-management/email-verification-successfully" element={<VerifyEmailSuccess />} />
+          <Route path="/cheque-management/my-ticket" element={<MyTicket />} />
         </Routes>
       </BrowserRouter>
     </>
