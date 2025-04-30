@@ -3,28 +3,26 @@ import logoLeft from '../assets/images/logoLeft.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import callAPI from '../pages/Common_Method/api';
+import axios from 'axios';
+const URL = process.env.REACT_APP_URL;
 
 const SignUp = () => {
   const navigate = useNavigate();
   const[formData,setFormData] = useState({
-    fullName:'',
+    name:'',
     email:'',
-    mobile:'',
     password:'',
-    confirmPassword:''
   })
   const[formErrors,setFormErrors] = useState({});
   const[loading,setLoading] = useState(false);
 
+
   const validateForm = () => {
-    const { fullName, email, mobile, password, confirmPassword } = formData;
+    const { name, email, password } = formData;
     let errors = {};
-  
-    if (fullName.trim() === '') {
+    if (name.trim() === '') {
       errors.fullName = 'Full Name is required';
     }
-  
     if (email.trim() === '') {
       errors.email = 'Email is required';
     } else {
@@ -33,24 +31,8 @@ const SignUp = () => {
         errors.email = 'Invalid email format';
       }
     }
-
-    if (mobile.trim() === '') {
-      errors.mobile = 'Mobile number is required';
-    }else{
-      const mobilePattern = /^[0-9]{10}$/;
-      if (!mobilePattern.test(mobile)) {
-          errors.mobile = 'Mobile number must be exactly 10 digits.';
-      }
-    }
-  
     if (password.trim() === '') {
       errors.password = 'Password is required';
-    }
-  
-    if (confirmPassword.trim() === '') {
-      errors.confirmPassword = 'Confirm Password is required';
-    } else if (password !== confirmPassword) {
-      errors.confirmPassword = 'Passwords do not match';
     }
     return errors;
   };
@@ -60,22 +42,31 @@ const SignUp = () => {
     setFormData({...formData, [name]:value })
   };
 
-  const handleMobileSubmit = async(e) =>{
+  const handleSubmit = async(e) =>{
     e.preventDefault();
-    if(!validateForm()){
+    const errors = validateForm();
+    setFormErrors(errors);
+    if (Object.keys(errors).length > 0) {
       return;
     }
+    
     setLoading(true);
     try {
-      const response = await callAPI.post(`/users/registerUser`,formData)
+      const response = await axios.post(`${URL}/auth/register-vendor`,formData,{
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+      console.log("response");
       if(response.status >= 200 && response.status < 300){
         setTimeout(() => {
-          toast.success('Sign up successfully');
-          navigate('/')
-        }, 2000);
+          toast.success('OTP send successfully');
+          navigate('/cheque-management/verify-otp')
+          localStorage.setItem("email", formData.email)
+        }, 1000);
       }else{
         setTimeout(() => {
-          toast.error("Failed to sign up")
+          toast.error("Failed to send OTP")
         }, 2000);
       }
     } catch (error) {
@@ -100,18 +91,16 @@ const SignUp = () => {
                 <div className="w-100">
                   <h3 className="fw-semibold">Register now</h3>
                   <h6 className="mb-4 text-445B64">Please enter your credentials to sign up</h6>
-                  <input className="form-control mb-3 rounded-3" type="text" id='fullName' name='fullName' value={formData.fullName} onChange={handleChange} placeholder="Full name" aria-label="example" />
+                  <input className="form-control mb-3 rounded-3" type="text" id='name' name='name' value={formData.name} onChange={handleChange} placeholder="Full name" aria-label="example" />
                   <input className="form-control mb-3 rounded-3" type="email" id='email' name='email' value={formData.email} onChange={handleChange} placeholder="Your email address" aria-label="example" />
-                  <input className="form-control mb-3 rounded-3" type="number" id='mobile' name='mobile' value={formData.mobile} onChange={handleChange} placeholder="Your phone number" aria-label="example" />
                   <input className="form-control mb-3 rounded-3" type="password" id='password' name='password' value={formData.password} onChange={handleChange} placeholder="Password" aria-label="example" />
-                  <input className="form-control mb-2 rounded-3" type="password" id='confirmPassword' name='confirmPassword' value={formData.confirmPassword} onChange={handleChange} placeholder="Confirm Password" aria-label="example" />
                   <div className="form-check form-switch mb-4 p-0">
                     <div className="form-check form-switch">
                       <input className="form-check-input" type="checkbox" role="switch" id="switchCheckDefault" />
                       <label className="form-check-label text-445B64" htmlFor="switchCheckDefault">Remember me </label>
                     </div>
                   </div>
-                  <button type="button" className="btn w-100 sign-btn mb-3" onClick={handleMobileSubmit}>Sign Up</button>
+                  <button type="button" className="btn w-100 sign-btn mb-3" onClick={handleSubmit}>Sign Up</button>
                   <h6 className="text-center text-445B64">Don't have an account? <Link to='/cheque-management/' className='text-00C7BE text-decoration-none'> Sign up</Link></h6>
                 </div>
               </div>

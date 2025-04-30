@@ -1,23 +1,26 @@
 import axios from "axios";
 
-const apiURL = "http://localhost:4001/api/v1";
+const apiURL = "http://localhost:5000/api/v1";
 
 const axiosApiInstance = axios.create({ baseURL: apiURL });
 
 export const interceptor = () => {
     axiosApiInstance.interceptors.request.use(
         async (config) => {
-            const token = localStorage.getItem("token");
-
-            config.headers = {
-                Accept: "application/json",
-                ...(token && { Authorization: `Bearer ${token}` }),
-            };
-
-            return config;
+          const token = localStorage.getItem("token");
+      
+          config.headers = {
+            ...config.headers, // preserve existing headers like Content-Type
+            Accept: "application/json",
+            "Content-Type": "application/json", // force it
+            ...(token && { Authorization: `Bearer ${token}` }),
+          };
+      
+          return config;
         },
         (error) => Promise.reject(error)
-    );
+      );
+      
 };
 
 const callAPI = {
