@@ -16,36 +16,36 @@ const Cheques = () => {
                         <div className="col-lg-10 bg-F6F6F6">
                             <div className="main-content">
                                 <div className="container-fluid p-3 px-2">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="card border-0 rounded-3 mb-1">
-                                                <div class="card-body p-2">
-                                                    <div class="row">
-                                                        <div class="col-12 col-lg-6">
-                                                            <div class="d-flex justify-content-between mb-3 mb-lg-0">
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="table-circular-icon bg-F0F5F6 me-3"
+                                    <div className="row">
+                                        <div className="col-12">
+                                            <div className="card border-0 rounded-3 mb-1">
+                                                <div className="card-body p-2">
+                                                    <div className="row">
+                                                        <div className="col-12 col-lg-6">
+                                                            <div className="d-flex justify-content-between mb-3 mb-lg-0">
+                                                                <div className="d-flex align-items-center">
+                                                                    <div className="table-circular-icon bg-F0F5F6 me-3"
                                                                         style={{ cursor: "pointer" }}>
                                                                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 16" fill="none">
                                                                             <path d="M9.16667 12.1667H3.33333V10.5H9.16667M11.6667 8.83333H3.33333V7.16667H11.6667M11.6667 5.5H3.33333V3.83333H11.6667M13.3333 0.5H1.66667C0.741667 0.5 0 1.24167 0 2.16667V13.8333C0 14.2754 0.175595 14.6993 0.488155 15.0118C0.800716 15.3244 1.22464 15.5 1.66667 15.5H13.3333C13.7754 15.5 14.1993 15.3244 14.5118 15.0118C14.8244 14.6993 15 14.2754 15 13.8333V2.16667C15 1.72464 14.8244 1.30072 14.5118 0.988155C14.1993 0.675595 13.7754 0.5 13.3333 0.5Z" fill="#445B64" />
                                                                         </svg>
                                                                     </div>
-                                                                    <span class="text-445B64 fw-medium">All Cheques</span>
+                                                                    <span className="text-445B64 fw-medium">All Cheques</span>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-12 col-lg-6">
+                                                        <div className="col-12 col-lg-6">
                                                             <div className="row">
                                                                 <div className="col-lg-7">
-                                                                    <div class="d-flex position-relative"
+                                                                    <div className="d-flex position-relative"
                                                                         style={{ width: "-webkit-fill-available" }}>
-                                                                        <input class="form-control form-control-sm rounded-3 me-2 shadow-none bg-F0F5F6" style={{ paddingLeft: "35px" }}
+                                                                        <input className="form-control form-control-sm rounded-3 me-2 shadow-none bg-F0F5F6" style={{ paddingLeft: "35px" }}
                                                                             type="search" placeholder="Search" aria-label="Search" />
-                                                                        <i class="fa-solid fa-magnifying-glass text-445B64 position-absolute top-0 start-0"
+                                                                        <i className="fa-solid fa-magnifying-glass text-445B64 position-absolute top-0 start-0"
                                                                             style={{ margin: "8px" }}></i>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-lg-5 d-flex justify-content-around">
+                                                                <div className="col-lg-5 d-flex justify-content-around">
                                                                     <div className="">
                                                                         <button className='btn fs-14 text-445B64 p-0'>
                                                                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
@@ -55,7 +55,7 @@ const Cheques = () => {
                                                                             <span className="ms-2">Add New Checks</span>
                                                                         </button>
                                                                     </div>
-                                                                    <div class="table-circular-icon bg-F0F5F6" style={{ cursor: "pointer" }}>
+                                                                    <div className="table-circular-icon bg-F0F5F6" style={{ cursor: "pointer" }}>
                                                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12"
                                                                             viewBox="0 0 14 12" fill="none">
                                                                             <path
@@ -69,35 +69,35 @@ const Cheques = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card border-0 rounded-3">
-                                                <div class="card-body p-0">
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <div class="table-responsive">
-                                                                <table class="table rounded-3">
+                                            <div className="card border-0 rounded-3">
+                                                <div className="card-body p-0">
+                                                    <div className="row">
+                                                        <div className="col-12">
+                                                            <div className="table-responsive">
+                                                                <table className="table rounded-3">
                                                                     <thead>
                                                                         <tr>
-                                                                            <th scope="col" class="text-center">
-                                                                                <input class="form-check-input table-checkbox"
+                                                                            <th scope="col" className="text-center">
+                                                                                <input className="form-check-input table-checkbox"
                                                                                     type="checkbox" value="" id="flexCheckDefault" />
                                                                             </th>
-                                                                            <th scope="col" class="text-445B64">SNo.</th>
-                                                                            <th scope="col" class="text-445B64">Customer Name</th>
-                                                                            <th scope="col" class="text-445B64">Company Name</th>
-                                                                            <th scope="col" class="text-445B64">License No</th>
-                                                                            <th scope="col" class="text-445B64 text-center">Check Type</th>
-                                                                            <th scope="col" class="text-445B64">Amount</th>
-                                                                            <th scope="col" class="text-445B64">Comment</th>
-                                                                            <th scope="col" class="text-445B64">Date
+                                                                            <th scope="col" className="text-445B64">SNo.</th>
+                                                                            <th scope="col" className="text-445B64">Customer Name</th>
+                                                                            <th scope="col" className="text-445B64">Company Name</th>
+                                                                            <th scope="col" className="text-445B64">License No</th>
+                                                                            <th scope="col" className="text-445B64 text-center">Check Type</th>
+                                                                            <th scope="col" className="text-445B64">Amount</th>
+                                                                            <th scope="col" className="text-445B64">Comment</th>
+                                                                            <th scope="col" className="text-445B64">Date
                                                                             </th>
-                                                                            <th scope="col" class="text-445B64 text-center">Status</th>
-                                                                            <th scope="col" class="text-445B64 text-center">Actions</th>
+                                                                            <th scope="col" className="text-445B64 text-center">Status</th>
+                                                                            <th scope="col" className="text-445B64 text-center">Actions</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
                                                                         <tr>
-                                                                            <td class="text-center">
-                                                                                <input class="form-check-input table-checkbox"
+                                                                            <td className="text-center">
+                                                                                <input className="form-check-input table-checkbox"
                                                                                     type="checkbox" value="" id="flexCheckDefault" />
                                                                             </td>
                                                                             <td scope="row"> 01 </td>
@@ -108,14 +108,14 @@ const Cheques = () => {
                                                                             <td>$487441</td>
                                                                             <td>Lorem Ipsum..</td>
                                                                             <td>July 14, 2015</td>
-                                                                            <td class="text-01A99A">Active</td>
-                                                                            <td class="">
+                                                                            <td className="text-01A99A">Active</td>
+                                                                            <td className="">
                                                                                 <div className="d-flex justify-content-center">
                                                                                     <Link to="/cheque-management/cheque-details" className="btn">
-                                                                                        <i class="fa-solid fa-eye text-445B64"></i>
+                                                                                        <i className="fa-solid fa-eye text-445B64"></i>
                                                                                     </Link>
                                                                                     <button className="btn">
-                                                                                        <i class="fa-solid fa-trash-can text-danger"></i>
+                                                                                        <i className="fa-solid fa-trash-can text-danger"></i>
                                                                                     </button>
                                                                                 </div>
                                                                             </td>

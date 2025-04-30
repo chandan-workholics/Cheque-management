@@ -16,15 +16,15 @@ const SignIn = () => {
                                 <div className="w-100">
                                     <h3 className="fw-semibold">Welcome!</h3>
                                     <h6 className="mb-4 text-445B64">Please enter your credentials to log in</h6>
-                                    <input class="form-control mb-3 rounded-3" type="email" placeholder="Your email address" aria-label="example" />
-                                    <input class="form-control mb-2 rounded-3" type="password" placeholder="Your password" aria-label="example" />
-                                    <div class="form-check form-switch mb-4 p-0">
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault" />
-                                            <label class="form-check-label text-445B64" for="switchCheckDefault">Remember me </label>
+                                    <input className="form-control mb-3 rounded-3" type="email" placeholder="Your email address" aria-label="example" />
+                                    <input className="form-control mb-2 rounded-3" type="password" placeholder="Your password" aria-label="example" />
+                                    <div className="form-check form-switch mb-4 p-0">
+                                        <div className="form-check form-switch">
+                                            <input className="form-check-input" type="checkbox" role="switch" id="switchCheckDefault" />
+                                            <label className="form-check-label text-445B64" htmlFor="switchCheckDefault">Remember me </label>
                                         </div>
                                     </div>
-                                    <Link to='/cheque-management/dashboard' class="btn w-100 sign-btn mb-3">Sign In</Link>
+                                    <Link to='/cheque-management/dashboard' className="btn w-100 sign-btn mb-3">Sign In</Link>
                                     <h6 className="text-center text-445B64">Don't have an account?
                                         <Link to='/cheque-management/sign-up' className='text-00C7BE text-decoration-none'> Sign up</Link>
                                     </h6>
