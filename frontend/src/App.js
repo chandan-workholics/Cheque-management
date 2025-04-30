@@ -8,6 +8,7 @@ import ChequeDetails from "./pages/ChequeDetails";
 import Report from "./pages/Report";
 import ReportExport from "./pages/ReportExport";
 import User from "./pages/User";
+import Support from "./pages/Support";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/cheque-management/report" element={<Report />} />
           <Route path="/cheque-management/export-report" element={<ReportExport />} />
           <Route path="/cheque-management/user" element={<User />} />
+          <Route path="/cheque-management/support" element={<Support />} />
         </Routes>
       </BrowserRouter>
     </>
