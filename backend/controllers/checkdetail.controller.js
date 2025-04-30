@@ -3,9 +3,9 @@ const Check = require('../model/check.model');
 
 exports.addCheckDetail = async (req, res) => {
     try {
-        const { imageUrl, customerName, licenseNo, date, company, checkType, amount } = req.body;
+        const { imageUrl, customerName, licenseNo, date, company, checkType, amount, status } = req.body;
 
-        const newCheck = new Check({ imageUrl, customerName, licenseNo, date, company, checkType, amount });
+        const newCheck = new Check({ imageUrl, customerName, licenseNo, date, company, checkType, amount, status });
 
         await newCheck.save();
 
@@ -84,3 +84,92 @@ exports.deleteCheckById = async (req, res) => {
     }
 };
 
+
+exports.getCheckStatuss = async (req, res) => {
+    try {
+        const { type } = req.query; // type can be 'day', 'week', or 'month'
+        if (!['day', 'week', 'month'].includes(type)) {
+            return res.status(400).json({ message: 'Invalid type. Use day, week, or month.' });
+        }
+
+        const now = new Date();
+        let startDate;
+
+        if (type === 'day') {
+            startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        } else if (type === 'week') {
+            const firstDayOfWeek = now.getDate() - now.getDay(); // Sunday as start
+            startDate = new Date(now.getFullYear(), now.getMonth(), firstDayOfWeek);
+        } else if (type === 'month') {
+            startDate = new Date(now.getFullYear(), now.getMonth(), 1);
+        }
+
+        const checks = await Check.find({ createdAt: { $gte: startDate } });
+
+        const totalAmount = checks.reduce((sum, check) => sum + (Number(check.amount) || 0), 0);
+        const totalChecks = checks.length;
+        const goodChecks = checks.filter(c => c.status === 'good').length;
+        const badChecks = checks.filter(c => c.status === 'bad').length;
+
+        res.status(200).json({
+            type,
+            from: startDate,
+            to: now,
+            totalAmount,
+            totalChecks,
+            goodChecks,
+            badChecks
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Failed to fetch check stats', error: error.message });
+    }
+};
+
+
+exports.getCheckStatus = async (req, res) => {
+    try {
+        const now = new Date();
+
+        // Helper function to calculate stats
+        const calculateStats = async (startDate) => {
+            const checks = await Check.find({ createdAt: { $gte: startDate } });
+
+            const totalAmount = checks.reduce((sum, c) => sum + (Number(c.amount) || 0), 0);
+            const totalChecks = checks.length;
+            const goodChecks = checks.filter(c => c.status === 'good').length;
+            const badChecks = checks.filter(c => c.status === 'bad').length;
+
+            return {
+                from: startDate,
+                to: now,
+                totalAmount,
+                totalChecks,
+                goodChecks,
+                badChecks
+            };
+        };
+
+        // Start dates for day, week, month
+        const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        const startOfWeek = new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay());
+        const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+
+        const [dayStats, weekStats, monthStats] = await Promise.all([
+            calculateStats(startOfDay),
+            calculateStats(startOfWeek),
+            calculateStats(startOfMonth),
+        ]);
+
+        res.status(200).json({
+            day: dayStats,
+            week: weekStats,
+            month: monthStats
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Failed to fetch check statistics', error: error.message });
+    }
+};
