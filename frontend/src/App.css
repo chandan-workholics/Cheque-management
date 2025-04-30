@@ -11,6 +11,7 @@
 .fs-14 {
   font-size: 14px;
 }
+
 .fs-13 {
   font-size: 13px;
 }
@@ -45,11 +46,25 @@
 .bg-F0F5F6 {
   background-color: #F0F5F6;
 }
+
 .bg-4FD1C5 {
   background-color: #4FD1C5;
 }
+
 .bg-E84D4D {
   background-color: #E84D4D;
+}
+
+.bg-E4FFFD {
+  background-color: #E4FFFD;
+}
+
+.bg-F5F5F5 {
+  background-color: #F5F5F5;
+}
+
+.bg-FFF0F0 {
+  background-color: #FFF0F0;
 }
 
 /* Background-Color-End */
@@ -73,6 +88,10 @@
 
 .text-E84D4D {
   color: #E84D4D;
+}
+
+.text-0D161A {
+  color: #0D161A !important;
 }
 
 /* Text-Color-End */
@@ -243,6 +262,7 @@
       color: #445B64 !important;
       font-weight: normal;
     }
+
     td {
       color: #0D161A !important;
       font-weight: 500;

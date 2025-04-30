@@ -28,17 +28,17 @@ const Sidebar = () => {
                         </Link>
                     </li>
                     <li>
-                        <a href="#" className="nav-link">
+                        <Link to="/cheque-management/report" className="nav-link">
                             <div className="sidebar-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="18" viewBox="0 0 14 18" fill="none">
                                     <path d="M7.875 6.45H12.6875L7.875 1.775V6.45ZM1.75 0.5H8.75L14 5.6V15.8C14 16.2509 13.8156 16.6833 13.4874 17.0021C13.1592 17.3209 12.7141 17.5 12.25 17.5H1.75C1.28587 17.5 0.840752 17.3209 0.512563 17.0021C0.184374 16.6833 0 16.2509 0 15.8V2.2C0 1.2565 0.77875 0.5 1.75 0.5ZM2.625 15.8H4.375V10.7H2.625V15.8ZM6.125 15.8H7.875V9H6.125V15.8ZM9.625 15.8H11.375V12.4H9.625V15.8Z" fill="#445B64" />
                                 </svg>
                             </div>
                             <span className="">Report</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="#" className="nav-link">
+                        <Link to="/cheque-management/user" className="nav-link">
                             <div className="sidebar-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                     <mask id="mask0_2104_254" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20">
@@ -50,7 +50,7 @@ const Sidebar = () => {
                                 </svg>
                             </div>
                             <span className="">Users</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
                         <a href="#" className="nav-link">
