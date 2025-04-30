@@ -65,7 +65,7 @@ const User = () => {
                                                                     <span className="text-0D161A fw-semibold">rohitsharma@gmail.com</span>
                                                                 </h6>
                                                                 <div className="mt-3">
-                                                                    <button className="btn btn-sm bg-FFF0F0 text-E84D4D rounded-2 ">My Ticket</button>
+                                                                    <Link to="/cheque-management/my-ticket" className="btn btn-sm bg-FFF0F0 text-E84D4D rounded-2 ">My Ticket</Link>
                                                                 </div>
                                                             </div>
                                                         </div>
