@@ -5,9 +5,7 @@ import { useState } from 'react';
 
 
 const Home = () => {
-  const [chequeImage, setChequeImage] = useState(null);
-  const [licenseImage, setLicenseImage] = useState();
-
+ 
   const [formData, setFormData] = useState({
     customerName: '',
     licenseNo: '',
@@ -18,15 +16,7 @@ const Home = () => {
     imageUrl: '',
   });
 
-  const handleChequeImageChange = (e) => {
-    const file = e.target.files[0];
-    setChequeImage(file);
-  };
-
-  const handleLicenseImageChange = (e) => {
-    const file = e.target.files[0];
-    setLicenseImage(file);
-  };
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -160,14 +150,14 @@ const Home = () => {
                           <label className="form-label text-445B64">License Image</label>
                           <div className="d-flex gap-3">
                             <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
-                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" style={{ opacity: 0, cursor: 'pointer' }} />
+                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmit} style={{ opacity: 0, cursor: 'pointer' }} />
                               <div className="">
                                 <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
                                 <div className="text-445B64">Upload License Image </div>
                               </div>
                             </div>
                             <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
-                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" style={{ opacity: 0, cursor: 'pointer' }} />
+                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmit} style={{ opacity: 0, cursor: 'pointer' }} />
                               <div className="">
                                 <i className="fa-solid fa-camera fs-4 text-01A99A"></i>
                                 <div className="text-445B64">Capture License Image</div>
@@ -186,7 +176,7 @@ const Home = () => {
                               </div>
                             </div>
                             <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
-                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleLicenseImageChange} style={{ opacity: 0, cursor: 'pointer' }} />
+                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmit} style={{ opacity: 0, cursor: 'pointer' }} />
                               <div className="">
                                 <i className="fa-solid fa-camera fs-4 text-01A99A"></i>
                                 <div className="text-445B64">Capture Cheque Image</div>
