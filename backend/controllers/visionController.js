@@ -7,7 +7,7 @@ const client = new vision.ImageAnnotatorClient({
 
 const fs = require('fs');
 const path = require('path');
-const Check = require('../model/check'); // adjust path
+const Check = require('../model/check.model'); // adjust path
 const baseUrl = 'http://206.189.130.102:5000'; // or your server domain
 
 // exports.scanCheck = async (req, res) => {

@@ -2,10 +2,10 @@ import React from 'react';
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import { useState } from 'react';
-
+const URL = process.env.REACT_APP_URL;
 
 const Home = () => {
- 
+
   const [formData, setFormData] = useState({
     customerName: '',
     licenseNo: '',
@@ -16,7 +16,7 @@ const Home = () => {
     imageUrl: '',
   });
 
- 
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,7 +28,7 @@ const Home = () => {
     const formData = new FormData();
     formData.append('image', file);
     try {
-      const response = await fetch('http://206.189.130.102:5000/scan-check', {
+      const response = await fetch(`${URL}/scan-check`, {
         method: 'POST',
         body: formData,
       });
@@ -186,7 +186,7 @@ const Home = () => {
                         </div>
                         <div className='col-lg-6'>
                           <div className='row'>
-                          {formData?.imageUrl && <img src={formData.imageUrl} alt="Profile" />}
+                            {formData?.imageUrl && <img src={formData.imageUrl} alt="Profile" />}
                           </div>
                         </div>
                         <div className="col-lg-8">
