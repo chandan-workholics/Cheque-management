@@ -4,6 +4,7 @@ const cors = require('cors');
 const path = require('path');
 const routes = require('./router');
 const { scanCheck } = require('./controllers/visionController');
+const { scanLicense } = require('./controllers/visionController');
 
 require('dotenv').config();
 
@@ -29,6 +30,7 @@ const upload = multer({ storage });
 
 // Routes
 app.post('/api/v1/scan-check', upload.single('image'), scanCheck);
+app.post('/api/v1/scan-license', upload.single('image'), scanLicense);
 
 // Start server
 app.listen(PORT, () => {

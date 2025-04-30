@@ -16,6 +16,19 @@ const Home = () => {
     imageUrl: '',
   });
 
+  const [licenseData, setLicenseData] = useState({
+    imageUrl: '',
+    name: '',
+    licenseNo: '',
+    class: '',
+    dob: '',
+    sex: '',
+    eyes: '',
+    height: '',
+    address: '',
+    issuedDate: '',
+    expiryDate: '',
+  });
 
 
   const handleSubmit = async (e) => {
@@ -50,7 +63,40 @@ const Home = () => {
     }
   };
 
-
+  const handleSubmitLicense = async (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    if (!file) {
+      alert("Please upload a License image.");
+      return;
+    }
+    const formData = new FormData();
+    formData.append('image', file);
+    try {
+      const response = await fetch(`${URL}/scan-license`, {
+        method: 'POST',
+        body: formData,
+      });
+      const result = await response.json();
+      if (result && result.name) {
+        const parsedData = {
+          imageUrl: result.imageUrl || '',
+          name: result.name || '',
+          licenseNo: result.licenseNo || '',
+          dob: result.dob || '',
+          sex: result.sex || '',
+          eyes: result.eyes || '',
+          height: result.height || '',
+          address: result.address || '',
+          issuedDate: result.issuedDate || '',
+          expiryDate: result.expiryDate || '',
+        };
+        setLicenseData(parsedData);
+      }
+    } catch (error) {
+      console.error('Error during image upload:', error);
+    }
+  };
 
 
 
@@ -150,14 +196,14 @@ const Home = () => {
                           <label className="form-label text-445B64">License Image</label>
                           <div className="d-flex gap-3">
                             <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
-                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmit} style={{ opacity: 0, cursor: 'pointer' }} />
+                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmitLicense} style={{ opacity: 0, cursor: 'pointer' }} />
                               <div className="">
                                 <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
                                 <div className="text-445B64">Upload License Image </div>
                               </div>
                             </div>
                             <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
-                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmit} style={{ opacity: 0, cursor: 'pointer' }} />
+                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmitLicense} style={{ opacity: 0, cursor: 'pointer' }} />
                               <div className="">
                                 <i className="fa-solid fa-camera fs-4 text-01A99A"></i>
                                 <div className="text-445B64">Capture License Image</div>
@@ -189,15 +235,20 @@ const Home = () => {
                             {formData?.imageUrl && <img src={formData.imageUrl} alt="Profile" />}
                           </div>
                         </div>
+                        <div className='col-lg-6'>
+                          <div className='row'>
+                            {licenseData?.imageUrl && <img src={licenseData.imageUrl} alt="Profile" />}
+                          </div>
+                        </div>
                         <div className="col-lg-8">
                           <div className="row">
                             <div className="col-md-4 mb-3">
                               <label className="form-label text-445B64">Customer Name</label>
-                              <input type="text" className="form-control" value={formData.customerName || ''} onChange={(e) => setFormData({ ...formData, customerName: e.target.value })} />
+                              <input type="text" className="form-control" value={licenseData.name || ''} onChange={(e) => setFormData({ ...licenseData, name: e.target.value })} />
                             </div>
                             <div className="col-md-4 mb-3">
                               <label className="form-label text-445B64">License No</label>
-                              <input type="text" className="form-control" value={formData.licenseNo || ''} onChange={(e) => setFormData({ ...formData, licenseNo: e.target.value })} />
+                              <input type="text" className="form-control" value={licenseData.licenseNo || ''} onChange={(e) => setFormData({ ...licenseData, licenseNo: e.target.value })} />
                             </div>
                             <div className="col-md-4 mb-3">
                               <label className="form-label text-445B64">Date</label>
