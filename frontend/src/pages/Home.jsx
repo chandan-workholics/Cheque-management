@@ -6,6 +6,7 @@ import axios from 'axios';
 
 const Home = () => {
   const [chequeImage, setChequeImage] = useState(null);
+  const [licenseImage, setLicenseImage] = useState();
 
   const [formData, setFormData] = useState({
     customerName: '',
@@ -193,6 +194,11 @@ const Home = () => {
                             </div>
                           </div>
                         </div>
+                        <div className='col-lg-6'>
+                          <div className='row'>
+                            <img src={formData?.imageUrl} alt="" />
+                          </div>
+                        </div>
                         <div className="col-lg-8">
                           <div className="row">
                             <div className="col-md-4 mb-3">
@@ -229,7 +235,7 @@ const Home = () => {
                         </div>
 
                         <div className="col-lg-4 me-auto mt-0 text-center">
-                          <button className="btn theme-btn px-5 py-2 rounded-3 mt-3 w-100" onClick={handleSubmit}>Save</button>
+                          <button className="btn theme-btn px-5 py-2 rounded-3 mt-3 w-100" >Save</button>
                         </div>
                       </div>
                     </div>

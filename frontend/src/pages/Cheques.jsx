@@ -111,7 +111,7 @@ const Cheques = () => {
                                                                             <td class="text-01A99A">Active</td>
                                                                             <td class="">
                                                                                 <div className="d-flex justify-content-center">
-                                                                                    <Link to="/cheque-details" className="btn">
+                                                                                    <Link to="/cheque-management/cheque-details" className="btn">
                                                                                         <i class="fa-solid fa-eye text-445B64"></i>
                                                                                     </Link>
                                                                                     <button className="btn">

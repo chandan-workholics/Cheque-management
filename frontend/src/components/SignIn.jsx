@@ -24,9 +24,9 @@ const SignIn = () => {
                                             <label class="form-check-label text-445B64" for="switchCheckDefault">Remember me </label>
                                         </div>
                                     </div>
-                                    <Link to='/dashboard' class="btn w-100 sign-btn mb-3">Sign In</Link>
+                                    <Link to='/cheque-management/dashboard' class="btn w-100 sign-btn mb-3">Sign In</Link>
                                     <h6 className="text-center text-445B64">Don't have an account?
-                                        <Link to='/sign-up' className='text-00C7BE text-decoration-none'> Sign up</Link>
+                                        <Link to='/cheque-management/sign-up' className='text-00C7BE text-decoration-none'> Sign up</Link>
                                     </h6>
                                 </div>
                             </div>
