@@ -4,18 +4,45 @@ const jwt = require('jsonwebtoken');
 const sendMail = require('../utils/sendMail');
 
 exports.registerVendor = async (req, res) => {
-    const { name, email, password } = req.body;
+    const { firstname, lastname, mobile, bussiness, email, password } = req.body;
     const userExist = await User.findOne({ email });
     if (userExist) return res.status(400).json({ message: 'Email already exists' });
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
-    const newUser = new User({ name, email, password: hashedPassword, otp });
+    const newUser = new User({ firstname, lastname, mobile, bussiness, email, password: hashedPassword, otp });
     await newUser.save();
     await sendMail(email, otp);
 
     res.json({ message: 'OTP sent to email. Please verify.' });
+};
+
+exports.getAllVender = async (req, res) => {
+    try {
+        const Users = await User.find();
+        return res.status(200).json({ message: 'All Users fetched successfully', data: Users });
+    } catch (error) {
+        console.error('Error in getAllChecks:', error);
+        return res.status(500).json({ message: 'Failed to fetch Users', error: error.message });
+    }
+};
+
+
+exports.getAllVenderId = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const Users = await User.findById(id);
+        if (!Users) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        return res.status(200).json({ message: 'User fetched successfully', data: Users });
+    } catch (error) {
+        console.error('Error in getCheckById:', error);
+        return res.status(500).json({ message: 'Failed to fetch User', error: error.message });
+    }
 };
 
 exports.verifyOtp = async (req, res) => {
