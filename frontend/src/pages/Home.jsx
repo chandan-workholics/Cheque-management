@@ -106,11 +106,11 @@ const Home = () => {
 
   return (
     <>
-      <div className="container-fluid">
+      <div className="container-fluid mh-100vh">
         <Header />
         <div className="">
           <div className="row">
-            <div className="col-lg-2">
+            <div className="col-lg-2 position-relative">
               <Sidebar />
             </div>
             <div className="col-lg-10 bg-F6F6F6">
@@ -206,13 +206,39 @@ const Home = () => {
                                 <div className="text-445B64">Upload License Image </div>
                               </div>
                             </div>
+
                             <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
-                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmitLicense} style={{ opacity: 0, cursor: 'pointer' }} />
-                              <div className="">
+                              <input
+                                className="position-absolute top-0 start-0 w-100 h-100"
+                                type="file"
+                                id="formFile"
+                                onChange={handleSubmitLicense}
+                                accept="image/*"
+                                capture="environment"  // opens rear camera by default on mobile
+                                style={{ opacity: 0, cursor: 'pointer' }}
+                              />
+                              <div>
                                 <i className="fa-solid fa-camera fs-4 text-01A99A"></i>
                                 <div className="text-445B64">Capture License Image</div>
                               </div>
                             </div>
+
+
+                          </div>
+                          <div className="row">
+                            {licenseData?.imageUrl &&
+                              <div className='col-lg-6'>
+                                <label className="form-label text-445B64 mb-1 mt-3">Front Image</label>
+                                <img src={licenseData.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
+                              </div>
+                            }
+                            {licenseData?.imageUrl &&
+                              <div className='col-lg-6'>
+                                <label className="form-label text-445B64 mb-1 mt-3">Back Image</label>
+                                <img src={licenseData.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
+                              </div>
+                            }
+                            <div className="col-lg-6"></div>
                           </div>
                         </div>
                         <div className="col-md-6">
@@ -225,37 +251,45 @@ const Home = () => {
                                 <div className="text-445B64">Upload Cheque Image </div>
                               </div>
                             </div>
+
                             <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
-                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmit} style={{ opacity: 0, cursor: 'pointer' }} />
-                              <div className="">
+                              <input
+                                className="position-absolute top-0 start-0 w-100 h-100"
+                                type="file"
+                                id="formFile"
+                                onChange={handleSubmit}
+                                accept="image/*"
+                                capture="environment"
+                                style={{ opacity: 0, cursor: 'pointer' }}
+                              />
+                              <div>
                                 <i className="fa-solid fa-camera fs-4 text-01A99A"></i>
                                 <div className="text-445B64">Capture Cheque Image</div>
                               </div>
                             </div>
-                          </div>
-                        </div>
-                        <div className='col-lg-6'>
-                          <div className='row'>
-                            {formData?.imageUrl && <img src={formData.imageUrl} alt="Profile" />}
-                          </div>
-                        </div>
-                        <div className='col-lg-6'>
-                          <div className='row'>
-                            {licenseData?.imageUrl && <img src={licenseData.imageUrl} alt="Profile" />}
-                          </div>
-                        </div>
 
-                        <div className="col-lg-6">
+
+                          </div>
                           <div className="row">
-                            <label className="form-label text-445B64">Comments</label>
-                            <div
-                              className="form-control h-100"
-                              style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}
-                              dangerouslySetInnerHTML={{ __html: formData?.extractedText }}
-                            />
+                            {formData?.imageUrl &&
+                              <div className='col-lg-6'>
+                                <label className="form-label text-445B64 mb-1 mt-3">Front Image</label>
+                                <img src={formData.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
+                              </div>
+                            }
+                            {formData?.imageUrl &&
+                              <div className='col-lg-6'>
+                                <label className="form-label text-445B64 mb-1 mt-3">Back Image</label>
+                                <img src={formData.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
+                              </div>
+                            }
                           </div>
                         </div>
-
+                        <div className="col-12 d-flex justify-content-end">
+                          <button type="button" class="btn btn-sm py-1 px-3 theme-btn rounded-3 mt-3 " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Please Check all Details
+                          </button>
+                        </div>
                         <div className="col-lg-8">
                           <div className="row">
                             <div className="col-md-4 mb-3">
@@ -298,6 +332,36 @@ const Home = () => {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* image-preview-Modal */}
+      <div class="modal modal-xl fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h6 class="modal-title text-445B64" id="exampleModalLabel">Please Check all Details</h6>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div className="row">
+                <div className='col-lg-6'>
+                  {/* {licenseData?.imageUrl && <img src={licenseData.imageUrl} alt="Profile" className='w-100' />} */}
+                  {formData?.imageUrl && <img src={formData.imageUrl} alt="Profile" className='w-100' />}
+                </div>
+                <div className='col-lg-6 d-flex align-items-center'>
+                  <div
+                    className="form-control border-0 bg-F0F5F6 fs-14"
+                    style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}
+                    dangerouslySetInnerHTML={{ __html: formData?.extractedText }}
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-sm btn-light bg-F0F5F6 border rounded-3 px-5" data-bs-dismiss="modal">Ok</button>
             </div>
           </div>
         </div>

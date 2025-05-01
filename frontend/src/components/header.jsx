@@ -22,7 +22,7 @@ const Header = () => {
     return (
         <>
             <div className="header w-100">
-                <nav className="navbar navbar-expand-lg bg-body-white px-3">
+                <nav className="navbar navbar-expand-lg bg-body-white px-3 w-100">
                     <ToastContainer position="top-right" autoClose={2000} hideProgressBar={false} newestOnTop={false}  closeOnClick  rtl={false} pauseOnFocusLoss draggable pauseOnHover />
                     <div className="d-flex align-items-center">
                         <Link className="navbar-brand d-flex align-items-center" to=''>
