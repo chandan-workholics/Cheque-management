@@ -206,13 +206,24 @@ const Home = () => {
                                 <div className="text-445B64">Upload License Image </div>
                               </div>
                             </div>
+
                             <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
-                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmitLicense} style={{ opacity: 0, cursor: 'pointer' }} />
-                              <div className="">
+                              <input
+                                className="position-absolute top-0 start-0 w-100 h-100"
+                                type="file"
+                                id="formFile"
+                                onChange={handleSubmitLicense}
+                                accept="image/*"
+                                capture="environment"  // opens rear camera by default on mobile
+                                style={{ opacity: 0, cursor: 'pointer' }}
+                              />
+                              <div>
                                 <i className="fa-solid fa-camera fs-4 text-01A99A"></i>
                                 <div className="text-445B64">Capture License Image</div>
                               </div>
                             </div>
+
+
                           </div>
                           <div className="row">
                             {licenseData?.imageUrl &&
@@ -240,13 +251,24 @@ const Home = () => {
                                 <div className="text-445B64">Upload Cheque Image </div>
                               </div>
                             </div>
+
                             <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
-                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmit} style={{ opacity: 0, cursor: 'pointer' }} />
-                              <div className="">
+                              <input
+                                className="position-absolute top-0 start-0 w-100 h-100"
+                                type="file"
+                                id="formFile"
+                                onChange={handleSubmit}
+                                accept="image/*"
+                                capture="environment"
+                                style={{ opacity: 0, cursor: 'pointer' }}
+                              />
+                              <div>
                                 <i className="fa-solid fa-camera fs-4 text-01A99A"></i>
                                 <div className="text-445B64">Capture Cheque Image</div>
                               </div>
                             </div>
+
+
                           </div>
                           <div className="row">
                             {formData?.imageUrl &&
