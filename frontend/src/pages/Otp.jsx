@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import logoLeft from '../assets/images/logoLeft.png';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const URL = process.env.REACT_APP_URL;
 
@@ -11,6 +11,19 @@ const Otp = () => {
     const navigate = useNavigate();
     const email = localStorage.getItem("email");
        const [loading, setLoading] = useState(false);
+       const [loadingResent, setLoadingResent] = useState(false);
+       const [timeLeft, setTimeLeft] = useState(120);
+
+       useEffect(() => {
+        if (timeLeft <= 0) {
+            navigate('/cheque-management/email-verification-expired');
+            return;
+        }
+        const timer = setInterval(() => {
+            setTimeLeft(prev => prev - 1);
+        }, 1000);
+        return () => clearInterval(timer);
+    }, [timeLeft, navigate]);
 
     const handleChange = (element, index) => {
         if (isNaN(element.value)) return;
@@ -35,16 +48,14 @@ const Otp = () => {
             if (res.data.message === "OTP verified. Registration complete.") {
                 setTimeout(() => {
                     toast.success("OTP Verified Successfully!")
-                    navigate('/cheque-management/');
                 }, 1000);
-            } else {
                 setTimeout(() => {
-                    toast.success("Please enter the right OTP")
-                }, 1000);
-            }
+                    navigate('/cheque-management/email-verification-successfully');
+                }, 2000);
+            } 
         } catch (err) {
             setTimeout(() => {
-                toast.error("OTP Verified Failed!")
+                toast.error("OTP Verified Failed. Please enter the correct  OTP!")
             }, 1000);
         }finally{
             setLoading(false)
@@ -60,7 +71,7 @@ const Otp = () => {
             }, 1000);
             return;
         }
-        setLoading(true);
+        setLoadingResent(true);
         try {
             const res = await axios.post(`${URL}/auth/resend-otp`, {
                 email,
@@ -68,10 +79,12 @@ const Otp = () => {
             if (res.status === 200) {
                 setTimeout(() => {
                     toast.success("otp resent !")
+                    setTimeLeft(300); 
+                    setOtp(new Array(6).fill("")); 
                 }, 1000);
             } else {
                 setTimeout(() => {
-                    toast.success("There is some issue in otp the resent !")
+                    toast.success("There is some issue in otp the resent!")
                 }, 1000);
             }
         } catch (error) {
@@ -80,7 +93,7 @@ const Otp = () => {
                 toast.error("Failed to resend OTP. Please try again.")
             }, 1000);
         }finally{
-            setLoading(false);
+            setLoadingResent(false);
         }
     };
 
@@ -88,6 +101,7 @@ const Otp = () => {
     return (
         <div className="container-fluid sign-page">
             <div className="row sign-main-container">
+            <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="colored" />
                 <div className="col-lg-6 sign-left-bg h-100 d-flex justify-content-center align-items-center">
                     <img src={logoLeft} alt="" />
                 </div>
@@ -97,6 +111,9 @@ const Otp = () => {
                             <div className="w-100">
                                 <h3 className="fw-semibold">Welcome!</h3>
                                 <h6 className="mb-4 text-445B64">Please enter OTP to verify</h6>
+                                <div className="text-center mb-3 text-danger">
+                                    OTP expires in {Math.floor(timeLeft / 60)}:{String(timeLeft % 60).padStart(2, '0')}
+                                </div>
                                 <form onSubmit={handleVerify}>
                                     <div className="d-flex justify-content-around">
                                         {otp.map((data, index) => (
@@ -120,7 +137,14 @@ const Otp = () => {
                                         "Verify"
                                     )}</button>
                                 </form>
-                                <button type="submit" className="btn w-100 sign-btn mb-3" onClick={handleResendOtp}>Resend OTP</button>
+                                <button type="submit" className="btn w-100 sign-btn mb-3" onClick={handleResendOtp}> {loadingResent ? (
+                                        <>
+                                            <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                            Resent OTP
+                                        </>
+                                    ) : (
+                                        "Resent OTP"
+                                    )}</button>
                             </div>
                         </div>
                     </div>
