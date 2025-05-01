@@ -112,7 +112,7 @@ const SignIn = () => {
                                     <h6 className="mb-4 text-445B64">Please enter your credentials to log in</h6>
                                     <input className="form-control mb-3 rounded-3" type="email" name='email' id='email' value={formData.email} onChange={handleChange} placeholder="Your email address" aria-label="example" required/>
                                     {formErrors.email && <small className="text-danger">{formErrors.email}</small>}
-                                    <input className="form-control mb-2 rounded-3" type="password" name='password' id='password' value={formData.password} onChange={handleChange} placeholder="Your password" aria-label="example" required />
+                                    <input className="form-control mb-3 rounded-3" type="password" name='password' id='password' value={formData.password} onChange={handleChange} placeholder="Your password" aria-label="example" required />
                                     {formErrors.password && <small className="text-danger">{formErrors.password}</small>}
                                     {/* <div className="form-check form-switch mb-4 p-0">
                                         <div className="form-check form-switch">

@@ -9,11 +9,11 @@ const Report = () => {
             <div className="container-fluid">
                 <Header />
                 <div className="">
-                    <div className="row">
-                        <div className="col-lg-2">
+                    <div className="row mh-100vh">
+                        <div className="col-lg-3 col-xl-2 position-relative">
                             <Sidebar />
                         </div>
-                        <div className="col-lg-10 bg-F6F6F6">
+                        <div className="col-lg-9 col-xl-10 bg-F6F6F6">
                             <div className="main-content">
                                 <div className="container-fluid p-3 px-2">
                                     <div class="row">

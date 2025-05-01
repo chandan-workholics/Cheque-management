@@ -190,14 +190,14 @@ const Home = () => {
 
   return (
     <>
-      <div className="container-fluid mh-100vh">
+      <div className="container-fluid">
         <Header />
         <div className="">
-          <div className="row">
-            <div className="col-lg-2 position-relative">
+          <div className="row mh-100vh">
+            <div className="col-lg-3 col-xl-2 position-relative">
               <Sidebar />
             </div>
-            <div className="col-lg-10 bg-F6F6F6">
+            <div className="col-lg-9 col-xl-10 bg-F6F6F6">
               <div className="main-content">
                 <div className="container-fluid p-3 px-2">
                   {/* Status Cards */}
@@ -426,7 +426,7 @@ const Home = () => {
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h6 class="modal-title text-445B64" id="exampleModalLabel">Please Check all Details</h6>
+              <h6 class="modal-title text-445B64" id="exampleModalLabel">Preview Details</h6>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

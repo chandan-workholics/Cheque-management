@@ -33,16 +33,16 @@ const Header = () => {
                     {/* Navbar right-side */}
 
                     <ul className="navbar-nav ms-auto mb-lg-0 d-flex flex-row">
-                        <li className="nav-item me-2 me-lg-0">
-                            <Link className="nav-link" to=''>
+                        <li className="nav-item me-lg-0">
+                            <Link className="nav-link header-icon me-2" to=''>
                                 <i className="fa-solid fa-bell fs-5"></i>
                             </Link>
                         </li>
-                        <li className="nav-item dropdown me-2">
-                            <Link className="nav-link dropdown-toggle" to='' data-bs-toggle="dropdown">
+                        <li className="nav-item dropdown me-4">
+                            <Link className="nav-link header-icon dropdown-toggle " to='' data-bs-toggle="dropdown">
                                 <i className="fa-solid fa-circle-user fs-5"></i>
                             </Link>
-                            <ul className="dropdown-menu dropdown-menu-end">
+                            <ul className="dropdown-menu dropdown-menu-end mt-3">
                                 <li><Link className="dropdown-item" to=''>Profile</Link></li>
                                 <li><button className="dropdown-item" onClick={handleLogout}>Logout</button></li>
                             </ul>
