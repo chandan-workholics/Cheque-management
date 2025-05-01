@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import { useState } from 'react';
+import axios from 'axios';
 const URL = process.env.REACT_APP_URL;
 
 const Home = () => {
@@ -31,6 +32,8 @@ const Home = () => {
     expiryDate: '',
   });
 
+  const [status, setStatus] = useState({});
+  const [saveData,setSaveData] = useState({});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -103,6 +106,87 @@ const Home = () => {
   };
 
 
+  const handleStatus = async () => {
+    try {
+      const response = await axios.get(`${URL}/check/status`, {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+      console.log(response);
+      if (response.status >= 200 && response.status < 300) {
+        setStatus(response?.data || []);
+      }
+    } catch (error) {
+      console.log("Error in fetching data");
+    }
+  }
+  useEffect(() => {
+    handleStatus();
+  }, [])
+
+  // const handleSave = async () => {
+  //   try {
+  //     const response = await fetch(`${URL}/check/add-check`, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(),
+  //     });
+  //     const result = await response.json();
+  
+  //     if (result && result.data) {
+  //       alert("Data saved successfully")
+  //       const data = {
+  //         customerName: result.data.customerName || '',
+  //         date: result.data.date || '',
+  //         company: result.data.company || '',
+  //         checkType: result.data.checkType || '',
+  //         amount: result.data.amount || '',
+  //         imageUrl: result.data.imageUrl || '',
+  //         extractedText: result.data.extractedText || '',
+  //         comment: result.data.comment || '',
+  //       };
+  //       setStatus(data);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error saving data:", error);
+  //     alert("Failed to save data. Please try again.");
+  //   }
+  // };
+  
+  
+  const handleSave = async () => {
+    try {
+      const response = await axios.post(`${URL}/check/add-check`);
+  
+      if (response.status >= 200 && response.status < 300 && response.data?.data) {
+        const apiData = response.data.data;
+  
+        const data = {
+          customerName: apiData.customerName || '',
+          licenseNo: apiData.licenseNo || '',
+          date: apiData.date || '',
+          company: apiData.company || '',
+          checkType: apiData.checkType || '',
+          amount: apiData.amount || '',
+          imageUrl: apiData.imageUrl || '',
+          extractedText: apiData.extractedText || '',
+          comment: apiData.comment || '',
+          status: apiData.status || '',
+        };
+  
+        setSaveData(data); // store the actual data from the API
+      } else {
+        console.warn("API call successful but no data returned.");
+      }
+    } catch (error) {
+      console.error("Error saving data:", error);
+      alert("Failed to save data. Please try again.");
+    }
+  };
+  
 
   return (
     <>
@@ -129,13 +213,13 @@ const Home = () => {
                             </div>
                             <div>
                               <h6 className="mb-1 fw-medium text-445B64 fs-14">Today's Status</h6>
-                              <h4 className="mb-0 text-00C7BE fw-bold">$1,000</h4>
+                              <h4 className="mb-0 text-00C7BE fw-bold">${status?.day?.totalAmount || 0}</h4>
                             </div>
                           </div>
                           <div className="d-flex justify-content-between small">
-                            <span className="badge bg-F5EEFF text-515151">1 New Checks</span>
-                            <span className="badge bg-EFFFFE text-01A99A">20 Good Checks</span>
-                            <span className="badge bg-FFF6F6 text-E84D4D">5 Bad Checks</span>
+                            <span className="badge bg-F5EEFF text-515151">{status?.day?.totalChecks || 0} New Checks</span>
+                            <span className="badge bg-EFFFFE text-01A99A">{status?.day?.goodChecks || 0} Good Checks</span>
+                            <span className="badge bg-FFF6F6 text-E84D4D">{status?.day?.badChecks || 0} Bad Checks</span>
                           </div>
                         </div>
                       </div>
@@ -151,13 +235,13 @@ const Home = () => {
                             </div>
                             <div>
                               <h6 className="mb-1 fw-medium text-445B64 fs-14">Weekly Status</h6>
-                              <h4 className="mb-0 text-00C7BE fw-bold">$25,000</h4>
+                              <h4 className="mb-0 text-00C7BE fw-bold">${status?.week?.totalAmount || 0}</h4>
                             </div>
                           </div>
                           <div className="d-flex justify-content-between small">
-                            <span className="badge bg-F5EEFF text-515151">30 New Checks</span>
-                            <span className="badge bg-EFFFFE text-01A99A">50 Good Checks</span>
-                            <span className="badge bg-FFF6F6 text-E84D4D">10 Bad Checks</span>
+                            <span className="badge bg-F5EEFF text-515151">{status?.week?.totalChecks || 0} New Checks</span>
+                            <span className="badge bg-EFFFFE text-01A99A">{status?.week?.goodChecks || 0} Good Checks</span>
+                            <span className="badge bg-FFF6F6 text-E84D4D">{status?.week?.badChecks || 0} Bad Checks</span>
                           </div>
                         </div>
                       </div>
@@ -173,13 +257,13 @@ const Home = () => {
                             </div>
                             <div>
                               <h6 className="mb-1 fw-medium text-445B64 fs-14">Monthly Status</h6>
-                              <h4 className="mb-0 text-00C7BE fw-bold">$53,000</h4>
+                              <h4 className="mb-0 text-00C7BE fw-bold">${status?.month?.totalAmount || 0}</h4>
                             </div>
                           </div>
                           <div className="d-flex justify-content-between small">
-                            <span className="badge bg-F5EEFF text-515151">50 New Checks</span>
-                            <span className="badge bg-EFFFFE text-01A99A">100 Good Checks</span>
-                            <span className="badge bg-FFF6F6 text-E84D4D">50 Bad Checks</span>
+                            <span className="badge bg-F5EEFF text-515151">{status?.month?.totalChecks || 0} New Checks</span>
+                            <span className="badge bg-EFFFFE text-01A99A">{status?.month?.goodChecks || 0} Good Checks</span>
+                            <span className="badge bg-FFF6F6 text-E84D4D">{status?.month?.badChecks || 0} Bad Checks</span>
                           </div>
                         </div>
                       </div>
@@ -325,7 +409,7 @@ const Home = () => {
                         </div>
 
                         <div className="col-lg-4 me-auto mt-0 text-center">
-                          <button className="btn theme-btn px-5 py-2 rounded-3 mt-3 w-100" >Save</button>
+                          <button className="btn theme-btn px-5 py-2 rounded-3 mt-3 w-100" onClick={handleSave}>Save</button>
                         </div>
                       </div>
                     </div>

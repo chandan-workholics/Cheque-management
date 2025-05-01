@@ -108,10 +108,17 @@ const SignUp = () => {
           toast.error("Failed to send OTP")
         }, 2000);
       }
-    } catch (error) {
+    }catch (error) {
       console.log("Error in register user", error);
-      toast.error('Error in register user');  
-    } finally {
+      if (error.response && error.response.status === 409) {
+        toast.error('User already registered');
+      } else if (error.response && error.response.data?.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error('Error in register user');
+      }
+    }
+     finally {
       setLoading(false);
     }
   }
@@ -120,7 +127,7 @@ const SignUp = () => {
     <>
       <div className="container-fluid sign-page">
         <div className="row sign-main-container">
-          <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="colored" />
+          <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
           <div className="col-lg-6 sign-left-bg h-100 d-flex justify-content-center align-items-center">
             <img src={logoLeft} alt="" className="" />
           </div>
