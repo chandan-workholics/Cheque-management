@@ -10,6 +10,7 @@ const Otp = () => {
     const [otp, setOtp] = useState(new Array(6).fill(""));
     const navigate = useNavigate();
     const email = localStorage.getItem("email");
+       const [loading, setLoading] = useState(false);
 
     const handleChange = (element, index) => {
         if (isNaN(element.value)) return;
@@ -25,23 +26,28 @@ const Otp = () => {
     const handleVerify = async (e) => {
         e.preventDefault();
         const enteredOtp = otp.join("");
-
+        setLoading(true);
         try {
             const res = await axios.post(`${URL}/auth/verify-otp`, {
                 email,
                 otp: enteredOtp
             });
-
             if (res.data.message === "OTP verified. Registration complete.") {
                 setTimeout(() => {
                     toast.success("OTP Verified Successfully!")
                     navigate('/cheque-management/');
+                }, 1000);
+            } else {
+                setTimeout(() => {
+                    toast.success("Please enter the right OTP")
                 }, 1000);
             }
         } catch (err) {
             setTimeout(() => {
                 toast.error("OTP Verified Failed!")
             }, 1000);
+        }finally{
+            setLoading(false)
         }
     };
 
@@ -54,6 +60,7 @@ const Otp = () => {
             }, 1000);
             return;
         }
+        setLoading(true);
         try {
             const res = await axios.post(`${URL}/auth/resend-otp`, {
                 email,
@@ -62,12 +69,18 @@ const Otp = () => {
                 setTimeout(() => {
                     toast.success("otp resent !")
                 }, 1000);
+            } else {
+                setTimeout(() => {
+                    toast.success("There is some issue in otp the resent !")
+                }, 1000);
             }
         } catch (error) {
             console.error("Error resending OTP:", error);
             setTimeout(() => {
                 toast.error("Failed to resend OTP. Please try again.")
             }, 1000);
+        }finally{
+            setLoading(false);
         }
     };
 
@@ -98,7 +111,14 @@ const Otp = () => {
                                             />
                                         ))}
                                     </div>
-                                    <button type="submit" className="btn w-100 sign-btn mb-3">Verify</button>
+                                    <button type="submit" className="btn w-100 sign-btn mb-3">  {loading ? (
+                                        <>
+                                            <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                            Verify OTP
+                                        </>
+                                    ) : (
+                                        "Verify"
+                                    )}</button>
                                 </form>
                                 <button type="submit" className="btn w-100 sign-btn mb-3" onClick={handleResendOtp}>Resend OTP</button>
                             </div>
