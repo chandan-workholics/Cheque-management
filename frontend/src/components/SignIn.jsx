@@ -102,8 +102,8 @@ const SignIn = () => {
                                 <div className="w-100">
                                     <h3 className="fw-semibold">Welcome!</h3>
                                     <h6 className="mb-4 text-445B64">Please enter your credentials to log in</h6>
-                                    <input className="form-control mb-3 rounded-3" type="email" name='email' id='email' value={formData.email} onChange={handleChange} placeholder="Your email address" aria-label="example" />
-                                    <input className="form-control mb-2 rounded-3" type="password" name='password' id='password' value={formData.password} onChange={handleChange} placeholder="Your password" aria-label="example" />
+                                    <input className="form-control mb-3 rounded-3" type="email" name='email' id='email' value={formData.email} onChange={handleChange} placeholder="Your email address" aria-label="example" required />
+                                    <input className="form-control mb-2 rounded-3" type="password" name='password' id='password' value={formData.password} onChange={handleChange} placeholder="Your password" aria-label="example" required />
                                     <div className="form-check form-switch mb-4 p-0">
                                         <div className="form-check form-switch">
                                             <input className="form-check-input" type="checkbox" role="switch" id="switchCheckDefault" />
