@@ -128,6 +128,9 @@ const SignIn = () => {
                                     ) : (
                                         "Sign In"
                                     )}</button>
+                                     <h6 className="text-center text-445B64">Create new Password?
+                                        <Link to='/cheque-management/forget-password' className='text-00C7BE text-decoration-none'> Forget Password</Link>
+                                    </h6>
                                     <h6 className="text-center text-445B64">Don't have an account?
                                         <Link to='/cheque-management/sign-up' className='text-00C7BE text-decoration-none'> Sign up</Link>
                                     </h6>

@@ -1,11 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+const URL = process.env.REACT_APP_URL;
 
 const Cheques = () => {
-    return (
-        <>
+    const[cheques,setCheques] = useState([]);
+
+    const fetchCheques = async() => {
+      try {
+        const response = await axios.get(`${URL}/check/get-all-check`)
+        if(response.data.data){
+            setCheques(response.data.data);
+        }
+      } catch (error) {
+        console.error("Error fetching cheques:", error);
+      }
+    }
+    useEffect(() => {
+      fetchCheques();
+    }, [])
+    
+    return (       
+         <>
             <div className="container-fluid">
                 <Header />
                 <div className="">
@@ -95,20 +114,21 @@ const Cheques = () => {
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        <tr>
+                                                                    {cheques.map((item, index) => (
+                                                                        <tr key={item}>
                                                                             <td className="text-center">
                                                                                 <input className="form-check-input table-checkbox"
                                                                                     type="checkbox" value="" id="flexCheckDefault" />
                                                                             </td>
-                                                                            <td > 01 </td>
-                                                                            <td>Rohit Sharma</td>
-                                                                            <td>State Bank of India</td>
-                                                                            <td>64644444</td>
-                                                                            <td>Self Check</td>
-                                                                            <td>$487441</td>
-                                                                            <td>Lorem Ipsum..</td>
-                                                                            <td>July 14, 2015</td>
-                                                                            <td className="text-01A99A">Active</td>
+                                                                            <td > {index + 1} </td>
+                                                                            <td>{item.customerName || '-'}</td>
+                                                                            <td>{item.company || '-'}</td>
+                                                                            <td>{item.licenseNo || '-'}</td>
+                                                                            <td>{item.checkType || '-'}</td>
+                                                                            <td>${item.amount || '-'}</td>
+                                                                            <td>{item.comment || '-'}</td>
+                                                                            <td>{new Date(item.date).toLocaleDateString()}</td>
+                                                                            <td className="text-01A99A">{item.status || '-'}</td>
                                                                             <td className="">
                                                                                 <div className="d-flex justify-content-center">
                                                                                     <Link to="/cheque-management/cheque-details" className="btn">
@@ -120,6 +140,7 @@ const Cheques = () => {
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
+                                                                    ))}
                                                                     </tbody>
                                                                 </table>
                                                             </div>
@@ -140,3 +161,4 @@ const Cheques = () => {
 }
 
 export default Cheques
+
