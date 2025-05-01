@@ -9,6 +9,8 @@ const checkSchema = new mongoose.Schema({
   company: String,
   checkType: String,
   amount: String,
+  extractedText: String,
+  comment: String,
   status: { type: String, enum: ['bad', 'good'], default: 'good' },
   createdAt: {
     type: Date,
