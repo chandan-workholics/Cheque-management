@@ -10,10 +10,10 @@ const Cheques = () => {
                 <Header />
                 <div className="">
                     <div className="row mh-100vh">
-                        <div className="col-lg-2">
+                        <div className="col-lg-3 col-xl-2 position-relative">
                             <Sidebar />
                         </div>
-                        <div className="col-lg-10 bg-F6F6F6">
+                        <div className="col-lg-9 col-xl-10 bg-F6F6F6">
                             <div className="main-content">
                                 <div className="container-fluid p-3 px-2">
                                     <div className="row">
@@ -46,7 +46,7 @@ const Cheques = () => {
                                                                     </div>
                                                                 </div>
                                                                 <div className="col-lg-5 d-flex justify-content-around">
-                                                                    <div className="">
+                                                                    <div className=" d-flex align-items-center">
                                                                         <button className='btn fs-14 text-445B64 p-0'>
                                                                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
                                                                                 <path d="M9.49229 5.07022C9.66013 5.07022 9.82109 5.13689 9.93977 5.25557C10.0584 5.37425 10.1251 5.53521 10.1251 5.70305V8.86718H13.2893C13.4571 8.86718 13.6181 8.93386 13.7367 9.05253C13.8554 9.17121 13.9221 9.33217 13.9221 9.50001C13.9221 9.66785 13.8554 9.82881 13.7367 9.94749C13.6181 10.0662 13.4571 10.1328 13.2893 10.1328H10.1251V13.297C10.1251 13.4648 10.0584 13.6258 9.93977 13.7445C9.82109 13.8631 9.66013 13.9298 9.49229 13.9298C9.32445 13.9298 9.16349 13.8631 9.04481 13.7445C8.92614 13.6258 8.85946 13.4648 8.85946 13.297V10.1328H5.69533C5.52749 10.1328 5.36653 10.0662 5.24785 9.94749C5.12917 9.82881 5.0625 9.66785 5.0625 9.50001C5.0625 9.33217 5.12917 9.17121 5.24785 9.05253C5.36653 8.93386 5.52749 8.86718 5.69533 8.86718H8.85946V5.70305C8.85946 5.53521 8.92614 5.37425 9.04481 5.25557C9.16349 5.13689 9.32445 5.07022 9.49229 5.07022Z" fill="#445B64" />
