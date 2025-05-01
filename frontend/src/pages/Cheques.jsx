@@ -9,7 +9,7 @@ const Cheques = () => {
             <div className="container-fluid">
                 <Header />
                 <div className="">
-                    <div className="row">
+                    <div className="row mh-100vh">
                         <div className="col-lg-2">
                             <Sidebar />
                         </div>

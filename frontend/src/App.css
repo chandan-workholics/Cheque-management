@@ -6,6 +6,9 @@
   box-sizing: border-box;
   font-family: "DM Sans", sans-serif;
 }
+body{
+  position: relative;
+}
 
 /* Text-Size - Start */
 .fs-14 {
@@ -104,6 +107,10 @@
 
 /* Text-Color-End */
 
+.mh-100vh{
+  min-height: 100vh;
+}
+
 /* SignIn - CSS - Start */
 .sign-main-container {
   height: 100vh;
@@ -178,6 +185,9 @@
 /* Header - CSS - Start */
 .header {
   border-bottom: 1px solid #F0F5F6;
+  position: fixed;
+  z-index: 11;
+  background-color: #FFFFFF;
 }
 
 .header-icon {
@@ -199,9 +209,11 @@
 
 /* Sidebar - CSS - Start */
 .sidebar {
+  width: 15%;
   min-height: 92.3vh;
   background-color: #FFFFFF;
   color: #445B64;
+  padding-top: 70px !important;
 }
 
 .sidebar .nav-link {
@@ -267,7 +279,8 @@
 
 
 /* Main-Content - CSS - Start */
-.main-content {
+.main-content { 
+  padding-top: 60px;
   .table-circular-icon {
     width: 30px;
     height: 30px;

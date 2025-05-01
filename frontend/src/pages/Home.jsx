@@ -106,11 +106,11 @@ const Home = () => {
 
   return (
     <>
-      <div className="container-fluid">
+      <div className="container-fluid mh-100vh">
         <Header />
         <div className="">
           <div className="row">
-            <div className="col-lg-2">
+            <div className="col-lg-2 position-relative">
               <Sidebar />
             </div>
             <div className="col-lg-10 bg-F6F6F6">

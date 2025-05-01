@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const Sidebar = () => {
     return (
         <>
-            <div className="sidebar d-flex flex-column py-3 px-1 d-none d-lg-block position-relative">
+            <div className="sidebar d-flex flex-column py-3 px-1 d-none d-lg-block position-fixed">
                 <ul className="nav nav-pills flex-column mb-auto gap-2">
                     <li>
                         <Link to="/cheque-management/dashboard" className="nav-link active">
