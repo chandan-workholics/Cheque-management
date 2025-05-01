@@ -14,6 +14,7 @@ const Home = () => {
     checkType: '',
     amount: '',
     imageUrl: '',
+    extractedText: '',
   });
 
   const [licenseData, setLicenseData] = useState({
@@ -56,7 +57,8 @@ const Home = () => {
           amountWords: result.amountWords || '',
           payee: result.payee || '',
           memo: result.memo || '',
-          imageUrl: result.imageUrl || ''
+          imageUrl: result.imageUrl || '',
+          extractedText: result.extractedText || ''
         };
         setFormData(parsedData);
       }
@@ -273,7 +275,7 @@ const Home = () => {
                         </div>
                         <div className="col-md-4 mb-3 pb-4">
                           <label className="form-label text-445B64">Comments</label>
-                          <textarea className="form-control h-100" defaultValue="Lorem Ipsum.." />
+                          <textarea className="form-control h-100" value={formData?.extractedText} />
                         </div>
 
                         <div className="col-lg-4 me-auto mt-0 text-center">
