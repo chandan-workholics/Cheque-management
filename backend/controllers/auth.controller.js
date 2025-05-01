@@ -18,6 +18,33 @@ exports.registerVendor = async (req, res) => {
     res.json({ message: 'OTP sent to email. Please verify.' });
 };
 
+exports.getAllVender = async (req, res) => {
+    try {
+        const Users = await User.find();
+        return res.status(200).json({ message: 'All Users fetched successfully', data: Users });
+    } catch (error) {
+        console.error('Error in getAllChecks:', error);
+        return res.status(500).json({ message: 'Failed to fetch Users', error: error.message });
+    }
+};
+
+
+exports.getAllVenderId = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const Users = await User.findById(id);
+        if (!Users) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        return res.status(200).json({ message: 'User fetched successfully', data: Users });
+    } catch (error) {
+        console.error('Error in getCheckById:', error);
+        return res.status(500).json({ message: 'Failed to fetch User', error: error.message });
+    }
+};
+
 exports.verifyOtp = async (req, res) => {
     const { email, otp } = req.body;
     const user = await User.findOne({ email });
