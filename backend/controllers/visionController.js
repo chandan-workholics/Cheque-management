@@ -122,7 +122,6 @@ const baseUrl = 'http://206.189.130.102:5000'; // or your server domain
 // };
 
 
-
 exports.scanCheck = async (req, res) => {
   try {
     if (!req.file) return res.status(400).json({ error: 'No image uploaded' });
@@ -137,7 +136,6 @@ exports.scanCheck = async (req, res) => {
     });
 
     const extractedText = result.textAnnotations?.[0]?.description || '';
-
     const lines = extractedText.split('\n');
 
     // Helper to get value after a label
@@ -147,13 +145,34 @@ exports.scanCheck = async (req, res) => {
     };
 
     const date = lines.find(line =>
-      line.match(/\b(?:\d{1,2}[\/\-\.]){2}\d{2,4}\b/) ||  // e.g., 12/25/2024
-      line.match(/\b(?:January|February|March|April|May|June|July|August|September|October|November|December)\b\s+\d{1,2},?\s+\d{4}/i) // e.g., July 4, 2024
+      line.match(/\b(?:\d{1,2}[\/\-\.]){2}\d{2,4}\b/) ||
+      line.match(/\b(?:January|February|March|April|May|June|July|August|September|October|November|December)\.?\s+\d{1,2},?\s+\d{4}\b/i)
     ) || '';
 
-    const amountNumericMatch = extractedText.match(/\$?\d{1,3}(,\d{3})*(\.\d{2})?|\$?\d+(\.\d{2})?/);
-    let amountNumeric = amountNumericMatch ? amountNumericMatch[0].replace('$', '').trim() : '';
-    // Convert 715,39 to 715.39 if comma is used as decimal
+    let amountNumeric = '';
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+
+      // Case 1: Line directly contains a valid currency amount
+      const directMatch = line.match(/(\d{1,3}(?:[.,]\d{3})*[.,]\d{2})/);
+      if (directMatch && !amountNumeric) {
+        amountNumeric = directMatch[1];
+      }
+
+      // Case 2: "$" or similar symbol is on one line, and amount is on the next line
+      if ((line.includes('$') || line.includes('€')) && i + 1 < lines.length) {
+        const nextLine = lines[i + 1];
+        const match = nextLine.match(/(\d{1,3}(?:[.,]\d{3})*[.,]\d{2})/);
+        if (match && !amountNumeric) {
+          amountNumeric = match[1];
+        }
+      }
+
+      // Once found, break early
+      if (amountNumeric) break;
+    }
+
+    // Convert comma decimal (e.g., 715,39) to dot format
     if (amountNumeric.includes(',') && !amountNumeric.includes('.')) {
       amountNumeric = amountNumeric.replace(',', '.');
     }
@@ -171,10 +190,7 @@ exports.scanCheck = async (req, res) => {
     const memo = memoLine ? memoLine.replace(/MEMO[:\s]*/i, '').trim() : '';
 
     const customerName = lines.find(line => /^[A-Z][a-z]+\s[A-Z][a-z]+$/.test(line)) || '';
-
     const company = lines.find(line => /USA|CORP|INC|LLC|BANK|FINANCE|CORPORATION|BRANCHES/i.test(line)) || '';
-
-
 
     const parsedData = {
       imageUrl,
@@ -194,6 +210,7 @@ exports.scanCheck = async (req, res) => {
     res.status(500).json({ error: 'Failed to process image' });
   }
 };
+
 
 // exports.scanLicense = async (req, res) => {
 //   try {

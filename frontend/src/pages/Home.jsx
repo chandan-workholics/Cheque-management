@@ -244,6 +244,18 @@ const Home = () => {
                             {licenseData?.imageUrl && <img src={licenseData.imageUrl} alt="Profile" />}
                           </div>
                         </div>
+
+                        <div className="col-lg-6">
+                          <div className="row">
+                            <label className="form-label text-445B64">Comments</label>
+                            <div
+                              className="form-control h-100"
+                              style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}
+                              dangerouslySetInnerHTML={{ __html: formData?.extractedText }}
+                            />
+                          </div>
+                        </div>
+
                         <div className="col-lg-8">
                           <div className="row">
                             <div className="col-md-4 mb-3">
@@ -275,7 +287,7 @@ const Home = () => {
                         </div>
                         <div className="col-md-4 mb-3 pb-4">
                           <label className="form-label text-445B64">Comments</label>
-                          <textarea className="form-control h-100" value={formData?.extractedText} />
+                          <textarea className="form-control h-100" />
                         </div>
 
                         <div className="col-lg-4 me-auto mt-0 text-center">
