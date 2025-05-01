@@ -49,11 +49,13 @@ const Home = () => {
       if (result && result.customerName) {
         const parsedData = {
           customerName: result.customerName || '',
-          licenseNo: result.licenseNo || '',
           date: result.date || '',
           company: result.company || '',
           checkType: result.checkType || '',
-          amount: result.amount || '',
+          amount: result.amountNumeric || '',
+          amountWords: result.amountWords || '',
+          payee: result.payee || '',
+          memo: result.memo || '',
           imageUrl: result.imageUrl || ''
         };
         setFormData(parsedData);
@@ -78,7 +80,7 @@ const Home = () => {
         body: formData,
       });
       const result = await response.json();
-      if (result && result.name) {
+      if (result) {
         const parsedData = {
           imageUrl: result.imageUrl || '',
           name: result.name || '',
@@ -244,7 +246,7 @@ const Home = () => {
                           <div className="row">
                             <div className="col-md-4 mb-3">
                               <label className="form-label text-445B64">Customer Name</label>
-                              <input type="text" className="form-control" value={licenseData.name || ''} onChange={(e) => setFormData({ ...licenseData, name: e.target.value })} />
+                              <input type="text" className="form-control" value={licenseData.name || formData.customerName} onChange={(e) => setFormData({ ...licenseData, name: e.target.value })} />
                             </div>
                             <div className="col-md-4 mb-3">
                               <label className="form-label text-445B64">License No</label>
