@@ -1,13 +1,29 @@
 import React from 'react';
 import logo from '../assets/images/logo.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Header = () => {
+
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("role");
+        setTimeout(() => {
+            toast.success("Logged out successfully!")
+        }, 1000);
+        setTimeout(() => {
+            navigate("/cheque-management/");
+        }, 2000);
+    };
 
     return (
         <>
             <div className="header w-100">
                 <nav className="navbar navbar-expand-lg bg-body-white px-3">
+                    <ToastContainer position="top-right" autoClose={2000} hideProgressBar={false} newestOnTop={false}  closeOnClick  rtl={false} pauseOnFocusLoss draggable pauseOnHover />
                     <div className="d-flex align-items-center">
                         <Link className="navbar-brand d-flex align-items-center" to=''>
                             <img src={logo} alt="" className="me-2" />
@@ -28,7 +44,7 @@ const Header = () => {
                             </Link>
                             <ul className="dropdown-menu dropdown-menu-end">
                                 <li><Link className="dropdown-item" to=''>Profile</Link></li>
-                                <li><Link className="dropdown-item" to=''>Logout</Link></li>
+                                <li><button className="dropdown-item" onClick={handleLogout}>Logout</button></li>
                             </ul>
                         </li>
                         <li className="nav-item me-lg-0 d-block d-lg-none">

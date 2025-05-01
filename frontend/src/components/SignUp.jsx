@@ -44,12 +44,18 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const { name, email, password } = formData;
+    if (!name.trim() || !email.trim() || !password.trim()) {
+      setTimeout(()=>{
+        toast.error('Please enter the fields first');
+      },1000)
+      return;
+    }
     const errors = validateForm();
     setFormErrors(errors);
     if (Object.keys(errors).length > 0) {
       return;
     }
-
     setLoading(true);
     try {
       const response = await axios.post(`${URL}/auth/register-vendor`, formData, {
@@ -61,9 +67,11 @@ const SignUp = () => {
       if (response.status >= 200 && response.status < 300) {
         setTimeout(() => {
           toast.success('OTP send successfully');
+        }, 1000);
+        setTimeout(() => {
           navigate('/cheque-management/verify-otp')
           localStorage.setItem("email", formData.email)
-        }, 1000);
+        }, 2000);
       } else {
         setTimeout(() => {
           toast.error("Failed to send OTP")
@@ -91,9 +99,12 @@ const SignUp = () => {
                 <div className="w-100">
                   <h3 className="fw-semibold">Register now</h3>
                   <h6 className="mb-4 text-445B64">Please enter your credentials to sign up</h6>
-                  <input className="form-control mb-3 rounded-3" type="text" id='name' name='name' value={formData.name} onChange={handleChange} placeholder="Full name" aria-label="example" />
-                  <input className="form-control mb-3 rounded-3" type="email" id='email' name='email' value={formData.email} onChange={handleChange} placeholder="Your email address" aria-label="example" />
-                  <input className="form-control mb-3 rounded-3" type="password" id='password' name='password' value={formData.password} onChange={handleChange} placeholder="Password" aria-label="example" />
+                  <input className="form-control mb-3 rounded-3" type="text" id='name' name='name' value={formData.name} onChange={handleChange} placeholder="Full name" aria-label="example" required/>
+                  {formErrors.name && <small className="text-danger">{formErrors.name}</small>}
+                  <input className="form-control mb-3 rounded-3" type="email" id='email' name='email' value={formData.email} onChange={handleChange} placeholder="Your email address" aria-label="example" required/>
+                  {formErrors.email && <small className="text-danger">{formErrors.email}</small>}
+                  <input className="form-control mb-3 rounded-3" type="password" id='password' name='password' value={formData.password} onChange={handleChange} placeholder="Password" aria-label="example" required/>
+                  {formErrors.password && <small className="text-danger">{formErrors.password}</small>}
                   <button type="button" className="btn w-100 sign-btn mb-3" onClick={handleSubmit}>  {loading ? (
                     <>
                       <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>

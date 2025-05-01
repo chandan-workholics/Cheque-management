@@ -41,6 +41,13 @@ const SignIn = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+         const { email, password } = formData;
+            if ( !email.trim() || !password.trim()) {
+              setTimeout(()=>{
+                toast.error('Please enter the fields first');
+              },1000)
+              return;
+            }
         const errors = validateForm();
         setFormErrors(errors);
         if (Object.keys(errors).length > 0) {
@@ -56,18 +63,19 @@ const SignIn = () => {
             if (response.status >= 200 && response.status < 300) {
                 localStorage.setItem("token", response.data.token);
                 localStorage.setItem("role", response.data.role);
-                if (rememberMe) {
-                    localStorage.setItem('rememberedEmail', formData.email);
-                    localStorage.setItem('rememberedPassword', formData.password);
-                } else {
-                    localStorage.removeItem('rememberedEmail');
-                    localStorage.removeItem('rememberedPassword');
-                }
-
+                // if (rememberMe) {
+                //     localStorage.setItem('rememberedEmail', formData.email);
+                //     localStorage.setItem('rememberedPassword', formData.password);
+                // } else {
+                //     localStorage.removeItem('rememberedEmail');
+                //     localStorage.removeItem('rememberedPassword');
+                // }
                 setTimeout(() => {
                     toast.success('Login successfully');
-                    navigate('/cheque-management/dashboard');
                 }, 1000);
+                setTimeout(()=>{
+                    navigate('/cheque-management/dashboard');
+                },2000);
             } else {
                 setTimeout(() => {
                     toast.error("Failed to login");
@@ -80,14 +88,14 @@ const SignIn = () => {
             setLoading(false);
         }
     };
-    useEffect(() => {
-        const savedEmail = localStorage.getItem('rememberedEmail');
-        const savedPassword = localStorage.getItem('rememberedPassword');
-        if (savedEmail) {
-            setFormData({ email: savedEmail, password: savedPassword || '' });
-            setRememberMe(true);
-        }
-    }, []);
+    // useEffect(() => {
+    //     const savedEmail = localStorage.getItem('rememberedEmail');
+    //     const savedPassword = localStorage.getItem('rememberedPassword');
+    //     if (savedEmail) {
+    //         setFormData({ email: savedEmail, password: savedPassword || '' });
+    //         setRememberMe(true);
+    //     }
+    // }, []);
     return (
         <>
             <div className="container-fluid sign-page">
@@ -102,14 +110,16 @@ const SignIn = () => {
                                 <div className="w-100">
                                     <h3 className="fw-semibold">Welcome!</h3>
                                     <h6 className="mb-4 text-445B64">Please enter your credentials to log in</h6>
-                                    <input className="form-control mb-3 rounded-3" type="email" name='email' id='email' value={formData.email} onChange={handleChange} placeholder="Your email address" aria-label="example" required />
+                                    <input className="form-control mb-3 rounded-3" type="email" name='email' id='email' value={formData.email} onChange={handleChange} placeholder="Your email address" aria-label="example" required/>
+                                    {formErrors.email && <small className="text-danger">{formErrors.email}</small>}
                                     <input className="form-control mb-2 rounded-3" type="password" name='password' id='password' value={formData.password} onChange={handleChange} placeholder="Your password" aria-label="example" required />
-                                    <div className="form-check form-switch mb-4 p-0">
+                                    {formErrors.password && <small className="text-danger">{formErrors.password}</small>}
+                                    {/* <div className="form-check form-switch mb-4 p-0">
                                         <div className="form-check form-switch">
                                             <input className="form-check-input" type="checkbox" role="switch" id="switchCheckDefault" />
                                             <label className="form-check-label text-445B64" htmlFor="switchCheckDefault" onChange={() => setRememberMe(!rememberMe)}>Remember me </label>
                                         </div>
-                                    </div>
+                                    </div> */}
                                     <button className="btn w-100 sign-btn mb-3" onClick={handleSubmit} >  {loading ? (
                                         <>
                                             <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
