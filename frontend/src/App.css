@@ -199,7 +199,7 @@
 
 /* Sidebar - CSS - Start */
 .sidebar {
-  height: 92.3vh;
+  min-height: 92.3vh;
   background-color: #FFFFFF;
   color: #445B64;
 }
