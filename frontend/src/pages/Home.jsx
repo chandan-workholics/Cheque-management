@@ -14,6 +14,7 @@ const Home = () => {
     checkType: '',
     amount: '',
     imageUrl: '',
+    extractedText: '',
   });
 
   const [licenseData, setLicenseData] = useState({
@@ -49,12 +50,15 @@ const Home = () => {
       if (result && result.customerName) {
         const parsedData = {
           customerName: result.customerName || '',
-          licenseNo: result.licenseNo || '',
           date: result.date || '',
           company: result.company || '',
           checkType: result.checkType || '',
-          amount: result.amount || '',
-          imageUrl: result.imageUrl || ''
+          amount: result.amountNumeric || '',
+          amountWords: result.amountWords || '',
+          payee: result.payee || '',
+          memo: result.memo || '',
+          imageUrl: result.imageUrl || '',
+          extractedText: result.extractedText || ''
         };
         setFormData(parsedData);
       }
@@ -78,7 +82,7 @@ const Home = () => {
         body: formData,
       });
       const result = await response.json();
-      if (result && result.name) {
+      if (result) {
         const parsedData = {
           imageUrl: result.imageUrl || '',
           name: result.name || '',
@@ -240,11 +244,23 @@ const Home = () => {
                             {licenseData?.imageUrl && <img src={licenseData.imageUrl} alt="Profile" />}
                           </div>
                         </div>
+
+                        <div className="col-lg-6">
+                          <div className="row">
+                            <label className="form-label text-445B64">Comments</label>
+                            <div
+                              className="form-control h-100"
+                              style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}
+                              dangerouslySetInnerHTML={{ __html: formData?.extractedText }}
+                            />
+                          </div>
+                        </div>
+
                         <div className="col-lg-8">
                           <div className="row">
                             <div className="col-md-4 mb-3">
                               <label className="form-label text-445B64">Customer Name</label>
-                              <input type="text" className="form-control" value={licenseData.name || ''} onChange={(e) => setFormData({ ...licenseData, name: e.target.value })} />
+                              <input type="text" className="form-control" value={licenseData.name || formData.customerName} onChange={(e) => setFormData({ ...licenseData, name: e.target.value })} />
                             </div>
                             <div className="col-md-4 mb-3">
                               <label className="form-label text-445B64">License No</label>
@@ -271,7 +287,7 @@ const Home = () => {
                         </div>
                         <div className="col-md-4 mb-3 pb-4">
                           <label className="form-label text-445B64">Comments</label>
-                          <textarea className="form-control h-100" defaultValue="Lorem Ipsum.." />
+                          <textarea className="form-control h-100" />
                         </div>
 
                         <div className="col-lg-4 me-auto mt-0 text-center">
