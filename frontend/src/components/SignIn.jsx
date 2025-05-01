@@ -100,7 +100,7 @@ const SignIn = () => {
         <>
             <div className="container-fluid sign-page">
                 <div className="row sign-main-container">
-                    <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="colored" />
+                    <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
                     <div className="col-lg-6 sign-left-bg h-100 d-flex justify-content-center align-items-center">
                         <img src={logoLeft} alt="" className="" />
                     </div>

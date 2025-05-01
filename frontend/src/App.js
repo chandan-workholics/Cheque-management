@@ -14,6 +14,7 @@ import VerifyEmail from "./pages/VerifyEmail";
 import VerifyEmailExpired from "./pages/VerifyEmailExpired";
 import VerifyEmailSuccess from "./pages/VerifyEmailSuccess";
 import MyTicket from "./pages/MyTicket";
+import Setting from "./pages/Setting";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/cheque-management/email-verification-expired" element={<VerifyEmailExpired />} />
           <Route path="/cheque-management/email-verification-successfully" element={<VerifyEmailSuccess />} />
           <Route path="/cheque-management/my-ticket" element={<MyTicket />} />
+          <Route path="/cheque-management/setting" element={<Setting />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -110,15 +110,15 @@ const Home = () => {
         <Header />
         <div className="">
           <div className="row mh-100vh">
-            <div className="col-lg-3 col-xl-2 position-relative">
+            <div className="col-lg-2 col-xl-2 position-relative">
               <Sidebar />
             </div>
-            <div className="col-lg-9 col-xl-10 bg-F6F6F6">
+            <div className="col-lg-10 col-xl-10 bg-F6F6F6">
               <div className="main-content">
                 <div className="container-fluid p-3 px-2">
                   {/* Status Cards */}
                   <div className="row mb-2">
-                    <div className="col-md-4 mb-3">
+                    <div className="col-md-6 col-xl-4 mb-3">
                       <div className="card shadow-sm border-0 rounded-4">
                         <div className="card-body">
                           <div className="d-flex align-items-center mb-3">
@@ -140,7 +140,7 @@ const Home = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="col-md-4 mb-3">
+                    <div className="col-md-6 col-xl-4 mb-3">
                       <div className="card shadow-sm border-0 rounded-4">
                         <div className="card-body">
                           <div className="d-flex align-items-center mb-3">
@@ -162,7 +162,7 @@ const Home = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="col-md-4 mb-3">
+                    <div className="col-md-6 col-xl-4 mb-3">
                       <div className="card shadow-sm border-0 rounded-4">
                         <div className="card-body">
                           <div className="d-flex align-items-center mb-3">
