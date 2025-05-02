@@ -26,6 +26,7 @@ const Support = () => {
                 },
             });
 
+            
             const result = response.data;
             if (result && result.customerName) {
                 const parsedData = {
