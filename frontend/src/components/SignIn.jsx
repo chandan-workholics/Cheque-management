@@ -86,7 +86,7 @@ const SignIn = () => {
             }
         } catch (error) {
             console.log("User not registered. Please try again!", error);
-            toast.error('User not registered. Please try again!');
+            toast.error(error.response?.data?.message || 'User not registered. Please try again!');
         } finally {
             setLoading(false);
         }
@@ -99,6 +99,33 @@ const SignIn = () => {
     //         setRememberMe(true);
     //     }
     // }, []);
+
+    const handleForgetPassword = async (e) => {
+        e.preventDefault();
+        const email =localStorage.getItem('email');
+        if (!email) {
+          toast.error('Email not found in localStorage.');
+          return;
+        }
+        try {
+          const response = await axios.post(`${URL}/auth/forget-password`, { email });
+          if (response.status === 200) {
+          setTimeout(()=>{
+            toast.success('OTP sent to your email.');
+            localStorage.setItem("resetEmail", email);
+          },1000)
+            setTimeout(()=>{
+                navigate('/cheque-management/forget-password-verification');
+            },2000)
+          } else {
+            toast.error('Failed to send OTP.');
+          }
+        } catch (error) {
+          console.error('OTP send error:', error);
+          toast.error(error.response?.data?.message || 'Error sending OTP.');
+        }
+      };
+
     return (
         <>
             <div className="container-fluid sign-page">
@@ -132,7 +159,7 @@ const SignIn = () => {
                                         "Sign In"
                                     )}</button>
                                      <h6 className="text-center text-445B64">Create new Password?
-                                        <Link to='/cheque-management/forget-password' className='text-00C7BE text-decoration-none'> Forget Password</Link>
+                                        <Link to='/cheque-management/forget-password' className='text-00C7BE text-decoration-none' onClick={handleForgetPassword}> Forget Password</Link>
                                     </h6>
                                     <h6 className="text-center text-445B64">Don't have an account?
                                         <Link to='/cheque-management/sign-up' className='text-00C7BE text-decoration-none'> Sign up</Link>

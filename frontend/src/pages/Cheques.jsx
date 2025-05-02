@@ -11,7 +11,8 @@ const Cheques = () => {
 
     const fetchCheques = async() => {
       try {
-        const response = await axios.get(`${URL}/check/get-all-check`)
+        const vendorId = localStorage.getItem('userId');
+        const response = await axios.get(`${URL}/check/get-checkByVenderId/${vendorId}`)
         if(response.data.data){
             setCheques(response.data.data);
         }
