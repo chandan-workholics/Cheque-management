@@ -3,14 +3,17 @@ import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import { Link } from 'react-router-dom';
 
-const UserList = () => {
+const UserInformation = () => {
     const usersData = Array.from({ length: 50 }, (_, index) => ({
         id: index + 1,
         name: `User ${index + 1}`,
-        phone: '(704) 555-0127',
-        email: `user${index + 1}@example.com`,
+        companyName: 'State Bank of India',
+        licenseNo: `64644444`,
+        chequeType:'Self Check',
+        amount:'$487441',
+        comment:'Lorem Ipsum..',
         date: 'July 14, 2015',
-        status: 'Active',
+        status: 'Active'
     }));
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -44,32 +47,64 @@ const UserList = () => {
                                                                 <div className="d-flex align-items-center">
                                                                     <div className="table-circular-icon bg-F0F5F6 me-3"
                                                                         style={{ cursor: "pointer" }}>
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 16" fill="none">
-                                                                            <path d="M9.16667 12.1667H3.33333V10.5H9.16667M11.6667 8.83333H3.33333V7.16667H11.6667M11.6667 5.5H3.33333V3.83333H11.6667M13.3333 0.5H1.66667C0.741667 0.5 0 1.24167 0 2.16667V13.8333C0 14.2754 0.175595 14.6993 0.488155 15.0118C0.800716 15.3244 1.22464 15.5 1.66667 15.5H13.3333C13.7754 15.5 14.1993 15.3244 14.5118 15.0118C14.8244 14.6993 15 14.2754 15 13.8333V2.16667C15 1.72464 14.8244 1.30072 14.5118 0.988155C14.1993 0.675595 13.7754 0.5 13.3333 0.5Z" fill="#445B64" />
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 12 14" fill="none">
+                                                                            <path d="M6 0.5C5.23002 0.5 4.49157 0.811674 3.94711 1.36646C3.40265 1.92124 3.09677 2.67368 3.09677 3.45827C3.09677 4.24285 3.40265 4.99529 3.94711 5.55008C4.49157 6.10486 5.23002 6.41653 6 6.41653C6.76998 6.41653 7.50843 6.10486 8.05289 5.55008C8.59735 4.99529 8.90323 4.24285 8.90323 3.45827C8.90323 2.67368 8.59735 1.92124 8.05289 1.36646C7.50843 0.811674 6.76998 0.5 6 0.5ZM2.90323 7.99427C2.13324 7.99427 1.3948 8.30595 0.850335 8.86073C0.305875 9.41551 0 10.168 0 10.9525V11.8897C0 12.4845 0.42271 12.991 0.99871 13.0864C4.31071 13.6379 7.68929 13.6379 11.0013 13.0864C11.2799 13.0397 11.5331 12.8938 11.716 12.6747C11.8989 12.4555 11.9995 12.1774 12 11.8897V10.9525C12 10.168 11.6941 9.41551 11.1497 8.86073C10.6052 8.30595 9.86676 7.99427 9.09677 7.99427H8.83355C8.68903 7.9948 8.54865 8.01741 8.41239 8.06212L7.74194 8.28537C6.61004 8.6619 5.38996 8.6619 4.25806 8.28537L3.58761 8.06212C3.45172 8.0177 3.30994 7.99482 3.16723 7.99427H2.90323Z" fill="#445B64" />
                                                                         </svg>
                                                                     </div>
-                                                                    <span className="text-445B64 fw-semibold">All User</span>
+                                                                    <span className="text-445B64 fw-semibold">User Information</span>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div className="col-12 col-lg-6">
-                                                            <div className="row">
-                                                                <div className="d-flex">
-                                                                    <div className="position-relative pe-0 pe-lg-4"
-                                                                        style={{ width: "-webkit-fill-available" }}>
-                                                                        <input className="form-control rounded-3 me-2 shadow-none bg-F0F5F6" style={{ paddingLeft: "40px" }}
-                                                                            type="search" placeholder="Search" aria-label="Search" />
-                                                                        <i className="fa-solid fa-magnifying-glass text-445B64 position-absolute top-0 start-0"
-                                                                            style={{ margin: "11px" }}></i>
-                                                                    </div>
-                                                                    <div className="table-circular-icon bg-F0F5F6" style={{ cursor: "pointer" }}>
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12"
-                                                                            viewBox="0 0 14 12" fill="none">
-                                                                            <path
-                                                                                d="M2.16667 13.6668V7.8335H0.5V6.16683H5.5V7.8335H3.83333V13.6668H2.16667ZM2.16667 4.50016V0.333496H3.83333V4.50016H2.16667ZM5.5 4.50016V2.8335H7.16667V0.333496H8.83333V2.8335H10.5V4.50016H5.5ZM7.16667 13.6668V6.16683H8.83333V13.6668H7.16667ZM12.1667 13.6668V11.1668H10.5V9.50016H15.5V11.1668H13.8333V13.6668H12.1667ZM12.1667 7.8335V0.333496H13.8333V7.8335H12.1667Z"
-                                                                                fill="#445B64" />
-                                                                        </svg>
-                                                                    </div>
+                                                        <div className="col-12 col-lg-6 d-flex justify-content-end align-items-center">
+                                                            <div className="d-flex justify-content-end align-items-center">
+                                                                <button className="btn btn-sm rounded-2 btn-light text-445B64">
+                                                                    <i className="fa-solid fa-arrow-left-long me-2 text-445B64"></i>
+                                                                    Back
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="card border-0 rounded-3 mb-1">
+                                                <div className="card-body">
+                                                    <div className="d-flex justify-content-between">
+                                                        <div className="d-flex gap-5">
+                                                            <div className="">
+                                                                <h6 className="text-445B64 fs-14 mb-1">User Name </h6>
+                                                                <h6 className="text-0D161A fw-medium mb-0">Darrell Steward</h6>
+                                                            </div>
+                                                            <div className="">
+                                                                <h6 className="text-445B64 fs-14 mb-1">Phone Number</h6>
+                                                                <h6 className="text-0D161A fw-medium mb-0">(704) 555-0127</h6>
+                                                            </div>
+                                                            <div className="">
+                                                                <h6 className="text-445B64 fs-14 mb-1">Email Address</h6>
+                                                                <h6 className="text-0D161A fw-medium mb-0">curtis.weaver@example.com</h6>
+                                                            </div>
+                                                            <div className="">
+                                                                <h6 className="text-445B64 fs-14 mb-1">Total Checks</h6>
+                                                                <h6 className="text-0D161A fw-medium mb-0">2000</h6>
+                                                            </div>
+                                                            <div className="">
+                                                                <h6 className="text-445B64 fs-14 mb-1">Total Amount</h6>
+                                                                <h6 className="text-0D161A fw-medium mb-0">$50000</h6>
+                                                            </div>
+                                                            <div className="">
+                                                                <h6 className="text-445B64 fs-14 mb-1">Date</h6>
+                                                                <h6 className="text-0D161A fw-medium mb-0">July 14, 2015</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div className="d-flex gap-5">
+                                                            <div className="">
+                                                                <h6 className="text-445B64 fs-14 mb-1">Status</h6>
+                                                                <div className="">
+                                                                    <button className="btn btn-sm rounded-2 lh-1 bg-4FD1C5 text-white me-3">
+                                                                        Active
+                                                                    </button>
+                                                                    <button className="btn btn-sm rounded-2 lh-1 bg-E84D4D text-white">
+                                                                        Deactive
+                                                                    </button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -77,6 +112,9 @@ const UserList = () => {
                                                 </div>
                                             </div>
                                             <div className="card border-0 rounded-3">
+                                                <div className="card-body">
+                                                    <h6 className="text-0D161A fw-medium mb-0">Check List</h6>
+                                                </div>
                                                 <div className="card-body p-0">
                                                     <div className="row">
                                                         <div className="col-12">
@@ -89,9 +127,12 @@ const UserList = () => {
                                                                                     type="checkbox" value="" id="flexCheckDefault" />
                                                                             </th>
                                                                             <th scope="col" className="text-445B64">SNo.</th>
-                                                                            <th scope="col" className="text-445B64">User Name</th>
-                                                                            <th scope="col" className="text-445B64">Phone Number</th>
-                                                                            <th scope="col" className="text-445B64">Email Address</th>
+                                                                            <th scope="col" className="text-445B64">Customer Name</th>
+                                                                            <th scope="col" className="text-445B64">Company Name</th>
+                                                                            <th scope="col" className="text-445B64">License No</th>
+                                                                            <th scope="col" className="text-445B64">Check Type</th>
+                                                                            <th scope="col" className="text-445B64">Amount</th>
+                                                                            <th scope="col" className="text-445B64">Comment</th>
                                                                             <th scope="col" className="text-445B64">Date</th>
                                                                             <th scope="col" className="text-445B64">Status</th>
                                                                             <th scope="col" className="text-445B64 text-center">Actions</th>
@@ -105,13 +146,16 @@ const UserList = () => {
                                                                                 </td>
                                                                                 <td>{indexOfFirstRow + index + 1}</td>
                                                                                 <td>{user.name}</td>
-                                                                                <td>{user.phone}</td>
-                                                                                <td>{user.email}</td>
+                                                                                <td>{user.companyName}</td>
+                                                                                <td>{user.licenseNo}</td>
+                                                                                <td>{user.chequeType}</td>
+                                                                                <td>{user.amount}</td>
+                                                                                <td>{user.comment}</td>
                                                                                 <td>{user.date}</td>
                                                                                 <td className="text-01A99A">{user.status}</td>
                                                                                 <td>
                                                                                     <div className="d-flex justify-content-center">
-                                                                                        <Link to="/cm-admin/user-information" className="btn">
+                                                                                        <Link to="/cheque-management/cheque-details" className="btn">
                                                                                             <i className="fa-solid fa-eye text-445B64"></i>
                                                                                         </Link>
                                                                                         <button className="btn">
@@ -168,4 +212,4 @@ const UserList = () => {
     )
 }
 
-export default UserList
+export default UserInformation
