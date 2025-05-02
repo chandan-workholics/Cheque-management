@@ -1,9 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+const URL = process.env.REACT_APP_URL;
 
 const Report = () => {
+
+    const [report, setReport] = useState();
+
+    const fetchReport = async () => {
+        try {
+            const vendorId = localStorage.getItem('userId');
+            const response = await axios.get(`${URL}/complain/tickets/vendor/${vendorId}`)
+            if (response) {
+                setReport(response?.data);
+            }
+        } catch (error) {
+            console.error("Error fetching cheques:", error);
+        }
+    }
+    useEffect(() => {
+        fetchReport();
+    }, [])
+
+    console.log(report)
     return (
         <>
             <div className="container-fluid">
@@ -70,31 +92,35 @@ const Report = () => {
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        <tr>
-                                                                            <td class="text-center">
-                                                                                <input class="form-check-input table-checkbox"
-                                                                                    type="checkbox" value="" id="flexCheckDefault" />
-                                                                            </td>
-                                                                            <td scope="row"> 01 </td>
-                                                                            <td>Rohit Sharma</td>
-                                                                            <td>State Bank of India</td>
-                                                                            <td>64644444</td>
-                                                                            <td>Self Check</td>
-                                                                            <td>$487441</td>
-                                                                            <td>Lorem Ipsum..</td>
-                                                                            <td>July 14, 2015</td>
-                                                                            <td class="text-01A99A">Active</td>
-                                                                            <td class="">
-                                                                                <div className="d-flex justify-content-center">
-                                                                                    <Link to="/cheque-management/cheque-details" className="btn">
-                                                                                        <i class="fa-solid fa-eye text-445B64"></i>
-                                                                                    </Link>
-                                                                                    <button className="btn">
-                                                                                        <i class="fa-solid fa-trash-can text-danger"></i>
-                                                                                    </button>
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
+
+                                                                        {report?.map((val, index) => {
+                                                                            <tr>
+                                                                                <td class="text-center">
+                                                                                    <input class="form-check-input table-checkbox"
+                                                                                        type="checkbox" value="" id="flexCheckDefault" />
+                                                                                </td>
+                                                                                <td scope="row"> {index+1} </td>
+                                                                                <td>{val?.subject}</td>
+                                                                                <td>State Bank of India</td>
+                                                                                <td>64644444</td>
+                                                                                <td>Self Check</td>
+                                                                                <td>$487441</td>
+                                                                                <td>Lorem Ipsum..</td>
+                                                                                <td>July 14, 2015</td>
+                                                                                <td class="text-01A99A">Active</td>
+                                                                                <td class="">
+                                                                                    <div className="d-flex justify-content-center">
+                                                                                        <Link to="/cheque-management/cheque-details" className="btn">
+                                                                                            <i class="fa-solid fa-eye text-445B64"></i>
+                                                                                        </Link>
+                                                                                        <button className="btn">
+                                                                                            <i class="fa-solid fa-trash-can text-danger"></i>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                        })}
+
                                                                     </tbody>
                                                                 </table>
                                                             </div>

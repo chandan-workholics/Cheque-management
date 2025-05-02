@@ -385,8 +385,8 @@ const Home = () => {
                                 onChange={(e) => setFormData({ ...formData, status: e.target.value })}
                               >
                                 <option value="">Select Status</option>
-                                <option value="Good">Good</option>
-                                <option value="Bad">Bad</option>
+                                <option value="good">Good</option>
+                                <option value="bad">Bad</option>
                               </select>
                             </div>
 
