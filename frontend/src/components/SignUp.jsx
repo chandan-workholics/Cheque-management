@@ -167,7 +167,7 @@ const SignUp = () => {
                   ) : (
                     "Sign Up"
                   )}</button>
-                  <h6 className="text-center text-445B64">Don't have an account? <Link to='/cheque-management/' className='text-00C7BE text-decoration-none'> Sign in</Link></h6>
+                  <h6 className="text-center text-445B64 mb-3">Don't have an account? <Link to='/cheque-management/' className='text-00C7BE text-decoration-none'> Sign in</Link></h6>
                 </div>
               </div>
             </div>

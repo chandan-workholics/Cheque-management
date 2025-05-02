@@ -1,0 +1,43 @@
+import React from 'react'
+import logoLeft from '../assets/images/logoLeft.png'
+import { Link } from 'react-router-dom'
+
+const SignUp = () => {
+
+  return (
+    <>
+      <div className="container-fluid sign-page">
+        <div className="row sign-main-container">
+          <div className="col-lg-6 sign-left-bg h-100 d-flex justify-content-center align-items-center">
+            <img src={logoLeft} alt="" className="" />
+          </div>
+          <div className="col-lg-6 h-100 bg-EEEEEE position-relative">
+            <div className="row h-100">
+              <div className="col-lg-6 mx-auto d-flex justify-content-center align-items-center">
+                <div className="w-100">
+                  <h3 className="fw-semibold">Register now</h3>
+                  <h6 className="mb-4 text-445B64">Please enter your credentials to sign up</h6>
+                  {/* Business */}
+                  <input className="form-control mb-3 rounded-3" type="text" id='bussiness' name='bussiness' placeholder="Business name" aria-label="example" required/>
+                  <input className="form-control mb-3 rounded-3" type="text" id='firstname' name='firstname' placeholder="First name" aria-label="example" required/>
+                  <input className="form-control mb-3 rounded-3" type="text" id='lastname' name='lastname' placeholder="Last name" aria-label="example" required/>
+                  <input className="form-control mb-3 rounded-3" type="email" id='email' name='email' placeholder="Your email address" aria-label="example" required/>
+                  <input className="form-control mb-3 rounded-3" type="number" id='mobile' name='mobile' placeholder="Your Phone number" aria-label="example" required/>
+                  <input className="form-control mb-3 rounded-3" type="password" id='password' name='password' placeholder="Password" aria-label="example" required/>
+                  <input className="form-control mb-3 rounded-3" type="password" id='confirmPassword' name='confirmPassword' placeholder="Confirm Password" aria-label="example" required/>
+                  <button type="button" className="btn w-100 sign-btn mb-3">Sign Up</button>
+                  <h6 className="text-center text-445B64 mb-3">Don't have an account? <Link to='/cheque-management/' className='text-00C7BE text-decoration-none'> Sign in</Link></h6>
+                </div>
+              </div>
+            </div>
+            <div className="position-absolute bottom-0 start-0 w-100">
+              <h6 className="text-445B64 text-center">Terms & Conditions • Privacy Policy</h6>
+            </div>
+          </div>
+        </div >
+      </div >
+    </>
+  )
+}
+
+export default SignUp

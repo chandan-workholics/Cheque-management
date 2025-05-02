@@ -91,11 +91,11 @@ const ForgetPassword = () => {
                         <div className="row h-100">
                             <div className="col-lg-6 mx-auto d-flex justify-content-center align-items-center">
                                 <div className="w-100">
-                                    <h3 className="fw-semibold">Welcome!</h3>
-                                    <h6 className="mb-4 text-445B64">Reset Password</h6>
+                                    <h3 className="fw-semibold">Forgot Password?</h3>
+                                    <h6 className="mb-4 text-445B64">No worries, we’ll help you reset your password.</h6>
                                     <input className="form-control mb-3 rounded-3" type="email" name='email' id='email' value={formData.email} onChange={handleChange} placeholder="Your email address" aria-label="example" required />
                                     {formErrors.email && <small className="text-danger">{formErrors.email}</small>}
-                                    <input className="form-control mb-2 rounded-3" type="password" name='newPassword' id='newPassword' value={formData.newPassword} onChange={handleChange} placeholder="Enter New Password" aria-label="example" required />
+                                    <input className="form-control mb-3 rounded-3" type="password" name='newPassword' id='newPassword' value={formData.newPassword} onChange={handleChange} placeholder="Enter New Password" aria-label="example" required />
                                     {formErrors.newPassword && <small className="text-danger">{formErrors.newPassword}</small>}
                                     <button className="btn w-100 sign-btn mb-3" onClick={handleSubmit} >  {loading ? (
                                         <>
@@ -105,6 +105,12 @@ const ForgetPassword = () => {
                                     ) : (
                                         "Set Password"
                                     )}</button>
+                                    <h6 className="text-center text-445B64">
+                                        <Link to='/cheque-management/' className='text-00C7BE text-decoration-none'>
+                                            <i class="fa-solid fa-chevron-left me-2"></i>
+                                            Back to Sign-in
+                                        </Link>
+                                    </h6>
                                 </div>
                             </div>
                         </div>

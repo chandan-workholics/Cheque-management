@@ -41,13 +41,13 @@ const SignIn = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-         const { email, password } = formData;
-            if ( !email.trim() || !password.trim()) {
-              setTimeout(()=>{
+        const { email, password } = formData;
+        if (!email.trim() || !password.trim()) {
+            setTimeout(() => {
                 toast.error('Please enter the fields first');
-              },1000)
-              return;
-            }
+            }, 1000)
+            return;
+        }
         const errors = validateForm();
         setFormErrors(errors);
         if (Object.keys(errors).length > 0) {
@@ -73,9 +73,9 @@ const SignIn = () => {
                 setTimeout(() => {
                     toast.success('Login successfully');
                 }, 1000);
-                setTimeout(()=>{
+                setTimeout(() => {
                     navigate('/cheque-management/dashboard');
-                },2000);
+                }, 2000);
             } else {
                 setTimeout(() => {
                     toast.error("Failed to login");
@@ -110,10 +110,13 @@ const SignIn = () => {
                                 <div className="w-100">
                                     <h3 className="fw-semibold">Welcome!</h3>
                                     <h6 className="mb-4 text-445B64">Please enter your credentials to log in</h6>
-                                    <input className="form-control mb-3 rounded-3" type="email" name='email' id='email' value={formData.email} onChange={handleChange} placeholder="Your email address" aria-label="example" required/>
+                                    <input className="form-control mb-3 rounded-3" type="email" name='email' id='email' value={formData.email} onChange={handleChange} placeholder="Your email address" aria-label="example" required />
                                     {formErrors.email && <small className="text-danger">{formErrors.email}</small>}
-                                    <input className="form-control mb-3 rounded-3" type="password" name='password' id='password' value={formData.password} onChange={handleChange} placeholder="Your password" aria-label="example" required />
+                                    <input className="form-control mb-1 rounded-3" type="password" name='password' id='password' value={formData.password} onChange={handleChange} placeholder="Your password" aria-label="example" required />
                                     {formErrors.password && <small className="text-danger">{formErrors.password}</small>}
+                                    <h6 className="text-end text-445B64 mb-3">
+                                        <Link to='/cheque-management/forget-password' className='text-00C7BE text-decoration-none'> Forget Password</Link>
+                                    </h6>
                                     {/* <div className="form-check form-switch mb-4 p-0">
                                         <div className="form-check form-switch">
                                             <input className="form-check-input" type="checkbox" role="switch" id="switchCheckDefault" />
@@ -128,9 +131,6 @@ const SignIn = () => {
                                     ) : (
                                         "Sign In"
                                     )}</button>
-                                     <h6 className="text-center text-445B64">Create new Password?
-                                        <Link to='/cheque-management/forget-password' className='text-00C7BE text-decoration-none'> Forget Password</Link>
-                                    </h6>
                                     <h6 className="text-center text-445B64">Don't have an account?
                                         <Link to='/cheque-management/sign-up' className='text-00C7BE text-decoration-none'> Sign up</Link>
                                     </h6>
