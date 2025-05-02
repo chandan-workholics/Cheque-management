@@ -3,9 +3,9 @@ const Check = require('../model/check.model');
 
 exports.addCheckDetail = async (req, res) => {
     try {
-        const { imageUrl, customerName, licenseNo, date, company, checkType, amount, status, extractedText, comment, venderId } = req.body;
+        const { imageUrl, imageUrl2,imageUrl3,imageUrl4,customerName, licenseNo, date, company, checkType, amount, status, extractedText, comment, venderId } = req.body;
 
-        const newCheck = new Check({ imageUrl, customerName, licenseNo, date, company, checkType, amount, status, extractedText, comment, venderId });
+        const newCheck = new Check({ imageUrl, imageUrl2,imageUrl3,imageUrl4,customerName, licenseNo, date, company, checkType, amount, status, extractedText, comment, venderId });
 
         await newCheck.save();
 

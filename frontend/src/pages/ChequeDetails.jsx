@@ -124,6 +124,7 @@ const ChequeDetails = () => {
                                                                         </div>
                                                                     </div>
                                                                 </div>
+
                                                             </div>
                                                         </div>
                                                     </div>

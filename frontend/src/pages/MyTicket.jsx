@@ -1,8 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
+
+const URL = process.env.REACT_APP_URL;
 
 const MyTicket = () => {
+    const navigate = useNavigate();
+    const[tickets,setTickets] = useState({});
+
+    const handleBack = () => {
+      navigate('/cheque-management/support');
+    }
+    const fetchTickets = async () => {
+     try {
+        const vendorId = localStorage.getItem("userId");
+        const response = await axios.get(`${URL}/complain/tickets/vendor/${vendorId}`)
+        if (response.status >= 200 && response.status < 300) {
+           setTickets(response?.data?.data || [])
+        }
+     } catch (error) {
+        console.log("Error in fetching complaints" +error.message);
+     }
+    }
+    useEffect(()=>{
+     fetchTickets();
+    },[])
     return (
         <>
             <div className="container-fluid">
@@ -35,7 +59,7 @@ const MyTicket = () => {
                                                         </div>
                                                         <div className="col-12 col-lg-6">
                                                             <div className="d-flex justify-content-end">
-                                                                <button className="btn btn-sm rounded-2 btn-light text-445B64">
+                                                                <button className="btn btn-sm rounded-2 btn-light text-445B64" onClick={handleBack}>
                                                                     <i className="fa-solid fa-arrow-left-long me-2 text-445B64"></i>
                                                                     Back
                                                                 </button>
