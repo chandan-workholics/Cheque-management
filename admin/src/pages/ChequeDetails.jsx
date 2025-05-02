@@ -103,23 +103,36 @@ const ChequeDetails = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="card border-0 rounded-3">
-                                                <div className="card-body">
-                                                <div className="row">
-                            {licenseData?.imageUrl &&
-                              <div className='col-lg-6'>
-                                <label className="form-label text-445B64 mb-1 mt-3">Front Image</label>
-                                <img src={licenseData.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
-                              </div>
-                            }
-                            {licenseData?.imageUrl &&
-                              <div className='col-lg-6'>
-                                <label className="form-label text-445B64 mb-1 mt-3">Back Image</label>
-                                <img src={licenseData.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
-                              </div>
-                            }
-                            <div className="col-lg-6"></div>
-                          </div>
+                                            <div className="row">
+                                                <div className='col-lg-6'>
+                                                    <div className="card border-0 rounded-3">
+                                                        <div className="card-body">
+                                                            <label className="form-label text-445B64 fw-medium">Cheque Image</label>
+                                                            <div className="row">
+                                                                <div className="col-lg-6">
+                                                                    <label className="form-label text-445B64">Front Image</label>
+                                                                </div>
+                                                                <div className="col-lg-6">
+                                                                    <label className="form-label text-445B64">Back Image</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className='col-lg-6'>
+                                                    <div className="card border-0 rounded-3">
+                                                        <div className="card-body">
+                                                            <label className="form-label text-445B64 fw-medium">License Image</label>
+                                                            <div className="row">
+                                                                <div className="col-lg-6">
+                                                                    <label className="form-label text-445B64">Front Image</label>
+                                                                </div>
+                                                                <div className="col-lg-6">
+                                                                    <label className="form-label text-445B64">Back Image</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

@@ -7,6 +7,8 @@ import UserList from "./pages/UserList";
 import UserInformation from "./pages/UserInformation";
 import AllCheques from "./pages/AllCheques";
 import ChequeDetails from "./pages/ChequeDetails";
+import Report from "./pages/Report";
+import ReportExport from "./pages/ReportExport";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route path="/cm-admin/user-information" element={<UserInformation />} />
           <Route path="/cm-admin/all-cheques" element={<AllCheques />} />
           <Route path="/cm-admin/cheque-details" element={<ChequeDetails />} />
+          <Route path="/cm-admin/report" element={<Report />} />
+          <Route path="/cm-admin/export-report" element={<ReportExport />} />
         </Routes>
       </BrowserRouter>
     </>
