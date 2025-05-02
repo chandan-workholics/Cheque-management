@@ -11,6 +11,8 @@ const checkSchema = new mongoose.Schema({
   amount: String,
   extractedText: String,
   comment: String,
+  venderId: String,
+  isActive:{ type: Boolean, default: true },
   status: { type: String, enum: ['bad', 'good'], default: 'good' },
   createdAt: {
     type: Date,

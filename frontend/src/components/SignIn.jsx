@@ -63,6 +63,9 @@ const SignIn = () => {
             if (response.status >= 200 && response.status < 300) {
                 localStorage.setItem("token", response.data.token);
                 localStorage.setItem("role", response.data.role);
+                localStorage.setItem("userId", response.data.userId);
+
+
                 // if (rememberMe) {
                 //     localStorage.setItem('rememberedEmail', formData.email);
                 //     localStorage.setItem('rememberedPassword', formData.password);
@@ -83,7 +86,7 @@ const SignIn = () => {
             }
         } catch (error) {
             console.log("User not registered. Please try again!", error);
-            toast.error('User not registered. Please try again!');
+            toast.error(error.response?.data?.message || 'User not registered. Please try again!');
         } finally {
             setLoading(false);
         }
@@ -96,6 +99,33 @@ const SignIn = () => {
     //         setRememberMe(true);
     //     }
     // }, []);
+
+    const handleForgetPassword = async (e) => {
+        e.preventDefault();
+        const email =localStorage.getItem('email');
+        if (!email) {
+          toast.error('Email not found in localStorage.');
+          return;
+        }
+        try {
+          const response = await axios.post(`${URL}/auth/forget-password`, { email });
+          if (response.status === 200) {
+          setTimeout(()=>{
+            toast.success('OTP sent to your email.');
+            localStorage.setItem("resetEmail", email);
+          },1000)
+            setTimeout(()=>{
+                navigate('/cheque-management/forget-password-verification');
+            },2000)
+          } else {
+            toast.error('Failed to send OTP.');
+          }
+        } catch (error) {
+          console.error('OTP send error:', error);
+          toast.error(error.response?.data?.message || 'Error sending OTP.');
+        }
+      };
+
     return (
         <>
             <div className="container-fluid sign-page">
@@ -115,7 +145,7 @@ const SignIn = () => {
                                     <input className="form-control mb-1 rounded-3" type="password" name='password' id='password' value={formData.password} onChange={handleChange} placeholder="Your password" aria-label="example" required />
                                     {formErrors.password && <small className="text-danger">{formErrors.password}</small>}
                                     <h6 className="text-end text-445B64 mb-3">
-                                        <Link to='/cheque-management/forget-password' className='text-00C7BE text-decoration-none'> Forget Password</Link>
+                                        <Link to='/cheque-management/forget-password' className='text-00C7BE text-decoration-none' onClick={handleForgetPassword}> Forget Password</Link>
                                     </h6>
                                     {/* <div className="form-check form-switch mb-4 p-0">
                                         <div className="form-check form-switch">

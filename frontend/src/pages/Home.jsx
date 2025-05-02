@@ -3,10 +3,11 @@ import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import { useState } from 'react';
 import axios from 'axios';
+import { toast, ToastContainer } from "react-toastify";
 const URL = process.env.REACT_APP_URL;
 
 const Home = () => {
-
+  const venderId = localStorage.getItem("userId");
   const [formData, setFormData] = useState({
     customerName: '',
     licenseNo: '',
@@ -33,78 +34,82 @@ const Home = () => {
   });
 
   const [status, setStatus] = useState({});
-  const [saveData,setSaveData] = useState({});
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const file = e.target.files[0];
-    if (!file) {
-      alert("Please upload a cheque image.");
-      return;
-    }
-    const formData = new FormData();
-    formData.append('image', file);
-    try {
-      const response = await fetch(`${URL}/scan-check`, {
-        method: 'POST',
-        body: formData,
-      });
-      const result = await response.json();
-      if (result && result.customerName) {
-        const parsedData = {
-          customerName: result.customerName || '',
-          date: result.date || '',
-          company: result.company || '',
-          checkType: result.checkType || '',
-          amount: result.amountNumeric || '',
-          amountWords: result.amountWords || '',
-          payee: result.payee || '',
-          memo: result.memo || '',
-          imageUrl: result.imageUrl || '',
-          extractedText: result.extractedText || ''
-        };
-        setFormData(parsedData);
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      const file = e.target.files[0];
+      if (!file) {
+        alert("Please upload a cheque image.");
+        return;
       }
-    } catch (error) {
-      console.error('Error during image upload:', error);
-    }
-  };
+      const formData = new FormData();
+      formData.append('image', file);
+      try {
+        const response = await axios.post(`${URL}/scan-check`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
 
-  const handleSubmitLicense = async (e) => {
-    e.preventDefault();
-    const file = e.target.files[0];
-    if (!file) {
-      alert("Please upload a License image.");
-      return;
-    }
-    const formData = new FormData();
-    formData.append('image', file);
-    try {
-      const response = await fetch(`${URL}/scan-license`, {
-        method: 'POST',
-        body: formData,
-      });
-      const result = await response.json();
-      if (result) {
-        const parsedData = {
-          imageUrl: result.imageUrl || '',
-          name: result.name || '',
-          licenseNo: result.licenseNo || '',
-          dob: result.dob || '',
-          sex: result.sex || '',
-          eyes: result.eyes || '',
-          height: result.height || '',
-          address: result.address || '',
-          issuedDate: result.issuedDate || '',
-          expiryDate: result.expiryDate || '',
-        };
-        setLicenseData(parsedData);
+        const result = response.data;
+        if (result && result.customerName) {
+          const parsedData = {
+            customerName: result.customerName || '',
+            date: result.date || '',
+            company: result.company || '',
+            checkType: result.checkType || '',
+            amount: result.amountNumeric || '',
+            amountWords: result.amountWords || '',
+            payee: result.payee || '',
+            memo: result.memo || '',
+            imageUrl: result.imageUrl || '',
+            extractedText: result.extractedText || ''
+          };
+          setFormData(parsedData);
+        }
+      } catch (error) {
+        console.error('Error during image upload:', error);
       }
-    } catch (error) {
-      console.error('Error during image upload:', error);
-    }
-  };
 
+    };
+
+    const handleSubmitLicense = async (e) => {
+      e.preventDefault();
+      const file = e.target.files[0];
+      if (!file) {
+        alert("Please upload a License image.");
+        return;
+      }
+      const formData = new FormData();
+      formData.append('image', file);
+      try {
+        const response = await axios.post(`${URL}/scan-license`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        const result = response.data;
+        if (result) {
+          const parsedData = {
+            imageUrl: result.imageUrl || '',
+            name: result.name || '',
+            licenseNo: result.licenseNo || '',
+            dob: result.dob || '',
+            sex: result.sex || '',
+            eyes: result.eyes || '',
+            height: result.height || '',
+            address: result.address || '',
+            issuedDate: result.issuedDate || '',
+            expiryDate: result.expiryDate || '',
+          };
+          setLicenseData(parsedData);
+        }
+      } catch (error) {
+        console.error('Error during image upload:', error);
+      }
+
+    };
 
   const handleStatus = async () => {
     try {
@@ -125,68 +130,34 @@ const Home = () => {
     handleStatus();
   }, [])
 
-  // const handleSave = async () => {
-  //   try {
-  //     const response = await fetch(`${URL}/check/add-check`, {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(),
-  //     });
-  //     const result = await response.json();
-  
-  //     if (result && result.data) {
-  //       alert("Data saved successfully")
-  //       const data = {
-  //         customerName: result.data.customerName || '',
-  //         date: result.data.date || '',
-  //         company: result.data.company || '',
-  //         checkType: result.data.checkType || '',
-  //         amount: result.data.amount || '',
-  //         imageUrl: result.data.imageUrl || '',
-  //         extractedText: result.data.extractedText || '',
-  //         comment: result.data.comment || '',
-  //       };
-  //       setStatus(data);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error saving data:", error);
-  //     alert("Failed to save data. Please try again.");
-  //   }
-  // };
-  
-  
-  const handleSave = async () => {
+  const handleSave = async (e) => {
+    e.preventDefault();
     try {
-      const response = await axios.post(`${URL}/check/add-check`);
-  
-      if (response.status >= 200 && response.status < 300 && response.data?.data) {
-        const apiData = response.data.data;
-  
-        const data = {
-          customerName: apiData.customerName || '',
-          licenseNo: apiData.licenseNo || '',
-          date: apiData.date || '',
-          company: apiData.company || '',
-          checkType: apiData.checkType || '',
-          amount: apiData.amount || '',
-          imageUrl: apiData.imageUrl || '',
-          extractedText: apiData.extractedText || '',
-          comment: apiData.comment || '',
-          status: apiData.status || '',
-        };
-  
-        setSaveData(data); // store the actual data from the API
+      const response = await axios.post(`${URL}/check/add-check`, {
+        imageUrl: formData.imageUrl,
+        customerName: formData.customerName,
+        licenseNo: licenseData.licenseNo,
+        date: new Date(formData.date).toLocaleDateString('en-GB'),
+        company: formData.company,
+        checkType: formData.checkType,
+        amount: formData.amount,
+        status: formData.status,
+        extractedText: formData.extractedText,
+        comment: formData.comment || 'xyz',
+        venderId: venderId
+      });
+      if (response.status >= 200 && response.status < 300) {
+
+        toast.success('check added successfully');
       } else {
-        console.warn("API call successful but no data returned.");
+        toast.error('Failed to add check');
       }
     } catch (error) {
-      console.error("Error saving data:", error);
-      alert("Failed to save data. Please try again.");
+      console.error('Error submitting form:', error);
+      toast.error('An error occurred while submitting the form');
     }
   };
-  
+
 
   return (
     <>
@@ -378,7 +349,7 @@ const Home = () => {
                           <div className="row">
                             <div className="col-md-4 mb-3">
                               <label className="form-label text-445B64">Customer Name</label>
-                              <input type="text" className="form-control" value={licenseData.name || formData.customerName} onChange={(e) => setFormData({ ...licenseData, name: e.target.value })} />
+                              <input type="text" className="form-control" value={licenseData.name || formData.customerName} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
                             </div>
                             <div className="col-md-4 mb-3">
                               <label className="form-label text-445B64">License No</label>
@@ -389,15 +360,37 @@ const Home = () => {
                               <input type="text" className="form-control" value={formData.date || ''} onChange={(e) => setFormData({ ...formData, date: e.target.value })} />
                             </div>
 
-                            <div className="col-md-4 mb-3">
+                            <div className="col-md-3 mb-3">
                               <label className="form-label text-445B64">Company</label>
                               <input type="text" className="form-control" value={formData.company || ''} onChange={(e) => setFormData({ ...formData, company: e.target.value })} />
                             </div>
-                            <div className="col-md-4 mb-3">
+                            <div className="col-md-3 mb-3">
                               <label className="form-label text-445B64">Check Type</label>
-                              <input type="text" className="form-control" value={formData.checkType || ''} onChange={(e) => setFormData({ ...formData, checkType: e.target.value })} />
+                              <select
+                                className="form-control"
+                                value={formData.checkType || ''}
+                                onChange={(e) => setFormData({ ...formData, checkType: e.target.value })}
+                              >
+                                <option value="">Select Check Type</option>
+                                <option value="Personal">Personal</option>
+                                <option value="Business">Business</option>
+                              </select>
                             </div>
-                            <div className="col-md-4 mb-3">
+
+                            <div className="col-md-3 mb-3">
+                              <label className="form-label text-445B64">Status</label>
+                              <select
+                                className="form-control"
+                                value={formData.status || ''}
+                                onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+                              >
+                                <option value="">Select Status</option>
+                                <option value="Good">Good</option>
+                                <option value="Bad">Bad</option>
+                              </select>
+                            </div>
+
+                            <div className="col-md-3 mb-3">
                               <label className="form-label text-445B64">Amount</label>
                               <input type="text" className="form-control" value={formData.amount || ''} onChange={(e) => setFormData({ ...formData, amount: e.target.value })} />
                             </div>
@@ -405,7 +398,7 @@ const Home = () => {
                         </div>
                         <div className="col-md-4 mb-3 pb-4">
                           <label className="form-label text-445B64">Comments</label>
-                          <textarea className="form-control h-100" />
+                          <textarea className="form-control h-100" value={formData.comment || ''} onChange={(e) => setFormData({ ...formData, comment: e.target.value })}/>
                         </div>
 
                         <div className="col-lg-4 me-auto mt-0 text-center">
