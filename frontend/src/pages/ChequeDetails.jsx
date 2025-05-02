@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 
@@ -11,12 +11,20 @@ const[chequeDetails,setChequeDetails] = useState([]);
 
 const fetchChequeDetails = async()=>{
     try {
-        const userId = localStorage.getItem("userId");
-        const response = await axios.get(`${URL}/check/get-checkByVenderId/${userId}`)
+        const vendorId = localStorage.getItem("userId");
+        const response = await axios.get(`${URL}/check/get-checkByVenderId/${vendorId}`);
+        if (response.status >= 200 && response.status < 300){
+            setChequeDetails(response?.data?.data)
+        }
     } catch (error) {
-        
+        console.log("Error in fetching cheque:" +error.message);
     }
 }
+
+useEffect(()=>{
+fetchChequeDetails();
+},[]) 
+
     return (
         <>
             <div className="container-fluid">
