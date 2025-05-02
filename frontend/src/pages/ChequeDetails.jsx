@@ -69,56 +69,58 @@ const ChequeDetails = () => {
                                         <div className="col-12">
                                             {chequeDetails.length > 0 ? (
                                                 chequeDetails.map((item, index) => (
-                                                    <div className="card border-0 rounded-3 mb-1" key={index}>
-                                                        <div className="card-body">
-                                                            <div className="d-flex justify-content-between">
-                                                                <div className="d-flex gap-5 flex-wrap">
-                                                                    <div className="mb-3">
-                                                                        <h6 className="text-445B64 fs-14 mb-1">Customer Name</h6>
-                                                                        <h6 className="text-0D161A fw-semibold fs-14">{item.customerName}</h6>
+                                                    <div key={item._id} className="col-12">
+                                                        <div className="card border-0 rounded-3 mb-1">
+                                                            <div className="card-body">
+                                                                <div className="d-flex justify-content-between">
+                                                                    <div className="d-flex gap-5 flex-wrap">
+                                                                        <div className="mb-3">
+                                                                            <h6 className="text-445B64 fs-14 mb-1">Customer Name</h6>
+                                                                            <h6 className="text-0D161A fw-semibold fs-14">{item.customerName}</h6>
+                                                                        </div>
+                                                                        <div className="mb-3">
+                                                                            <h6 className="text-445B64 fs-14 mb-1">License No</h6>
+                                                                            <h6 className="text-0D161A fw-semibold fs-14">{item.licenseNo}</h6>
+                                                                        </div>
+                                                                        <div className="mb-3">
+                                                                            <h6 className="text-445B64 fs-14 mb-1">Company</h6>
+                                                                            <h6 className="text-0D161A fw-semibold fs-14">{item.company}</h6>
+                                                                        </div>
+                                                                        <div className="mb-3">
+                                                                            <h6 className="text-445B64 fs-14 mb-1">Check Type</h6>
+                                                                            <h6 className="text-0D161A fw-semibold fs-14">{item.checkType}</h6>
+                                                                        </div>
+                                                                        <div className="mb-3">
+                                                                            <h6 className="text-445B64 fs-14 mb-1">Amount</h6>
+                                                                            <h6 className="text-0D161A fw-semibold fs-14">${item.amount}</h6>
+                                                                        </div>
+                                                                        <div className="mb-3">
+                                                                            <h6 className="text-445B64 fs-14 mb-1">Date</h6>
+                                                                            <h6 className="text-0D161A fw-semibold fs-14">{item.date}</h6>
+                                                                        </div>
                                                                     </div>
-                                                                    <div className="mb-3">
-                                                                        <h6 className="text-445B64 fs-14 mb-1">License No</h6>
-                                                                        <h6 className="text-0D161A fw-semibold fs-14">{item.licenseNo}</h6>
-                                                                    </div>
-                                                                    <div className="mb-3">
-                                                                        <h6 className="text-445B64 fs-14 mb-1">Company</h6>
-                                                                        <h6 className="text-0D161A fw-semibold fs-14">{item.bankName}</h6>
-                                                                    </div>
-                                                                    <div className="mb-3">
-                                                                        <h6 className="text-445B64 fs-14 mb-1">Check Type</h6>
-                                                                        <h6 className="text-0D161A fw-semibold fs-14">{item.checkType}</h6>
-                                                                    </div>
-                                                                    <div className="mb-3">
-                                                                        <h6 className="text-445B64 fs-14 mb-1">Amount</h6>
-                                                                        <h6 className="text-0D161A fw-semibold fs-14">{item.amount}</h6>
-                                                                    </div>
-                                                                    <div className="mb-3">
-                                                                        <h6 className="text-445B64 fs-14 mb-1">Date</h6>
-                                                                        <h6 className="text-0D161A fw-semibold fs-14">{item.date}</h6>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="d-flex gap-5">
-                                                                    <div className="mb-3">
-                                                                        <h6 className="text-445B64 fs-14 mb-1">Status</h6>
-                                                                        <div>
-                                                                            <button className={`btn btn-sm rounded-2 lh-1 me-3 ${item.status === 'Active' ? 'bg-4FD1C5' : 'btn-light'} text-white`}>
-                                                                                Active
-                                                                            </button>
-                                                                            <button className={`btn btn-sm rounded-2 lh-1 ${item.status !== 'Active' ? 'bg-E84D4D' : 'btn-light'} text-white`}>
-                                                                                Deactive
-                                                                            </button>
+                                                                    <div className="d-flex gap-3 align-items-start">
+                                                                        <div className="mb-3">
+                                                                            <h6 className="text-445B64 fs-14 mb-1">Status</h6>
+                                                                            <div>
+                                                                                <button className={`btn btn-sm rounded-2 lh-1 text-white ${item.isActive ? "bg-4FD1C5" : "bg-E84D4D"}`}>
+                                                                                    {item.isActive ? "Active" : "Deactive"}
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className="mb-3">
+                                                                            <img src={item.imageUrl} alt="Cheque" className="img-fluid rounded" style={{ maxWidth: "150px" }} />
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
 
-                                                            <div className="d-flex gap-5">
-                                                                <div className="mb-3">
-                                                                    <h6 className="text-445B64 fs-14 mb-1">Comments</h6>
-                                                                    <div className="card rounded-3">
-                                                                        <div className="card-body p-2">
-                                                                            <p className="text-0D161A fw-light fs-13 mb-0">{item.comments || "No comments available"}</p>
+                                                                <div className="d-flex gap-5 mt-3">
+                                                                    <div className="mb-3 w-100">
+                                                                        <h6 className="text-445B64 fs-14 mb-1">Comments</h6>
+                                                                        <div className="card rounded-3">
+                                                                            <div className="card-body p-2">
+                                                                                <p className="text-0D161A fw-light fs-13 mb-0">{item.comment || "No comments available."}</p>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -127,8 +129,9 @@ const ChequeDetails = () => {
                                                     </div>
                                                 ))
                                             ) : (
-                                                <p>No cheque details found.</p>
+                                                <div className="col-12 text-center py-4">No cheque details found.</div>
                                             )}
+
 
                                         </div>
                                     </div>
