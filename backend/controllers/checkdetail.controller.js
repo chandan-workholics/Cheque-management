@@ -3,9 +3,9 @@ const Check = require('../model/check.model');
 
 exports.addCheckDetail = async (req, res) => {
     try {
-        const { imageUrl, customerName, licenseNo, date, company, checkType, amount, status, extractedText, comment } = req.body;
+        const { imageUrl, customerName, licenseNo, date, company, checkType, amount, status, extractedText, comment, venderId } = req.body;
 
-        const newCheck = new Check({ imageUrl, customerName, licenseNo, date, company, checkType, amount, status, extractedText, comment });
+        const newCheck = new Check({ imageUrl, customerName, licenseNo, date, company, checkType, amount, status, extractedText, comment, venderId });
 
         await newCheck.save();
 
@@ -32,6 +32,26 @@ exports.getAllChecks = async (req, res) => {
         return res.status(500).json({ message: 'Failed to fetch checks', error: error.message });
     }
 };
+
+exports.getCheckByVenderId = async (req, res) => {
+    try {
+        const { venderId } = req.params;
+
+       
+
+        const checks = await Check.find({ venderId });
+
+        if (!checks.length) {
+            return res.status(404).json({ message: 'No checks found for this vendor' });
+        }
+
+        return res.status(200).json({ message: 'Checks fetched successfully', data: checks });
+    } catch (error) {
+        console.error('Error in getCheckByVenderId:', error);
+        return res.status(500).json({ message: 'Failed to fetch checks', error: error.message });
+    }
+};
+
 
 exports.getCheckById = async (req, res) => {
     try {

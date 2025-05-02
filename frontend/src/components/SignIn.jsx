@@ -63,6 +63,9 @@ const SignIn = () => {
             if (response.status >= 200 && response.status < 300) {
                 localStorage.setItem("token", response.data.token);
                 localStorage.setItem("role", response.data.role);
+                localStorage.setItem("userId", response.data.userId);
+
+
                 // if (rememberMe) {
                 //     localStorage.setItem('rememberedEmail', formData.email);
                 //     localStorage.setItem('rememberedPassword', formData.password);

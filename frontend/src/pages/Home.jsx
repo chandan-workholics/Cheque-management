@@ -3,10 +3,11 @@ import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import { useState } from 'react';
 import axios from 'axios';
+import { toast, ToastContainer } from "react-toastify";
 const URL = process.env.REACT_APP_URL;
 
 const Home = () => {
-
+  const venderId = localStorage.getItem("userId");
   const [formData, setFormData] = useState({
     customerName: '',
     licenseNo: '',
@@ -33,7 +34,7 @@ const Home = () => {
   });
 
   const [status, setStatus] = useState({});
-  const [saveData,setSaveData] = useState({});
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -125,68 +126,35 @@ const Home = () => {
     handleStatus();
   }, [])
 
-  // const handleSave = async () => {
-  //   try {
-  //     const response = await fetch(`${URL}/check/add-check`, {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(),
-  //     });
-  //     const result = await response.json();
-  
-  //     if (result && result.data) {
-  //       alert("Data saved successfully")
-  //       const data = {
-  //         customerName: result.data.customerName || '',
-  //         date: result.data.date || '',
-  //         company: result.data.company || '',
-  //         checkType: result.data.checkType || '',
-  //         amount: result.data.amount || '',
-  //         imageUrl: result.data.imageUrl || '',
-  //         extractedText: result.data.extractedText || '',
-  //         comment: result.data.comment || '',
-  //       };
-  //       setStatus(data);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error saving data:", error);
-  //     alert("Failed to save data. Please try again.");
-  //   }
-  // };
-  
-  
-  const handleSave = async () => {
+
+  const handleSave = async (e) => {
+    e.preventDefault();
     try {
-      const response = await axios.post(`${URL}/check/add-check`);
-  
-      if (response.status >= 200 && response.status < 300 && response.data?.data) {
-        const apiData = response.data.data;
-  
-        const data = {
-          customerName: apiData.customerName || '',
-          licenseNo: apiData.licenseNo || '',
-          date: apiData.date || '',
-          company: apiData.company || '',
-          checkType: apiData.checkType || '',
-          amount: apiData.amount || '',
-          imageUrl: apiData.imageUrl || '',
-          extractedText: apiData.extractedText || '',
-          comment: apiData.comment || '',
-          status: apiData.status || '',
-        };
-  
-        setSaveData(data); // store the actual data from the API
+      const response = await axios.post(`${URL}/check/add-check`, {
+        imageUrl: formData.imageUrl,
+        customerName: formData.customerName,
+        licenseNo: formData.customerName,
+        date: formData.date,
+        company: formData.company,
+        checkType: "personal check",
+        amount: formData.amountNumeric,
+        status: "good",
+        extractedText: formData.extractedText,
+        comment: "xyz",
+        venderId: venderId
+      });
+      if (response.status >= 200 && response.status < 300) {
+
+        toast.success('check added successfully');
       } else {
-        console.warn("API call successful but no data returned.");
+        toast.error('Failed to add check');
       }
     } catch (error) {
-      console.error("Error saving data:", error);
-      alert("Failed to save data. Please try again.");
+      console.error('Error submitting form:', error);
+      toast.error('An error occurred while submitting the form');
     }
   };
-  
+
 
   return (
     <>
