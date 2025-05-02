@@ -1,9 +1,87 @@
-import React from 'react'
+import React, { useState } from 'react'
+import axios from 'axios';
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
-import { Link } from 'react-router-dom';
+const URL = process.env.REACT_APP_URL;
 
 const Support = () => {
+    const venderId = localStorage.getItem("userId");
+    const [formData, setFormData] = useState({
+        customerName: '', licenseNo: '', date: '', company: '', checkType: '', amount: '', imageUrl: '', extractedText: '',
+    });
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const file = e.target.files[0];
+        if (!file) {
+            alert("Please upload a cheque image.");
+            return;
+        }
+        const formData = new FormData();
+        formData.append('image', file);
+        try {
+            const response = await axios.post(`${URL}/scan-check`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            const result = response.data;
+            if (result && result.customerName) {
+                const parsedData = {
+                    customerName: result.customerName || '',
+                    date: result.date || '',
+                    company: result.company || '',
+                    checkType: result.checkType || '',
+                    amount: result.amountNumeric || '',
+                    amountWords: result.amountWords || '',
+                    payee: result.payee || '',
+                    memo: result.memo || '',
+                    imageUrl: result.imageUrl || '',
+                    extractedText: result.extractedText || ''
+                };
+                setFormData(parsedData);
+            }
+        } catch (error) {
+            console.error('Error during image upload:', error);
+        }
+
+    };
+
+
+    const [data, setData] = useState({ subject: '', category: '', description: '', checkImg: '', vendorId: '' })
+
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setData((prevData) => ({ ...prevData, [name]: value }))
+    }
+
+    const addTicket = async () => {
+        try {
+            const response = await axios.post(`${URL}/complain/tickets`, {
+                subject: data?.subject || '',
+                category: data?.category || '',
+                description: data?.description || '',
+                checkImg: formData?.imageUrl || '',
+                vendorId: venderId || ''
+            });
+            if (response.status === 201) {
+                alert('Ticket raised successfully!');
+                setData({
+                    subject: '',
+                    category: '',
+                    description: '',
+                    checkImg: '',
+                    vendorId: '',
+                });
+            }
+        } catch (error) {
+            console.error(error);
+            alert('Failed to raise ticket. Please try again.');
+        }
+    };
+
+
     return (
         <>
             <div className="container-fluid">
@@ -55,22 +133,30 @@ const Support = () => {
                                                             <div className="row">
                                                                 <div className="col-md-6 mb-3">
                                                                     <label className="form-label text-445B64">Subject</label>
-                                                                    <input type="text" className="form-control" />
+                                                                    <input type="text" name='subject' value={data.subject} onChange={handleChange} className="form-control" />
                                                                 </div>
                                                                 <div className="col-md-6 mb-3">
                                                                     <label className="form-label text-445B64">Category</label>
-                                                                    <input type="text" className="form-control" />
+                                                                    <input type="text" name='category' value={data.category} onChange={handleChange} className="form-control" />
                                                                 </div>
                                                                 <div className="col-12 d-flex gap-3">
                                                                     <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
-                                                                        <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" style={{ opacity: 0, cursor: 'pointer' }} />
+                                                                        <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmit} style={{ opacity: 0, cursor: 'pointer' }} />
                                                                         <div className="">
                                                                             <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
                                                                             <div className="text-445B64">Upload Cheque Image </div>
                                                                         </div>
                                                                     </div>
                                                                     <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
-                                                                        <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" style={{ opacity: 0, cursor: 'pointer' }} />
+                                                                        <input
+                                                                            className="position-absolute top-0 start-0 w-100 h-100"
+                                                                            type="file"
+                                                                            id="formFile"
+                                                                            onChange={handleSubmit}
+                                                                            accept="image/*"
+                                                                            capture="environment"
+                                                                            style={{ opacity: 0, cursor: 'pointer' }}
+                                                                        />
                                                                         <div className="">
                                                                             <i className="fa-solid fa-camera fs-4 text-01A99A"></i>
                                                                             <div className="text-445B64">Capture Cheque Image</div>
@@ -79,13 +165,22 @@ const Support = () => {
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <div className="row">
+                                                            {formData?.imageUrl &&
+                                                                <div className='col-lg-6'>
+                                                                    <label className="form-label text-445B64 mb-1 mt-3">Front Image</label>
+                                                                    <img src={formData.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
+                                                                </div>
+                                                            }
+
+                                                        </div>
                                                         <div className="col-lg-6 mb-3 pb-3">
                                                             <label className="form-label text-445B64">Description</label>
-                                                            <textarea className="form-control h-100" defaultValue="Description" />
+                                                            <textarea className="form-control h-100" name='description' value={data.description} onChange={handleChange} defaultValue="Description" />
                                                         </div>
 
                                                         <div className="col-lg-4 me-auto mt-0 text-center">
-                                                            <button className="btn theme-btn px-5 py-2 rounded-3 mt-3 w-100" >Save</button>
+                                                            <button className="btn theme-btn px-5 py-2 rounded-3 mt-3 w-100" onClick={addTicket}>Save</button>
                                                         </div>
                                                     </div>
                                                 </div>
