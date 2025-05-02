@@ -78,6 +78,7 @@ body {
 .bg-FAFAFA {
   background-color: #FAFAFA;
 }
+
 .bg-F2F2F7 {
   background-color: #F2F2F7;
 }
@@ -98,7 +99,7 @@ body {
 }
 
 .text-01A99A {
-  color: #01A99A;
+  color: #01A99A !important;
 }
 
 .text-E84D4D {
@@ -324,7 +325,7 @@ body {
     }
 
     td {
-      color: #0D161A !important;
+      color: #0D161A;
       font-weight: 500;
       padding: 10px;
     }
@@ -344,6 +345,26 @@ body {
     box-shadow: rgb(204, 219, 232) 0px -1px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 0px 0px inset;
     border-radius: 5px !important;
     border: #DEE6E9;
+  }
+
+  .pagination {
+    .page-link {
+      color: #000000DE;
+      background-color: transparent;
+    }
+
+    .active>.page-link,
+    .page-link.active {
+      z-index: 3;
+      color: #000000DE;
+      background-color: #00C7BE;
+    }
+
+    .disabled>.page-link,
+    .page-link.disabled {
+      color: #818181de !important;
+      background-color: transparent;
+    }
   }
 }
 
