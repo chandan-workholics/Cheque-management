@@ -353,6 +353,10 @@ body {
       background-color: transparent;
     }
 
+    .page-link:focus {
+      box-shadow: none;
+    }
+
     .active>.page-link,
     .page-link.active {
       z-index: 3;

@@ -3,14 +3,17 @@ import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import { Link } from 'react-router-dom';
 
-const UserList = () => {
+const AllCheques = () => {
     const usersData = Array.from({ length: 50 }, (_, index) => ({
         id: index + 1,
         name: `User ${index + 1}`,
-        phone: '(704) 555-0127',
-        email: `user${index + 1}@example.com`,
+        companyName: 'State Bank of India',
+        licenseNo: `64644444`,
+        chequeType: 'Self Check',
+        amount: '$487441',
+        comment: 'Lorem Ipsum..',
         date: 'July 14, 2015',
-        status: 'Active',
+        status: 'Active'
     }));
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -48,7 +51,7 @@ const UserList = () => {
                                                                             <path d="M9.16667 12.1667H3.33333V10.5H9.16667M11.6667 8.83333H3.33333V7.16667H11.6667M11.6667 5.5H3.33333V3.83333H11.6667M13.3333 0.5H1.66667C0.741667 0.5 0 1.24167 0 2.16667V13.8333C0 14.2754 0.175595 14.6993 0.488155 15.0118C0.800716 15.3244 1.22464 15.5 1.66667 15.5H13.3333C13.7754 15.5 14.1993 15.3244 14.5118 15.0118C14.8244 14.6993 15 14.2754 15 13.8333V2.16667C15 1.72464 14.8244 1.30072 14.5118 0.988155C14.1993 0.675595 13.7754 0.5 13.3333 0.5Z" fill="#445B64" />
                                                                         </svg>
                                                                     </div>
-                                                                    <span className="text-445B64 fw-semibold">All User</span>
+                                                                    <span className="text-445B64 fw-semibold">All Cheques</span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -89,9 +92,12 @@ const UserList = () => {
                                                                                     type="checkbox" value="" id="flexCheckDefault" />
                                                                             </th>
                                                                             <th scope="col" className="text-445B64">SNo.</th>
-                                                                            <th scope="col" className="text-445B64">User Name</th>
-                                                                            <th scope="col" className="text-445B64">Phone Number</th>
-                                                                            <th scope="col" className="text-445B64">Email Address</th>
+                                                                            <th scope="col" className="text-445B64">Customer Name</th>
+                                                                            <th scope="col" className="text-445B64">Company Name</th>
+                                                                            <th scope="col" className="text-445B64">License No</th>
+                                                                            <th scope="col" className="text-445B64">Check Type</th>
+                                                                            <th scope="col" className="text-445B64">Amount</th>
+                                                                            <th scope="col" className="text-445B64">Comment</th>
                                                                             <th scope="col" className="text-445B64">Date</th>
                                                                             <th scope="col" className="text-445B64">Status</th>
                                                                             <th scope="col" className="text-445B64 text-center">Actions</th>
@@ -105,13 +111,16 @@ const UserList = () => {
                                                                                 </td>
                                                                                 <td>{indexOfFirstRow + index + 1}</td>
                                                                                 <td>{user.name}</td>
-                                                                                <td>{user.phone}</td>
-                                                                                <td>{user.email}</td>
+                                                                                <td>{user.companyName}</td>
+                                                                                <td>{user.licenseNo}</td>
+                                                                                <td>{user.chequeType}</td>
+                                                                                <td>{user.amount}</td>
+                                                                                <td>{user.comment}</td>
                                                                                 <td>{user.date}</td>
                                                                                 <td className="text-01A99A">{user.status}</td>
                                                                                 <td>
                                                                                     <div className="d-flex justify-content-center">
-                                                                                        <Link to="/cm-admin/user-information" className="btn">
+                                                                                        <Link to="/cm-admin/cheque-details" className="btn">
                                                                                             <i className="fa-solid fa-eye text-445B64"></i>
                                                                                         </Link>
                                                                                         <button className="btn">
@@ -168,4 +177,4 @@ const UserList = () => {
     )
 }
 
-export default UserList
+export default AllCheques
