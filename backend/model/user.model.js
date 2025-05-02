@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
   role: { type: String, enum: ['superadmin', 'admin', 'vendor'], default: 'vendor' },
   otp: String,
   otpVerified: { type: Boolean, default: false },
+  isActive:{ type: Boolean, default: true },
 });
 
 module.exports = mongoose.model('User', userSchema);
