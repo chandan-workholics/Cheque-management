@@ -16,6 +16,7 @@ import VerifyEmailSuccess from "./pages/VerifyEmailSuccess";
 import MyTicket from "./pages/MyTicket";
 import Setting from "./pages/Setting";
 import ForgetPassword from "./pages/ForgetPassword";
+import ProtectedRoute from "./pages/Common_Method/protectedroute";
 
 function App() {
   return (
@@ -24,19 +25,19 @@ function App() {
         <Routes>
           <Route path="/cheque-management/" element={<SignIn />} />
           <Route path="/cheque-management/sign-up" element={<SignUp />} />
-          <Route path="/cheque-management/dashboard" element={<Home />} />
-          <Route path="/cheque-management/cheques" element={<Cheques />} />
-          <Route path="/cheque-management/cheque-details" element={<ChequeDetails />} />
-          <Route path="/cheque-management/report" element={<Report />} />
-          <Route path="/cheque-management/export-report" element={<ReportExport />} />
-          <Route path="/cheque-management/user" element={<User />} />
-          <Route path="/cheque-management/support" element={<Support />} />
+          <Route path="/cheque-management/dashboard" element={<ProtectedRoute element={<Home />}/>} />
+          <Route path="/cheque-management/cheques" element={<ProtectedRoute element={<Cheques />}/>} />
+          <Route path="/cheque-management/cheque-details" element={<ProtectedRoute element={<ChequeDetails />}/>} />
+          <Route path="/cheque-management/report" element={<ProtectedRoute element={<Report />}/>} />
+          <Route path="/cheque-management/export-report" element={<ProtectedRoute element={<ReportExport />}/>} />
+          <Route path="/cheque-management/user" element={<ProtectedRoute element={<User />}/>} />
+          <Route path="/cheque-management/support" element={<ProtectedRoute element={<Support />}/>} />
           <Route path="/cheque-management/verify-otp" element={<Otp />} />
           <Route path="/cheque-management/verify-email" element={<VerifyEmail />} />
           <Route path="/cheque-management/email-verification-expired" element={<VerifyEmailExpired />} />
           <Route path="/cheque-management/email-verification-successfully" element={<VerifyEmailSuccess />} />
-          <Route path="/cheque-management/my-ticket" element={<MyTicket />} />
-          <Route path="/cheque-management/setting" element={<Setting />} />
+          <Route path="/cheque-management/my-ticket" element={<ProtectedRoute element={<MyTicket />}/>} />
+          <Route path="/cheque-management/setting" element={<ProtectedRoute element={<Setting />}/>} />
           <Route path="/cheque-management/forget-password" element={<ForgetPassword/>}/>
         </Routes>
       </BrowserRouter>
