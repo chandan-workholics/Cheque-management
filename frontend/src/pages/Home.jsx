@@ -136,7 +136,7 @@ const Home = () => {
       const response = await axios.post(`${URL}/check/add-check`, {
         imageUrl: formData.imageUrl,
         customerName: formData.customerName,
-        licenseNo: formData.licenseNo,
+        licenseNo: licenseData.licenseNo,
         date: new Date(formData.date).toLocaleDateString('en-GB'),
         company: formData.company,
         checkType: formData.checkType,
