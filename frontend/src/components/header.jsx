@@ -28,7 +28,7 @@ const Header = () => {
                     <div className="d-flex align-items-center">
                         <Link className="navbar-brand d-flex align-items-center" to=''>
                             <img src={logo} alt="" className="me-2" />
-                            <span className='fs-6 fw-semibold'>Check Management</span>
+                            <span className='fs-6 fw-semibold'>Cheque Management</span>
                         </Link>
                     </div>
                     {/* Navbar right-side */}
@@ -39,7 +39,7 @@ const Header = () => {
                                 <i className="fa-solid fa-bell fs-5"></i>
                             </Link>
                         </li>
-                        <li className="nav-item dropdown me-4">
+                        <li className="nav-item dropdown me-2 me-lg-4 d-none d-lg-block">
                             <Link className="nav-link header-icon dropdown-toggle " to='' data-bs-toggle="dropdown">
                                 <i className="fa-solid fa-circle-user fs-5"></i>
                             </Link>
@@ -49,7 +49,7 @@ const Header = () => {
                             </ul>
                         </li>
                         <li className="nav-item me-lg-0 d-block d-lg-none">
-                            <Link className="nav-link" to=''>
+                            <Link className="nav-link header-icon" to=''>
                                 <button className="btn border-0 bg-transparent p-0 mb-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
                                     <i className="fa-solid fa-bars"></i>
                                 </button>
@@ -60,12 +60,12 @@ const Header = () => {
             </div>
 
             <div className="offcanvas offcanvas-start w-75 w-md-50 " data-bs-scroll="true" tabIndex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-                <div className="offcanvas-header">
+                <div className="offcanvas-header border-bottom">
                     <h5 className="offcanvas-title" id="offcanvasWithBothOptionsLabel">Cheque Management</h5>
                     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div className="offcanvas-body">
-                    <div className="sidebar d-flex flex-column py-3 px-1 w-100" style={{paddingTop:'0px !important'}}>
+                    <div className="sidebar d-flex flex-column px-1 w-100">
                         <ul className="nav nav-pills flex-column mb-auto gap-2">
                             <li>
                                 <NavLink to="/cheque-management/dashboard" className="nav-link">
@@ -118,16 +118,26 @@ const Header = () => {
                                     <span className="">Settings</span>
                                 </NavLink>
                             </li>
+                            <li>
+                                <button className="nav-link btn btn-danger text-danger w-100" onClick={handleLogout}>
+                                    <div className="sidebar-icon">
+                                        <i class="fa-solid fa-right-from-bracket"></i>
+                                    </div>
+                                    <span className="">Logut</span>
+                                </button>
+                            </li>
                         </ul>
-                        <div className="position-absolute bottom-0 left-0 w-100 mb-3" style={{ paddingRight: '7px' }}>
-                            <div className="card sidebarSupport border-0" style={{ borderRadius: '24px' }}>
-                                <div className="card-body bg-transparent p-xxl-3">
-                                    <img src={supportIconImg} alt="" className='mb-4' />
-                                    <h6 className="text-white fw-semibold ">Need help?</h6>
-                                    <h6 className="text-white fw-normal mb-3 fs-13">Please check our docs</h6>
-                                    <NavLink to='/cheque-management/support' className="btn fs-13 fw-semibold border-0 py-2 text-00C7BE bg-white w-100" style={{ borderRadius: '12px' }}>
-                                        <span className="">Go To Help Center</span>
-                                    </NavLink>
+                        <div className="position-relative">
+                            <div className="position-absolute bottom-0 left-0 w-100 mb-3" style={{ paddingRight: '7px' }}>
+                                <div className="card sidebarSupport border-0" style={{ borderRadius: '24px' }}>
+                                    <div className="card-body bg-transparent p-xxl-3">
+                                        <img src={supportIconImg} alt="" className='mb-4' />
+                                        <h6 className="text-white fw-semibold ">Need help?</h6>
+                                        <h6 className="text-white fw-normal mb-3 fs-13">Please check our docs</h6>
+                                        <NavLink to='/cheque-management/support' className="btn fs-13 fw-semibold border-0 py-2 text-00C7BE bg-white w-100" style={{ borderRadius: '12px' }}>
+                                            <span className="">Go To Help Center</span>
+                                        </NavLink>
+                                    </div>
                                 </div>
                             </div>
                         </div>

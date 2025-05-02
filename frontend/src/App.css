@@ -5,7 +5,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "DM Sans", sans-serif;
-}
+} 
 
 body {
   position: relative;
@@ -187,6 +187,8 @@ body {
 .header {
   border-bottom: 1px solid #F0F5F6;
   position: fixed;
+  top: 0;
+  left: 0;
   z-index: 11;
   background-color: #FFFFFF;
 }
@@ -220,6 +222,11 @@ body {
   background-color: #FFFFFF;
   color: #445B64;
   padding-top: 80px !important;
+}
+
+.offcanvas-body .sidebar{
+  padding-top: 0 !important;
+  min-height: 86vh;
 }
 
 @media only screen and (min-width:1200px) and (max-width:1400px) {

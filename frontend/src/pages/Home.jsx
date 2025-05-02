@@ -165,7 +165,7 @@ const Home = () => {
         <Header />
         <div className="">
           <div className="row mh-100vh">
-            <div className="col-lg-2 col-xl-2 position-relative">
+            <div className="col-lg-2 col-xl-2 d-none d-lg-block position-relative">
               <Sidebar />
             </div>
             <div className="col-lg-10 col-xl-10 bg-F6F6F6">
@@ -277,8 +277,6 @@ const Home = () => {
                                 <div className="text-445B64">Capture License Image</div>
                               </div>
                             </div>
-
-
                           </div>
                           <div className="row">
                             {licenseData?.imageUrl &&

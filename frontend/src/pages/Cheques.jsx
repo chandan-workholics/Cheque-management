@@ -30,7 +30,7 @@ const Cheques = () => {
                 <Header />
                 <div className="">
                     <div className="row mh-100vh">
-                        <div className="col-lg-3 col-xl-2 position-relative">
+                        <div className="col-lg-3 col-xl-2 d-none d-lg-block position-relative">
                             <Sidebar />
                         </div>
                         <div className="col-lg-9 col-xl-10 bg-F6F6F6">
@@ -57,7 +57,7 @@ const Cheques = () => {
                                                         <div className="col-12 col-lg-6">
                                                             <div className="row">
                                                                 <div className="col-lg-7">
-                                                                    <div className="d-flex position-relative"
+                                                                    <div className="d-flex position-relative mb-3 mb-lg-0"
                                                                         style={{ width: "-webkit-fill-available" }}>
                                                                         <input className="form-control form-control-sm rounded-3 me-2 shadow-none bg-F0F5F6" style={{ paddingLeft: "35px" }}
                                                                             type="search" placeholder="Search" aria-label="Search" />
