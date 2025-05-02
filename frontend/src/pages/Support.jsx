@@ -36,57 +36,54 @@ const Support = () => {
                                                         </div>
                                                         <div className="col-12 col-lg-6">
                                                             <div className="d-flex justify-content-end">
-                                                                <button class="btn btn-sm rounded-2 btn-light text-445B64">
-                                                                    <i class="fa-solid fa-arrow-left-long me-2 text-445B64"></i>
-                                                                    Back
-                                                                </button>
+                                                                <Link to="/cheque-management/my-ticket" className="btn btn-sm bg-FFF0F0 text-E84D4D rounded-2 ">My Ticket</Link>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="card rounded-4 overflow-hidden border-0 shadow-sm">
-                                                <div className="card-header bg-white d-flex align-items-center">
-                                                    <h6 className='ms-2 mb-0 text-445B64 fs-14'>New Ticket</h6>
-                                                </div>
-                                                <div className="card-body">
-                                                    <div className="row g-3 new-cheque-form">
-                                                        <div className="col-lg-6">
-                                                            <div className="row">
-                                                                <div className="col-md-6 mb-3">
-                                                                    <label className="form-label text-445B64">Subject</label>
-                                                                    <input type="text" className="form-control" />
-                                                                </div>
-                                                                <div className="col-md-6 mb-3">
-                                                                    <label className="form-label text-445B64">Category</label>
-                                                                    <input type="text" className="form-control" />
-                                                                </div>
-                                                                <div className="col-12 d-flex gap-3">
-                                                                    <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
-                                                                        <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" style={{ opacity: 0, cursor: 'pointer' }} />
-                                                                        <div className="">
-                                                                            <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
-                                                                            <div className="text-445B64">Upload Cheque Image </div>
-                                                                        </div>
+                                        </div>
+                                        <div className="card rounded-4 overflow-hidden border-0 shadow-sm">
+                                            <div className="card-header bg-white d-flex align-items-center">
+                                                <h6 className='ms-2 mb-0 text-445B64 fs-14'>New Ticket</h6>
+                                            </div>
+                                            <div className="card-body">
+                                                <div className="row g-3 new-cheque-form">
+                                                    <div className="col-lg-6">
+                                                        <div className="row">
+                                                            <div className="col-md-6 mb-3">
+                                                                <label className="form-label text-445B64">Subject</label>
+                                                                <input type="text" className="form-control" />
+                                                            </div>
+                                                            <div className="col-md-6 mb-3">
+                                                                <label className="form-label text-445B64">Category</label>
+                                                                <input type="text" className="form-control" />
+                                                            </div>
+                                                            <div className="col-12 d-flex gap-3">
+                                                                <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
+                                                                    <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" style={{ opacity: 0, cursor: 'pointer' }} />
+                                                                    <div className="">
+                                                                        <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
+                                                                        <div className="text-445B64">Upload Cheque Image </div>
                                                                     </div>
-                                                                    <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
-                                                                        <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" style={{ opacity: 0, cursor: 'pointer' }} />
-                                                                        <div className="">
-                                                                            <i className="fa-solid fa-camera fs-4 text-01A99A"></i>
-                                                                            <div className="text-445B64">Capture Cheque Image</div>
-                                                                        </div>
+                                                                </div>
+                                                                <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
+                                                                    <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" style={{ opacity: 0, cursor: 'pointer' }} />
+                                                                    <div className="">
+                                                                        <i className="fa-solid fa-camera fs-4 text-01A99A"></i>
+                                                                        <div className="text-445B64">Capture Cheque Image</div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div className="col-lg-6 mb-3 pb-3">
-                                                            <label className="form-label text-445B64">Description</label>
-                                                            <textarea className="form-control h-100" defaultValue="Description" />
-                                                        </div>
+                                                    </div>
+                                                    <div className="col-lg-6 mb-3 pb-3">
+                                                        <label className="form-label text-445B64">Description</label>
+                                                        <textarea className="form-control h-100" defaultValue="Description" />
+                                                    </div>
 
-                                                        <div className="col-lg-4 me-auto mt-0 text-center">
-                                                            <button className="btn theme-btn px-5 py-2 rounded-3 mt-3 w-100" >Save</button>
-                                                        </div>
+                                                    <div className="col-lg-4 me-auto mt-0 text-center">
+                                                        <button className="btn theme-btn px-5 py-2 rounded-3 mt-3 w-100" >Save</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -98,6 +95,7 @@ const Support = () => {
                     </div>
                 </div>
             </div>
+        </div >
         </>
     )
 }
