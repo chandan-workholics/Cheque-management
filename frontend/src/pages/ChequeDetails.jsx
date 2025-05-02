@@ -108,9 +108,6 @@ const ChequeDetails = () => {
                                                                                 </button>
                                                                             </div>
                                                                         </div>
-                                                                        <div className="mb-3">
-                                                                            <img src={item.imageUrl} alt="Cheque" className="img-fluid rounded" style={{ maxWidth: "150px" }} />
-                                                                        </div>
                                                                     </div>
                                                                 </div>
 
@@ -127,6 +124,45 @@ const ChequeDetails = () => {
 
                                                             </div>
                                                         </div>
+
+
+                                                        <div className="row">
+                                                            <div className='col-lg-6'>
+                                                                <div className="card border-0 rounded-3">
+                                                                    <div className="card-body">
+                                                                        <label className="form-label text-445B64">Cheque Image</label>
+                                                                        <div className="row">
+                                                                            <div className="col-lg-6">
+                                                                                <label className="form-label text-445B64">Front Image</label>
+                                                                                <img src={item.imageUrl} alt='Profile' className='w-100 border rounded-4 overflow-hidden' />
+                                                                            </div>
+                                                                            <div className="col-lg-6">
+                                                                                <label className="form-label text-445B64">Back Image</label>
+                                                                                <img src={item.imageUrl2} alt='Profile' className='w-100 border rounded-4 overflow-hidden' />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className='col-lg-6'>
+                                                                <div className="card border-0 rounded-3">
+                                                                    <div className="card-body">
+                                                                        <label className="form-label text-445B64">License Image</label>
+                                                                        <div className="row">
+                                                                            <div className="col-lg-6">
+                                                                                <label className="form-label text-445B64">Front Image</label>
+                                                                                <img src={item.imageUrl3} alt='Profile' className='w-100 border rounded-4 overflow-hidden' />
+                                                                            </div>
+                                                                            <div className="col-lg-6">
+                                                                                <label className="form-label text-445B64">Back Image</label>
+                                                                                <img src={item.imageUrl4} alt='Profile' className='w-100 border rounded-4 overflow-hidden' />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                 ))
                                             ) : (
