@@ -1,29 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
+import axios from 'axios';
 
 const URL = process.env.REACT_APP_URL;
-// http://localhost:5000/api/v1/check/get-checkByVenderId/681491b8ec317581688544d0
-
 
 const ChequeDetails = () => {
-const[chequeDetails,setChequeDetails] = useState([]);
+    const [chequeDetails, setChequeDetails] = useState([]);
 
-const fetchChequeDetails = async()=>{
-    try {
-        const vendorId = localStorage.getItem("userId");
-        const response = await axios.get(`${URL}/check/get-checkByVenderId/${vendorId}`);
-        if (response.status >= 200 && response.status < 300){
-            setChequeDetails(response?.data?.data)
+    const fetchChequeDetails = async () => {
+        try {
+            const venderId = localStorage.getItem("userId");
+            const response = await axios.get(`${URL}/check/get-checkByVenderId/${venderId}`);
+            if (response.status >= 200 && response.status < 300) {
+                setChequeDetails(response?.data?.data)
+            }
+        } catch (error) {
+            console.log("Error in fetching cheque:" + error.message);
         }
-    } catch (error) {
-        console.log("Error in fetching cheque:" +error.message);
     }
-}
 
-useEffect(()=>{
-fetchChequeDetails();
-},[]) 
+    useEffect(() => {
+        fetchChequeDetails();
+    }, [])
 
     return (
         <>
@@ -68,62 +67,69 @@ fetchChequeDetails();
                                             </div>
                                         </div>
                                         <div className="col-12">
-                                            <div className="card border-0 rounded-3 mb-1">
-                                                <div className="card-body">
-                                                    <div className="d-flex justify-content-between">
-                                                        <div className="d-flex gap-5">
-                                                            <div className="mb-3">
-                                                                <h6 className="text-445B64 fs-14 mb-1">Customer Name</h6>
-                                                                <h6 className="text-0D161A fw-semibold fs-14">Rohit Sharma</h6>
-                                                            </div>
-                                                            <div className="mb-3">
-                                                                <h6 className="text-445B64 fs-14 mb-1">License No</h6>
-                                                                <h6 className="text-0D161A fw-semibold fs-14">464646556</h6>
-                                                            </div>
-                                                            <div className="mb-3">
-                                                                <h6 className="text-445B64 fs-14 mb-1">Company</h6>
-                                                                <h6 className="text-0D161A fw-semibold fs-14">State Bank Of India</h6>
-                                                            </div>
-                                                            <div className="mb-3">
-                                                                <h6 className="text-445B64 fs-14 mb-1">Check Type</h6>
-                                                                <h6 className="text-0D161A fw-semibold fs-14">Self</h6>
-                                                            </div>
-                                                            <div className="mb-3">
-                                                                <h6 className="text-445B64 fs-14 mb-1">Amount</h6>
-                                                                <h6 className="text-0D161A fw-semibold fs-14">50.0000</h6>
-                                                            </div>
-                                                            <div className="mb-3">
-                                                                <h6 className="text-445B64 fs-14 mb-1">Date</h6>
-                                                                <h6 className="text-0D161A fw-semibold fs-14">25/12/2025</h6>
-                                                            </div>
-                                                        </div>
-                                                        <div className="d-flex gap-5">
-                                                            <div className="mb-3">
-                                                                <h6 className="text-445B64 fs-14 mb-1">Status</h6>
-                                                                <div className="">
-                                                                    <button className="btn btn-sm rounded-2 lh-1 bg-4FD1C5 text-white me-3">
-                                                                        Active
-                                                                    </button>
-                                                                    <button className="btn btn-sm rounded-2 lh-1 bg-E84D4D text-white">
-                                                                        Deactive
-                                                                    </button>
+                                            {chequeDetails.length > 0 ? (
+                                                chequeDetails.map((item, index) => (
+                                                    <div className="card border-0 rounded-3 mb-1" key={index}>
+                                                        <div className="card-body">
+                                                            <div className="d-flex justify-content-between">
+                                                                <div className="d-flex gap-5 flex-wrap">
+                                                                    <div className="mb-3">
+                                                                        <h6 className="text-445B64 fs-14 mb-1">Customer Name</h6>
+                                                                        <h6 className="text-0D161A fw-semibold fs-14">{item.customerName}</h6>
+                                                                    </div>
+                                                                    <div className="mb-3">
+                                                                        <h6 className="text-445B64 fs-14 mb-1">License No</h6>
+                                                                        <h6 className="text-0D161A fw-semibold fs-14">{item.licenseNo}</h6>
+                                                                    </div>
+                                                                    <div className="mb-3">
+                                                                        <h6 className="text-445B64 fs-14 mb-1">Company</h6>
+                                                                        <h6 className="text-0D161A fw-semibold fs-14">{item.bankName}</h6>
+                                                                    </div>
+                                                                    <div className="mb-3">
+                                                                        <h6 className="text-445B64 fs-14 mb-1">Check Type</h6>
+                                                                        <h6 className="text-0D161A fw-semibold fs-14">{item.checkType}</h6>
+                                                                    </div>
+                                                                    <div className="mb-3">
+                                                                        <h6 className="text-445B64 fs-14 mb-1">Amount</h6>
+                                                                        <h6 className="text-0D161A fw-semibold fs-14">{item.amount}</h6>
+                                                                    </div>
+                                                                    <div className="mb-3">
+                                                                        <h6 className="text-445B64 fs-14 mb-1">Date</h6>
+                                                                        <h6 className="text-0D161A fw-semibold fs-14">{item.date}</h6>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="d-flex gap-5">
-                                                        <div className="mb-3">
-                                                            <h6 className="text-445B64 fs-14 mb-1">Comments</h6>
-                                                            <div className="card rounded-3">
-                                                                <div className="card-body p-2">
-                                                                    <p className="text-0D161A fw-light fs-13 mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, m has been the industry's standard dummy teLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, m has been the industry's standard dummy te</p>
+                                                                <div className="d-flex gap-5">
+                                                                    <div className="mb-3">
+                                                                        <h6 className="text-445B64 fs-14 mb-1">Status</h6>
+                                                                        <div>
+                                                                            <button className={`btn btn-sm rounded-2 lh-1 me-3 ${item.status === 'Active' ? 'bg-4FD1C5' : 'btn-light'} text-white`}>
+                                                                                Active
+                                                                            </button>
+                                                                            <button className={`btn btn-sm rounded-2 lh-1 ${item.status !== 'Active' ? 'bg-E84D4D' : 'btn-light'} text-white`}>
+                                                                                Deactive
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
 
+                                                            <div className="d-flex gap-5">
+                                                                <div className="mb-3">
+                                                                    <h6 className="text-445B64 fs-14 mb-1">Comments</h6>
+                                                                    <div className="card rounded-3">
+                                                                        <div className="card-body p-2">
+                                                                            <p className="text-0D161A fw-light fs-13 mb-0">{item.comments || "No comments available"}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
+                                                ))
+                                            ) : (
+                                                <p>No cheque details found.</p>
+                                            )}
+
                                         </div>
                                     </div>
                                 </div>
