@@ -2,8 +2,21 @@ import React from 'react'
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 
+const URL = process.env.REACT_APP_URL;
+// http://localhost:5000/api/v1/check/get-checkByVenderId/681491b8ec317581688544d0
+
 
 const ChequeDetails = () => {
+const[chequeDetails,setChequeDetails] = useState([]);
+
+const fetchChequeDetails = async()=>{
+    try {
+        const userId = localStorage.getItem("userId");
+        const response = await axios.get(`${URL}/check/get-checkByVenderId/${userId}`)
+    } catch (error) {
+        
+    }
+}
     return (
         <>
             <div className="container-fluid">

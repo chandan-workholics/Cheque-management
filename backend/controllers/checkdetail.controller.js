@@ -36,9 +36,6 @@ exports.getAllChecks = async (req, res) => {
 exports.getCheckByVenderId = async (req, res) => {
     try {
         const { venderId } = req.params;
-
-       
-
         const checks = await Check.find({ venderId });
 
         if (!checks.length) {

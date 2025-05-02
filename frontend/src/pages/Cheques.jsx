@@ -3,6 +3,7 @@ import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const URL = process.env.REACT_APP_URL;
 
@@ -20,10 +21,27 @@ const Cheques = () => {
         console.error("Error fetching cheques:", error);
       }
     }
-    useEffect(() => {
-      fetchCheques();
-    }, [])
+   
+    const handleDeleteCheque = async (id) => {
+        if (!window.confirm("Are you sure you want to delete this cheque?")) return;
+        try {
+          const response = await axios.delete(`${URL}/check/delete-check/${id}`);
+          if (response.status >= 200 && response.status < 300) {
+            setTimeout(() => {
+              toast.success("Cheque deleted successfully!");
+              fetchCheques(); 
+            }, 1000);
+          }
+        } catch (error) {
+          toast.error("Error in deleting cheque: " + error.message);
+          console.log("Error in deleting cheque", error);
+        }
+      };
     
+    useEffect(() => {
+        fetchCheques();
+      }, [])
+
     return (       
          <>
             <div className="container-fluid">
@@ -135,7 +153,7 @@ const Cheques = () => {
                                                                                     <Link to="/cheque-management/cheque-details" className="btn">
                                                                                         <i className="fa-solid fa-eye text-445B64"></i>
                                                                                     </Link>
-                                                                                    <button className="btn">
+                                                                                    <button className="btn" onClick={() => handleDeleteCheque(item._id)}>
                                                                                         <i className="fa-solid fa-trash-can text-danger"></i>
                                                                                     </button>
                                                                                 </div>
