@@ -42,8 +42,8 @@ const VerifyEmailExpired = () => {
         <div className="container-fluid sign-page">
             <ToastContainer position="top-right" autoClose={3000} />
             <div className="row sign-main-container">
-                <div className="col-lg-6 sign-left-bg h-100 d-flex justify-content-center align-items-center">
-                    <img src={logoLeft} alt="logo" />
+                <div className="col-lg-6 sign-left-bg h-100 justify-content-center d-none d-lg-flex align-items-center">
+                    <img src={logoLeft} alt="" className="" />
                 </div>
                 <div className="col-lg-6 h-100 bg-EEEEEE position-relative">
                     <div className="row h-100">
@@ -52,9 +52,9 @@ const VerifyEmailExpired = () => {
                                 <img src={emailVerifyExpired} alt="" className="mb-3" style={{ width: '70px' }} />
                                 <h5 className="fw-semibold">Email verification link expired</h5>
                                 <h6 className="mb-4 text-445B64 fs-14">Looks like the email verification link has expired. No worries we can send the link again.</h6>
-                                <button 
-                                    onClick={handleResendOtp} 
-                                    className="btn w-100 sign-btn mb-3" 
+                                <button
+                                    onClick={handleResendOtp}
+                                    className="btn w-100 sign-btn mb-3"
                                     disabled={loadingResent}
                                 >
                                     {loadingResent ? (

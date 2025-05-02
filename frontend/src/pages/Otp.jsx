@@ -10,11 +10,11 @@ const Otp = () => {
     const [otp, setOtp] = useState(new Array(6).fill(""));
     const navigate = useNavigate();
     const email = localStorage.getItem("email");
-       const [loading, setLoading] = useState(false);
-       const [loadingResent, setLoadingResent] = useState(false);
-       const [timeLeft, setTimeLeft] = useState(120);
+    const [loading, setLoading] = useState(false);
+    const [loadingResent, setLoadingResent] = useState(false);
+    const [timeLeft, setTimeLeft] = useState(120);
 
-       useEffect(() => {
+    useEffect(() => {
         if (timeLeft <= 0) {
             navigate('/cheque-management/email-verification-expired');
             return;
@@ -52,12 +52,12 @@ const Otp = () => {
                 setTimeout(() => {
                     navigate('/cheque-management/email-verification-successfully');
                 }, 2000);
-            } 
+            }
         } catch (err) {
             setTimeout(() => {
                 toast.error("OTP Verified Failed. Please enter the correct  OTP!")
             }, 1000);
-        }finally{
+        } finally {
             setLoading(false)
         }
     };
@@ -79,8 +79,8 @@ const Otp = () => {
             if (res.status === 200) {
                 setTimeout(() => {
                     toast.success("otp resent !")
-                    setTimeLeft(300); 
-                    setOtp(new Array(6).fill("")); 
+                    setTimeLeft(300);
+                    setOtp(new Array(6).fill(""));
                 }, 1000);
             } else {
                 setTimeout(() => {
@@ -92,7 +92,7 @@ const Otp = () => {
             setTimeout(() => {
                 toast.error("Failed to resend OTP. Please try again.")
             }, 1000);
-        }finally{
+        } finally {
             setLoadingResent(false);
         }
     };
@@ -101,9 +101,9 @@ const Otp = () => {
     return (
         <div className="container-fluid sign-page">
             <div className="row sign-main-container">
-            <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
-                <div className="col-lg-6 sign-left-bg h-100 d-flex justify-content-center align-items-center">
-                    <img src={logoLeft} alt="" />
+                <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+                <div className="col-lg-6 sign-left-bg h-100 justify-content-center d-none d-lg-flex align-items-center">
+                    <img src={logoLeft} alt="" className="" />
                 </div>
                 <div className="col-lg-6 h-100 bg-EEEEEE position-relative">
                     <div className="row h-100">
@@ -138,13 +138,13 @@ const Otp = () => {
                                     )}</button>
                                 </form>
                                 <button type="submit" className="btn w-100 sign-btn mb-3" onClick={handleResendOtp}> {loadingResent ? (
-                                        <>
-                                            <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                                            Resent OTP
-                                        </>
-                                    ) : (
-                                        "Resent OTP"
-                                    )}</button>
+                                    <>
+                                        <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                        Resent OTP
+                                    </>
+                                ) : (
+                                    "Resent OTP"
+                                )}</button>
                             </div>
                         </div>
                     </div>
