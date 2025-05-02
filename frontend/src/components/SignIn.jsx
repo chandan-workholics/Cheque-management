@@ -109,7 +109,7 @@ const SignIn = () => {
         }
         try {
           const response = await axios.post(`${URL}/auth/forget-password`, { email });
-          if (response.status === 200) {
+          if (response.status >= 200 && response.status < 300) {
           setTimeout(()=>{
             toast.success('OTP sent to your email.');
             localStorage.setItem("resetEmail", email);

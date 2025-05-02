@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
+import { useNavigate } from 'react-router-dom';
 const URL = process.env.REACT_APP_URL;
 
 const Support = () => {
+    const navigate = useNavigate();
     const venderId = localStorage.getItem("userId");
     const [formData, setFormData] = useState({
         customerName: '', licenseNo: '', date: '', company: '', checkType: '', amount: '', imageUrl: '', extractedText: '',
@@ -115,9 +117,8 @@ const Support = () => {
                                                         </div>
                                                         <div className="col-6 col-lg-6">
                                                             <div className="d-flex justify-content-end">
-                                                                <button class="btn btn-sm rounded-2 btn-light text-445B64">
-                                                                    <i class="fa-solid fa-arrow-left-long me-2 text-445B64"></i>
-                                                                    Back
+                                                                <button class="btn btn-sm rounded-2 btn-light text-445B64" onClick={()=>navigate('/cheque-management/my-ticket')}>
+                                                                    My Ticket
                                                                 </button>
                                                             </div>
                                                         </div>

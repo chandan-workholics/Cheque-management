@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 
 const checkSchema = new mongoose.Schema({
   imageUrl: String,
+  imageUrl2: String,
+  imageUrl3: String,
+  imageUrl4: String,
   customerName: String,
   licenseNo: String,
   date: String,

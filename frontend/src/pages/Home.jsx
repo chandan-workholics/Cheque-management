@@ -19,7 +19,32 @@ const Home = () => {
     extractedText: '',
   });
 
+  const [formDataback, setFormDataback] = useState({
+    customerName: '',
+    licenseNo: '',
+    date: '',
+    company: '',
+    checkType: '',
+    amount: '',
+    imageUrl: '',
+    extractedText: '',
+  });
+
   const [licenseData, setLicenseData] = useState({
+    imageUrl: '',
+    name: '',
+    licenseNo: '',
+    class: '',
+    dob: '',
+    sex: '',
+    eyes: '',
+    height: '',
+    address: '',
+    issuedDate: '',
+    expiryDate: '',
+  });
+
+  const [licenseDataback, setLicenseDataback] = useState({
     imageUrl: '',
     name: '',
     licenseNo: '',
@@ -36,80 +61,155 @@ const Home = () => {
   const [status, setStatus] = useState({});
 
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      const file = e.target.files[0];
-      if (!file) {
-        alert("Please upload a cheque image.");
-        return;
-      }
-      const formData = new FormData();
-      formData.append('image', file);
-      try {
-        const response = await axios.post(`${URL}/scan-check`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    if (!file) {
+      alert("Please upload a cheque image.");
+      return;
+    }
+    const formData = new FormData();
+    formData.append('image', file);
+    try {
+      const response = await axios.post(`${URL}/scan-check`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
 
-        const result = response.data;
-        if (result && result.customerName) {
-          const parsedData = {
-            customerName: result.customerName || '',
-            date: result.date || '',
-            company: result.company || '',
-            checkType: result.checkType || '',
-            amount: result.amountNumeric || '',
-            amountWords: result.amountWords || '',
-            payee: result.payee || '',
-            memo: result.memo || '',
-            imageUrl: result.imageUrl || '',
-            extractedText: result.extractedText || ''
-          };
-          setFormData(parsedData);
-        }
-      } catch (error) {
-        console.error('Error during image upload:', error);
+      const result = response.data;
+      if (result && result.customerName) {
+        const parsedData = {
+          customerName: result.customerName || '',
+          date: result.date || '',
+          company: result.company || '',
+          checkType: result.checkType || '',
+          amount: result.amountNumeric || '',
+          amountWords: result.amountWords || '',
+          payee: result.payee || '',
+          memo: result.memo || '',
+          imageUrl: result.imageUrl || '',
+          extractedText: result.extractedText || ''
+        };
+        setFormData(parsedData);
       }
+    } catch (error) {
+      console.error('Error during image upload:', error);
+    }
 
-    };
+  };
 
-    const handleSubmitLicense = async (e) => {
-      e.preventDefault();
-      const file = e.target.files[0];
-      if (!file) {
-        alert("Please upload a License image.");
-        return;
+  const handleSubmitback = async (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    if (!file) {
+      alert("Please upload a cheque image.");
+      return;
+    }
+    const formData = new FormData();
+    formData.append('image', file);
+    try {
+      const response = await axios.post(`${URL}/scan-check`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      const result = response.data;
+      if (result && result.customerName) {
+        const parsedData = {
+          customerName: result.customerName || '',
+          date: result.date || '',
+          company: result.company || '',
+          checkType: result.checkType || '',
+          amount: result.amountNumeric || '',
+          amountWords: result.amountWords || '',
+          payee: result.payee || '',
+          memo: result.memo || '',
+          imageUrl: result.imageUrl || '',
+          extractedText: result.extractedText || ''
+        };
+        setFormDataback(parsedData);
       }
-      const formData = new FormData();
-      formData.append('image', file);
-      try {
-        const response = await axios.post(`${URL}/scan-license`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
-        const result = response.data;
-        if (result) {
-          const parsedData = {
-            imageUrl: result.imageUrl || '',
-            name: result.name || '',
-            licenseNo: result.licenseNo || '',
-            dob: result.dob || '',
-            sex: result.sex || '',
-            eyes: result.eyes || '',
-            height: result.height || '',
-            address: result.address || '',
-            issuedDate: result.issuedDate || '',
-            expiryDate: result.expiryDate || '',
-          };
-          setLicenseData(parsedData);
-        }
-      } catch (error) {
-        console.error('Error during image upload:', error);
-      }
+    } catch (error) {
+      console.error('Error during image upload:', error);
+    }
 
-    };
+  };
+
+  const handleSubmitLicense = async (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    if (!file) {
+      alert("Please upload a License image.");
+      return;
+    }
+    const formData = new FormData();
+    formData.append('image', file);
+    try {
+      const response = await axios.post(`${URL}/scan-license`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      const result = response.data;
+      if (result) {
+        const parsedData = {
+          imageUrl: result.imageUrl || '',
+          name: result.name || '',
+          licenseNo: result.licenseNo || '',
+          dob: result.dob || '',
+          sex: result.sex || '',
+          eyes: result.eyes || '',
+          height: result.height || '',
+          address: result.address || '',
+          issuedDate: result.issuedDate || '',
+          expiryDate: result.expiryDate || '',
+        };
+        setLicenseData(parsedData);
+      }
+    } catch (error) {
+      console.error('Error during image upload:', error);
+    }
+
+  };
+
+  const handleSubmitLicenseback = async (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    if (!file) {
+      alert("Please upload a License image.");
+      return;
+    }
+    const formData = new FormData();
+    formData.append('image', file);
+    try {
+      const response = await axios.post(`${URL}/scan-license`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      const result = response.data;
+      if (result) {
+        const parsedData = {
+          imageUrl: result.imageUrl || '',
+          name: result.name || '',
+          licenseNo: result.licenseNo || '',
+          dob: result.dob || '',
+          sex: result.sex || '',
+          eyes: result.eyes || '',
+          height: result.height || '',
+          address: result.address || '',
+          issuedDate: result.issuedDate || '',
+          expiryDate: result.expiryDate || '',
+        };
+        setLicenseDataback(parsedData);
+      }
+    } catch (error) {
+      console.error('Error during image upload:', error);
+    }
+
+  };
 
   const handleStatus = async () => {
     try {
@@ -126,6 +226,7 @@ const Home = () => {
       console.log("Error in fetching data");
     }
   }
+
   useEffect(() => {
     handleStatus();
   }, [])
@@ -134,7 +235,10 @@ const Home = () => {
     e.preventDefault();
     try {
       const response = await axios.post(`${URL}/check/add-check`, {
-        imageUrl: formData.imageUrl,
+        imageUrl: formData.imageUrl||'',
+        imageUrl2: formDataback.imageUrl||'',
+        imageUrl3: licenseData.imageUrl||'',
+        imageUrl4: licenseDataback.imageUrl||'',
         customerName: formData.customerName,
         licenseNo: licenseData.licenseNo,
         date: new Date(formData.date).toLocaleDateString('en-GB'),
@@ -184,7 +288,9 @@ const Home = () => {
                             </div>
                             <div>
                               <h6 className="mb-1 fw-medium text-445B64 fs-14">Today's Status</h6>
-                              <h4 className="mb-0 text-00C7BE fw-bold">${status?.day?.totalAmount || 0}</h4>
+                              <h4 className="mb-0 text-00C7BE fw-bold">
+                                ${parseFloat(status?.day?.totalAmount || 0).toFixed(2)}
+                              </h4>
                             </div>
                           </div>
                           <div className="d-flex justify-content-between small">
@@ -206,7 +312,7 @@ const Home = () => {
                             </div>
                             <div>
                               <h6 className="mb-1 fw-medium text-445B64 fs-14">Weekly Status</h6>
-                              <h4 className="mb-0 text-00C7BE fw-bold">${status?.week?.totalAmount || 0}</h4>
+                              <h4 className="mb-0 text-00C7BE fw-bold">${parseFloat(status?.week?.totalAmount || 0).toFixed(2)}</h4>
                             </div>
                           </div>
                           <div className="d-flex justify-content-between small">
@@ -228,7 +334,7 @@ const Home = () => {
                             </div>
                             <div>
                               <h6 className="mb-1 fw-medium text-445B64 fs-14">Monthly Status</h6>
-                              <h4 className="mb-0 text-00C7BE fw-bold">${status?.month?.totalAmount || 0}</h4>
+                              <h4 className="mb-0 text-00C7BE fw-bold">${parseFloat(status?.month?.totalAmount || 0).toFixed(2)}</h4>
                             </div>
                           </div>
                           <div className="d-flex justify-content-between small">
@@ -258,11 +364,18 @@ const Home = () => {
                               <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmitLicense} style={{ opacity: 0, cursor: 'pointer' }} />
                               <div className="">
                                 <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
-                                <div className="text-445B64">Upload License Image </div>
+                                <div className="text-445B64">Upload/Capture Front </div>
+                              </div>
+                            </div>
+                            <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
+                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmitLicenseback} style={{ opacity: 0, cursor: 'pointer' }} />
+                              <div className="">
+                                <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
+                                <div className="text-445B64">Upload/Capture Back  </div>
                               </div>
                             </div>
 
-                            <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
+                            {/* <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
                               <input
                                 className="position-absolute top-0 start-0 w-100 h-100"
                                 type="file"
@@ -274,9 +387,27 @@ const Home = () => {
                               />
                               <div>
                                 <i className="fa-solid fa-camera fs-4 text-01A99A"></i>
-                                <div className="text-445B64">Capture License Image</div>
+                                <div className="text-445B64">Capture License Front Image</div>
                               </div>
-                            </div>
+                            </div> */}
+
+                            {/* <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
+                              <input
+                                className="position-absolute top-0 start-0 w-100 h-100"
+                                type="file"
+                                id="formFile"
+                                onChange={handleSubmitLicenseback}
+                                accept="image/*"
+                                capture="environment"  // opens rear camera by default on mobile
+                                style={{ opacity: 0, cursor: 'pointer' }}
+                              />
+                              <div>
+                                <i className="fa-solid fa-camera fs-4 text-01A99A"></i>
+                                <div className="text-445B64">Capture License Back Image</div>
+                              </div>
+                            </div> */}
+
+
                           </div>
                           <div className="row">
                             {licenseData?.imageUrl &&
@@ -288,7 +419,7 @@ const Home = () => {
                             {licenseData?.imageUrl &&
                               <div className='col-lg-6'>
                                 <label className="form-label text-445B64 mb-1 mt-3">Back Image</label>
-                                <img src={licenseData.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
+                                <img src={licenseDataback.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
                               </div>
                             }
                             <div className="col-lg-6"></div>
@@ -296,16 +427,27 @@ const Home = () => {
                         </div>
                         <div className="col-md-6">
                           <label className="form-label text-445B64">Cheque Image</label>
+
+
                           <div className="d-flex gap-3">
                             <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
                               <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmit} style={{ opacity: 0, cursor: 'pointer' }} />
                               <div className="">
                                 <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
-                                <div className="text-445B64">Upload Cheque Image </div>
+                                <div className="text-445B64">Upload/Capture Front </div>
                               </div>
                             </div>
 
                             <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
+                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmitback} style={{ opacity: 0, cursor: 'pointer' }} />
+                              <div className="">
+                                <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
+                                <div className="text-445B64">Upload/Capture Back </div>
+                              </div>
+                            </div>
+
+
+                            {/* <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
                               <input
                                 className="position-absolute top-0 start-0 w-100 h-100"
                                 type="file"
@@ -319,7 +461,23 @@ const Home = () => {
                                 <i className="fa-solid fa-camera fs-4 text-01A99A"></i>
                                 <div className="text-445B64">Capture Cheque Image</div>
                               </div>
-                            </div>
+                            </div> */}
+
+                            {/* <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
+                              <input
+                                className="position-absolute top-0 start-0 w-100 h-100"
+                                type="file"
+                                id="formFile"
+                                onChange={handleSubmitback}
+                                accept="image/*"
+                                capture="environment"
+                                style={{ opacity: 0, cursor: 'pointer' }}
+                              />
+                              <div>
+                                <i className="fa-solid fa-camera fs-4 text-01A99A"></i>
+                                <div className="text-445B64">Capture Cheque Back Image</div>
+                              </div>
+                            </div> */}
 
 
                           </div>
@@ -333,7 +491,7 @@ const Home = () => {
                             {formData?.imageUrl &&
                               <div className='col-lg-6'>
                                 <label className="form-label text-445B64 mb-1 mt-3">Back Image</label>
-                                <img src={formData.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
+                                <img src={formDataback.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
                               </div>
                             }
                           </div>
@@ -396,7 +554,7 @@ const Home = () => {
                         </div>
                         <div className="col-md-4 mb-3 pb-4">
                           <label className="form-label text-445B64">Comments</label>
-                          <textarea className="form-control h-100" value={formData.comment || ''} onChange={(e) => setFormData({ ...formData, comment: e.target.value })}/>
+                          <textarea className="form-control h-100" value={formData.comment || ''} onChange={(e) => setFormData({ ...formData, comment: e.target.value })} />
                         </div>
 
                         <div className="col-lg-4 me-auto mt-0 text-center">

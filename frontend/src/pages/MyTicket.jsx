@@ -1,8 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
+
+const URL = process.env.REACT_APP_URL;
 
 const MyTicket = () => {
+    const navigate = useNavigate();
+    const [tickets, setTickets] = useState([]);
+
+    const handleBack = () => {
+        navigate('/cheque-management/support');
+    }
+    const fetchTickets = async () => {
+        try {
+            const vendorId = localStorage.getItem("userId");
+            const response = await axios.get(`${URL}/complain/tickets/vendor/${vendorId}`)
+            if (response.status >= 200 && response.status < 300) {
+                setTickets(response?.data || [])
+            }
+        } catch (error) {
+            console.log("Error in fetching complaints" + error.message);
+        }
+    }
+    useEffect(() => {
+        fetchTickets();
+    }, [])
     return (
         <>
             <div className="container-fluid">
@@ -35,7 +59,7 @@ const MyTicket = () => {
                                                         </div>
                                                         <div className="col-6 col-lg-6">
                                                             <div className="d-flex justify-content-end">
-                                                                <button className="btn btn-sm rounded-2 btn-light text-445B64">
+                                                                <button className="btn btn-sm rounded-2 btn-light text-445B64" onClick={handleBack}>
                                                                     <i className="fa-solid fa-arrow-left-long me-2 text-445B64"></i>
                                                                     Back
                                                                 </button>
@@ -83,24 +107,26 @@ const MyTicket = () => {
                                                         <table className="table table-borderless">
                                                             <thead>
                                                                 <tr>
-                                                                    <th className='border-bottom'>Ticket ID</th>
+                                                                    <th className='border-bottom'>S.No</th>
                                                                     <th className='border-bottom'>Subject</th>
                                                                     <th className='border-bottom'>Status</th>
-                                                                    <th className='border-bottom'>Last Update</th>
-                                                                    <th className='border-bottom'>Support</th>
+                                                                    <th className='border-bottom'>Category</th>
+                                                                    <th className='border-bottom'>Descrition</th>
                                                                     <th className='border-bottom'></th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody>
+                                                            <tbody >
                                                                 {/* Ticket Row 1 */}
-                                                                <tr data-bs-toggle="collapse" data-bs-target="#ticket1" className="cursor-pointer" aria-expanded="false" aria-controls="ticket1">
-                                                                    <td>#0001</td>
-                                                                    <td>Password Reset</td>
-                                                                    <td><span className="text-primary">In Progress</span></td>
-                                                                    <td>July 14, 2015</td>
-                                                                    <td>Wade Warren</td>
-                                                                    <td><i class="fa-solid fa-chevron-down text-01A99A"></i></td>
-                                                                </tr>
+                                                                {tickets?.map((ticket, index) => (
+                                                                    <tr key={index} data-bs-toggle="collapse" data-bs-target={`#ticket${index}`} className="cursor-pointer">
+                                                                        <td>{index + 1}</td>
+                                                                        <td>{ticket.subject}</td>
+                                                                        <td><span className="text-primary">{ticket.status}</span></td>
+                                                                        <td>{ticket.category}</td>
+                                                                        <td>{ticket.description}</td>
+                                                                        <td><i className="fa-solid fa-chevron-down text-01A99A"></i></td>
+                                                                    </tr>
+                                                                ))}
                                                                 <tr className="collapse" id="ticket1">
                                                                     <td className='border-bottom bg-FAFAFA' colSpan="6">
                                                                         {/* Message 1 */}
@@ -131,37 +157,9 @@ const MyTicket = () => {
                                                                         </div>
                                                                     </td>
                                                                 </tr>
-                                                                {/* Ticket Row 2 with Expanded Content */}
-                                                                <tr data-bs-toggle="collapse" data-bs-target="#ticket2" className="table-info cursor-pointer" aria-expanded="false" aria-controls="ticket2">
-                                                                    <td>#0002</td>
-                                                                    <td>Issue with Checkout</td>
-                                                                    <td><span className="text-success">Completed</span></td>
-                                                                    <td>July 14, 2015</td>
-                                                                    <td>Esther Howard</td>
-                                                                    <td><i class="fa-solid fa-chevron-down text-01A99A"></i></td>
-                                                                </tr>
-                                                                <tr className="collapse" id="ticket2">
-                                                                    <td colSpan="6" className="bg-light">
-                                                                        {/* Add content if needed */}
-                                                                        <p className="text-muted">This ticket is completed and resolved.</p>
-                                                                    </td>
-                                                                </tr>
 
-                                                                {/* Ticket Row 3 */}
-                                                                <tr data-bs-toggle="collapse" data-bs-target="#ticket3" className="cursor-pointer" aria-expanded="false" aria-controls="ticket3">
-                                                                    <td>#0003</td>
-                                                                    <td>Password Reset</td>
-                                                                    <td><span className="text-primary">In Progress</span></td>
-                                                                    <td>July 14, 2015</td>
-                                                                    <td>Wade Warren</td>
-                                                                    <td><i class="fa-solid fa-chevron-down text-01A99A"></i></td>
-                                                                </tr>
-                                                                <tr className="collapse" id="ticket3">
-                                                                    <td colSpan="6" className="bg-light">
-                                                                        <p className="text-muted">We're still investigating this issue.</p>
-                                                                    </td>
-                                                                </tr>
                                                             </tbody>
+
                                                         </table>
                                                     </div>
                                                 </div>
