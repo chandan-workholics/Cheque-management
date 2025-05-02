@@ -103,9 +103,6 @@ const SignUp = () => {
         setTimeout(() => {
           navigate('/cheque-management/verify-otp')
           localStorage.setItem("email", formData.email)
-          const userId = response.data?._id;
-          localStorage.setItem("userId", userId);
-          
         }, 2000);
       } else {
         setTimeout(() => {

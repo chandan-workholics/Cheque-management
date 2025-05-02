@@ -3,6 +3,7 @@ import axios from 'axios';
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import { Link } from 'react-router-dom';
+const URL = process.env.REACT_APP_URL;
 
 const User = () => {
     const [userData, setUserData] = useState(null);
@@ -10,8 +11,8 @@ const User = () => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const id = localStorage.getItem()
-                const res = await axios.get(`${URL}/auth/get-venderById/${id}`);
+                const userId = localStorage.getItem("userId")
+                const res = await axios.get(`${URL}/auth/get-venderById/${userId}`);
                 setUserData(res.data.data);
             } catch (error) {
                 console.error('Error fetching user data:', error);
@@ -72,11 +73,13 @@ const User = () => {
                                                             <div>
                                                                 <h6 className="fs-14 mb-1">
                                                                     <span className="text-445B64 fw-normal">Full Name : </span>
-                                                                    <span className="text-0D161A fw-semibold">{userData?.name || 'Loading...'}</span>
+                                                                    <span className="text-0D161A fw-semibold">{userData?.firstname && userData?.lastname
+                                                                        ? `${userData.firstname} ${userData.lastname}`
+                                                                        : 'Loading...'}</span>
                                                                 </h6>
                                                                 <h6 className="fs-14 mb-1">
                                                                     <span className="text-445B64 fw-normal">Mobile : </span>
-                                                                    <span className="text-0D161A fw-semibold">+(1) 987 654354</span> {/* Replace if mobile is available */}
+                                                                    <span className="text-0D161A fw-semibold">+(1) {userData.mobile} </span>
                                                                 </h6>
                                                                 <h6 className="fs-14 mb-1">
                                                                     <span className="text-445B64 fw-normal">Email : </span>
