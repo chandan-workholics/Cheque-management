@@ -100,7 +100,7 @@ const SignIn = () => {
         <>
             <div className="container-fluid sign-page">
                 <div className="row sign-main-container">
-                    <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="colored" />
+                    <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
                     <div className="col-lg-6 sign-left-bg h-100 d-flex justify-content-center align-items-center">
                         <img src={logoLeft} alt="" className="" />
                     </div>
@@ -112,7 +112,7 @@ const SignIn = () => {
                                     <h6 className="mb-4 text-445B64">Please enter your credentials to log in</h6>
                                     <input className="form-control mb-3 rounded-3" type="email" name='email' id='email' value={formData.email} onChange={handleChange} placeholder="Your email address" aria-label="example" required/>
                                     {formErrors.email && <small className="text-danger">{formErrors.email}</small>}
-                                    <input className="form-control mb-2 rounded-3" type="password" name='password' id='password' value={formData.password} onChange={handleChange} placeholder="Your password" aria-label="example" required />
+                                    <input className="form-control mb-3 rounded-3" type="password" name='password' id='password' value={formData.password} onChange={handleChange} placeholder="Your password" aria-label="example" required />
                                     {formErrors.password && <small className="text-danger">{formErrors.password}</small>}
                                     {/* <div className="form-check form-switch mb-4 p-0">
                                         <div className="form-check form-switch">
@@ -128,6 +128,9 @@ const SignIn = () => {
                                     ) : (
                                         "Sign In"
                                     )}</button>
+                                     <h6 className="text-center text-445B64">Create new Password?
+                                        <Link to='/cheque-management/forget-password' className='text-00C7BE text-decoration-none'> Forget Password</Link>
+                                    </h6>
                                     <h6 className="text-center text-445B64">Don't have an account?
                                         <Link to='/cheque-management/sign-up' className='text-00C7BE text-decoration-none'> Sign up</Link>
                                     </h6>
