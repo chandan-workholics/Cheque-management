@@ -117,7 +117,7 @@ const Support = () => {
                                                         </div>
                                                         <div className="col-6 col-lg-6">
                                                             <div className="d-flex justify-content-end">
-                                                                <button class="btn btn-sm rounded-2 btn-light text-445B64" onClick={()=>navigate('/cheque-management/my-ticket')}>
+                                                                <button class="btn btn-sm rounded-2 bg-FFF0F0 text-E84D4D" onClick={()=>navigate('/cheque-management/my-ticket')}>
                                                                     My Ticket
                                                                 </button>
                                                             </div>
