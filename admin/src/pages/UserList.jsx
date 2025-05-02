@@ -1,9 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react';
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import { Link } from 'react-router-dom';
 
 const UserList = () => {
+    const usersData = Array.from({ length: 50 }, (_, index) => ({
+        id: index + 1,
+        name: `User ${index + 1}`,
+        phone: '(704) 555-0127',
+        email: `user${index + 1}@example.com`,
+        date: 'July 14, 2015',
+        status: 'Active',
+    }));
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const rowsPerPage = 10;
+
+    // Pagination logic
+    const indexOfLastRow = currentPage * rowsPerPage;
+    const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+    const currentRows = usersData.slice(indexOfFirstRow, indexOfLastRow);
+    const totalPages = Math.ceil(usersData.length / rowsPerPage);
     return (
         <>
             <div className="container-fluid">
@@ -18,7 +35,7 @@ const UserList = () => {
                                 <div className="container-fluid p-3 px-2">
                                     <div className="row">
                                         <div className="col-12">
-                                            <div className="card border-0 rounded-3 mb-1">
+                                            <div className="card border-0 rounded-3 mb-3">
                                                 <div className="card-body p-2">
                                                     <div className="row">
                                                         <div className="col-12 col-lg-6">
@@ -75,50 +92,72 @@ const UserList = () => {
                                                                                     type="checkbox" value="" id="flexCheckDefault" />
                                                                             </th>
                                                                             <th scope="col" className="text-445B64">SNo.</th>
-                                                                            <th scope="col" className="text-445B64">Customer Name</th>
-                                                                            <th scope="col" className="text-445B64">Company Name</th>
-                                                                            <th scope="col" className="text-445B64">License No</th>
-                                                                            <th scope="col" className="text-445B64 text-center">Check Type</th>
-                                                                            <th scope="col" className="text-445B64">Amount</th>
-                                                                            <th scope="col" className="text-445B64">Comment</th>
-                                                                            <th scope="col" className="text-445B64">Date
-                                                                            </th>
-                                                                            <th scope="col" className="text-445B64 text-center">Status</th>
+                                                                            <th scope="col" className="text-445B64">User Name</th>
+                                                                            <th scope="col" className="text-445B64">Phone Number</th>
+                                                                            <th scope="col" className="text-445B64">Email Address</th>
+                                                                            <th scope="col" className="text-445B64">Date</th>
+                                                                            <th scope="col" className="text-445B64">Status</th>
                                                                             <th scope="col" className="text-445B64 text-center">Actions</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        <tr>
-                                                                            <td className="text-center">
-                                                                                <input className="form-check-input table-checkbox"
-                                                                                    type="checkbox" value="" id="flexCheckDefault" />
-                                                                            </td>
-                                                                            <td >1</td>
-                                                                            <td>customerName</td>
-                                                                            <td>company</td>
-                                                                            <td>licenseNo</td>
-                                                                            <td>checkType</td>
-                                                                            <td>amount</td>
-                                                                            <td>comment</td>
-                                                                            <td></td>
-                                                                            <td className="text-01A99A">status</td>
-                                                                            <td className="">
-                                                                                <div className="d-flex justify-content-center">
-                                                                                    <Link to="/cheque-management/cheque-details" className="btn">
-                                                                                        <i className="fa-solid fa-eye text-445B64"></i>
-                                                                                    </Link>
-                                                                                    <button className="btn">
-                                                                                        <i className="fa-solid fa-trash-can text-danger"></i>
-                                                                                    </button>
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
+                                                                        {currentRows.map((user, index) => (
+                                                                            <tr key={user.id}>
+                                                                                <td className="text-center">
+                                                                                    <input className="form-check-input table-checkbox" type="checkbox" />
+                                                                                </td>
+                                                                                <td>{indexOfFirstRow + index + 1}</td>
+                                                                                <td>{user.name}</td>
+                                                                                <td>{user.phone}</td>
+                                                                                <td>{user.email}</td>
+                                                                                <td>{user.date}</td>
+                                                                                <td className="text-01A99A">{user.status}</td>
+                                                                                <td>
+                                                                                    <div className="d-flex justify-content-center">
+                                                                                        <Link to="/cheque-management/cheque-details" className="btn">
+                                                                                            <i className="fa-solid fa-eye text-445B64"></i>
+                                                                                        </Link>
+                                                                                        <button className="btn">
+                                                                                            <i className="fa-solid fa-trash-can text-danger"></i>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                        ))}
                                                                     </tbody>
                                                                 </table>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            {/* Pagination Controls */}
+                                            <div className="d-flex justify-content-between mt-4 mb-1 pt-2">
+                                                <h6 className="mb-0 text-445B64">Showing 1 to 10 of 50 entries</h6>
+                                                <nav>
+                                                    <ul className="pagination justify-content-end">
+                                                        <li className={`page-item ${currentPage === 1 && 'disabled'}`}>
+                                                            <button className="page-link border-0" onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}>
+                                                                <i class="fa-solid fa-angle-left"></i>
+                                                            </button>
+                                                        </li>
+                                                        {Array.from({ length: totalPages }, (_, i) => (
+                                                            <li
+                                                                key={i + 1}
+                                                                className={`page-item ${currentPage === i + 1 && 'active'}`}
+                                                            >
+                                                                <button className="page-link border-0 mx-1 px-3 rounded-2" onClick={() => setCurrentPage(i + 1)}>
+                                                                    {i + 1}
+                                                                </button>
+                                                            </li>
+                                                        ))}
+                                                        <li className={`page-item ${currentPage === totalPages && 'disabled'}`}>
+                                                            <button className="page-link border-0" onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}>
+                                                                <i class="fa-solid fa-angle-right"></i>
+                                                            </button>
+                                                        </li>
+                                                    </ul>
+                                                </nav>
                                             </div>
                                         </div>
                                     </div>
