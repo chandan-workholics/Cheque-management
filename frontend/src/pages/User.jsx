@@ -85,9 +85,6 @@ const User = () => {
                                                                     <span className="text-445B64 fw-normal">Email : </span>
                                                                     <span className="text-0D161A fw-semibold">{userData?.email || 'Loading...'}</span>
                                                                 </h6>
-                                                                <div className="mt-3">
-                                                                    <Link to="/cheque-management/my-ticket" className="btn btn-sm bg-FFF0F0 text-E84D4D rounded-2 ">My Ticket</Link>
-                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div className="d-flex gap-5">

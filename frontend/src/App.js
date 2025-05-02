@@ -17,6 +17,7 @@ import MyTicket from "./pages/MyTicket";
 import Setting from "./pages/Setting";
 import ForgetPassword from "./pages/ForgetPassword";
 import ProtectedRoute from "./pages/Common_Method/protectedroute";
+import ForgetPasswordVerification from "./pages/ForgetPasswordVerification";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           <Route path="/cheque-management/my-ticket" element={<ProtectedRoute element={<MyTicket />}/>} />
           <Route path="/cheque-management/setting" element={<ProtectedRoute element={<Setting />}/>} />
           <Route path="/cheque-management/forget-password" element={<ForgetPassword/>}/>
+          <Route path="/cheque-management/forget-password-verification" element={<ForgetPasswordVerification/>}/>
         </Routes>
       </BrowserRouter>
     </>

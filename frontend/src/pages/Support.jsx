@@ -166,14 +166,14 @@ const Support = () => {
                                                             </div>
                                                         </div>
                                                         <div className="row">
-                                                            {formData?.imageUrl &&
-                                                                <div className='col-lg-6'>
-                                                                    <label className="form-label text-445B64 mb-1 mt-3">Front Image</label>
-                                                                    <img src={formData.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
-                                                                </div>
-                                                            }
-
-                                                        </div>
+                            {formData?.imageUrl &&
+                              <div className='col-lg-6'>
+                                <label className="form-label text-445B64 mb-1 mt-3">Front Image</label>
+                                <img src={formData.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
+                              </div>
+                            }
+                            
+                          </div>
                                                         <div className="col-lg-6 mb-3 pb-3">
                                                             <label className="form-label text-445B64">Description</label>
                                                             <textarea className="form-control h-100" name='description' value={data.description} onChange={handleChange} defaultValue="Description" />
