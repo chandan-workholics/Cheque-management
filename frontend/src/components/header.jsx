@@ -123,7 +123,7 @@ const Header = () => {
                                     <div className="sidebar-icon">
                                         <i class="fa-solid fa-right-from-bracket"></i>
                                     </div>
-                                    <span className="">Logut</span>
+                                    <span className="">Logout</span>
                                 </button>
                             </li>
                         </ul>
