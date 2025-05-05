@@ -18,6 +18,7 @@ import Setting from "./pages/Setting";
 import ForgetPassword from "./pages/ForgetPassword";
 import ProtectedRoute from "./pages/Common_Method/protectedroute";
 import ForgetPasswordVerification from "./pages/ForgetPasswordVerification";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -31,16 +32,17 @@ function App() {
           <Route path="/cheque-management/cheque-details" element={<ProtectedRoute element={<ChequeDetails />}/>} />
           <Route path="/cheque-management/report" element={<ProtectedRoute element={<Report />}/>} />
           <Route path="/cheque-management/export-report" element={<ProtectedRoute element={<ReportExport />}/>} />
-          <Route path="/cheque-management/user" element={<ProtectedRoute element={<User />}/>} />
+          {/* <Route path="/cheque-management/user" element={<ProtectedRoute element={<User />}/>} /> */}
           <Route path="/cheque-management/support" element={<ProtectedRoute element={<Support />}/>} />
           <Route path="/cheque-management/verify-otp" element={<Otp />} />
           <Route path="/cheque-management/verify-email" element={<VerifyEmail />} />
           <Route path="/cheque-management/email-verification-expired" element={<VerifyEmailExpired />} />
           <Route path="/cheque-management/email-verification-successfully" element={<VerifyEmailSuccess />} />
           <Route path="/cheque-management/my-ticket" element={<ProtectedRoute element={<MyTicket />}/>} />
-          <Route path="/cheque-management/setting" element={<ProtectedRoute element={<Setting />}/>} />
+          {/* <Route path="/cheque-management/setting" element={<ProtectedRoute element={<Setting />}/>} /> */}
           <Route path="/cheque-management/forget-password" element={<ForgetPassword/>}/>
           <Route path="/cheque-management/forget-password-verification" element={<ForgetPasswordVerification/>}/>
+          <Route path="/cheque-management/profile" element={<Profile/>}/>
         </Routes>
       </BrowserRouter>
     </>
