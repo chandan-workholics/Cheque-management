@@ -199,3 +199,141 @@ exports.dashboardDetail = async (req, res) => {
         res.status(500).json({ message: "Server error" });
     }
 };
+
+
+exports.getAllUsers = async (req, res) => {
+    try {
+        const Users = await Vender.find();
+        return res.status(200).json({ message: 'All Users fetched successfully', data: Users });
+    } catch (error) {
+        console.error('Error in getAllUsers:', error);
+        return res.status(500).json({ message: 'Failed to fetch Users', error: error.message });
+    }
+};
+
+exports.getAllUsersById = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const Users = await Vender.findById(id);
+        if (!Users) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        return res.status(200).json({ message: 'User fetched successfully', data: Users });
+    } catch (error) {
+        console.error('Error in getCheckById:', error);
+        return res.status(500).json({ message: 'Failed to fetch User', error: error.message });
+    }
+};
+
+
+exports.updateUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updatedUser = await Vender.findByIdAndUpdate(id, req.body, {
+            new: true, // return updated document
+            runValidators: true, // ensure validations run
+        });
+
+        if (!updatedUser) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        return res.status(200).json({
+            message: 'User updated successfully',
+            data: updatedUser,
+        });
+    } catch (error) {
+        console.error('Error in updateUser:', error);
+        return res.status(500).json({ message: 'Failed to update user', error: error.message });
+    }
+};
+
+
+exports.deleteUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deletedUser = await Vender.findByIdAndDelete(id);
+
+        if (!deletedUser) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        return res.status(200).json({
+            message: 'User deleted successfully',
+            data: deletedUser,
+        });
+    } catch (error) {
+        console.error('Error in deleteUser:', error);
+        return res.status(500).json({ message: 'Failed to delete user', error: error.message });
+    }
+};
+
+
+exports.getAllChecks = async (req, res) => {
+    try {
+        const Checks = await Check.find();
+        return res.status(200).json({ message: 'All Check fetched successfully', data: Checks });
+    } catch (error) {
+        console.error('Error in getAlChecks:', error);
+        return res.status(500).json({ message: 'Failed to fetch Checks', error: error.message });
+    }
+};
+
+exports.getAllChecksById = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const Checks = await Check.findById(id);
+        if (!Checks) {
+            return res.status(404).json({ message: 'Check not found' });
+        }
+
+        return res.status(200).json({ message: 'Check fetched successfully', data: Checks });
+    } catch (error) {
+        console.error('Error in getCheckById:', error);
+        return res.status(500).json({ message: 'Failed to fetch Check', error: error.message });
+    }
+};
+
+exports.updateCheck = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updatedCheck = await Check.findByIdAndUpdate(id, req.body, {
+            new: true, // return updated document
+            runValidators: true, // ensure validations run
+        });
+
+        if (!updatedCheck) {
+            return res.status(404).json({ message: 'Check not found' });
+        }
+
+        return res.status(200).json({
+            message: 'Check updated successfully',
+            data: updatedCheck,
+        });
+    } catch (error) {
+        console.error('Error in updateCheck:', error);
+        return res.status(500).json({ message: 'Failed to update Check', error: error.message });
+    }
+};
+
+exports.deleteCheck = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deletedCheck = await Check.findByIdAndDelete(id);
+
+        if (!deletedCheck) {
+            return res.status(404).json({ message: 'Check not found' });
+        }
+
+        return res.status(200).json({
+            message: 'Check deleted successfully',
+            data: deletedCheck,
+        });
+    } catch (error) {
+        console.error('Error in deleteCheck:', error);
+        return res.status(500).json({ message: 'Failed to delete Check', error: error.message });
+    }
+};
