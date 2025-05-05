@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const AllCheques = () => {
     const usersData = Array.from({ length: 50 }, (_, index) => ({
@@ -16,6 +17,7 @@ const AllCheques = () => {
         status: 'Active'
     }));
 
+    const [cheques, setCheques] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const rowsPerPage = 10;
 
@@ -24,6 +26,21 @@ const AllCheques = () => {
     const indexOfFirstRow = indexOfLastRow - rowsPerPage;
     const currentRows = usersData.slice(indexOfFirstRow, indexOfLastRow);
     const totalPages = Math.ceil(usersData.length / rowsPerPage);
+
+    const fetchCheques = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/api/v1/admin/get-all-checks');
+            if (response.status >= 200 && response.status < 300) {
+                setCheques(response?.data?.data)
+            }
+        } catch (error) {
+            console.log("Error in fetching data", error);
+        }
+    }
+
+    useEffect(() => {
+       fetchCheques();
+    })
 
     return (
         <>
@@ -104,20 +121,20 @@ const AllCheques = () => {
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        {currentRows.map((user, index) => (
-                                                                            <tr key={user.id}>
+                                                                        {cheques?.map((cheque, index) => (
+                                                                            <tr key={index}>
                                                                                 <td className="text-center">
                                                                                     <input className="form-check-input table-checkbox" type="checkbox" />
                                                                                 </td>
                                                                                 <td>{indexOfFirstRow + index + 1}</td>
-                                                                                <td>{user.name}</td>
-                                                                                <td>{user.companyName}</td>
-                                                                                <td>{user.licenseNo}</td>
-                                                                                <td>{user.chequeType}</td>
-                                                                                <td>{user.amount}</td>
-                                                                                <td>{user.comment}</td>
-                                                                                <td>{user.date}</td>
-                                                                                <td className="text-01A99A">{user.status}</td>
+                                                                                <td>{cheque.customerName}</td>
+                                                                                <td>{cheque.company}</td>
+                                                                                <td>{cheque.licenseNo}</td>
+                                                                                <td>{cheque.chequeType}</td>
+                                                                                <td>{cheque.amount}</td>
+                                                                                <td>{cheque.comment}</td>
+                                                                                <td>{cheque.date}</td>
+                                                                                <td className="text-01A99A">{cheque.status}</td>
                                                                                 <td>
                                                                                     <div className="d-flex justify-content-center">
                                                                                         <Link to="/cm-admin/cheque-details" className="btn">

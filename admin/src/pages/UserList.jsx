@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import { Link } from 'react-router-dom';
+import axios from 'axios'
 
 const UserList = () => {
     const usersData = Array.from({ length: 50 }, (_, index) => ({
@@ -13,6 +14,7 @@ const UserList = () => {
         status: 'Active',
     }));
 
+    const[users,setUsers] = useState([])
     const [currentPage, setCurrentPage] = useState(1);
     const rowsPerPage = 10;
 
@@ -21,6 +23,23 @@ const UserList = () => {
     const indexOfFirstRow = indexOfLastRow - rowsPerPage;
     const currentRows = usersData.slice(indexOfFirstRow, indexOfLastRow);
     const totalPages = Math.ceil(usersData.length / rowsPerPage);
+
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/v1/admin/get-all-users`);
+        console.log(response);
+        if (response.status >= 200 && response.status < 300){
+            setUsers(response?.data?.data)
+        }
+      } catch (error) {
+        console.log("Error in fetching users",error);
+      }
+    }
+
+   useEffect(() => {
+     fetchUsers();
+   }, [])
+   
 
     return (
         <>
@@ -92,22 +111,26 @@ const UserList = () => {
                                                                             <th scope="col" className="text-445B64">User Name</th>
                                                                             <th scope="col" className="text-445B64">Phone Number</th>
                                                                             <th scope="col" className="text-445B64">Email Address</th>
-                                                                            <th scope="col" className="text-445B64">Date</th>
+                                                                            <th scope="col" className="text-445B64">bussiness</th>
                                                                             <th scope="col" className="text-445B64">Status</th>
+                                                                            <th scope="col" className="text-445B64">Role</th>
+                                                                            <th scope="col" className="text-445B64">OTP</th>
                                                                             <th scope="col" className="text-445B64 text-center">Actions</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        {currentRows.map((user, index) => (
+                                                                    {users?.length > 0 && users.map((user, index) => (
                                                                             <tr key={user.id}>
                                                                                 <td className="text-center">
                                                                                     <input className="form-check-input table-checkbox" type="checkbox" />
                                                                                 </td>
                                                                                 <td>{indexOfFirstRow + index + 1}</td>
-                                                                                <td>{user.name}</td>
-                                                                                <td>{user.phone}</td>
+                                                                                <td>{user.firstname} {user.lastname}</td>
+                                                                                <td>{user.mobile}</td>
                                                                                 <td>{user.email}</td>
-                                                                                <td>{user.date}</td>
+                                                                                <td>{user.bussiness}</td>
+                                                                                <td>{user.role}</td>
+                                                                                <td>{user.otp}</td>
                                                                                 <td className="text-01A99A">{user.status}</td>
                                                                                 <td>
                                                                                     <div className="d-flex justify-content-center">
