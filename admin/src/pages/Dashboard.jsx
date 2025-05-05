@@ -2,25 +2,72 @@ import React, { useEffect, useState } from 'react'
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import axios from 'axios';
+import Chart from 'react-apexcharts';
+import ReactApexChart from 'react-apexcharts';
+
+
+const URL = process.env.REACT_APP_URL;
 
 const Dashboard = () => {
-    const [data, setData] = useState({});
+    const [data, setData] = useState();
 
-    const fetchData = async () => {
+    const [chartData, setChartData] = useState({
+        series: [],
+        options: {
+            chart: {
+                type: 'pie',
+            },
+            labels: [],
+            legend: {
+                position: 'bottom',
+            },
+            colors: ['#00C7BE', '#FF6B6B', '#FFA500'],
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: { width: 300 },
+                    legend: { position: 'bottom' }
+                }
+            }]
+        }
+    });
+
+
+    const fetchDatas = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/api/v1/admin/dashboard-detail`);
-            console.log("response", response);
+            const response = await axios.get(`${URL}/admin/dashboard-detail`);
             if (response.status >= 200 && response.status < 300) {
-                setData(response?.data)
+                const fetchedData = response?.data;
+                setData(fetchedData);
+
+                const checkStatus = fetchedData?.chart?.checkStatus;
+                if (Array.isArray(checkStatus)) {
+                    const series = checkStatus.map(item => item.value);
+                    const labels = checkStatus.map(item => item.label);
+
+                    setChartData(prev => ({
+                        ...prev,
+                        series,
+                        options: {
+                            ...prev.options,
+                            labels
+                        }
+                    }));
+                } else {
+                    console.warn("checkStatus is missing or not an array");
+                }
             }
         } catch (error) {
-            console.log("Error in fetching data", error);
+            console.error("Error in fetching data", error);
         }
-    }
+    };
+
 
     useEffect(() => {
-        fetchData();
+        fetchDatas();
     }, [])
+
+
 
 
     return (
@@ -48,7 +95,7 @@ const Dashboard = () => {
                                                         </div>
                                                         <div>
                                                             <h6 className="mb-1 fw-medium text-445B64">Total Vendor</h6>
-                                                            <h4 className="mb-0 text-00C7BE fw-bold">{data.totalVendor}</h4>
+                                                            <h4 className="mb-0 text-00C7BE fw-bold">{data?.totalVendor}</h4>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -65,7 +112,7 @@ const Dashboard = () => {
                                                         </div>
                                                         <div>
                                                             <h6 className="mb-1 fw-medium text-445B64">New Checks</h6>
-                                                            <h4 className="mb-0 text-00C7BE fw-bold">{data.newCheck}</h4>
+                                                            <h4 className="mb-0 text-00C7BE fw-bold">{data?.newCheck}</h4>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -82,7 +129,7 @@ const Dashboard = () => {
                                                         </div>
                                                         <div>
                                                             <h6 className="mb-1 fw-medium text-445B64">Good Checks</h6>
-                                                            <h4 className="mb-0 text-00C7BE fw-bold">{data.goodCheck}</h4>
+                                                            <h4 className="mb-0 text-00C7BE fw-bold">{data?.goodCheck}</h4>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -99,7 +146,7 @@ const Dashboard = () => {
                                                         </div>
                                                         <div>
                                                             <h6 className="mb-1 fw-medium text-445B64">Bed Checks</h6>
-                                                            <h4 className="mb-0 text-00C7BE fw-bold">{data.badCheck}</h4>
+                                                            <h4 className="mb-0 text-00C7BE fw-bold">{data?.badCheck}</h4>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -116,7 +163,7 @@ const Dashboard = () => {
                                                         </div>
                                                         <div>
                                                             <h6 className="mb-1 fw-medium text-445B64">Today’s Status</h6>
-                                                            <h4 className="mb-0 text-00C7BE fw-bold">${data.todayStatus}</h4>
+                                                            <h4 className="mb-0 text-00C7BE fw-bold">${data?.todayStatus}</h4>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -133,7 +180,7 @@ const Dashboard = () => {
                                                         </div>
                                                         <div>
                                                             <h6 className="mb-1 fw-medium text-445B64">Weekly Status</h6>
-                                                            <h4 className="mb-0 text-00C7BE fw-bold">${data.weeklyStatus}</h4>
+                                                            <h4 className="mb-0 text-00C7BE fw-bold">${data?.weeklyStatus}</h4>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -150,7 +197,7 @@ const Dashboard = () => {
                                                         </div>
                                                         <div>
                                                             <h6 className="mb-1 fw-medium text-445B64">Monthly Status</h6>
-                                                            <h4 className="mb-0 text-00C7BE fw-bold">${data.monthlyStatus}</h4>
+                                                            <h4 className="mb-0 text-00C7BE fw-bold">${data?.monthlyStatus}</h4>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -158,24 +205,57 @@ const Dashboard = () => {
                                         </div>
                                     </div>
                                     <div className="row mb-2">
-                                        <div className="col-12 col-xl-7 mb-3">
-                                            <div className="card shadow-sm border-0 rounded-4">
-                                                <div className="card-body">
-                                                    <div className="d-flex align-items-center">
 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-12 col-xl-5 mb-3">
-                                            <div className="card shadow-sm border-0 rounded-4">
-                                                <div className="card-body">
-                                                    <div className="d-flex align-items-center">
 
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <div className="col-12 col-xl-12 mb-3">
+                                            <h5 className="mb-3">Check Status</h5>
+                                            <ReactApexChart
+                                                options={chartData.options}
+                                                series={chartData.series}
+                                                type="pie"
+                                                height={300}
+                                            />
                                         </div>
+
+                                        <div className="col-12 col-xl-12 mb-3">
+                                            <h5 className="mb-3">Weekly Checks</h5>
+                                            <Chart
+                                                options={{
+                                                    chart: { id: 'weekly-bar' },
+                                                    xaxis: {
+                                                        categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                                                    },
+                                                    colors: ['#FFA500'],
+                                                }}
+                                                series={[{ name: 'Checks', data: data?.chart?.weekly || [] }]}
+                                                type="bar"
+                                                height={250}
+                                            />
+                                        </div>
+
+                                        <div className="col-12 col-xl-12 mb-3">
+                                            <h5 className="mb-3">Monthly Checks</h5>
+                                            <Chart
+                                                options={{
+                                                    chart: { id: 'monthly-bar' },
+                                                    xaxis: {
+                                                        categories: data?.chart?.monthly?.map(item => item.date) || [],
+                                                    },
+                                                    colors: ['#FF4560'],
+                                                }}
+                                                series={[{
+                                                    name: 'Checks',
+                                                    data: data?.chart?.monthly?.map(item => item.count) || [],
+                                                }]}
+                                                type="bar"
+                                                height={300}
+                                            />
+                                        </div>
+
+
+
+
+
                                     </div>
                                 </div>
                             </div>
