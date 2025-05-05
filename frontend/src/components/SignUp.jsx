@@ -95,7 +95,6 @@ const SignUp = () => {
           'Content-Type': 'application/json',
         }
       })
-      console.log("response", response);
       if (response.status >= 200 && response.status < 300) {
         setTimeout(() => {
           toast.success('OTP send successfully');

@@ -1,8 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
+import axios from 'axios';
 
 const Dashboard = () => {
+    const [data, setData] = useState({});
+
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(`http://localhost:5000/api/v1/admin/dashboard-detail`);
+            console.log("response", response);
+            if (response.status >= 200 && response.status < 300) {
+                setData(response?.data)
+            }
+        } catch (error) {
+            console.log("Error in fetching data", error);
+        }
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, [])
+
+
     return (
         <>
             <div className="container-fluid">
@@ -28,7 +48,7 @@ const Dashboard = () => {
                                                         </div>
                                                         <div>
                                                             <h6 className="mb-1 fw-medium text-445B64">Total Vendor</h6>
-                                                            <h4 className="mb-0 text-00C7BE fw-bold">5000</h4>
+                                                            <h4 className="mb-0 text-00C7BE fw-bold">{data.totalVendor}</h4>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -45,7 +65,7 @@ const Dashboard = () => {
                                                         </div>
                                                         <div>
                                                             <h6 className="mb-1 fw-medium text-445B64">New Checks</h6>
-                                                            <h4 className="mb-0 text-00C7BE fw-bold">50</h4>
+                                                            <h4 className="mb-0 text-00C7BE fw-bold">{data.newCheck}</h4>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -62,7 +82,7 @@ const Dashboard = () => {
                                                         </div>
                                                         <div>
                                                             <h6 className="mb-1 fw-medium text-445B64">Good Checks</h6>
-                                                            <h4 className="mb-0 text-00C7BE fw-bold">30</h4>
+                                                            <h4 className="mb-0 text-00C7BE fw-bold">{data.goodCheck}</h4>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -79,7 +99,7 @@ const Dashboard = () => {
                                                         </div>
                                                         <div>
                                                             <h6 className="mb-1 fw-medium text-445B64">Bed Checks</h6>
-                                                            <h4 className="mb-0 text-00C7BE fw-bold">80</h4>
+                                                            <h4 className="mb-0 text-00C7BE fw-bold">{data.badCheck}</h4>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -96,7 +116,7 @@ const Dashboard = () => {
                                                         </div>
                                                         <div>
                                                             <h6 className="mb-1 fw-medium text-445B64">Today’s Status</h6>
-                                                            <h4 className="mb-0 text-00C7BE fw-bold">$1,000</h4>
+                                                            <h4 className="mb-0 text-00C7BE fw-bold">${data.todayStatus}</h4>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -113,7 +133,7 @@ const Dashboard = () => {
                                                         </div>
                                                         <div>
                                                             <h6 className="mb-1 fw-medium text-445B64">Weekly Status</h6>
-                                                            <h4 className="mb-0 text-00C7BE fw-bold">$25,000</h4>
+                                                            <h4 className="mb-0 text-00C7BE fw-bold">${data.weeklyStatus}</h4>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -130,7 +150,7 @@ const Dashboard = () => {
                                                         </div>
                                                         <div>
                                                             <h6 className="mb-1 fw-medium text-445B64">Monthly Status</h6>
-                                                            <h4 className="mb-0 text-00C7BE fw-bold">$53,000</h4>
+                                                            <h4 className="mb-0 text-00C7BE fw-bold">${data.monthlyStatus}</h4>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -142,7 +162,7 @@ const Dashboard = () => {
                                             <div className="card shadow-sm border-0 rounded-4">
                                                 <div className="card-body">
                                                     <div className="d-flex align-items-center">
-                                                       
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -151,7 +171,7 @@ const Dashboard = () => {
                                             <div className="card shadow-sm border-0 rounded-4">
                                                 <div className="card-body">
                                                     <div className="d-flex align-items-center">
-                                                       
+
                                                     </div>
                                                 </div>
                                             </div>

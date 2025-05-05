@@ -1,12 +1,88 @@
 import React, { useState } from 'react';
 import logoLeft from '../assets/images/logoLeft.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios';
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignIn = () => {
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        email: '',
+        password: ''
+    });
+    const [formErrors, setFormErrors] = useState({});
+    const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
     const togglePasswordVisibility = () => {
         setShowPassword(prev => !prev);
+    };
+
+    const validateForm = () => {
+        const { email, password } = formData;
+        let errors = {};
+        if (email.trim() === '') {
+            errors.email = 'Email is required';
+        } else {
+            const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+            if (!emailPattern.test(email)) {
+                errors.email = 'Invalid email format';
+            }
+        }
+        if (password.trim() === '') {
+            errors.password = 'Password is required';
+        }
+        return errors;
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value })
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const { email, password } = formData;
+        if (!email.trim() || !password.trim()) {
+            setTimeout(() => {
+                toast.error('Please enter the fields first');
+            }, 1000)
+            return;
+        }
+        const errors = validateForm();
+        setFormErrors(errors);
+        if (Object.keys(errors).length > 0) {
+            return;
+        }
+        setLoading(true);
+        try {
+            const response = await axios.post(`http://localhost:5000/api/v1/admin/login`, formData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            if (response.status >= 200 && response.status < 300) {
+                localStorage.setItem("token", response.data.token);
+                localStorage.setItem("role", response.data.role);
+                localStorage.setItem("adminId", response.data.userId);
+                setTimeout(() => {
+                    toast.success('Login successfully');
+                }, 1000);
+                setTimeout(() => {
+                    navigate('/cm-admin/dashboard');
+                }, 2000);
+            } else {
+                setTimeout(() => {
+                    toast.error("Failed to login");
+                }, 2000);
+            }
+        } catch (error) {
+            console.log("User not registered. Please try again!", error);
+            toast.error(error.response?.data?.message || 'User not registered. Please try again!');
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -27,6 +103,8 @@ const SignIn = () => {
                                         className="form-control mb-3 rounded-3"
                                         type="email"
                                         name="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
                                         id="email"
                                         placeholder="Your email address"
                                         aria-label="example"
@@ -39,6 +117,8 @@ const SignIn = () => {
                                             type={showPassword ? 'text' : 'password'}
                                             name="password"
                                             id="password"
+                                            value={formData.password}
+                                            onChange={handleChange}
                                             placeholder="Your password"
                                             aria-label="example"
                                             required
@@ -58,8 +138,9 @@ const SignIn = () => {
                                         </Link>
                                     </h6>
 
-                                    <Link to="/cm-admin/dashboard" className="btn w-100 sign-btn mb-3">Sign In</Link>
-
+                                    <button type="button" className="btn w-100 sign-btn mb-3" onClick={handleSubmit} disabled={loading}>
+                                        {loading ? 'Processing...' : 'Sign In'}
+                                    </button>
                                     {/* <h6 className="text-center text-445B64">
                                         Don't have an account?
                                         <Link to="/cm-admin/sign-up" className="text-00C7BE text-decoration-none"> Sign up</Link>
