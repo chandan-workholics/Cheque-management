@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import logoLeft from '../assets/images/logoLeft.png'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+const URL = process.env.REACT_APP_URL;
 
 const SignIn = () => {
     const navigate = useNavigate();
@@ -57,7 +58,7 @@ const SignIn = () => {
         }
         setLoading(true);
         try {
-            const response = await axios.post(`http://localhost:5000/api/v1/admin/login`, formData, {
+            const response = await axios.post(`${URL}/admin/login`, formData, {
                 headers: {
                     'Content-Type': 'application/json',
                 }

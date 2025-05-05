@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from 'axios';
+const URL = process.env.REACT_APP_URL;
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -92,7 +93,7 @@ const SignUp = () => {
     setLoading(true);
     try {
       const { confirmPassword, ...dataToSend } = formData;
-      const response = await axios.post(`http://localhost:5000/api/v1/admin/register`, dataToSend, {
+      const response = await axios.post(`${URL}/admin/register`, dataToSend, {
         headers: {
           'Content-Type': 'application/json',
         }
