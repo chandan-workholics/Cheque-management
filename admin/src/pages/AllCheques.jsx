@@ -3,6 +3,7 @@ import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+const URL = process.env.REACT_APP_URL;
 
 const AllCheques = () => {
     const usersData = Array.from({ length: 50 }, (_, index) => ({
@@ -29,7 +30,7 @@ const AllCheques = () => {
 
     const fetchCheques = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/api/v1/admin/get-all-checks');
+            const response = await axios.get(`${URL}/admin/get-all-checks`);
             if (response.status >= 200 && response.status < 300) {
                 setCheques(response?.data?.data)
             }
@@ -137,7 +138,7 @@ const AllCheques = () => {
                                                                                 <td className="text-01A99A">{cheque.status}</td>
                                                                                 <td>
                                                                                     <div className="d-flex justify-content-center">
-                                                                                        <Link to="/cm-admin/cheque-details" className="btn">
+                                                                                        <Link to={`/cm-admin/cheque-details/${cheque?._id}`} className="btn">
                                                                                             <i className="fa-solid fa-eye text-445B64"></i>
                                                                                         </Link>
                                                                                         <button className="btn">

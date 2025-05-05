@@ -3,6 +3,7 @@ import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import { Link } from 'react-router-dom';
 import axios from 'axios'
+const URL = process.env.REACT_APP_URL;
 
 const UserList = () => {
     const usersData = Array.from({ length: 50 }, (_, index) => ({
@@ -26,7 +27,7 @@ const UserList = () => {
 
     const fetchUsers = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/v1/admin/get-all-users`);
+        const response = await axios.get(`${URL}/v1/admin/get-all-users`);
         console.log(response);
         if (response.status >= 200 && response.status < 300){
             setUsers(response?.data?.data)

@@ -1,9 +1,23 @@
 import React from 'react';
 import logo from '../assets/images/logo.png'
 import supportIconImg from '../assets/images/supportIconImg.png';
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink, Link,useNavigate } from 'react-router-dom'
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Header = () => {
+const navigate = useNavigate();
+   const handleLogout = () => {
+           localStorage.removeItem("token");
+           localStorage.removeItem("role");
+           localStorage.removeItem("adminId");
+           setTimeout(() => {
+               toast.success("Logged out successfully!")
+           }, 1000);
+           setTimeout(() => {
+               navigate("/cm-admin/");
+           }, 2000);
+       };
 
     return (
         <>
@@ -29,7 +43,7 @@ const Header = () => {
                             </Link>
                             <ul className="dropdown-menu dropdown-menu-end mt-3">
                                 <li><Link className="dropdown-item" to=''>Profile</Link></li>
-                                <li><button className="dropdown-item">Logout</button></li>
+                                <li><button className="dropdown-item" onClick={handleLogout}>Logout</button></li>
                             </ul>
                         </li>
                         <li className="nav-item me-lg-0 d-block d-lg-none">

@@ -9,6 +9,7 @@ import AllCheques from "./pages/AllCheques";
 import ChequeDetails from "./pages/ChequeDetails";
 import Report from "./pages/Report";
 import ReportExport from "./pages/ReportExport";
+import ProtectedRoute from './pages/Common_Method/protectedroute'
 
 function App() {
   return (
@@ -17,13 +18,13 @@ function App() {
         <Routes>
           <Route path="/cm-admin/" element={<SignIn />} />
           <Route path="/cm-admin/sign-up" element={<SignUp />} />
-          <Route path="/cm-admin/dashboard" element={<Dashboard />} />
-          <Route path="/cm-admin/user-list" element={<UserList />} />
-          <Route path="/cm-admin/user-information" element={<UserInformation />} />
-          <Route path="/cm-admin/all-cheques" element={<AllCheques />} />
-          <Route path="/cm-admin/cheque-details" element={<ChequeDetails />} />
-          <Route path="/cm-admin/report" element={<Report />} />
-          <Route path="/cm-admin/export-report" element={<ReportExport />} />
+          <Route path="/cm-admin/dashboard" element={<ProtectedRoute element={<Dashboard />}/>} />
+          <Route path="/cm-admin/user-list" element={<ProtectedRoute element={<UserList />}/>} />
+          <Route path="/cm-admin/user-information" element={<ProtectedRoute element={<UserInformation />}/>} />
+          <Route path="/cm-admin/all-cheques" element={<ProtectedRoute element={<AllCheques />}/>} />
+          <Route path="/cm-admin/cheque-details/:id" element={<ProtectedRoute element={<ChequeDetails />}/>} />
+          <Route path="/cm-admin/report" element={<ProtectedRoute element={<Report />}/>} />
+          <Route path="/cm-admin/export-report" element={<ProtectedRoute element={<ReportExport />}/>} />
         </Routes>
       </BrowserRouter>
     </>
