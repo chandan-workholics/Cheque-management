@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from "react-router"
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import axios from 'axios';
@@ -6,12 +7,13 @@ import axios from 'axios';
 const URL = process.env.REACT_APP_URL;
 
 const ChequeDetails = () => {
-    const [chequeDetails, setChequeDetails] = useState([]);
-
+    const [chequeDetails, setChequeDetails] = useState('');
+    const { id } = useParams()
+    const navigate = useNavigate()
     const fetchChequeDetails = async () => {
         try {
-            const venderId = localStorage.getItem("userId");
-            const response = await axios.get(`${URL}/check/get-checkByVenderId/${venderId}`);
+
+            const response = await axios.get(`${URL}/check/get-checkById/${id}`);
             if (response.status >= 200 && response.status < 300) {
                 setChequeDetails(response?.data?.data)
             }
@@ -21,8 +23,12 @@ const ChequeDetails = () => {
     }
 
     useEffect(() => {
-        fetchChequeDetails();
+        fetchChequeDetails();// eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    const handleBack = () => {
+        navigate(-1)
+    }
 
     return (
         <>
@@ -56,7 +62,7 @@ const ChequeDetails = () => {
                                                         </div>
                                                         <div className="col-4 col-lg-6">
                                                             <div className="d-flex justify-content-end">
-                                                                <button className="btn btn-sm rounded-2 btn-light text-445B64">
+                                                                <button onClick={handleBack} className="btn btn-sm rounded-2 btn-light text-445B64">
                                                                     <i className="fa-solid fa-arrow-left-long me-2 text-445B64"></i>
                                                                     Back
                                                                 </button>
@@ -67,107 +73,103 @@ const ChequeDetails = () => {
                                             </div>
                                         </div>
                                         <div className="col-12">
-                                            {chequeDetails.length > 0 ? (
-                                                chequeDetails.map((item, index) => (
-                                                    <div key={item._id} className="col-12">
-                                                        <div className="card border-0 rounded-3 mb-1">
-                                                            <div className="card-body">
-                                                                <div className="d-flex justify-content-between">
-                                                                    <div className="d-flex gap-5 flex-wrap">
-                                                                        <div className="mb-3">
-                                                                            <h6 className="text-445B64 fs-14 mb-1">Customer Name</h6>
-                                                                            <h6 className="text-0D161A fw-semibold fs-14">{item.customerName}</h6>
-                                                                        </div>
-                                                                        <div className="mb-3">
-                                                                            <h6 className="text-445B64 fs-14 mb-1">License No</h6>
-                                                                            <h6 className="text-0D161A fw-semibold fs-14">{item.licenseNo}</h6>
-                                                                        </div>
-                                                                        <div className="mb-3">
-                                                                            <h6 className="text-445B64 fs-14 mb-1">Company</h6>
-                                                                            <h6 className="text-0D161A fw-semibold fs-14">{item.company}</h6>
-                                                                        </div>
-                                                                        <div className="mb-3">
-                                                                            <h6 className="text-445B64 fs-14 mb-1">Check Type</h6>
-                                                                            <h6 className="text-0D161A fw-semibold fs-14">{item.checkType}</h6>
-                                                                        </div>
-                                                                        <div className="mb-3">
-                                                                            <h6 className="text-445B64 fs-14 mb-1">Amount</h6>
-                                                                            <h6 className="text-0D161A fw-semibold fs-14">${item.amount}</h6>
-                                                                        </div>
-                                                                        <div className="mb-3">
-                                                                            <h6 className="text-445B64 fs-14 mb-1">Date</h6>
-                                                                            <h6 className="text-0D161A fw-semibold fs-14">{item.date}</h6>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="d-flex gap-3 align-items-start">
-                                                                        <div className="mb-3">
-                                                                            <h6 className="text-445B64 fs-14 mb-1">Status</h6>
-                                                                            <div>
-                                                                                <button className={`btn btn-sm rounded-2 lh-1 text-white ${item.isActive ? "bg-4FD1C5" : "bg-E84D4D"}`}>
-                                                                                    {item.isActive ? "Active" : "Deactive"}
-                                                                                </button>
-                                                                            </div>
-                                                                        </div>
+
+                                            <div className="col-12">
+                                                <div className="card border-0 rounded-3 mb-1">
+                                                    <div className="card-body">
+                                                        <div className="d-flex justify-content-between">
+                                                            <div className="d-flex gap-5 flex-wrap">
+                                                                <div className="mb-3">
+                                                                    <h6 className="text-445B64 fs-14 mb-1">Customer Name</h6>
+                                                                    <h6 className="text-0D161A fw-semibold fs-14">{chequeDetails?.customerName}</h6>
+                                                                </div>
+                                                                <div className="mb-3">
+                                                                    <h6 className="text-445B64 fs-14 mb-1">License No</h6>
+                                                                    <h6 className="text-0D161A fw-semibold fs-14">{chequeDetails?.licenseNo}</h6>
+                                                                </div>
+                                                                <div className="mb-3">
+                                                                    <h6 className="text-445B64 fs-14 mb-1">Company</h6>
+                                                                    <h6 className="text-0D161A fw-semibold fs-14">{chequeDetails?.company}</h6>
+                                                                </div>
+                                                                <div className="mb-3">
+                                                                    <h6 className="text-445B64 fs-14 mb-1">Check Type</h6>
+                                                                    <h6 className="text-0D161A fw-semibold fs-14">{chequeDetails?.checkType}</h6>
+                                                                </div>
+                                                                <div className="mb-3">
+                                                                    <h6 className="text-445B64 fs-14 mb-1">Amount</h6>
+                                                                    <h6 className="text-0D161A fw-semibold fs-14">${chequeDetails?.amount}</h6>
+                                                                </div>
+                                                                <div className="mb-3">
+                                                                    <h6 className="text-445B64 fs-14 mb-1">Date</h6>
+                                                                    <h6 className="text-0D161A fw-semibold fs-14">{chequeDetails?.date}</h6>
+                                                                </div>
+                                                            </div>
+                                                            <div className="d-flex gap-3 align-chequeDetails?s-start">
+                                                                <div className="mb-3">
+                                                                    <h6 className="text-445B64 fs-14 mb-1">Status</h6>
+                                                                    <div>
+                                                                        <button className={`btn btn-sm rounded-2 lh-1 text-white ${chequeDetails?.isActive ? "bg-4FD1C5" : "bg-E84D4D"}`}>
+                                                                            {chequeDetails?.isActive ? "Active" : "Deactive"}
+                                                                        </button>
                                                                     </div>
                                                                 </div>
-
-                                                                <div className="d-flex gap-5 mt-3">
-                                                                    <div className="mb-3 w-100">
-                                                                        <h6 className="text-445B64 fs-14 mb-1">Comments</h6>
-                                                                        <div className="card rounded-3">
-                                                                            <div className="card-body p-2">
-                                                                                <p className="text-0D161A fw-light fs-13 mb-0">{item.comment || "No comments available."}</p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
                                                             </div>
                                                         </div>
 
-
-                                                        <div className="row">
-                                                            <div className='col-lg-6'>
-                                                                <div className="card border-0 rounded-3">
-                                                                    <div className="card-body">
-                                                                        <label className="form-label text-445B64">Cheque Image</label>
-                                                                        <div className="row">
-                                                                            <div className="col-lg-6">
-                                                                                <label className="form-label text-445B64">Front Image</label>
-                                                                                <img src={item.imageUrl} alt='Profile' className='w-100 border rounded-4 overflow-hidden' />
-                                                                            </div>
-                                                                            <div className="col-lg-6">
-                                                                                <label className="form-label text-445B64">Back Image</label>
-                                                                                <img src={item.imageUrl2} alt='Profile' className='w-100 border rounded-4 overflow-hidden' />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div className='col-lg-6'>
-                                                                <div className="card border-0 rounded-3">
-                                                                    <div className="card-body">
-                                                                        <label className="form-label text-445B64">License Image</label>
-                                                                        <div className="row">
-                                                                            <div className="col-lg-6">
-                                                                                <label className="form-label text-445B64">Front Image</label>
-                                                                                <img src={item.imageUrl3} alt='Profile' className='w-100 border rounded-4 overflow-hidden' />
-                                                                            </div>
-                                                                            <div className="col-lg-6">
-                                                                                <label className="form-label text-445B64">Back Image</label>
-                                                                                <img src={item.imageUrl4} alt='Profile' className='w-100 border rounded-4 overflow-hidden' />
-                                                                            </div>
-                                                                        </div>
+                                                        <div className="d-flex gap-5 mt-3">
+                                                            <div className="mb-3 w-100">
+                                                                <h6 className="text-445B64 fs-14 mb-1">Comments</h6>
+                                                                <div className="card rounded-3">
+                                                                    <div className="card-body p-2">
+                                                                        <p className="text-0D161A fw-light fs-13 mb-0">{chequeDetails?.comment || "No comments available."}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
 
                                                     </div>
-                                                ))
-                                            ) : (
-                                                <div className="col-12 text-center py-4">No cheque details found.</div>
-                                            )}
+                                                </div>
+
+
+                                                <div className="row">
+                                                    <div className='col-lg-6'>
+                                                        <div className="card border-0 rounded-3">
+                                                            <div className="card-body">
+                                                                <label className="form-label text-445B64">Cheque Image</label>
+                                                                <div className="row">
+                                                                    <div className="col-lg-6">
+                                                                        <label className="form-label text-445B64">Front Image</label>
+                                                                        <img src={chequeDetails?.imageUrl} alt='Profile' className='w-100 border rounded-4 overflow-hidden' />
+                                                                    </div>
+                                                                    <div className="col-lg-6">
+                                                                        <label className="form-label text-445B64">Back Image</label>
+                                                                        <img src={chequeDetails?.imageUrl2} alt='Profile' className='w-100 border rounded-4 overflow-hidden' />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className='col-lg-6'>
+                                                        <div className="card border-0 rounded-3">
+                                                            <div className="card-body">
+                                                                <label className="form-label text-445B64">License Image</label>
+                                                                <div className="row">
+                                                                    <div className="col-lg-6">
+                                                                        <label className="form-label text-445B64">Front Image</label>
+                                                                        <img src={chequeDetails?.imageUrl3} alt='Profile' className='w-100 border rounded-4 overflow-hidden' />
+                                                                    </div>
+                                                                    <div className="col-lg-6">
+                                                                        <label className="form-label text-445B64">Back Image</label>
+                                                                        <img src={chequeDetails?.imageUrl4} alt='Profile' className='w-100 border rounded-4 overflow-hidden' />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
 
 
                                         </div>

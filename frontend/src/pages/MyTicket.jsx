@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import axios from 'axios'
+import moment from 'moment'
 import { useNavigate } from 'react-router-dom';
 
 const URL = process.env.REACT_APP_URL;
@@ -9,12 +10,18 @@ const URL = process.env.REACT_APP_URL;
 const MyTicket = () => {
     const navigate = useNavigate();
     const [tickets, setTickets] = useState([]);
+    const [ticketid, setTicketsId] = useState('');
+    const [data, setData] = useState([]);
+    const vendorId = localStorage.getItem("userId");
+    const [message, setMessage] = useState('');
+
 
     const handleBack = () => {
-        navigate('/cheque-management/support');
+        navigate(-1);
     }
     const fetchTickets = async () => {
         try {
+
             const vendorId = localStorage.getItem("userId");
             const response = await axios.get(`${URL}/complain/tickets/vendor/${vendorId}`)
             if (response.status >= 200 && response.status < 300) {
@@ -27,6 +34,47 @@ const MyTicket = () => {
     useEffect(() => {
         fetchTickets();
     }, [])
+
+    const getChat = async (id) => {
+        try {
+            setTicketsId(id)
+            const response = await axios.get(`${URL}/complain/tickets/chat/${id}`);
+
+            if (response.status >= 200 && response.status < 300) {
+                setData(response?.data || []);
+            }
+        } catch (error) {
+            console.log("Error fetching chat:", error);
+        }
+    }
+
+    const sendChat = async () => {
+        if (!message.trim()) return;
+
+        const payload = {
+            ticketId: ticketid,
+            senderId: vendorId,
+            message
+        };
+
+        try {
+            const response = await axios.post(`${URL}/complain/tickets/chat/`, payload, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.status >= 200 && response.status < 300) {
+                setMessage('');
+                getChat(response?.data?.chat?.ticketId); // refresh chat
+            }
+        } catch (error) {
+            console.error('Send chat error:', error);
+        }
+    };
+
+
+
     return (
         <>
             <div className="container-fluid">
@@ -69,12 +117,14 @@ const MyTicket = () => {
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div className="col-12">
                                             <div className="card border-0 rounded-3 mb-2">
                                                 <div className="card-body p-2">
                                                     <div className="row">
                                                         <div className="col-12 col-lg-6">
                                                             <div className="d-flex justify-content-between mb-3 mb-lg-0">
+
                                                                 <div className="d-flex align-items-center">
                                                                     <div className="d-flex gap-4">
                                                                         <div className="form-check align-items-center">
@@ -94,12 +144,14 @@ const MyTicket = () => {
                                                                         </div>
                                                                     </div>
                                                                 </div>
+
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div className="col-12">
                                             <div className="card border-0 rounded-3 mb-2 overflow-hidden">
                                                 <div className="card-body p-0">
@@ -124,39 +176,55 @@ const MyTicket = () => {
                                                                         <td><span className="text-primary">{ticket.status}</span></td>
                                                                         <td>{ticket.category}</td>
                                                                         <td>{ticket.description}</td>
-                                                                        <td><i className="fa-solid fa-chevron-down text-01A99A"></i></td>
+                                                                        <td><i className="fa-solid fa-chevron-down text-01A99A" onClick={() => getChat(ticket._id)}></i></td>
                                                                     </tr>
                                                                 ))}
+
+                                                                {/* chat start with vender with admin */}
+
                                                                 <tr className="collapse" id="ticket1">
                                                                     <td className='border-bottom bg-FAFAFA' colSpan="6">
                                                                         {/* Message 1 */}
-                                                                        <div className="border-bottom">
-                                                                            <div className="text-muted fs-13 mb-1">Apr 27, 2023 11:32 AM</div>
-                                                                            <h6 className='fs-14'>Hi, I'm unable to login to my account since yesterday. Please help.</h6>
-                                                                            <div className="mb-2 btn btn-light border py-0 px-2 border-bottom">
-                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="14" viewBox="0 0 10 14" fill="none">
-                                                                                    <path d="M5.60938 0.5H1.14062C0.691922 0.5 0.328125 0.863797 0.328125 1.3125V12.6875C0.328125 13.1362 0.691922 13.5 1.14062 13.5H8.85938C9.30808 13.5 9.67188 13.1362 9.67188 12.6875V4.5627L5.60938 0.5ZM8.85938 4.89928V4.96875H5.20312V1.3125H5.273L8.85938 4.89928ZM1.14062 12.6875V1.3125H4.39062V5.78125H8.85938V12.6875H1.14062Z" fill="#445B64" />
-                                                                                </svg>
-                                                                                <span className="text-445B64 fs-13 ms-1">screenshot.png</span>
+                                                                        {data?.length > 0 ? data.map((chat, index) => (
+                                                                            <div key={chat._id || index} className="border-bottom mb-2">
+                                                                                <div className="text-muted fs-13 mb-1">
+                                                                                    {moment(chat?.createdAt).format("MMM DD, YYYY hh:mm A")}
+                                                                                </div>
+                                                                                <h6 className='fs-14'>
+                                                                                    <strong>{chat?.senderId?.role === 'vendor' ? 'Vendor' : 'Admin'}:</strong> {chat?.message}
+                                                                                </h6>
                                                                             </div>
-                                                                        </div>
-                                                                        {/* Message 2 */}
-                                                                        <div className="border-bottom ">
-                                                                            <div className="text-muted my-2 fs-13">Apr 28, 2023 11:15 AM</div>
-                                                                            <p>Hello John, we are looking into it.</p>
-                                                                        </div>
+                                                                        )) : (
+                                                                            <p className="text-muted">No chat messages found.</p>
+                                                                        )}
+
+
                                                                         {/* Reply Box */}
                                                                         <div className="mt-3">
-                                                                            <textarea className="form-control bg-FAFAFA mb-3 fs-14" placeholder="Write your reply" rows="3" disabled></textarea>
+                                                                            <textarea
+                                                                                className="form-control bg-FAFAFA mb-3 fs-14"
+                                                                                placeholder="Write your reply"
+                                                                                rows="3"
+                                                                                value={message}
+                                                                                onChange={(e) => setMessage(e.target.value)}
+                                                                            />
                                                                             <div className="d-flex justify-content-between">
                                                                                 <button className="btn bg-F6FFFE text-445B64 fs-14" style={{ border: '1px solid #D7D7D7' }}>
-                                                                                    <span className="me-2 text-00C7BE"><i class="fa-solid fa-arrow-up-from-bracket text-4FD1C5 fs-6"></i></span>
-                                                                                    Upload Attachment</button>
-                                                                                <button className="btn sign-btn p-0 px-5 fs-14">Send reply</button>
+                                                                                    <span className="me-2 text-00C7BE">
+                                                                                        <i className="fa-solid fa-arrow-up-from-bracket text-4FD1C5 fs-6"></i>
+                                                                                    </span>
+                                                                                    Upload Attachment
+                                                                                </button>
+                                                                                <button className="btn sign-btn p-0 px-5 fs-14" onClick={sendChat}>
+                                                                                    Send reply
+                                                                                </button>
                                                                             </div>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
+
+
+                                                                {/* chat start with vender with admin */}
 
                                                             </tbody>
 

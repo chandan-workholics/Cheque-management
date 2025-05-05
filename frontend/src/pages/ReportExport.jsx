@@ -79,7 +79,7 @@ const ReportExport = () => {
                                                                                 <input class="form-check-input table-checkbox"
                                                                                     type="checkbox" value="" id="flexCheckDefault" />
                                                                             </td>
-                                                                            <td scope="row"> 01 </td>
+                                                                            <td > 01 </td>
                                                                             <td>Rohit Sharma</td>
                                                                             <td>State Bank of India</td>
                                                                             <td>64644444</td>

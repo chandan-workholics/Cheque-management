@@ -94,31 +94,36 @@ const Report = () => {
                                                                     <tbody>
 
                                                                         {report?.map((val, index) => {
-                                                                            <tr>
-                                                                                <td class="text-center">
-                                                                                    <input class="form-check-input table-checkbox"
-                                                                                        type="checkbox" value="" id="flexCheckDefault" />
-                                                                                </td>
-                                                                                <td scope="row"> {index+1} </td>
-                                                                                <td>{val?.subject}</td>
-                                                                                <td>State Bank of India</td>
-                                                                                <td>64644444</td>
-                                                                                <td>Self Check</td>
-                                                                                <td>$487441</td>
-                                                                                <td>Lorem Ipsum..</td>
-                                                                                <td>July 14, 2015</td>
-                                                                                <td class="text-01A99A">Active</td>
-                                                                                <td class="">
-                                                                                    <div className="d-flex justify-content-center">
-                                                                                        <Link to="/cheque-management/cheque-details" className="btn">
-                                                                                            <i class="fa-solid fa-eye text-445B64"></i>
-                                                                                        </Link>
-                                                                                        <button className="btn">
-                                                                                            <i class="fa-solid fa-trash-can text-danger"></i>
-                                                                                        </button>
-                                                                                    </div>
-                                                                                </td>
-                                                                            </tr>
+                                                                            return (
+                                                                                <>
+                                                                                    <tr>
+                                                                                        <td class="text-center">
+                                                                                            <input class="form-check-input table-checkbox"
+                                                                                                type="checkbox" value="" id="flexCheckDefault" />
+                                                                                        </td>
+                                                                                        <td > {index + 1} </td>
+                                                                                        <td>{val?.subject}</td>
+                                                                                        <td>State Bank of India</td>
+                                                                                        <td>64644444</td>
+                                                                                        <td>Self Check</td>
+                                                                                        <td>$487441</td>
+                                                                                        <td>Lorem Ipsum..</td>
+                                                                                        <td>July 14, 2015</td>
+                                                                                        <td class="text-01A99A">Active</td>
+                                                                                        <td class="">
+                                                                                            <div className="d-flex justify-content-center">
+                                                                                                <Link to={`/cheque-management/cheque-details/${val?._id}`} className="btn">
+                                                                                                    <i class="fa-solid fa-eye text-445B64"></i>
+                                                                                                </Link>
+                                                                                                <button className="btn">
+                                                                                                    <i class="fa-solid fa-trash-can text-danger"></i>
+                                                                                                </button>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </>
+                                                                            )
+
                                                                         })}
 
                                                                     </tbody>

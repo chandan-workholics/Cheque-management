@@ -3,7 +3,7 @@ import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import { useState } from 'react';
 import axios from 'axios';
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 const URL = process.env.REACT_APP_URL;
 
 const Home = () => {

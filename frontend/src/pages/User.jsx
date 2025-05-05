@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 const URL = process.env.REACT_APP_URL;
 
 const User = () => {
     const [userData, setUserData] = useState(null);
-
+    const navigate = useNavigate()
     useEffect(() => {
         const fetchUser = async () => {
             try {
@@ -21,6 +21,10 @@ const User = () => {
 
         fetchUser();
     }, []);
+
+    const handleBack=()=>{
+        navigate(-1)
+    }
 
     return (
         <>
@@ -54,7 +58,7 @@ const User = () => {
                                                         </div>
                                                         <div className="col-6 col-lg-6">
                                                             <div className="d-flex justify-content-end">
-                                                                <button className="btn btn-sm rounded-2 btn-light text-445B64">
+                                                                <button onClick={handleBack} className="btn btn-sm rounded-2 btn-light text-445B64">
                                                                     <i className="fa-solid fa-arrow-left-long me-2 text-445B64"></i>
                                                                     Back
                                                                 </button>

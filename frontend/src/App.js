@@ -28,7 +28,7 @@ function App() {
           <Route path="/cheque-management/sign-up" element={<SignUp />} />
           <Route path="/cheque-management/dashboard" element={<ProtectedRoute element={<Home />}/>} />
           <Route path="/cheque-management/cheques" element={<ProtectedRoute element={<Cheques />}/>} />
-          <Route path="/cheque-management/cheque-details" element={<ProtectedRoute element={<ChequeDetails />}/>} />
+          <Route path="/cheque-management/cheque-details/:id" element={<ProtectedRoute element={<ChequeDetails />}/>} />
           <Route path="/cheque-management/report" element={<ProtectedRoute element={<Report />}/>} />
           <Route path="/cheque-management/export-report" element={<ProtectedRoute element={<ReportExport />}/>} />
           <Route path="/cheque-management/user" element={<ProtectedRoute element={<User />}/>} />

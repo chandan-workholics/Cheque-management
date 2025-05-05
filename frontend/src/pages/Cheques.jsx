@@ -143,7 +143,7 @@ const Cheques = () => {
                                                                     <td>{item.status}</td>
                                                                     <td>
                                                                         <div className="d-flex justify-content-center">
-                                                                            <Link to="/cheque-management/cheque-details" className="btn">
+                                                                            <Link to={`/cheque-management/cheque-details/${item?._id}`} className="btn">
                                                                                 <i className="fa-solid fa-eye text-445B64"></i>
                                                                             </Link><button className="btn" onClick={() => handleDeleteCheque(item._id)}>
                                                                                 <i className="fa-solid fa-trash-can text-danger"></i>
