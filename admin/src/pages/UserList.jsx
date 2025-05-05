@@ -15,7 +15,7 @@ const UserList = () => {
         status: 'Active',
     }));
 
-    const[users,setUsers] = useState([])
+    const [users, setUsers] = useState([])
     const [currentPage, setCurrentPage] = useState(1);
     const rowsPerPage = 10;
 
@@ -26,21 +26,21 @@ const UserList = () => {
     const totalPages = Math.ceil(usersData.length / rowsPerPage);
 
     const fetchUsers = async () => {
-      try {
-        const response = await axios.get(`${URL}/admin/get-all-users`);
-        console.log(response);
-        if (response.status >= 200 && response.status < 300){
-            setUsers(response?.data?.data)
+        try {
+            const response = await axios.get(`${URL}/admin/get-all-users`);
+            console.log(response);
+            if (response.status >= 200 && response.status < 300) {
+                setUsers(response?.data?.data)
+            }
+        } catch (error) {
+            console.log("Error in fetching users", error);
         }
-      } catch (error) {
-        console.log("Error in fetching users",error);
-      }
     }
 
-   useEffect(() => {
-     fetchUsers();
-   }, [])
-   
+    useEffect(() => {
+        fetchUsers();
+    }, [])
+
 
     return (
         <>
@@ -120,19 +120,19 @@ const UserList = () => {
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                    {users?.length > 0 && users.map((user, index) => (
+                                                                        {users?.length > 0 && users.map((user, index) => (
                                                                             <tr key={user.id}>
                                                                                 <td className="text-center">
                                                                                     <input className="form-check-input table-checkbox" type="checkbox" />
                                                                                 </td>
                                                                                 <td>{indexOfFirstRow + index + 1}</td>
-                                                                                <td>{user.firstname} {user.lastname}</td>
-                                                                                <td>{user.mobile}</td>
-                                                                                <td>{user.email}</td>
-                                                                                <td>{user.bussiness}</td>
-                                                                                <td>{user.role}</td>
-                                                                                <td>{user.otp}</td>
-                                                                                <td className="text-01A99A">{user.status}</td>
+                                                                                <td>{user?.firstname} {user?.lastname}</td>
+                                                                                <td>{user?.mobile}</td>
+                                                                                <td>{user?.email}</td>
+                                                                                <td>{user?.bussiness}</td>
+                                                                                <td>{user?.isActive == true ? "active" : "not active"}</td>
+                                                                                <td>{user?.role}</td>
+                                                                                <td className="text-01A99A">{user?.status}</td>
                                                                                 <td>
                                                                                     <div className="d-flex justify-content-center">
                                                                                         <Link to="/cm-admin/user-information" className="btn">
