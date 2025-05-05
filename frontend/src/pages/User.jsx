@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 const URL = process.env.REACT_APP_URL;
 
 const User = () => {
     const [userData, setUserData] = useState(null);
-
+    const navigate = useNavigate()
     useEffect(() => {
         const fetchUser = async () => {
             try {
@@ -22,13 +22,17 @@ const User = () => {
         fetchUser();
     }, []);
 
+    const handleBack=()=>{
+        navigate(-1)
+    }
+
     return (
         <>
             <div className="container-fluid">
                 <Header />
                 <div className="">
                     <div className="row mh-100vh">
-                        <div className="col-lg-3 col-xl-2 position-relative">
+                        <div className="col-lg-3 col-xl-2 d-none d-lg-block position-relative">
                             <Sidebar />
                         </div>
                         <div className="col-lg-9 col-xl-10 bg-F6F6F6">
@@ -39,8 +43,8 @@ const User = () => {
                                             <div className="card border-0 rounded-3 mb-2">
                                                 <div className="card-body p-2">
                                                     <div className="row">
-                                                        <div className="col-12 col-lg-6">
-                                                            <div className="d-flex justify-content-between mb-3 mb-lg-0">
+                                                        <div className="col-6 col-lg-6">
+                                                            <div className="d-flex justify-content-betweenmb-lg-0">
                                                                 <div className="d-flex align-items-center">
                                                                     <div className="table-circular-icon bg-F0F5F6 me-3"
                                                                         style={{ cursor: "pointer" }}>
@@ -52,9 +56,9 @@ const User = () => {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div className="col-12 col-lg-6">
+                                                        <div className="col-6 col-lg-6">
                                                             <div className="d-flex justify-content-end">
-                                                                <button className="btn btn-sm rounded-2 btn-light text-445B64">
+                                                                <button onClick={handleBack} className="btn btn-sm rounded-2 btn-light text-445B64">
                                                                     <i className="fa-solid fa-arrow-left-long me-2 text-445B64"></i>
                                                                     Back
                                                                 </button>

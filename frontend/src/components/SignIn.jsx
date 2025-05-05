@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import logoLeft from '../assets/images/logoLeft.png'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
@@ -14,7 +14,7 @@ const SignIn = () => {
     })
     const [formErrors, setFormErrors] = useState({});
     const [loading, setLoading] = useState(false);
-    const [rememberMe, setRememberMe] = useState(false);
+    
 
 
     const validateForm = () => {
@@ -131,7 +131,7 @@ const SignIn = () => {
             <div className="container-fluid sign-page">
                 <div className="row sign-main-container">
                     <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
-                    <div className="col-lg-6 sign-left-bg h-100 d-flex justify-content-center align-items-center">
+                    <div className="col-lg-6 sign-left-bg h-100 justify-content-center d-none d-lg-flex align-items-center">
                         <img src={logoLeft} alt="" className="" />
                     </div>
                     <div className="col-lg-6 h-100 bg-EEEEEE position-relative">

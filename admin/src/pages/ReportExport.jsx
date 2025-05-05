@@ -1,38 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 
-const URL = process.env.REACT_APP_URL;
-
-const Report = () => {
-
-    const [report, setReport] = useState();
-
-    const fetchReport = async () => {
-        try {
-            const vendorId = localStorage.getItem('userId');
-            const response = await axios.get(`${URL}/complain/tickets/vendor/${vendorId}`)
-            if (response) {
-                setReport(response?.data);
-            }
-        } catch (error) {
-            console.error("Error fetching cheques:", error);
-        }
-    }
-    useEffect(() => {
-        fetchReport();
-    }, [])
-
-    console.log(report)
+const ReportExport = () => {
     return (
         <>
             <div className="container-fluid">
                 <Header />
                 <div className="">
                     <div className="row mh-100vh">
-                        <div className="col-lg-3 col-xl-2 d-none d-lg-block position-relative">
+                        <div className="col-lg-3 col-xl-2 position-relative">
                             <Sidebar />
                         </div>
                         <div className="col-lg-9 col-xl-10 bg-F6F6F6">
@@ -43,8 +21,8 @@ const Report = () => {
                                             <div class="card border-0 rounded-3 mb-2">
                                                 <div class="card-body p-2">
                                                     <div class="row">
-                                                        <div class="col-6 col-lg-6">
-                                                            <div class="d-flex justify-content-between mb-lg-0">
+                                                        <div class="col-12 col-lg-4">
+                                                            <div class="d-flex justify-content-between mb-3 mb-lg-0">
                                                                 <div class="d-flex align-items-center">
                                                                     <div class="table-circular-icon bg-F0F5F6 me-3"
                                                                         style={{ cursor: "pointer" }}>
@@ -52,15 +30,19 @@ const Report = () => {
                                                                             <path d="M7.875 5.4H12.6875L7.875 1.55V5.4ZM1.75 0.5H8.75L14 4.7V13.1C14 13.4713 13.8156 13.8274 13.4874 14.0899C13.1592 14.3525 12.7141 14.5 12.25 14.5H1.75C1.28587 14.5 0.840752 14.3525 0.512563 14.0899C0.184374 13.8274 0 13.4713 0 13.1V1.9C0 1.123 0.77875 0.5 1.75 0.5ZM2.625 13.1H4.375V8.9H2.625V13.1ZM6.125 13.1H7.875V7.5H6.125V13.1ZM9.625 13.1H11.375V10.3H9.625V13.1Z" fill="#445B64" />
                                                                         </svg>
                                                                     </div>
-                                                                    <span class="text-445B64 fw-medium">Report</span>
+                                                                    <span class="text-445B64 fw-semibold">Report</span>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div className="col-6 col-lg-6">
+                                                        <div className="col-12 col-lg-8">
                                                             <div className="d-flex justify-content-end">
-                                                                <Link to="/cheque-management/export-report" class="btn btn-sm rounded-2 bg-E4FFFD text-01A99A">
-                                                                    Export Report
+                                                                <button className="btn btn-light btn-sm bg-F5F5F5 rounded-2 me-2">Export Report to 28/04/2025 to 28/04/2025 </button>
+                                                                <Link to="/" class="btn btn-sm rounded-2 bg-E4FFFD text-01A99A me-2">
+                                                                    View
                                                                 </Link>
+                                                                <button className="btn btn-sm rounded-2 me-2">Downloads Now</button>
+                                                                <button className="btn btn-danger btn-sm rounded-2 me-2">PDF</button>
+                                                                <button className="btn btn-success btn-sm rounded-2">CSV</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -92,40 +74,31 @@ const Report = () => {
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-
-                                                                        {report?.map((val, index) => {
-                                                                            return (
-                                                                                <>
-                                                                                    <tr>
-                                                                                        <td class="text-center">
-                                                                                            <input class="form-check-input table-checkbox"
-                                                                                                type="checkbox" value="" id="flexCheckDefault" />
-                                                                                        </td>
-                                                                                        <td > {index + 1} </td>
-                                                                                        <td>{val?.subject}</td>
-                                                                                        <td>State Bank of India</td>
-                                                                                        <td>64644444</td>
-                                                                                        <td>Self Check</td>
-                                                                                        <td>$487441</td>
-                                                                                        <td>Lorem Ipsum..</td>
-                                                                                        <td>July 14, 2015</td>
-                                                                                        <td class="text-01A99A">Active</td>
-                                                                                        <td class="">
-                                                                                            <div className="d-flex justify-content-center">
-                                                                                                <Link to={`/cheque-management/cheque-details/${val?._id}`} className="btn">
-                                                                                                    <i class="fa-solid fa-eye text-445B64"></i>
-                                                                                                </Link>
-                                                                                                <button className="btn">
-                                                                                                    <i class="fa-solid fa-trash-can text-danger"></i>
-                                                                                                </button>
-                                                                                            </div>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                </>
-                                                                            )
-
-                                                                        })}
-
+                                                                        <tr>
+                                                                            <td class="text-center">
+                                                                                <input class="form-check-input table-checkbox"
+                                                                                    type="checkbox" value="" id="flexCheckDefault" />
+                                                                            </td>
+                                                                            <td scope="row"> 01 </td>
+                                                                            <td>Rohit Sharma</td>
+                                                                            <td>State Bank of India</td>
+                                                                            <td>64644444</td>
+                                                                            <td>Self Check</td>
+                                                                            <td>$487441</td>
+                                                                            <td>Lorem Ipsum..</td>
+                                                                            <td>July 14, 2015</td>
+                                                                            <td class="text-01A99A">Active</td>
+                                                                            <td class="">
+                                                                                <div className="d-flex justify-content-center">
+                                                                                    <Link to="/cheque-management/cheque-details" className="btn">
+                                                                                        <i class="fa-solid fa-eye text-445B64"></i>
+                                                                                    </Link>
+                                                                                    <button className="btn">
+                                                                                        <i class="fa-solid fa-trash-can text-danger"></i>
+                                                                                    </button>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
                                                                     </tbody>
                                                                 </table>
                                                             </div>
@@ -145,4 +118,4 @@ const Report = () => {
     )
 }
 
-export default Report
+export default ReportExport

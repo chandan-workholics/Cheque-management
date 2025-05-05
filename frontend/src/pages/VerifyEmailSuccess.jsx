@@ -9,7 +9,7 @@ const VerifyEmailSuccess = () => {
         <>
             <div className="container-fluid sign-page">
                 <div className="row sign-main-container">
-                    <div className="col-lg-6 sign-left-bg h-100 d-flex justify-content-center align-items-center">
+                    <div className="col-lg-6 sign-left-bg h-100 justify-content-center d-none d-lg-flex align-items-center">
                         <img src={logoLeft} alt="" className="" />
                     </div>
                     <div className="col-lg-6 h-100 bg-EEEEEE position-relative">
@@ -19,7 +19,7 @@ const VerifyEmailSuccess = () => {
                                     <img src={emailVerified} alt="" className="mb-3" style={{ width: '70px' }} />
                                     <h5 className="text-center fw-semibold">Account verified</h5>
                                     <h6 className="mb-4 text-445B64 fs-14 text-center">Congratulations! your email account <br />
-                                    <span className="fw-bolder text-0D161A">{email}</span> has been verified.</h6>
+                                        <span className="fw-bolder text-0D161A">{email}</span> has been verified.</h6>
                                     <Link to='/cheque-management/' className="btn w-100 sign-btn mb-3">Continue to your account</Link>
                                 </div>
                             </div>

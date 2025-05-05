@@ -5,6 +5,7 @@ const client = new vision.ImageAnnotatorClient({
   keyFilename: './service-account-key.json'  // Path to your service account JSON
 });
 
+
 const fs = require('fs');
 const path = require('path');
 const Check = require('../model/check.model'); // adjust path
@@ -316,5 +317,36 @@ exports.scanLicense = async (req, res) => {
   } catch (error) {
     console.error('Error scanning license:', error);
     res.status(500).json({ error: 'Failed to process license image' });
+  }
+};
+
+
+exports.uploadImage = async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ success: false, message: 'No image uploaded' });
+    }
+
+    const filename = `${Date.now()}-${req.file.originalname}`;
+    const filepath = path.join(__dirname, '..', 'upload', filename);
+
+    // Save image to disk
+    fs.writeFileSync(filepath, req.file.buffer);
+
+    // Construct image URL (you can use process.env.MAIN_URL if set)
+    const imageUrl = `${req.protocol}://${req.get('host')}/upload/${filename}`;
+
+    res.status(200).json({
+      success: true,
+      message: 'Image uploaded successfully',
+      data: {
+        filename,
+        imageUrl
+      }
+    });
+
+  } catch (error) {
+    console.error('Error uploading image:', error);
+    res.status(500).json({ success: false, message: 'Failed to upload image' });
   }
 };
