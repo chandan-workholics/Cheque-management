@@ -509,7 +509,7 @@ const Home = () => {
                             </div>
                             <div className="col-md-4 mb-3">
                               <label className="form-label text-445B64">License No</label>
-                              <input type="text" className="form-control" value={licenseData.licenseNo || ''} onChange={(e) => setFormData({ ...licenseData, licenseNo: e.target.value })} />
+                              <input type="text" className="form-control" value={licenseData.licenseNo || ''} onChange={(e) => setLicenseData({ ...licenseData, licenseNo: e.target.value })} />
                             </div>
                             <div className="col-md-4 mb-3">
                               <label className="form-label text-445B64">Date</label>
