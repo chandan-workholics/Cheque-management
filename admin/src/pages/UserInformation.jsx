@@ -3,7 +3,7 @@ import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios'
-import { toast,ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const URL = process.env.REACT_APP_URL;
 
@@ -52,19 +52,19 @@ const UserInformation = () => {
         }
     }
 
-     const handleDeleteCheque = async (id) => {
-            if (!window.confirm("Are you sure you want to delete this cheque?")) return;
-            try {
-                const response = await axios.delete(`${URL}/check/delete-check/${id}`);
-                if (response.status >= 200 && response.status < 300) {
-                    toast.success("Cheque deleted successfully!");
-                    fetchCheques();
-                }
-            } catch (error) {
-                toast.error("Error in deleting cheque: " + error.message);
-                console.error("Error in deleting cheque", error);
+    const handleDeleteCheque = async (id) => {
+        if (!window.confirm("Are you sure you want to delete this cheque?")) return;
+        try {
+            const response = await axios.delete(`${URL}/check/delete-check/${id}`);
+            if (response.status >= 200 && response.status < 300) {
+                toast.success("Cheque deleted successfully!");
+                fetchCheques();
             }
-        };
+        } catch (error) {
+            toast.error("Error in deleting cheque: " + error.message);
+            console.error("Error in deleting cheque", error);
+        }
+    };
 
     const totalAmount = cheques.reduce((sum, cheque) => {
         const num = parseFloat(cheque.amount?.replace(/[^\d.-]/g, '') || 0);
@@ -84,7 +84,7 @@ const UserInformation = () => {
     return (
         <>
             <div className="container-fluid">
-            <ToastContainer position='top-right' autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+                <ToastContainer position='top-right' autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
                 <Header />
                 <div className="">
                     <div className="row mh-100vh">
@@ -136,19 +136,19 @@ const UserInformation = () => {
                                                             <div className="d-flex gap-5 flex-wrap">
                                                                 <div>
                                                                     <h6 className="text-445B64 fs-14 mb-1">User Name</h6>
-                                                                    <h6 className="text-0D161A fw-medium mb-0">{users.firstname} {users.lastname}</h6>
+                                                                    <h6 className="text-0D161A fw-medium mb-0">{users?.firstname} {users?.lastname}</h6>
                                                                 </div>
                                                                 <div>
                                                                     <h6 className="text-445B64 fs-14 mb-1">Phone Number</h6>
-                                                                    <h6 className="text-0D161A fw-medium mb-0">{users.mobile}</h6>
+                                                                    <h6 className="text-0D161A fw-medium mb-0">{users?.mobile}</h6>
                                                                 </div>
                                                                 <div>
                                                                     <h6 className="text-445B64 fs-14 mb-1">Email Address</h6>
-                                                                    <h6 className="text-0D161A fw-medium mb-0">{users.email}</h6>
+                                                                    <h6 className="text-0D161A fw-medium mb-0">{users?.email}</h6>
                                                                 </div>
                                                                 <div>
                                                                     <h6 className="text-445B64 fs-14 mb-1">Total Checks</h6>
-                                                                    <h6 className="text-0D161A fw-medium mb-0">{cheques.length}</h6>
+                                                                    <h6 className="text-0D161A fw-medium mb-0">{cheques?.length}</h6>
                                                                 </div>
                                                                 <div>
                                                                     <h6 className="text-445B64 fs-14 mb-1">Total Amount</h6>
@@ -161,8 +161,8 @@ const UserInformation = () => {
                                                             </div>
                                                             <div>
                                                                 <h6 className="text-445B64 fs-14 mb-1">Status</h6>
-                                                                <button className={`btn btn-sm rounded-2 lh-1 text-white ${users.isActive ? 'bg-4FD1C5' : 'bg-E84D4D'}`}>
-                                                                    {users.isActive ? 'Active' : 'Inactive'}
+                                                                <button className={`btn btn-sm rounded-2 lh-1 text-white ${users?.isActive ? 'bg-4FD1C5' : 'bg-E84D4D'}`}>
+                                                                    {users?.isActive ? 'Active' : 'Inactive'}
                                                                 </button>
                                                             </div>
                                                         </div>
@@ -204,20 +204,20 @@ const UserInformation = () => {
                                                                                     <input className="form-check-input table-checkbox" type="checkbox" />
                                                                                 </td>
                                                                                 <td>{indexOfFirstRow + index1 + 1}</td>
-                                                                                <td>{cheque.customerName}</td>
-                                                                                <td>{cheque.company}</td>
-                                                                                <td>{cheque.licenseNo}</td>
-                                                                                <td>{cheque.checkType}</td>
-                                                                                <td>{cheque.amount}</td>
-                                                                                <td>{cheque.comment}</td>
-                                                                                <td>{cheque.date}</td>
-                                                                                <td className="text-01A99A">{cheque.status}</td>
+                                                                                <td>{cheque?.customerFirstName}</td>
+                                                                                <td>{cheque?.company}</td>
+                                                                                <td>{cheque?.licenseNo}</td>
+                                                                                <td>{cheque?.checkType}</td>
+                                                                                <td>{cheque?.amount}</td>
+                                                                                <td>{cheque?.comment}</td>
+                                                                                <td>{cheque?.date}</td>
+                                                                                <td className="text-01A99A">{cheque?.status}</td>
                                                                                 <td>
                                                                                     <div className="d-flex justify-content-center">
-                                                                                        <Link to={`/cheque-management/cm-admin/cheque-details/${cheque._id}`} className="btn">
+                                                                                        <Link to={`/cheque-management/cm-admin/cheque-details/${cheque?._id}`} className="btn">
                                                                                             <i className="fa-solid fa-eye text-445B64"></i>
                                                                                         </Link>
-                                                                                        <button className="btn" onClick={() => handleDeleteCheque(cheque._id)}>
+                                                                                        <button className="btn" onClick={() => handleDeleteCheque(cheque?._id)}>
                                                                                             <i className="fa-solid fa-trash-can text-danger"></i>
                                                                                         </button>
                                                                                     </div>
