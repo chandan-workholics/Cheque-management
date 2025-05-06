@@ -11,6 +11,7 @@ const SignUp = () => {
   const [formData, setFormData] = useState({
     bussiness: '',
     firstname: '',
+    middlename:'',
     lastname: '',
     email: '',
     mobile: '',
@@ -22,13 +23,16 @@ const SignUp = () => {
 
 
   const validateForm = () => {
-    const { bussiness, firstname, lastname, email, mobile, password, confirmPassword } = formData;
+    const { bussiness, firstname, middlename, lastname, email, mobile, password, confirmPassword } = formData;
     let errors = {};
     if (bussiness.trim() === '') {
       errors.bussiness = 'Business name is required';
     }
     if (firstname.trim() === '') {
       errors.firstname = 'First Name is required';
+    }
+    if (middlename.trim() === '') {
+      errors.middlename = 'Middle Name is required';
     }
     if (lastname.trim() === '') {
       errors.lastname = 'Last Name is required';
@@ -75,8 +79,8 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { bussiness, firstname, lastname, email, mobile, password, confirmPassword } = formData;
-    if (!bussiness.trim() || !firstname.trim() || !lastname.trim() || !email.trim() || !mobile.trim() || !password.trim() || !confirmPassword.trim()) {
+    const { bussiness, firstname, middlename, lastname, email, mobile, password, confirmPassword } = formData;
+    if (!bussiness.trim() || !firstname.trim() || !middlename.trim() || !lastname.trim() || !email.trim() || !mobile.trim() || !password.trim() || !confirmPassword.trim()) {
       setTimeout(() => {
         toast.error('Please enter the fields first');
       }, 1000)
@@ -143,6 +147,9 @@ const SignUp = () => {
                   {/* first name */}
                   <input className="form-control mb-3 rounded-3" type="text" id='firstname' name='firstname' value={formData.firstname} onChange={handleChange} placeholder="First name" aria-label="example" required />
                   {formErrors.firstname && <small className="text-danger">{formErrors.firstname}</small>}
+                   {/* Middle name */}
+                   <input className="form-control mb-3 rounded-3" type="text" id='middlename' name='middlename' value={formData.middlename} onChange={handleChange} placeholder="Middle name" aria-label="example" required />
+                  {formErrors.middlename && <small className="text-danger">{formErrors.middlename}</small>}
                   {/* last name */}
                   <input className="form-control mb-3 rounded-3" type="text" id='lastname' name='lastname' value={formData.lastname} onChange={handleChange} placeholder="Last name" aria-label="example" required />
                   {formErrors.lastname && <small className="text-danger">{formErrors.lastname}</small>}
