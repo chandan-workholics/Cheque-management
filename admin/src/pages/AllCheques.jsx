@@ -133,7 +133,7 @@ const AllCheques = () => {
                                                                                 <td>{cheque.licenseNo}</td>
                                                                                 <td>{cheque.chequeType}</td>
                                                                                 <td>{cheque.amount}</td>
-                                                                                <td>{cheque.comment}</td>
+                                                                                <td>{cheque.comment?.length > 10 ? cheque.comment.substring(0, 10) + '...' : cheque.comment}</td>
                                                                                 <td>{cheque.date}</td>
                                                                                 <td className="text-01A99A">{cheque.status}</td>
                                                                                 <td>
