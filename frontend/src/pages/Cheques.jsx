@@ -3,7 +3,8 @@ import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import { useNavigate,Link } from 'react-router-dom';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import { toast,ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const URL = process.env.REACT_APP_URL;
 
@@ -63,6 +64,7 @@ const Cheques = () => {
 
     return (
         <div className="container-fluid">
+            <ToastContainer position='top-right' autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
             <Header />
             <div className="row mh-100vh">
                 <div className="col-lg-3 col-xl-2 position-relative">

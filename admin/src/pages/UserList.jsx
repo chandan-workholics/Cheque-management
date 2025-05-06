@@ -3,28 +3,34 @@ import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import { Link } from 'react-router-dom';
 import axios from 'axios'
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const URL = process.env.REACT_APP_URL;
 
 const UserList = () => {
-    const usersData = Array.from({ length: 50 }, (_, index) => ({
-        id: index + 1,
-        name: `User ${index + 1}`,
-        phone: '(704) 555-0127',
-        email: `user${index + 1}@example.com`,
-        date: 'July 14, 2015',
-        status: 'Active',
-    }));
 
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
+    const [showModal, setShowModal] = useState(false);
+    const [newUser, setNewUser] = useState({
+        firstname: '',
+        lastname: '',
+        mobile: '',
+        email: '',
+        bussiness: '',
+        status: 'active',
+        role: '',
+        otp: ''
+    });
+
     const rowsPerPage = 10;
 
     // Pagination logic
     const indexOfLastRow = currentPage * rowsPerPage;
     const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-    const currentRows = usersData.slice(indexOfFirstRow, indexOfLastRow);
-    const totalPages = Math.ceil(usersData.length / rowsPerPage);
+    // const currentRows = users.slice(indexOfFirstRow, indexOfLastRow);
+    const totalPages = Math.ceil(users.length / rowsPerPage);
 
     const fetchUsers = async () => {
         try {
@@ -35,10 +41,50 @@ const UserList = () => {
             }
         } catch (error) {
             console.log("Error in fetching users", error);
-        }finally {
+        } finally {
             setLoading(false);
         }
     }
+
+    const handleDeleteUser = async (id) => {
+        if (!window.confirm("Are you sure you want to delete this user?")) return;
+        try {
+            const response = await axios.delete(`${URL}/admin/delete-users/${id}`);
+            if (response.status >= 200 && response.status < 300) {
+                toast.success("User deleted successfully!");
+                fetchUsers();
+            }
+        } catch (error) {
+            toast.error("Error in deleting user: " + error.message);
+            console.error("Error in deleting user", error);
+        }
+    };
+
+    const handleAddUser = async () => {
+        try {
+            const response = await axios.post(`${URL}/admin/add-user`, newUser);
+            if (response.status >= 200 && response.status < 300) {
+                toast.success("User added successfully!");
+                setShowModal(false);
+                setNewUser({
+                    firstname: '',
+                    lastname: '',
+                    mobile: '',
+                    email: '',
+                    password:'',
+                    bussiness: '',
+                    isActive: '',
+                    role: '',
+                    name: ''
+                });
+                fetchUsers(); // Refresh user list
+            }
+        } catch (error) {
+            toast.error("Failed to add user: " + error.message);
+            console.error("Add user error", error);
+        }
+    };
+
 
     useEffect(() => {
         fetchUsers();
@@ -48,6 +94,7 @@ const UserList = () => {
     return (
         <>
             <div className="container-fluid">
+                <ToastContainer position='top-right' autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
                 <Header />
                 <div className="">
                     <div className="row mh-100vh">
@@ -85,13 +132,8 @@ const UserList = () => {
                                                                         <i className="fa-solid fa-magnifying-glass text-445B64 position-absolute top-0 start-0"
                                                                             style={{ margin: "11px" }}></i>
                                                                     </div>
-                                                                    <div className="table-circular-icon bg-F0F5F6" style={{ cursor: "pointer" }}>
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12"
-                                                                            viewBox="0 0 14 12" fill="none">
-                                                                            <path
-                                                                                d="M2.16667 13.6668V7.8335H0.5V6.16683H5.5V7.8335H3.83333V13.6668H2.16667ZM2.16667 4.50016V0.333496H3.83333V4.50016H2.16667ZM5.5 4.50016V2.8335H7.16667V0.333496H8.83333V2.8335H10.5V4.50016H5.5ZM7.16667 13.6668V6.16683H8.83333V13.6668H7.16667ZM12.1667 13.6668V11.1668H10.5V9.50016H15.5V11.1668H13.8333V13.6668H12.1667ZM12.1667 7.8335V0.333496H13.8333V7.8335H12.1667Z"
-                                                                                fill="#445B64" />
-                                                                        </svg>
+                                                                    <div className="table-circular-icon bg-F0F5F6" style={{ cursor: "pointer" }} onClick={() => setShowModal(true)}>
+                                                                        <i className="fa-solid fa-user-plus"></i>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -123,7 +165,7 @@ const UserList = () => {
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                    {loading ? (
+                                                                        {loading ? (
                                                                             <tr>
                                                                                 <td colSpan="11" className="text-center py-5">
                                                                                     <div className="spinner-border text-primary" role="status">
@@ -132,32 +174,32 @@ const UserList = () => {
                                                                                 </td>
                                                                             </tr>
                                                                         ) : (
-                                                                        users?.length > 0 && users.map((user, index) => (
-                                                                            <tr key={index}>
-                                                                                <td className="text-center">
-                                                                                    <input className="form-check-input table-checkbox" type="checkbox" />
-                                                                                </td>
-                                                                                <td>{indexOfFirstRow + index + 1}</td>
-                                                                                <td>{user?.firstname} {user?.lastname}</td>
-                                                                                <td>{user?.mobile}</td>
-                                                                                <td>{user?.email}</td>
-                                                                                <td>{user?.bussiness}</td>
-                                                                                <td>{user?.isActive == true ? "active" : "not active"}</td>
-                                                                                <td>{user?.role}</td>
-                                                                                <td className="text-01A99A">{user?.status}</td>
-                                                                                <td>
-                                                                                    <div className="d-flex justify-content-center">
-                                                                                        <Link to="/cm-admin/user-information" className="btn">
-                                                                                            <i className="fa-solid fa-eye text-445B64"></i>
-                                                                                        </Link>
-                                                                                        <button className="btn">
-                                                                                            <i className="fa-solid fa-trash-can text-danger"></i>
-                                                                                        </button>
-                                                                                    </div>
-                                                                                </td>
-                                                                            </tr>
-                                                                        ))
-                                                                    )}
+                                                                            users?.length > 0 && users.map((user, index) => (
+                                                                                <tr key={index}>
+                                                                                    <td className="text-center">
+                                                                                        <input className="form-check-input table-checkbox" type="checkbox" />
+                                                                                    </td>
+                                                                                    <td>{indexOfFirstRow + index + 1}</td>
+                                                                                    <td>{user?.firstname} {user?.lastname}</td>
+                                                                                    <td>{user?.mobile}</td>
+                                                                                    <td>{user?.email}</td>
+                                                                                    <td>{user?.bussiness}</td>
+                                                                                    <td>{user?.isActive === true ? "active" : "not active"}</td>
+                                                                                    <td>{user?.role}</td>
+                                                                                    <td>{user?.otp}</td>
+                                                                                    <td>
+                                                                                        <div className="d-flex justify-content-center">
+                                                                                            <Link to={`/cm-admin/user-information/${user._id}`} className="btn">
+                                                                                                <i className="fa-solid fa-eye text-445B64"></i>
+                                                                                            </Link>
+                                                                                            <button className="btn" onClick={() => handleDeleteUser(user._id)}>
+                                                                                                <i className="fa-solid fa-trash-can text-danger"></i>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            ))
+                                                                        )}
                                                                     </tbody>
                                                                 </table>
                                                             </div>
@@ -199,6 +241,73 @@ const UserList = () => {
                             </div>
                         </div>
                     </div>
+                    {showModal && (
+                        <div className="modal fade show d-block" tabIndex="-1" role="dialog">
+                            <div className="modal-dialog modal-lg" role="document">
+                                <div className="modal-content">
+                                    <div className="modal-header">
+                                        <h5 className="modal-title">Add New User</h5>
+                                        <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
+                                    </div>
+                                    <div className="modal-body">
+                                        <form>
+                                            <div className="row g-3">
+                                                <div className="col-md-6">
+                                                    <label className="form-label">First Name</label>
+                                                    <input type="text" className="form-control" value={newUser.firstname} onChange={e => setNewUser({ ...newUser, firstname: e.target.value })} />
+                                                </div>
+                                                <div className="col-md-6">
+                                                    <label className="form-label">Last Name</label>
+                                                    <input type="text" className="form-control" value={newUser.lastname} onChange={e => setNewUser({ ...newUser, lastname: e.target.value })} />
+                                                </div>
+                                                <div className="col-md-6">
+                                                    <label className="form-label">Phone Number</label>
+                                                    <input type="text" className="form-control" value={newUser.mobile} onChange={e => setNewUser({ ...newUser, mobile: e.target.value })} />
+                                                </div>
+                                                <div className="col-md-6">
+                                                    <label className="form-label">Email Address</label>
+                                                    <input type="email" className="form-control" value={newUser.email} onChange={e => setNewUser({ ...newUser, email: e.target.value })} />
+                                                </div>
+                                                <div className="col-md-6">
+                                                    <label className="form-label">Password</label>
+                                                    <input type="password" className="form-control" value={newUser.password} onChange={e => setNewUser({ ...newUser, password: e.target.value })} />
+                                                </div>
+
+                                                <div className="col-md-6">
+                                                    <label className="form-label">Business</label>
+                                                    <input type="text" className="form-control" value={newUser.bussiness} onChange={e => setNewUser({ ...newUser, bussiness: e.target.value })} />
+                                                </div>
+                                                <div className="col-md-6">
+                                                    <label className="form-label">Role</label>
+                                                    <select className="form-select" value={newUser.role} onChange={e => setNewUser({ ...newUser, role: e.target.value })}>
+                                                        <option value="">Select Role</option>
+                                                        <option value="admin">Admin</option>
+                                                        <option value="vendor">Vendor</option>
+                                                    </select>
+                                                </div>
+                                                <div className="col-md-6">
+                                                    <label className="form-label">Status</label>
+                                                    <select className="form-select" value={newUser.isActive} onChange={e => setNewUser({ ...newUser, isActive: e.target.value })}>
+                                                        <option value="true">Active</option>
+                                                        <option value="false">Inactive</option>
+                                                    </select>
+                                                </div>
+                                                <div className="col-md-6">
+                                                    <label className="form-label">name</label>
+                                                    <input type="text" className="form-control" value={newUser.name} onChange={e => setNewUser({ ...newUser, name: e.target.value })} />
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>Close</button>
+                                        <button type="button" className="btn btn-primary" onClick={handleAddUser}>Save User</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
                 </div>
             </div>
         </>

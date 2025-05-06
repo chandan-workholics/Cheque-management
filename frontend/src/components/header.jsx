@@ -61,7 +61,8 @@ const Header = () => {
 
             <div className="offcanvas offcanvas-start w-75 w-md-50 " data-bs-scroll="true" tabIndex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
                 <div className="offcanvas-header border-bottom">
-                    <h5 className="offcanvas-title" id="offcanvasWithBothOptionsLabel">Cheque Management</h5>
+                    <img src={logo} alt="" className="me-2" />
+                    <h6 className="offcanvas-title fw-semibold" id="offcanvasWithBothOptionsLabel">Cheque Management</h6>
                     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div className="offcanvas-body">
@@ -121,7 +122,7 @@ const Header = () => {
                             <li>
                                 <button className="nav-link btn btn-danger text-danger w-100" onClick={handleLogout}>
                                     <div className="sidebar-icon">
-                                        <i class="fa-solid fa-right-from-bracket"></i>
+                                        <i className="fa-solid fa-right-from-bracket"></i>
                                     </div>
                                     <span className="">Logout</span>
                                 </button>
