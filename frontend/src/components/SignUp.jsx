@@ -131,8 +131,8 @@ const SignUp = () => {
           <div className="col-lg-6 sign-left-bg h-100 justify-content-center d-none d-lg-flex align-items-center">
             <img src={logoLeft} alt="" className="" />
           </div>
-          <div className="col-lg-6 h-100 bg-EEEEEE position-relative py-5">
-            <div className="row h-100">
+          <div className="col-lg-6 sign-right-bg h-100 bg-EEEEEE position-relative py-5">
+            <div className="row h-100 w-100">
               <div className="col-lg-6 mx-auto d-flex justify-content-center align-items-center">
                 <div className="w-100">
                   <h3 className="fw-semibold">Register now</h3>
