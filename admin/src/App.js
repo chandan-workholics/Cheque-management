@@ -20,7 +20,7 @@ function App() {
           <Route path="/cm-admin/sign-up" element={<SignUp />} />
           <Route path="/cm-admin/dashboard" element={<ProtectedRoute element={<Dashboard />}/>} />
           <Route path="/cm-admin/user-list" element={<ProtectedRoute element={<UserList />}/>} />
-          <Route path="/cm-admin/user-information" element={<ProtectedRoute element={<UserInformation />}/>} />
+          <Route path="/cm-admin/user-information/:id" element={<ProtectedRoute element={<UserInformation />}/>} />
           <Route path="/cm-admin/all-cheques" element={<ProtectedRoute element={<AllCheques />}/>} />
           <Route path="/cm-admin/cheque-details/:id" element={<ProtectedRoute element={<ChequeDetails />}/>} />
           <Route path="/cm-admin/report" element={<ProtectedRoute element={<Report />}/>} />
