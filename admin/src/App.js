@@ -10,6 +10,8 @@ import ChequeDetails from "./pages/ChequeDetails";
 import Report from "./pages/Report";
 import ReportExport from "./pages/ReportExport";
 import ProtectedRoute from './pages/Common_Method/protectedroute'
+import Support from "./pages/Support";
+import TicketDetails from "./pages/TicketDetails";
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
           <Route path="/cm-admin/cheque-details/:id" element={<ProtectedRoute element={<ChequeDetails />}/>} />
           <Route path="/cm-admin/report" element={<ProtectedRoute element={<Report />}/>} />
           <Route path="/cm-admin/export-report" element={<ProtectedRoute element={<ReportExport />}/>} />
+          <Route path="/cm-admin/support" element={<ProtectedRoute element={<Support />}/>} />
+          <Route path="/cm-admin/ticket-details" element={<ProtectedRoute element={<TicketDetails />}/>} />
         </Routes>
       </BrowserRouter>
     </>
