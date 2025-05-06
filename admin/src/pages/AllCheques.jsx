@@ -153,7 +153,7 @@ const AllCheques = () => {
                                                                                             <Link to={`/cm-admin/cheque-details/${cheque?._id}`} className="btn">
                                                                                                 <i className="fa-solid fa-eye text-445B64"></i>
                                                                                             </Link>
-                                                                                            <button className="btn" onClick={() => handleDeleteCheque(cheque._id)}>
+                                                                                            <button className="btn" onClick={() => handleDeleteCheque(cheque?._id)}>
                                                                                                 <i className="fa-solid fa-trash-can text-danger"></i>
                                                                                             </button>
                                                                                         </div>
