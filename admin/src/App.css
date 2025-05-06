@@ -90,6 +90,10 @@ body {
   color: #445B64;
 }
 
+.text-445B64-img {
+  color: #445B64 !important;
+}
+
 .text-00C7BE {
   color: #00C7BE;
 }
@@ -114,6 +118,13 @@ body {
 
 .mh-100vh {
   min-height: 100vh;
+}
+
+.w-60px{
+  width: 60px;
+}
+.w-110px{
+  width: 110px;
 }
 
 /* SignIn - CSS - Start */
