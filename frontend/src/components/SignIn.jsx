@@ -64,15 +64,6 @@ const SignIn = () => {
                 localStorage.setItem("token", response.data.token);
                 localStorage.setItem("role", response.data.role);
                 localStorage.setItem("userId", response.data.userId);
-
-
-                // if (rememberMe) {
-                //     localStorage.setItem('rememberedEmail', formData.email);
-                //     localStorage.setItem('rememberedPassword', formData.password);
-                // } else {
-                //     localStorage.removeItem('rememberedEmail');
-                //     localStorage.removeItem('rememberedPassword');
-                // }
                 setTimeout(() => {
                     toast.success('Login successfully');
                 }, 1000);
@@ -91,14 +82,7 @@ const SignIn = () => {
             setLoading(false);
         }
     };
-    // useEffect(() => {
-    //     const savedEmail = localStorage.getItem('rememberedEmail');
-    //     const savedPassword = localStorage.getItem('rememberedPassword');
-    //     if (savedEmail) {
-    //         setFormData({ email: savedEmail, password: savedPassword || '' });
-    //         setRememberMe(true);
-    //     }
-    // }, []);
+  
 
     const handleForgetPassword = async (e) => {
         e.preventDefault();

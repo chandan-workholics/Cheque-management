@@ -54,7 +54,7 @@ const Profile = () => {
                                                         </div>
                                                         <div className="col-12 col-lg-6">
                                                             <div className="d-flex justify-content-end">
-                                                                <button className="btn btn-sm rounded-2 btn-light text-445B64">
+                                                                <button className="btn btn-sm rounded-2 btn-light text-445B64" onClic>
                                                                     <i className="fa-solid fa-arrow-left-long me-2 text-445B64"></i>
                                                                     Back
                                                                 </button>
