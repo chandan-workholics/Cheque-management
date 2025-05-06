@@ -140,17 +140,17 @@ const AllCheques = () => {
                                                                                         <input className="form-check-input table-checkbox" type="checkbox" />
                                                                                     </td>
                                                                                     <td>{indexOfFirstRow + index + 1}</td>
-                                                                                    <td>{cheque.customerName}</td>
-                                                                                    <td>{cheque.company}</td>
-                                                                                    <td>{cheque.licenseNo}</td>
-                                                                                    <td>{cheque.chequeType}</td>
-                                                                                    <td>{cheque.amount}</td>
-                                                                                    <td>{cheque.comment?.length > 10 ? cheque.comment.substring(0, 10) + '...' : cheque.comment}</td>
-                                                                                    <td>{cheque.date}</td>
-                                                                                    <td className="text-01A99A">{cheque.status}</td>
+                                                                                    <td>{cheque?.customerFirstName}</td>
+                                                                                    <td>{cheque?.company}</td>
+                                                                                    <td>{cheque?.licenseNo}</td>
+                                                                                    <td>{cheque?.chequeType}</td>
+                                                                                    <td>{cheque?.amount}</td>
+                                                                                    <td>{cheque?.comment?.length > 10 ? cheque?.comment.substring(0, 10) + '...' : cheque?.comment}</td>
+                                                                                    <td>{cheque?.date}</td>
+                                                                                    <td className="text-01A99A">{cheque?.status}</td>
                                                                                     <td>
                                                                                         <div className="d-flex justify-content-center">
-                                                                                            <Link to={`/cm-admin/cheque-details/${cheque._id}`} className="btn">
+                                                                                            <Link to={`/cm-admin/cheque-details/${cheque?._id}`} className="btn">
                                                                                                 <i className="fa-solid fa-eye text-445B64"></i>
                                                                                             </Link>
                                                                                             <button className="btn" onClick={() => handleDeleteCheque(cheque._id)}>
