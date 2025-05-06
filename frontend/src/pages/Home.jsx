@@ -255,14 +255,14 @@ const Home = () => {
         customerMiddleName: formData.customerMiddleName || '',
         customerLastName: formData.customerLastName || '',
         licenseNo: licenseData.licenseNo,
-        date: new Date(formData.date).toLocaleString('en-GB', {
+        date: new Date(Date.now()).toLocaleString('en-GB', {
           day: '2-digit',
           month: '2-digit',
           year: 'numeric',
           hour: '2-digit',
           minute: '2-digit',
           second: '2-digit',
-          hour12: false // use 24-hour format
+          hour12: false // 24-hour format
         }),
 
         company: formData.company,
