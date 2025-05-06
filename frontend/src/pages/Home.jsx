@@ -218,7 +218,6 @@ const Home = () => {
           'Content-Type': 'application/json',
         }
       })
-      console.log(response);
       if (response.status >= 200 && response.status < 300) {
         setStatus(response?.data || []);
       }
@@ -233,6 +232,10 @@ const Home = () => {
 
   const handleSave = async (e) => {
     e.preventDefault();
+    if (!formData.imageUrl || !licenseData.imageUrl) {
+      toast.error('Please upload both Cheque and License front images');
+      return;
+    }
     try {
       const response = await axios.post(`${URL}/check/add-check`, {
         imageUrl: formData.imageUrl || '',
@@ -428,7 +431,7 @@ const Home = () => {
                           </div>
                         </div>
                         <div className="col-12 d-flex justify-content-end">
-                          <button type="button" class="btn btn-sm py-1 px-3 theme-btn rounded-3 mt-3 " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                          <button type="button" className="btn btn-sm py-1 px-3 theme-btn rounded-3 mt-3 " data-bs-toggle="modal" data-bs-target="#exampleModal">
                             Please Check all Details
                           </button>
                         </div>
@@ -512,14 +515,14 @@ const Home = () => {
       </div>
 
       {/* image-preview-Modal */}
-      <div class="modal modal-xl fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h6 class="modal-title text-445B64" id="exampleModalLabel">Preview Details</h6>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div className="modal modal-xl fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h6 className="modal-title text-445B64" id="exampleModalLabel">Preview Details</h6>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               <div className="row">
                 <div className='col-lg-6'>
                   {/* {licenseData?.imageUrl && <img src={licenseData.imageUrl} alt="Profile" className='w-100' />} */}
@@ -534,8 +537,8 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-sm btn-light bg-F0F5F6 border rounded-3 px-5" data-bs-dismiss="modal">Ok</button>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-sm btn-light bg-F0F5F6 border rounded-3 px-5" data-bs-dismiss="modal">Ok</button>
             </div>
           </div>
         </div>

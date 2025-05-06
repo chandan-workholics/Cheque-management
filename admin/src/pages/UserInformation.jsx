@@ -1,33 +1,90 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios'
+import { toast,ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+const URL = process.env.REACT_APP_URL;
 
 const UserInformation = () => {
-    const usersData = Array.from({ length: 50 }, (_, index) => ({
-        id: index + 1,
-        name: `User ${index + 1}`,
-        companyName: 'State Bank of India',
-        licenseNo: `64644444`,
-        chequeType:'Self Check',
-        amount:'$487441',
-        comment:'Lorem Ipsum..',
-        date: 'July 14, 2015',
-        status: 'Active'
-    }));
-
+    const navigate = useNavigate();
+    const { id } = useParams()
+    const [users, setUsers] = useState([]);
+    const [cheques, setCheques] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const rowsPerPage = 10;
 
     // Pagination logic
     const indexOfLastRow = currentPage * rowsPerPage;
     const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-    const currentRows = usersData.slice(indexOfFirstRow, indexOfLastRow);
-    const totalPages = Math.ceil(usersData.length / rowsPerPage);
+    // const currentRows = cheques.slice(indexOfFirstRow, indexOfLastRow);
+    const totalPages = Math.ceil(cheques.length / rowsPerPage);
+
+    const fetchUsers = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.get(`${URL}/admin/get-all-users-byId/${id}`);
+            console.log(response)
+            if (response.status >= 200 && response.status < 300) {
+                setUsers(response?.data?.data)
+            }
+        } catch (error) {
+            console.log("Error in fetching users", error);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    const fetchCheques = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.get(`${URL}/check/get-checkByVenderId/${id}`);
+            console.log(response)
+            if (response.status >= 200 && response.status < 300) {
+                setCheques(response?.data?.data)
+            }
+        } catch (error) {
+            console.log("Error in fetching users", error);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+     const handleDeleteCheque = async (id) => {
+            if (!window.confirm("Are you sure you want to delete this cheque?")) return;
+            try {
+                const response = await axios.delete(`${URL}/check/delete-check/${id}`);
+                if (response.status >= 200 && response.status < 300) {
+                    toast.success("Cheque deleted successfully!");
+                    fetchCheques();
+                }
+            } catch (error) {
+                toast.error("Error in deleting cheque: " + error.message);
+                console.error("Error in deleting cheque", error);
+            }
+        };
+
+    const totalAmount = cheques.reduce((sum, cheque) => {
+        const num = parseFloat(cheque.amount?.replace(/[^\d.-]/g, '') || 0);
+        return sum + (isNaN(num) ? 0 : num);
+    }, 0);
+
+
+    useEffect(() => {
+        fetchUsers();
+        fetchCheques();
+    }, [])
+
+    const handleBack = () => {
+        navigate(-1)
+    }
 
     return (
         <>
             <div className="container-fluid">
+            <ToastContainer position='top-right' autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
                 <Header />
                 <div className="">
                     <div className="row mh-100vh">
@@ -57,7 +114,7 @@ const UserInformation = () => {
                                                         </div>
                                                         <div className="col-12 col-lg-6 d-flex justify-content-end align-items-center">
                                                             <div className="d-flex justify-content-end align-items-center">
-                                                                <button className="btn btn-sm rounded-2 btn-light text-445B64">
+                                                                <button className="btn btn-sm rounded-2 btn-light text-445B64" onClick={handleBack}>
                                                                     <i className="fa-solid fa-arrow-left-long me-2 text-445B64"></i>
                                                                     Back
                                                                 </button>
@@ -68,48 +125,50 @@ const UserInformation = () => {
                                             </div>
                                             <div className="card border-0 rounded-3 mb-1">
                                                 <div className="card-body">
-                                                    <div className="d-flex justify-content-between">
-                                                        <div className="d-flex gap-5">
-                                                            <div className="">
-                                                                <h6 className="text-445B64 fs-14 mb-1">User Name </h6>
-                                                                <h6 className="text-0D161A fw-medium mb-0">Darrell Steward</h6>
-                                                            </div>
-                                                            <div className="">
-                                                                <h6 className="text-445B64 fs-14 mb-1">Phone Number</h6>
-                                                                <h6 className="text-0D161A fw-medium mb-0">(704) 555-0127</h6>
-                                                            </div>
-                                                            <div className="">
-                                                                <h6 className="text-445B64 fs-14 mb-1">Email Address</h6>
-                                                                <h6 className="text-0D161A fw-medium mb-0">curtis.weaver@example.com</h6>
-                                                            </div>
-                                                            <div className="">
-                                                                <h6 className="text-445B64 fs-14 mb-1">Total Checks</h6>
-                                                                <h6 className="text-0D161A fw-medium mb-0">2000</h6>
-                                                            </div>
-                                                            <div className="">
-                                                                <h6 className="text-445B64 fs-14 mb-1">Total Amount</h6>
-                                                                <h6 className="text-0D161A fw-medium mb-0">$50000</h6>
-                                                            </div>
-                                                            <div className="">
-                                                                <h6 className="text-445B64 fs-14 mb-1">Date</h6>
-                                                                <h6 className="text-0D161A fw-medium mb-0">July 14, 2015</h6>
+                                                    {loading ? (
+                                                        <div className="text-center py-5">
+                                                            <div className="spinner-border text-primary" role="status">
+                                                                <span className="visually-hidden">Loading...</span>
                                                             </div>
                                                         </div>
-                                                        <div className="d-flex gap-5">
-                                                            <div className="">
-                                                                <h6 className="text-445B64 fs-14 mb-1">Status</h6>
-                                                                <div className="">
-                                                                    <button className="btn btn-sm rounded-2 lh-1 bg-4FD1C5 text-white me-3">
-                                                                        Active
-                                                                    </button>
-                                                                    <button className="btn btn-sm rounded-2 lh-1 bg-E84D4D text-white">
-                                                                        Deactive
-                                                                    </button>
+                                                    ) : users && (
+                                                        <div className="d-flex justify-content-between flex-wrap">
+                                                            <div className="d-flex gap-5 flex-wrap">
+                                                                <div>
+                                                                    <h6 className="text-445B64 fs-14 mb-1">User Name</h6>
+                                                                    <h6 className="text-0D161A fw-medium mb-0">{users.firstname} {users.lastname}</h6>
+                                                                </div>
+                                                                <div>
+                                                                    <h6 className="text-445B64 fs-14 mb-1">Phone Number</h6>
+                                                                    <h6 className="text-0D161A fw-medium mb-0">{users.mobile}</h6>
+                                                                </div>
+                                                                <div>
+                                                                    <h6 className="text-445B64 fs-14 mb-1">Email Address</h6>
+                                                                    <h6 className="text-0D161A fw-medium mb-0">{users.email}</h6>
+                                                                </div>
+                                                                <div>
+                                                                    <h6 className="text-445B64 fs-14 mb-1">Total Checks</h6>
+                                                                    <h6 className="text-0D161A fw-medium mb-0">{cheques.length}</h6>
+                                                                </div>
+                                                                <div>
+                                                                    <h6 className="text-445B64 fs-14 mb-1">Total Amount</h6>
+                                                                    <h6 className="text-0D161A fw-medium mb-0">${totalAmount}</h6>
+                                                                </div>
+                                                                <div>
+                                                                    <h6 className="text-445B64 fs-14 mb-1">Date</h6>
+                                                                    <h6 className="text-0D161A fw-medium mb-0">July 14, 2015</h6>
                                                                 </div>
                                                             </div>
+                                                            <div>
+                                                                <h6 className="text-445B64 fs-14 mb-1">Status</h6>
+                                                                <button className={`btn btn-sm rounded-2 lh-1 text-white ${users.isActive ? 'bg-4FD1C5' : 'bg-E84D4D'}`}>
+                                                                    {users.isActive ? 'Active' : 'Inactive'}
+                                                                </button>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    )}
                                                 </div>
+
                                             </div>
                                             <div className="card border-0 rounded-3">
                                                 <div className="card-body">
@@ -139,26 +198,26 @@ const UserInformation = () => {
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        {currentRows.map((user, index) => (
-                                                                            <tr key={user.id}>
+                                                                        {cheques?.map((cheque, index1) => (
+                                                                            <tr key={index1}>
                                                                                 <td className="text-center">
                                                                                     <input className="form-check-input table-checkbox" type="checkbox" />
                                                                                 </td>
-                                                                                <td>{indexOfFirstRow + index + 1}</td>
-                                                                                <td>{user.name}</td>
-                                                                                <td>{user.companyName}</td>
-                                                                                <td>{user.licenseNo}</td>
-                                                                                <td>{user.chequeType}</td>
-                                                                                <td>{user.amount}</td>
-                                                                                <td>{user.comment}</td>
-                                                                                <td>{user.date}</td>
-                                                                                <td className="text-01A99A">{user.status}</td>
+                                                                                <td>{indexOfFirstRow + index1 + 1}</td>
+                                                                                <td>{cheque.customerName}</td>
+                                                                                <td>{cheque.company}</td>
+                                                                                <td>{cheque.licenseNo}</td>
+                                                                                <td>{cheque.checkType}</td>
+                                                                                <td>{cheque.amount}</td>
+                                                                                <td>{cheque.comment}</td>
+                                                                                <td>{cheque.date}</td>
+                                                                                <td className="text-01A99A">{cheque.status}</td>
                                                                                 <td>
                                                                                     <div className="d-flex justify-content-center">
-                                                                                        <Link to="/cheque-management/cheque-details" className="btn">
+                                                                                        <Link to={`/cheque-management/cm-admin/cheque-details/${cheque._id}`} className="btn">
                                                                                             <i className="fa-solid fa-eye text-445B64"></i>
                                                                                         </Link>
-                                                                                        <button className="btn">
+                                                                                        <button className="btn" onClick={() => handleDeleteCheque(cheque._id)}>
                                                                                             <i className="fa-solid fa-trash-can text-danger"></i>
                                                                                         </button>
                                                                                     </div>
