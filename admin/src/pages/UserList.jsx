@@ -62,7 +62,7 @@ const UserList = () => {
 
     const handleAddUser = async () => {
         try {
-            const response = await axios.post(`${URL}/admin/add-user`, newUser); // Update the endpoint if needed
+            const response = await axios.post(`${URL}/admin/add-user`, newUser);
             if (response.status >= 200 && response.status < 300) {
                 toast.success("User added successfully!");
                 setShowModal(false);
@@ -71,10 +71,11 @@ const UserList = () => {
                     lastname: '',
                     mobile: '',
                     email: '',
+                    password:'',
                     bussiness: '',
-                    status: 'active',
+                    isActive: '',
                     role: '',
-                    otp: ''
+                    name: ''
                 });
                 fetchUsers(); // Refresh user list
             }
@@ -83,7 +84,7 @@ const UserList = () => {
             console.error("Add user error", error);
         }
     };
-    
+
 
     useEffect(() => {
         fetchUsers();
@@ -132,7 +133,7 @@ const UserList = () => {
                                                                             style={{ margin: "11px" }}></i>
                                                                     </div>
                                                                     <div className="table-circular-icon bg-F0F5F6" style={{ cursor: "pointer" }} onClick={() => setShowModal(true)}>
-                                                                        <i class="fa-solid fa-user-plus"></i>
+                                                                        <i className="fa-solid fa-user-plus"></i>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -183,10 +184,9 @@ const UserList = () => {
                                                                                     <td>{user?.mobile}</td>
                                                                                     <td>{user?.email}</td>
                                                                                     <td>{user?.bussiness}</td>
-                                                                                    <td>{user?.isActive == true ? "active" : "not active"}</td>
+                                                                                    <td>{user?.isActive === true ? "active" : "not active"}</td>
                                                                                     <td>{user?.role}</td>
                                                                                     <td>{user?.otp}</td>
-                                                                                    <td className="text-01A99A">{user?.status}</td>
                                                                                     <td>
                                                                                         <div className="d-flex justify-content-center">
                                                                                             <Link to={`/cm-admin/user-information/${user._id}`} className="btn">
@@ -269,6 +269,11 @@ const UserList = () => {
                                                     <input type="email" className="form-control" value={newUser.email} onChange={e => setNewUser({ ...newUser, email: e.target.value })} />
                                                 </div>
                                                 <div className="col-md-6">
+                                                    <label className="form-label">Password</label>
+                                                    <input type="password" className="form-control" value={newUser.password} onChange={e => setNewUser({ ...newUser, password: e.target.value })} />
+                                                </div>
+
+                                                <div className="col-md-6">
                                                     <label className="form-label">Business</label>
                                                     <input type="text" className="form-control" value={newUser.bussiness} onChange={e => setNewUser({ ...newUser, bussiness: e.target.value })} />
                                                 </div>
@@ -282,14 +287,14 @@ const UserList = () => {
                                                 </div>
                                                 <div className="col-md-6">
                                                     <label className="form-label">Status</label>
-                                                    <select className="form-select" value={newUser.status} onChange={e => setNewUser({ ...newUser, status: e.target.value })}>
-                                                        <option value="active">Active</option>
-                                                        <option value="inactive">Inactive</option>
+                                                    <select className="form-select" value={newUser.isActive} onChange={e => setNewUser({ ...newUser, isActive: e.target.value })}>
+                                                        <option value="true">Active</option>
+                                                        <option value="false">Inactive</option>
                                                     </select>
                                                 </div>
                                                 <div className="col-md-6">
-                                                    <label className="form-label">OTP</label>
-                                                    <input type="text" className="form-control" value={newUser.otp} onChange={e => setNewUser({ ...newUser, otp: e.target.value })} />
+                                                    <label className="form-label">name</label>
+                                                    <input type="text" className="form-control" value={newUser.name} onChange={e => setNewUser({ ...newUser, name: e.target.value })} />
                                                 </div>
                                             </div>
                                         </form>
