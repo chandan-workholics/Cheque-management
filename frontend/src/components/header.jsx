@@ -121,7 +121,7 @@ const Header = () => {
                             <li>
                                 <button className="nav-link btn btn-danger text-danger w-100" onClick={handleLogout}>
                                     <div className="sidebar-icon">
-                                        <i class="fa-solid fa-right-from-bracket"></i>
+                                        <i className="fa-solid fa-right-from-bracket"></i>
                                     </div>
                                     <span className="">Logout</span>
                                 </button>

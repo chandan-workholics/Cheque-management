@@ -19,7 +19,7 @@ const UserInformation = () => {
     // Pagination logic
     const indexOfLastRow = currentPage * rowsPerPage;
     const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-    const currentRows = cheques.slice(indexOfFirstRow, indexOfLastRow);
+    // const currentRows = cheques.slice(indexOfFirstRow, indexOfLastRow);
     const totalPages = Math.ceil(cheques.length / rowsPerPage);
 
     const fetchUsers = async () => {

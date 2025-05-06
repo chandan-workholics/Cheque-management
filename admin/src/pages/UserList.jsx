@@ -29,7 +29,7 @@ const UserList = () => {
     // Pagination logic
     const indexOfLastRow = currentPage * rowsPerPage;
     const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-    const currentRows = users.slice(indexOfFirstRow, indexOfLastRow);
+    // const currentRows = users.slice(indexOfFirstRow, indexOfLastRow);
     const totalPages = Math.ceil(users.length / rowsPerPage);
 
     const fetchUsers = async () => {

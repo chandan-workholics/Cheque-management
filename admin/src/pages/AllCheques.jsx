@@ -12,13 +12,12 @@ const AllCheques = () => {
     const [cheques, setCheques] = useState([]);
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-    const [showModal, setShowModal] = useState(false);
     const rowsPerPage = 10;
 
     // Pagination logic
     const indexOfLastRow = currentPage * rowsPerPage;
     const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-    const currentRows = cheques.slice(indexOfFirstRow, indexOfLastRow);
+    // const currentRows = cheques.slice(indexOfFirstRow, indexOfLastRow);
     const totalPages = Math.ceil(cheques.length / rowsPerPage);
 
     const fetchCheques = async () => {
