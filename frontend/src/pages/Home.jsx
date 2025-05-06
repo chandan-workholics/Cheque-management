@@ -249,9 +249,6 @@ const Home = () => {
         imageUrl4: licenseDataback.imageUrl || '',
         customerName: formData.customerName,
         licenseNo: licenseData.licenseNo,
-<<<<<<< HEAD
-        date: new Date(formData.date).toLocaleString('en-GB'),
-=======
         date: new Date(Date.now()).toLocaleString('en-GB', {
           day: '2-digit',
           month: '2-digit',
@@ -262,7 +259,6 @@ const Home = () => {
           hour12: false // 24-hour format
         }),
 
->>>>>>> 8d573a610db66e5efd033fe01b05612eb3837f97
         company: formData.company,
         checkType: formData.checkType,
         amount: formData.amount,

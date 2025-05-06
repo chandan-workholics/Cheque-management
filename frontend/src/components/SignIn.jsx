@@ -335,7 +335,7 @@ const SignIn = () => {
                           onClick={() => setShowForgotPassword(true)}
                           style={{ cursor: 'pointer' }}
                         >
-                          Forget Password?
+                          Forgot Password?
                         </span>
                       </h6>
                       <button className="btn w-100 sign-btn mb-3" onClick={handleSubmit}>
