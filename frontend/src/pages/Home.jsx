@@ -441,13 +441,13 @@ const Home = () => {
                               <div className="row">
                                 <label className="form-label text-445B64">Customer Name</label>
                                 <div className="col-md-4 mb-3">
-                                  <input type="text" className="form-control" placeholder='First Name' value={licenseData.name || formData.customerName} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
+                                  <input type="text" className="form-control" placeholder='First Name' value={licenseData.firstname || formData.customerFirstName} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
                                 </div>
                                 <div className="col-md-4 mb-3">
-                                  <input type="text" className="form-control" placeholder='Middle Name' value={licenseData.name || formData.customerName} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
+                                  <input type="text" className="form-control" placeholder='Middle Name' value={licenseData.middlename || formData.customerMiddleName} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
                                 </div>
                                 <div className="col-md-4 mb-3">
-                                  <input type="text" className="form-control" placeholder='Last Name' value={licenseData.name || formData.customerName} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
+                                  <input type="text" className="form-control" placeholder='Last Name' value={licenseData.lastname || formData.customerLastName} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
                                 </div>
                               </div>
                             </div>
