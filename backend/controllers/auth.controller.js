@@ -3,20 +3,55 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const sendMail = require('../utils/sendMail');
 
+// exports.registerVendor = async (req, res) => {
+//     const { firstname, lastname, mobile, bussiness, email, password } = req.body;
+//     const userExist = await User.findOne({ email });
+//     if (userExist) return res.status(400).json({ message: 'Email already exists' });
+
+//     const hashedPassword = await bcrypt.hash(password, 10);
+//     const otp = Math.floor(100000 + Math.random() * 900000).toString();
+
+//     const newUser = new User({ firstname, lastname, mobile, bussiness, email, password: hashedPassword, otp });
+//     await newUser.save();
+//     await sendMail(email, otp);
+
+//     res.json({ message: 'OTP sent to email. Please verify.' });
+// };
+
 exports.registerVendor = async (req, res) => {
     const { firstname, lastname, mobile, bussiness, email, password } = req.body;
+
+    // Check for existing email
     const userExist = await User.findOne({ email });
-    if (userExist) return res.status(400).json({ message: 'Email already exists' });
+    if (userExist) {
+        return res.status(400).json({ message: 'Email already exists' });
+    }
+
+    // Check for existing mobile number
+    const mobileExist = await User.findOne({ mobile });
+    if (mobileExist) {
+        return res.status(400).json({ message: 'Mobile number already registered' });
+    }
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
-    const newUser = new User({ firstname, lastname, mobile, bussiness, email, password: hashedPassword, otp });
+    const newUser = new User({
+        firstname,
+        lastname,
+        mobile,
+        bussiness,
+        email,
+        password: hashedPassword,
+        otp
+    });
+
     await newUser.save();
     await sendMail(email, otp);
 
     res.json({ message: 'OTP sent to email. Please verify.' });
 };
+
 
 exports.getAllVender = async (req, res) => {
     try {
@@ -96,7 +131,7 @@ exports.login = async (req, res) => {
     if (!isMatch) return res.status(400).json({ message: 'Incorrect password' });
 
     const token = jwt.sign({ id: user._id, role: user.role }, 'secret_key', { expiresIn: '1d' });
-    res.json({ token, role: user.role,userId: user._id, message: 'Login successful' });
+    res.json({ token, role: user.role, userId: user._id, message: 'Login successful' });
 };
 
 

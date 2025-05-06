@@ -179,7 +179,7 @@ const UserInformation = () => {
                                                     <ul className="pagination justify-content-end">
                                                         <li className={`page-item ${currentPage === 1 && 'disabled'}`}>
                                                             <button className="page-link border-0" onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}>
-                                                                <i class="fa-solid fa-angle-left"></i>
+                                                                <i className="fa-solid fa-angle-left"></i>
                                                             </button>
                                                         </li>
                                                         {Array.from({ length: totalPages }, (_, i) => (
@@ -194,7 +194,7 @@ const UserInformation = () => {
                                                         ))}
                                                         <li className={`page-item ${currentPage === totalPages && 'disabled'}`}>
                                                             <button className="page-link border-0" onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}>
-                                                                <i class="fa-solid fa-angle-right"></i>
+                                                                <i className="fa-solid fa-angle-right"></i>
                                                             </button>
                                                         </li>
                                                     </ul>

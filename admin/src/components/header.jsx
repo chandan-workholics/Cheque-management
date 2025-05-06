@@ -23,6 +23,7 @@ const navigate = useNavigate();
         <>
             <div className="header w-100">
                 <nav className="navbar navbar-expand-lg bg-body-white px-3 w-100">
+                      <ToastContainer position='top-right' autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
                     <div className="d-flex align-items-center">
                         <Link className="navbar-brand d-flex align-items-center" to=''>
                             <img src={logo} alt="" className="me-2" />
