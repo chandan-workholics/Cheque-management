@@ -115,6 +115,7 @@ body {
 /* SignIn - CSS - Start */
 .sign-main-container {
   height: 100vh;
+  max-height: fit-content;
 }
 
 .sign-left-bg {
