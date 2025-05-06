@@ -133,7 +133,7 @@ const SignUp = () => {
           </div>
           <div className="col-lg-6 sign-right-bg bg-EEEEEE position-relative py-5">
             <div className="row h-100 w-100">
-              <div className="col-lg-8 mx-auto d-flex justify-content-center align-items-center">
+              <div className="col-lg-8 col-xl-7 col-xxl-6 mx-auto d-flex justify-content-center align-items-center">
                 <div className="w-100">
                   <h3 className="fw-semibold">Register now</h3>
                   <h6 className="mb-4 text-445B64">Please enter your credentials to sign up</h6>
