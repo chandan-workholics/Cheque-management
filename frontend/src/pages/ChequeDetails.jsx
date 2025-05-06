@@ -81,7 +81,7 @@ const ChequeDetails = () => {
                                                             <div className="d-flex gap-5 flex-wrap">
                                                                 <div className="mb-3">
                                                                     <h6 className="text-445B64 fs-14 mb-1">Customer Name</h6>
-                                                                    <h6 className="text-0D161A fw-semibold fs-14">{chequeDetails?.customerName}</h6>
+                                                                    <h6 className="text-0D161A fw-semibold fs-14">{chequeDetails?.customerFirstName}</h6>
                                                                 </div>
                                                                 <div className="mb-3">
                                                                     <h6 className="text-445B64 fs-14 mb-1">License No</h6>
