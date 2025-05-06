@@ -19,6 +19,7 @@ const AllCheques = () => {
     }));
 
     const [cheques, setCheques] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const rowsPerPage = 10;
 
@@ -30,18 +31,21 @@ const AllCheques = () => {
 
     const fetchCheques = async () => {
         try {
+            setLoading(true);
             const response = await axios.get(`${URL}/admin/get-all-checks`);
             if (response.status >= 200 && response.status < 300) {
                 setCheques(response?.data?.data)
             }
         } catch (error) {
             console.log("Error in fetching data", error);
+        } finally {
+            setLoading(false);
         }
     }
 
     useEffect(() => {
-       fetchCheques();
-    })
+        fetchCheques();
+    }, [])
 
     return (
         <>
@@ -122,33 +126,46 @@ const AllCheques = () => {
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        {cheques?.map((cheque, index) => (
-                                                                            <tr key={index}>
-                                                                                <td className="text-center">
-                                                                                    <input className="form-check-input table-checkbox" type="checkbox" />
-                                                                                </td>
-                                                                                <td>{indexOfFirstRow + index + 1}</td>
-                                                                                <td>{cheque.customerName}</td>
-                                                                                <td>{cheque.company}</td>
-                                                                                <td>{cheque.licenseNo}</td>
-                                                                                <td>{cheque.chequeType}</td>
-                                                                                <td>{cheque.amount}</td>
-                                                                                <td>{cheque.comment?.length > 10 ? cheque.comment.substring(0, 10) + '...' : cheque.comment}</td>
-                                                                                <td>{cheque.date}</td>
-                                                                                <td className="text-01A99A">{cheque.status}</td>
-                                                                                <td>
-                                                                                    <div className="d-flex justify-content-center">
-                                                                                        <Link to={`/cm-admin/cheque-details/${cheque?._id}`} className="btn">
-                                                                                            <i className="fa-solid fa-eye text-445B64"></i>
-                                                                                        </Link>
-                                                                                        <button className="btn">
-                                                                                            <i className="fa-solid fa-trash-can text-danger"></i>
-                                                                                        </button>
-                                                                                    </div>
+                                                                        {loading ? (
+                                                                            <tr>
+                                                                                <td colSpan="11" className="text-center py-5">
+                                                                                    <span className="spinner-border text-primary" role="status" />
                                                                                 </td>
                                                                             </tr>
-                                                                        ))}
+                                                                        ) : cheques?.length > 0 ? (
+                                                                            cheques.map((cheque, index) => (
+                                                                                <tr key={index}>
+                                                                                    <td className="text-center">
+                                                                                        <input className="form-check-input table-checkbox" type="checkbox" />
+                                                                                    </td>
+                                                                                    <td>{indexOfFirstRow + index + 1}</td>
+                                                                                    <td>{cheque.customerName}</td>
+                                                                                    <td>{cheque.company}</td>
+                                                                                    <td>{cheque.licenseNo}</td>
+                                                                                    <td>{cheque.chequeType}</td>
+                                                                                    <td>{cheque.amount}</td>
+                                                                                    <td>{cheque.comment?.length > 10 ? cheque.comment.substring(0, 10) + '...' : cheque.comment}</td>
+                                                                                    <td>{cheque.date}</td>
+                                                                                    <td className="text-01A99A">{cheque.status}</td>
+                                                                                    <td>
+                                                                                        <div className="d-flex justify-content-center">
+                                                                                            <Link to={`/cm-admin/cheque-details/${cheque._id}`} className="btn">
+                                                                                                <i className="fa-solid fa-eye text-445B64"></i>
+                                                                                            </Link>
+                                                                                            <button className="btn">
+                                                                                                <i className="fa-solid fa-trash-can text-danger"></i>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            ))
+                                                                        ) : (
+                                                                            <tr>
+                                                                                <td colSpan="11" className="text-center py-4 text-muted">No cheques found</td>
+                                                                            </tr>
+                                                                        )}
                                                                     </tbody>
+
                                                                 </table>
                                                             </div>
                                                         </div>
@@ -162,7 +179,7 @@ const AllCheques = () => {
                                                     <ul className="pagination justify-content-end">
                                                         <li className={`page-item ${currentPage === 1 && 'disabled'}`}>
                                                             <button className="page-link border-0" onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}>
-                                                                <i class="fa-solid fa-angle-left"></i>
+                                                                <i className="fa-solid fa-angle-left"></i>
                                                             </button>
                                                         </li>
                                                         {Array.from({ length: totalPages }, (_, i) => (
@@ -177,7 +194,7 @@ const AllCheques = () => {
                                                         ))}
                                                         <li className={`page-item ${currentPage === totalPages && 'disabled'}`}>
                                                             <button className="page-link border-0" onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}>
-                                                                <i class="fa-solid fa-angle-right"></i>
+                                                                <i className="fa-solid fa-angle-right"></i>
                                                             </button>
                                                         </li>
                                                     </ul>
