@@ -117,6 +117,14 @@ const Header = () => {
                                     <span className="">Support</span>
                                 </NavLink>
                             </li>
+                            <li>
+                                <button className="nav-link btn btn-danger text-danger w-100" onClick={handleLogout}>
+                                    <div className="sidebar-icon">
+                                        <i className="fa-solid fa-right-from-bracket"></i>
+                                    </div>
+                                    <span className="">Logout</span>
+                                </button>
+                            </li>
                             {/* <li>
                                 <NavLink to='/cm-admin/setting' className="nav-link">
                                     <div className="sidebar-icon">

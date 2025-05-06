@@ -58,7 +58,7 @@ const Sidebar = () => {
                             <span className="">Support</span>
                         </NavLink>
                     </li>
-                    <li>
+                    {/* <li>
                         <NavLink to='/cm-admin/setting' className="nav-link">
                             <div className="sidebar-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewBox="0 0 17 18" fill="none">
@@ -67,7 +67,7 @@ const Sidebar = () => {
                             </div>
                             <span className="">Settings</span>
                         </NavLink>
-                    </li>
+                    </li> */}
                 </ul>
                 <div className="position-absolute bottom-0 left-0 w-100 mb-3" style={{ paddingRight: '7px' }}>
                     <div className="card sidebarSupport border-0" style={{ borderRadius: '24px' }}>
