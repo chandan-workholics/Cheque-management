@@ -77,8 +77,8 @@ const ChequeDetails = () => {
                                             <div className="col-12">
                                                 <div className="card border-0 rounded-3 mb-1">
                                                     <div className="card-body">
-                                                        <div className="d-flex justify-content-between">
-                                                            <div className="d-flex gap-5 flex-wrap">
+                                                        <div className="d-block d-lg-flex justify-content-between">
+                                                            <div className="d-block d-lg-flex gap-5 flex-wrap">
                                                                 <div className="mb-3">
                                                                     <h6 className="text-445B64 fs-14 mb-1">Customer Name</h6>
                                                                     <h6 className="text-0D161A fw-semibold fs-14">{chequeDetails?.customerFirstName}</h6>
@@ -104,7 +104,7 @@ const ChequeDetails = () => {
                                                                     <h6 className="text-0D161A fw-semibold fs-14">{chequeDetails?.date}</h6>
                                                                 </div>
                                                             </div>
-                                                            <div className="d-flex gap-3 align-chequeDetails?s-start">
+                                                            <div className="d-block d-lg-flex gap-3 align-chequeDetails?s-start">
                                                                 <div className="mb-3">
                                                                     <h6 className="text-445B64 fs-14 mb-1">Status</h6>
                                                                     <div>
@@ -116,7 +116,7 @@ const ChequeDetails = () => {
                                                             </div>
                                                         </div>
 
-                                                        <div className="d-flex gap-5 mt-3">
+                                                        <div className="d-block d-lg-flex gap-5 mt-3">
                                                             <div className="mb-3 w-100">
                                                                 <h6 className="text-445B64 fs-14 mb-1">Comments</h6>
                                                                 <div className="card rounded-3">
@@ -132,12 +132,12 @@ const ChequeDetails = () => {
 
 
                                                 <div className="row">
-                                                    <div className='col-lg-6'>
+                                                    <div className='col-lg-6 mb-1 mb-lg-0'>
                                                         <div className="card border-0 rounded-3">
                                                             <div className="card-body">
                                                                 <label className="form-label text-445B64">Cheque Image</label>
                                                                 <div className="row">
-                                                                    <div className="col-lg-6">
+                                                                    <div className="col-lg-6 mb-3 mb-lg-0">
                                                                         <label className="form-label text-445B64">Front Image</label>
                                                                         <img src={chequeDetails?.imageUrl} alt='Profile' className='w-100 border rounded-4 overflow-hidden' />
                                                                     </div>
@@ -154,7 +154,7 @@ const ChequeDetails = () => {
                                                             <div className="card-body">
                                                                 <label className="form-label text-445B64">License Image</label>
                                                                 <div className="row">
-                                                                    <div className="col-lg-6">
+                                                                    <div className="col-lg-6 mb-3 mb-lg-0">
                                                                         <label className="form-label text-445B64">Front Image</label>
                                                                         <img src={chequeDetails?.imageUrl3} alt='Profile' className='w-100 border rounded-4 overflow-hidden' />
                                                                     </div>
@@ -167,11 +167,7 @@ const ChequeDetails = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
-
-
-
                                         </div>
                                     </div>
                                 </div>

@@ -10,7 +10,7 @@ const ReportExport = () => {
                 <Header />
                 <div className="">
                     <div className="row mh-100vh">
-                        <div className="col-lg-3 col-xl-2 position-relative">
+                        <div className="col-lg-3 col-xl-2 d-none d-lg-block position-relative">
                             <Sidebar />
                         </div>
                         <div className="col-lg-9 col-xl-10 bg-F6F6F6">
@@ -35,9 +35,9 @@ const ReportExport = () => {
                                                             </div>
                                                         </div>
                                                         <div className="col-12 col-lg-8">
-                                                            <div className="d-flex justify-content-end">
-                                                                <button className="btn btn-light btn-sm bg-F5F5F5 rounded-2 me-2">Export Report to 28/04/2025 to 28/04/2025 </button>
-                                                                <Link to="/" className="btn btn-sm rounded-2 bg-E4FFFD text-01A99A me-2">
+                                                            <div className="d-block d-lg-flex justify-content-end">
+                                                                <button className="btn btn-light btn-sm bg-F5F5F5 rounded-2 me-2 mb-3 mb-lg-0">Export Report to 28/04/2025 to 28/04/2025 </button>
+                                                                <Link to="/cm-admin/export-report" className="btn btn-sm rounded-2 bg-E4FFFD text-01A99A me-2">
                                                                     View
                                                                 </Link>
                                                                 <button className="btn btn-sm rounded-2 me-2">Downloads Now</button>
@@ -90,7 +90,7 @@ const ReportExport = () => {
                                                                             <td className="text-01A99A">Active</td>
                                                                             <td className="">
                                                                                 <div className="d-flex justify-content-center">
-                                                                                    <Link to="/cheque-management/cheque-details" className="btn">
+                                                                                    <Link to="/cm-admin/export-report" className="btn">
                                                                                         <i className="fa-solid fa-eye text-445B64"></i>
                                                                                     </Link>
                                                                                     <button className="btn">

@@ -11,7 +11,7 @@ const Report = () => {
                 <Header />
                 <div className="">
                     <div className="row mh-100vh">
-                        <div className="col-lg-3 col-xl-2 position-relative">
+                        <div className="col-lg-3 col-xl-2 d-none d-lg-block position-relative">
                             <Sidebar />
                         </div>
                         <div className="col-lg-9 col-xl-10 bg-F6F6F6">
@@ -22,8 +22,8 @@ const Report = () => {
                                             <div className="card border-0 rounded-3 mb-2">
                                                 <div className="card-body p-2">
                                                     <div className="row">
-                                                        <div className="col-12 col-lg-6">
-                                                            <div className="d-flex justify-content-between mb-3 mb-lg-0">
+                                                        <div className="col-6 col-lg-6">
+                                                            <div className="d-flex justify-content-between mb-lg-0">
                                                                 <div className="d-flex align-items-center">
                                                                     <div className="table-circular-icon bg-F0F5F6 me-3"
                                                                         style={{ cursor: "pointer" }}>
@@ -35,9 +35,9 @@ const Report = () => {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div className="col-12 col-lg-6 d-flex justify-content-end">
+                                                        <div className="col-6 col-lg-6 d-flex justify-content-end align-items-center">
                                                             <div className="d-flex justify-content-end align-items-center">
-                                                                <Link to="/cheque-management/export-report" className="btn btn-sm rounded-2 bg-E4FFFD text-01A99A">
+                                                                <Link to="/cm-admin/export-report" className="btn btn-sm rounded-2 bg-E4FFFD text-01A99A">
                                                                     Export Report
                                                                 </Link>
                                                             </div>
@@ -81,7 +81,7 @@ const Report = () => {
                                                                             <td className="text-01A99A">Active</td>
                                                                             <td className="">
                                                                                 <div className="d-flex justify-content-center">
-                                                                                    <Link to="/cheque-management/cheque-details" className="btn">
+                                                                                    <Link to="/cm-admin/report" className="btn">
                                                                                         <i className="fa-solid fa-eye text-445B64"></i>
                                                                                     </Link>
                                                                                     <button className="btn">

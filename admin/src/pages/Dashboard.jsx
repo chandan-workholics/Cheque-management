@@ -74,10 +74,10 @@ const Dashboard = () => {
                 <Header />
                 <div className="">
                     <div className="row mh-100vh">
-                        <div className="col-lg-2 col-xl-2 position-relative">
+                        <div className="col-lg-3 col-xl-2 d-none d-lg-block position-relative">
                             <Sidebar />
                         </div>
-                        <div className="col-lg-10 col-xl-10 bg-F6F6F6">
+                        <div className="col-lg-10 col-xl-10 bg-F6F6F6 dashboard-page">
                             <div className="main-content">
                                 <div className="container-fluid p-3 px-2">
                                     {/* Status Cards */}
@@ -203,51 +203,133 @@ const Dashboard = () => {
                                         </div>
                                     </div>
                                     <div className="row mb-2">
+                                        <div className="col-12 col-xl-7 mb-3">
+                                            <div className="card shadow-sm border-0 rounded-4">
+                                                <div className="card-body">
+                                                    <div className="row border-bottom pb-2">
+                                                        <div className="col-md-4">
+                                                            <h6 className="mb-3 text-445B64">Report</h6>
+                                                        </div>
+                                                        <div className="col-md-8 d-flex justify-content-end">
+                                                            <div className="bg-F6F6F6 p-1 rounded-3 d-flex align-items-center">
+                                                                <ul className="nav nav-pills" id="chartTabs" role="tablist">
+                                                                    <li className="nav-item" role="presentation">
+                                                                        <button
+                                                                            className="nav-link badge fs-14 fw-normal"
+                                                                            id="daily-tab"
+                                                                            data-bs-toggle="tab"
+                                                                            data-bs-target="#daily"
+                                                                            type="button"
+                                                                            role="tab"
+                                                                            aria-controls="daily"
+                                                                            aria-selected="true"
+                                                                        >
+                                                                            Daily
+                                                                        </button>
+                                                                    </li>
+                                                                    <li className="nav-item" role="presentation">
+                                                                        <button
+                                                                            className="nav-link badge active fs-14 fw-normal"
+                                                                            id="weekly-tab"
+                                                                            data-bs-toggle="tab"
+                                                                            data-bs-target="#weekly"
+                                                                            type="button"
+                                                                            role="tab"
+                                                                            aria-controls="weekly"
+                                                                            aria-selected="false"
+                                                                        >
+                                                                            Weekly
+                                                                        </button>
+                                                                    </li>
+                                                                    <li className="nav-item" role="presentation">
+                                                                        <button
+                                                                            className="nav-link badge fs-14 fw-normal"
+                                                                            id="monthly-tab"
+                                                                            data-bs-toggle="tab"
+                                                                            data-bs-target="#monthly"
+                                                                            type="button"
+                                                                            role="tab"
+                                                                            aria-controls="monthly"
+                                                                            aria-selected="false"
+                                                                        >
+                                                                            Monthly
+                                                                        </button>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {/* Tab Panes */}
+                                                    <div className="tab-content" id="chartTabsContent">
+                                                        {/* Daily */}
+                                                        <div
+                                                            className="tab-pane fade"
+                                                            id="daily"
+                                                            role="tabpanel"
+                                                            aria-labelledby="daily-tab"
+                                                        >
 
+                                                        </div>
 
-                                        <div className="col-12 col-xl-12 mb-3">
-                                            <h5 className="mb-3">Check Status</h5>
-                                            <ReactApexChart
-                                                options={chartData.options}
-                                                series={chartData.series}
-                                                type="pie"
-                                                height={300}
-                                            />
+                                                        {/* Weekly */}
+                                                        <div
+                                                            className="tab-pane fade show active"
+                                                            id="weekly"
+                                                            role="tabpanel"
+                                                            aria-labelledby="weekly-tab"
+                                                        >
+                                                            <Chart
+                                                                options={{
+                                                                    chart: { id: 'weekly-bar' },
+                                                                    xaxis: { categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] },
+                                                                    colors: ['#FFA500'],
+                                                                }}
+                                                                series={[{ name: 'Checks', data: data?.chart?.weekly || [] }]}
+                                                                type="bar"
+                                                                height={250}
+                                                            />
+                                                        </div>
+
+                                                        {/* Monthly */}
+                                                        <div
+                                                            className="tab-pane fade"
+                                                            id="monthly"
+                                                            role="tabpanel"
+                                                            aria-labelledby="monthly-tab"
+                                                        >
+                                                            <Chart
+                                                                options={{
+                                                                    chart: { id: 'monthly-bar' },
+                                                                    xaxis: {
+                                                                        categories: data?.chart?.monthly?.map(item => item.date) || [],
+                                                                    },
+                                                                    colors: ['#FF4560'],
+                                                                }}
+                                                                series={[{
+                                                                    name: 'Checks',
+                                                                    data: data?.chart?.monthly?.map(item => item.count) || [],
+                                                                }]}
+                                                                type="bar"
+                                                                height={300}
+                                                            />
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
                                         </div>
-
-                                        <div className="col-12 col-xl-12 mb-3">
-                                            <h5 className="mb-3">Weekly Checks</h5>
-                                            <Chart
-                                                options={{
-                                                    chart: { id: 'weekly-bar' },
-                                                    xaxis: {
-                                                        categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                                                    },
-                                                    colors: ['#FFA500'],
-                                                }}
-                                                series={[{ name: 'Checks', data: data?.chart?.weekly || [] }]}
-                                                type="bar"
-                                                height={250}
-                                            />
-                                        </div>
-
-                                        <div className="col-12 col-xl-12 mb-3">
-                                            <h5 className="mb-3">Monthly Checks</h5>
-                                            <Chart
-                                                options={{
-                                                    chart: { id: 'monthly-bar' },
-                                                    xaxis: {
-                                                        categories: data?.chart?.monthly?.map(item => item.date) || [],
-                                                    },
-                                                    colors: ['#FF4560'],
-                                                }}
-                                                series={[{
-                                                    name: 'Checks',
-                                                    data: data?.chart?.monthly?.map(item => item.count) || [],
-                                                }]}
-                                                type="bar"
-                                                height={300}
-                                            />
+                                        <div className="col-12 col-xl-5 mb-3">
+                                            <div className="card shadow-sm border-0 rounded-4">
+                                                <div className="card-body">
+                                                    <h6 className="mb-3 text-445B64 pb-2 border-bottom">Check Status</h6>
+                                                    <ReactApexChart
+                                                        options={chartData.options}
+                                                        series={chartData.series}
+                                                        type="pie"
+                                                        height={300}
+                                                    />
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
