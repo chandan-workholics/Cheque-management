@@ -135,7 +135,7 @@ const Cheques = () => {
                                                             filteredCheques.map((item, index) => (
                                                                 <tr key={item._id}>
                                                                     <td>{index + 1}</td>
-                                                                    <td>{item.customerName}</td>
+                                                                    <td>{item.customerFirstName}</td>
                                                                     <td>{item.company}</td>
                                                                     <td>{item.licenseNo}</td>
                                                                     <td>{item.checkType}</td>

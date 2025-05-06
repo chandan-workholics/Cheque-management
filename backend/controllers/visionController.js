@@ -193,9 +193,17 @@ exports.scanCheck = async (req, res) => {
     const customerName = lines.find(line => /^[A-Z][a-z]+\s[A-Z][a-z]+$/.test(line)) || '';
     const company = lines.find(line => /USA|CORP|INC|LLC|BANK|FINANCE|CORPORATION|BRANCHES/i.test(line)) || '';
 
+    // Set first/middle/last names to same value if name found
+    const customerFirstName = customerName || '';
+    const customerMiddleName = customerName || '';
+    const customerLastName = customerName || '';
+
     const parsedData = {
       imageUrl,
       customerName,
+      customerFirstName,
+      customerMiddleName,
+      customerLastName,
       date: date.trim(),
       amountNumeric: amountNumeric.trim(),
       amountWords: amountWords.trim(),
@@ -204,6 +212,7 @@ exports.scanCheck = async (req, res) => {
       company: company.trim(),
       extractedText
     };
+
 
     res.json(parsedData);
   } catch (error) {
