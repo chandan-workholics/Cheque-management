@@ -38,7 +38,7 @@ const navigate = useNavigate();
                                 <i className="fa-solid fa-bell fs-5"></i>
                             </Link>
                         </li>
-                        <li className="nav-item dropdown me-4">
+                        <li className="nav-item dropdown me-4 d-none d-lg-block">
                             <Link className="nav-link header-icon dropdown-toggle " to='' data-bs-toggle="dropdown">
                                 <i className="fa-solid fa-circle-user fs-5"></i>
                             </Link>
@@ -48,7 +48,7 @@ const navigate = useNavigate();
                             </ul>
                         </li>
                         <li className="nav-item me-lg-0 d-block d-lg-none">
-                            <Link className="nav-link" to=''>
+                            <Link className="nav-link header-icon" to=''>
                                 <button className="btn border-0 bg-transparent p-0 mb-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
                                     <i className="fa-solid fa-bars"></i>
                                 </button>
