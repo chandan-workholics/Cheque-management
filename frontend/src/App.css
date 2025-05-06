@@ -124,11 +124,9 @@ body {
   background-size: cover;
   background-position: center;
   min-height: 100vh;
-  max-height: fit-content;
 }
 .sign-right-bg {
   min-height: 100vh;
-  max-height: fit-content;
   display: flex;
   align-items: center;
   justify-content: center;
