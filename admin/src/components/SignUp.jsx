@@ -142,7 +142,7 @@ const SignUp = () => {
                   <input className="form-control mb-3 rounded-3" type="text" id='bussiness' name='bussiness' value={formData.bussiness} onChange={handleChange} placeholder="Business name" aria-label="example" required />
                   <input className="form-control mb-3 rounded-3" type="text" id='firstname' name='firstname' value={formData.firstname} onChange={handleChange} placeholder="First name" aria-label="example" required />
                   <input className="form-control mb-3 rounded-3" type="text" id='lastname' name='lastname' value={formData.lastname} onChange={handleChange} placeholder="Last name" aria-label="example" required />
-                  <input className='form-control mb-3 rounded-3' type='text' id='name' name='name' value={formData.name} onChange={handleChange} placeholder='User name is required' aria-label='example' required />
+                  <input className='form-control mb-3 rounded-3' type='text' id='name' name='name' value={formData.name} onChange={handleChange} placeholder='User name' aria-label='example' required />
                   <input className="form-control mb-3 rounded-3" type="email" id='email' name='email' value={formData.email} onChange={handleChange} placeholder="Your email address" aria-label="example" required />
                   <input className="form-control mb-3 rounded-3" type="number" id='mobile' name='mobile' value={formData.mobile} onChange={handleChange} placeholder="Your Phone number" aria-label="example" required />
                   <input className="form-control mb-3 rounded-3" type="password" id='password' name='password' value={formData.password} onChange={handleChange} placeholder="Password" aria-label="example" required />

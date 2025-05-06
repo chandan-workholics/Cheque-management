@@ -15,7 +15,8 @@ const UserList = () => {
         status: 'Active',
     }));
 
-    const [users, setUsers] = useState([])
+    const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const rowsPerPage = 10;
 
@@ -27,13 +28,15 @@ const UserList = () => {
 
     const fetchUsers = async () => {
         try {
+            setLoading(true);
             const response = await axios.get(`${URL}/admin/get-all-users`);
-            console.log(response);
             if (response.status >= 200 && response.status < 300) {
                 setUsers(response?.data?.data)
             }
         } catch (error) {
             console.log("Error in fetching users", error);
+        }finally {
+            setLoading(false);
         }
     }
 
@@ -120,8 +123,17 @@ const UserList = () => {
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        {users?.length > 0 && users.map((user, index) => (
-                                                                            <tr key={user.id}>
+                                                                    {loading ? (
+                                                                            <tr>
+                                                                                <td colSpan="11" className="text-center py-5">
+                                                                                    <div className="spinner-border text-primary" role="status">
+                                                                                        <span className="visually-hidden">Loading...</span>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                        ) : (
+                                                                        users?.length > 0 && users.map((user, index) => (
+                                                                            <tr key={index}>
                                                                                 <td className="text-center">
                                                                                     <input className="form-check-input table-checkbox" type="checkbox" />
                                                                                 </td>
@@ -144,7 +156,8 @@ const UserList = () => {
                                                                                     </div>
                                                                                 </td>
                                                                             </tr>
-                                                                        ))}
+                                                                        ))
+                                                                    )}
                                                                     </tbody>
                                                                 </table>
                                                             </div>
@@ -159,7 +172,7 @@ const UserList = () => {
                                                     <ul className="pagination justify-content-end">
                                                         <li className={`page-item ${currentPage === 1 && 'disabled'}`}>
                                                             <button className="page-link border-0" onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}>
-                                                                <i class="fa-solid fa-angle-left"></i>
+                                                                <i className="fa-solid fa-angle-left"></i>
                                                             </button>
                                                         </li>
                                                         {Array.from({ length: totalPages }, (_, i) => (
@@ -174,7 +187,7 @@ const UserList = () => {
                                                         ))}
                                                         <li className={`page-item ${currentPage === totalPages && 'disabled'}`}>
                                                             <button className="page-link border-0" onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}>
-                                                                <i class="fa-solid fa-angle-right"></i>
+                                                                <i className="fa-solid fa-angle-right"></i>
                                                             </button>
                                                         </li>
                                                     </ul>
