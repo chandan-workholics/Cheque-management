@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
-import { Link } from 'react-router-dom';
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from 'react-router-dom';
 const URL = process.env.REACT_APP_URL;
 
 const Profile = () => {
+    const navigate = useNavigate();
     const [userData, setUserData] = useState(null);
 
     useEffect(() => {
@@ -21,6 +24,21 @@ const Profile = () => {
 
         fetchUser();
     }, []);
+
+     const handleLogout = () => {
+            localStorage.removeItem("token");
+            localStorage.removeItem("role");
+            setTimeout(() => {
+                toast.success("Logged out successfully!")
+            }, 1000);
+            setTimeout(() => {
+                navigate("/cheque-management/");
+            }, 2000);
+        };
+    
+    const handleBack = () => {
+        navigate(-1);
+    }
 
     return (
         <>
@@ -54,7 +72,7 @@ const Profile = () => {
                                                         </div>
                                                         <div className="col-12 col-lg-6">
                                                             <div className="d-flex justify-content-end">
-                                                                <button className="btn btn-sm rounded-2 btn-light text-445B64" onClic>
+                                                                <button className="btn btn-sm rounded-2 btn-light text-445B64" onClick={handleBack}>
                                                                     <i className="fa-solid fa-arrow-left-long me-2 text-445B64"></i>
                                                                     Back
                                                                 </button>
@@ -90,9 +108,9 @@ const Profile = () => {
                                                         <div className="d-flex gap-5">
                                                             <div className="mb-3">
                                                                 <div className="d-flex justify-content-end">
-                                                                    <Link to="/cheque-management/export-report" className="btn btn-sm rounded-2 bg-E4FFFD text-01A99A">
+                                                                    <button className="btn btn-sm rounded-2 bg-E4FFFD text-01A99A" onClick={handleLogout}>
                                                                         Logout
-                                                                    </Link>
+                                                                    </button>
                                                                 </div>
                                                             </div>
                                                         </div>

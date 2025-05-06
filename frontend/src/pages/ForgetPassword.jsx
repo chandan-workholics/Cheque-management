@@ -80,7 +80,7 @@ const ForgetPassword = () => {
     };
 
     useEffect(() => {
-        const storedEmail = localStorage.getItem("email");
+        const storedEmail = localStorage.getItem("resetEmail");
         if (storedEmail) {
             setFormData(prev => ({ ...prev, email: storedEmail }));
         }
