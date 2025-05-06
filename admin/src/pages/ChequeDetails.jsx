@@ -87,27 +87,27 @@ const ChequeDetails = () => {
                                                                 <div className="d-block d-lg-flex gap-5">
                                                                     <div className="mb-3">
                                                                         <h6 className="text-445B64 fs-14 mb-1">Customer Name</h6>
-                                                                        <h6 className="text-0D161A fw-medium mb-0">{chequeDetails.customerName}</h6>
+                                                                        <h6 className="text-0D161A fw-medium mb-0">{chequeDetails?.customerFirstName}</h6>
                                                                     </div>
                                                                     <div className="mb-3">
                                                                         <h6 className="text-445B64 fs-14 mb-1">License No</h6>
-                                                                        <h6 className="text-0D161A fw-medium mb-0">{chequeDetails.licenseNo}</h6>
+                                                                        <h6 className="text-0D161A fw-medium mb-0">{chequeDetails?.licenseNo}</h6>
                                                                     </div>
                                                                     <div className="mb-3">
                                                                         <h6 className="text-445B64 fs-14 mb-1">Company</h6>
-                                                                        <h6 className="text-0D161A fw-medium mb-0">{chequeDetails.company}</h6>
+                                                                        <h6 className="text-0D161A fw-medium mb-0">{chequeDetails?.company}</h6>
                                                                     </div>
                                                                     <div className="mb-3">
                                                                         <h6 className="text-445B64 fs-14 mb-1">Check Type</h6>
-                                                                        <h6 className="text-0D161A fw-medium mb-0">{chequeDetails.checkType}</h6>
+                                                                        <h6 className="text-0D161A fw-medium mb-0">{chequeDetails?.checkType}</h6>
                                                                     </div>
                                                                     <div className="mb-3">
                                                                         <h6 className="text-445B64 fs-14 mb-1">Amount</h6>
-                                                                        <h6 className="text-0D161A fw-medium mb-0">{chequeDetails.amount}</h6>
+                                                                        <h6 className="text-0D161A fw-medium mb-0">{chequeDetails?.amount}</h6>
                                                                     </div>
                                                                     <div className="mb-3">
                                                                         <h6 className="text-445B64 fs-14 mb-1">Date</h6>
-                                                                        <h6 className="text-0D161A fw-medium mb-0">{chequeDetails.date}</h6>
+                                                                        <h6 className="text-0D161A fw-medium mb-0">{chequeDetails?.date}</h6>
                                                                     </div>
                                                                 </div>
                                                                 <div className="d-block d-lg-flex gap-5">
@@ -115,7 +115,7 @@ const ChequeDetails = () => {
                                                                         <h6 className="text-445B64 fs-14 mb-1">Status</h6>
                                                                         <div className="">
                                                                             <button className="btn btn-sm rounded-2 lh-1 bg-4FD1C5 text-white me-3">
-                                                                                {chequeDetails.status}
+                                                                                {chequeDetails?.status}
                                                                             </button>
                                                                         </div>
                                                                     </div>
@@ -126,7 +126,7 @@ const ChequeDetails = () => {
                                                                     <h6 className="text-445B64 fs-14 mb-1">Comments</h6>
                                                                     <div className="card rounded-3">
                                                                         <div className="card-body p-2">
-                                                                            <p className="text-0D161A fw-light fs-14 mb-0">{chequeDetails.comment}</p>
+                                                                            <p className="text-0D161A fw-light fs-14 mb-0">{chequeDetails?.comment}</p>
                                                                         </div>
                                                                     </div>
 
@@ -142,11 +142,11 @@ const ChequeDetails = () => {
                                                                     <div className="row">
                                                                         <div className="col-lg-6 mb-3 mb-lg-0">
                                                                             <label className="form-label text-445B64">Front Image</label>
-                                                                            <img src={chequeDetails.imageUrl} alt="Cheque Front" className="img-fluid rounded" />
+                                                                            <img src={chequeDetails?.imageUrl} alt="Cheque Front" className="img-fluid rounded" />
                                                                         </div>
                                                                         <div className="col-lg-6">
                                                                             <label className="form-label text-445B64">Back Image</label>
-                                                                            <img src={chequeDetails.imageUrl2} alt="Cheque Front" className="img-fluid rounded" />
+                                                                            <img src={chequeDetails?.imageUrl2} alt="Cheque Front" className="img-fluid rounded" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -159,11 +159,11 @@ const ChequeDetails = () => {
                                                                     <div className="row">
                                                                         <div className="col-lg-6 mb-3 mb-lg-0">
                                                                             <label className="form-label text-445B64">Front Image</label>
-                                                                            <img src={chequeDetails.imageUrl3} alt="Cheque Front" className="img-fluid rounded" />
+                                                                            <img src={chequeDetails?.imageUrl3} alt="Cheque Front" className="img-fluid rounded" />
                                                                         </div>
                                                                         <div className="col-lg-6">
                                                                             <label className="form-label text-445B64">Back Image</label>
-                                                                            <img src={chequeDetails.imageUrl4} alt="Cheque Front" className="img-fluid rounded" />
+                                                                            <img src={chequeDetails?.imageUrl4} alt="Cheque Front" className="img-fluid rounded" />
                                                                         </div>
                                                                     </div>
                                                                 </div>

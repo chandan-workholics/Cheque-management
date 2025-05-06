@@ -64,7 +64,6 @@ const Home = () => {
 
   const [status, setStatus] = useState({});
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const file = e.target.files[0];
@@ -124,10 +123,7 @@ const Home = () => {
       const result = response.data;
       if (result && result.customerName) {
         const parsedData = {
-
-          customerFirstName: result.customerFirstName || '',
-          customerMiddleName: result.customerMiddleName || '',
-          customerLastName: result.customerLastName || '',
+          customerName: result.customerName || '',
           date: result.date || '',
           company: result.company || '',
           checkType: result.checkType || '',
@@ -251,18 +247,16 @@ const Home = () => {
         imageUrl2: formDataback.imageUrl || '',
         imageUrl3: licenseData.imageUrl || '',
         imageUrl4: licenseDataback.imageUrl || '',
-        customerFirstName: formData.customerFirstName || '',
-        customerMiddleName: formData.customerMiddleName || '',
-        customerLastName: formData.customerLastName || '',
+        customerName: formData.customerName,
         licenseNo: licenseData.licenseNo,
-        date: new Date(formData.date).toLocaleString('en-GB', {
+        date: new Date(Date.now()).toLocaleString('en-GB', {
           day: '2-digit',
           month: '2-digit',
           year: 'numeric',
           hour: '2-digit',
           minute: '2-digit',
           second: '2-digit',
-          hour12: false // use 24-hour format
+          hour12: false // 24-hour format
         }),
 
         company: formData.company,
@@ -461,13 +455,13 @@ const Home = () => {
                               <div className="row">
                                 <label className="form-label text-445B64">Customer Name</label>
                                 <div className="col-md-4 mb-3">
-                                  <input type="text" className="form-control" placeholder='First Name' value={formData.customerFirstName} onChange={(e) => setFormData({ ...formData, customerFirstName: e.target.value })} />
+                                  <input type="text" className="form-control" placeholder='First Name' value={licenseData.firstname || formData.customerFirstName} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
                                 </div>
                                 <div className="col-md-4 mb-3">
-                                  <input type="text" className="form-control" placeholder='Middle Name' value={formData.customerMiddleName} onChange={(e) => setFormData({ ...formData, customerMiddleName: e.target.value })} />
+                                  <input type="text" className="form-control" placeholder='Middle Name' value={licenseData.middlename || formData.customerMiddleName} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
                                 </div>
                                 <div className="col-md-4 mb-3">
-                                  <input type="text" className="form-control" placeholder='Last Name' value={formData.customerLastName} onChange={(e) => setFormData({ ...formData, customerLastName: e.target.value })} />
+                                  <input type="text" className="form-control" placeholder='Last Name' value={licenseData.lastname || formData.customerLastName} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
                                 </div>
                               </div>
                             </div>
