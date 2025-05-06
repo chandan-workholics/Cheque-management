@@ -50,6 +50,23 @@ exports.getCheckByVenderId = async (req, res) => {
 };
 
 
+exports.getCheckByCompany = async (req, res) => {
+    try {
+        const { company} = req.params;
+        const checks = await Check.find({ company });
+
+        if (!checks.length) {
+            return res.status(404).json({ message: 'No checks found for this vendor' });
+        }
+
+        return res.status(200).json({ message: 'Checks fetched successfully', data: checks });
+    } catch (error) {
+        console.error('Error in getCheckBycompany:', error);
+        return res.status(500).json({ message: 'Failed to fetch checks', error: error.message });
+    }
+};
+
+
 exports.getCheckById = async (req, res) => {
     try {
         const { id } = req.params;

@@ -200,6 +200,20 @@ exports.dashboardDetail = async (req, res) => {
     }
 };
 
+exports.addUser = async (req, res) => {
+    const { firstname, lastname, mobile, bussiness, email, password } = req.body;
+    const userExist = await Vender.findOne({ email });
+    if (userExist) return res.status(400).json({ message: 'Email already exists' });
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+
+    const newUser = new Vender({ firstname, lastname, mobile, bussiness, email, password: hashedPassword, otp,otpVerified:true });
+    await newUser.save();
+   
+
+    res.json({ message: 'User added successfully.' ,newUser });
+};
 
 exports.getAllUsers = async (req, res) => {
     try {
