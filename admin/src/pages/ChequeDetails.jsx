@@ -36,7 +36,7 @@ const ChequeDetails = () => {
                 <Header />
                 <div className="">
                     <div className="row mh-100vh">
-                        <div className="col-lg-3 col-xl-2 position-relative">
+                        <div className="col-lg-3 col-xl-2 d-none d-lg-block position-relative">
                             <Sidebar />
                         </div>
                         <div className="col-lg-9 col-xl-10 bg-F6F6F6">
@@ -55,8 +55,8 @@ const ChequeDetails = () => {
                                                     <div className="card border-0 rounded-3 mb-3">
                                                         <div className="card-body p-2">
                                                             <div className="row">
-                                                                <div className="col-12 col-lg-6">
-                                                                    <div className="d-flex justify-content-between mb-3 mb-lg-0">
+                                                                <div className="col-8 col-lg-6">
+                                                                    <div className="d-flex justify-content-between mb-lg-0">
                                                                         <div className="d-flex align-items-center">
                                                                             <div className="table-circular-icon bg-F0F5F6 me-3"
                                                                                 style={{ cursor: "pointer" }}>
@@ -68,7 +68,7 @@ const ChequeDetails = () => {
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div className="col-12 col-lg-6">
+                                                                <div className="col-4 col-lg-6 d-flex justify-content-end align-items-center">
                                                                     <div className="d-flex justify-content-end">
                                                                         <button className="btn btn-sm rounded-2 btn-light text-445B64" onClick={handleBack}>
                                                                             <i className="fa-solid fa-arrow-left-long me-2 text-445B64"></i>
@@ -83,8 +83,8 @@ const ChequeDetails = () => {
                                                 <div className="col-12">
                                                     <div className="card border-0 rounded-3 mb-3">
                                                         <div className="card-body">
-                                                            <div className="d-flex justify-content-between">
-                                                                <div className="d-flex gap-5">
+                                                            <div className="d-block d-lg-flex justify-content-between">
+                                                                <div className="d-block d-lg-flex gap-5">
                                                                     <div className="mb-3">
                                                                         <h6 className="text-445B64 fs-14 mb-1">Customer Name</h6>
                                                                         <h6 className="text-0D161A fw-medium mb-0">{chequeDetails?.customerFirstName}</h6>
@@ -110,7 +110,7 @@ const ChequeDetails = () => {
                                                                         <h6 className="text-0D161A fw-medium mb-0">{chequeDetails?.date}</h6>
                                                                     </div>
                                                                 </div>
-                                                                <div className="d-flex gap-5">
+                                                                <div className="d-block d-lg-flex gap-5">
                                                                     <div className="mb-3">
                                                                         <h6 className="text-445B64 fs-14 mb-1">Status</h6>
                                                                         <div className="">
@@ -121,8 +121,8 @@ const ChequeDetails = () => {
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div className="d-flex gap-5">
-                                                                <div className="mb-3">
+                                                            <div className="d-block d-lg-flex gap-5">
+                                                                <div className="mb-3 w-100">
                                                                     <h6 className="text-445B64 fs-14 mb-1">Comments</h6>
                                                                     <div className="card rounded-3">
                                                                         <div className="card-body p-2">
@@ -135,12 +135,12 @@ const ChequeDetails = () => {
                                                         </div>
                                                     </div>
                                                     <div className="row">
-                                                        <div className='col-lg-6'>
+                                                        <div className='col-lg-6 mb-1 mb-lg-0'>
                                                             <div className="card border-0 rounded-3">
                                                                 <div className="card-body">
                                                                     <label className="form-label text-445B64 fw-medium">Cheque Image</label>
                                                                     <div className="row">
-                                                                        <div className="col-lg-6">
+                                                                        <div className="col-lg-6 mb-3 mb-lg-0">
                                                                             <label className="form-label text-445B64">Front Image</label>
                                                                             <img src={chequeDetails?.imageUrl} alt="Cheque Front" className="img-fluid rounded" />
                                                                         </div>
@@ -157,7 +157,7 @@ const ChequeDetails = () => {
                                                                 <div className="card-body">
                                                                     <label className="form-label text-445B64 fw-medium">License Image</label>
                                                                     <div className="row">
-                                                                        <div className="col-lg-6">
+                                                                        <div className="col-lg-6 mb-3 mb-lg-0">
                                                                             <label className="form-label text-445B64">Front Image</label>
                                                                             <img src={chequeDetails?.imageUrl3} alt="Cheque Front" className="img-fluid rounded" />
                                                                         </div>

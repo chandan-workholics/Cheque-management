@@ -98,7 +98,7 @@ const UserList = () => {
                 <Header />
                 <div className="">
                     <div className="row mh-100vh">
-                        <div className="col-lg-3 col-xl-2 position-relative">
+                        <div className="col-lg-3 col-xl-2 d-none d-lg-block position-relative">
                             <Sidebar />
                         </div>
                         <div className="col-lg-9 col-xl-10 bg-F6F6F6">
@@ -125,7 +125,7 @@ const UserList = () => {
                                                         <div className="col-12 col-lg-6">
                                                             <div className="row">
                                                                 <div className="d-flex">
-                                                                    <div className="position-relative pe-0 pe-lg-4"
+                                                                    <div className="position-relative pe-0 pe-lg-4 me-3"
                                                                         style={{ width: "-webkit-fill-available" }}>
                                                                         <input className="form-control rounded-3 me-2 shadow-none bg-F0F5F6" style={{ paddingLeft: "40px" }}
                                                                             type="search" placeholder="Search" aria-label="Search" />
@@ -208,8 +208,8 @@ const UserList = () => {
                                                 </div>
                                             </div>
                                             {/* Pagination Controls */}
-                                            <div className="d-flex justify-content-between mt-4 mb-1 pt-2">
-                                                <h6 className="mb-0 text-445B64">Showing 1 to 10 of 50 entries</h6>
+                                            <div className="d-block d-lg-flex justify-content-between mt-4 mb-1 pt-2">
+                                                <h6 className="mb-3 mb-lg-0 text-445B64">Showing 1 to 10 of 50 entries</h6>
                                                 <nav>
                                                     <ul className="pagination justify-content-end">
                                                         <li className={`page-item ${currentPage === 1 && 'disabled'}`}>

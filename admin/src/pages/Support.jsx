@@ -29,7 +29,7 @@ const Support = () => {
                 <Header />
                 <div className="">
                     <div className="row mh-100vh">
-                        <div className="col-lg-3 col-xl-2 position-relative">
+                        <div className="col-lg-3 col-xl-2 d-none d-lg-block position-relative">
                             <Sidebar />
                         </div>
                         <div className="col-lg-9 col-xl-10 bg-F6F6F6">
@@ -113,8 +113,8 @@ const Support = () => {
                                                 </div>
                                             </div>
                                             {/* Pagination Controls */}
-                                            <div className="d-flex justify-content-between mt-4 mb-1 pt-2">
-                                                <h6 className="mb-0 text-445B64">Showing 1 to 10 of 50 entries</h6>
+                                            <div className="d-block d-lg-flex justify-content-between mt-4 mb-1 pt-2">
+                                                <h6 className="mb-3 mb-lg-0 text-445B64">Showing 1 to 10 of 50 entries</h6>
                                                 <nav>
                                                     <ul className="pagination justify-content-end">
                                                         <li className={`page-item ${currentPage === 1 && 'disabled'}`}>

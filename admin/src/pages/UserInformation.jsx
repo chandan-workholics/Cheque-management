@@ -88,7 +88,7 @@ const UserInformation = () => {
                 <Header />
                 <div className="">
                     <div className="row mh-100vh">
-                        <div className="col-lg-3 col-xl-2 position-relative">
+                        <div className="col-lg-3 col-xl-2 d-none d-lg-block position-relative">
                             <Sidebar />
                         </div>
                         <div className="col-lg-9 col-xl-10 bg-F6F6F6">
@@ -99,8 +99,8 @@ const UserInformation = () => {
                                             <div className="card border-0 rounded-3 mb-3">
                                                 <div className="card-body p-2">
                                                     <div className="row">
-                                                        <div className="col-12 col-lg-6">
-                                                            <div className="d-flex justify-content-between mb-3 mb-lg-0">
+                                                        <div className="col-8 col-lg-6">
+                                                            <div className="d-flex justify-content-between mb-lg-0">
                                                                 <div className="d-flex align-items-center">
                                                                     <div className="table-circular-icon bg-F0F5F6 me-3"
                                                                         style={{ cursor: "pointer" }}>
@@ -112,7 +112,7 @@ const UserInformation = () => {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div className="col-12 col-lg-6 d-flex justify-content-end align-items-center">
+                                                        <div className="col-4 col-lg-6 d-flex justify-content-end align-items-center">
                                                             <div className="d-flex justify-content-end align-items-center">
                                                                 <button className="btn btn-sm rounded-2 btn-light text-445B64" onClick={handleBack}>
                                                                     <i className="fa-solid fa-arrow-left-long me-2 text-445B64"></i>
@@ -132,29 +132,29 @@ const UserInformation = () => {
                                                             </div>
                                                         </div>
                                                     ) : users && (
-                                                        <div className="d-flex justify-content-between flex-wrap">
-                                                            <div className="d-flex gap-5 flex-wrap">
-                                                                <div>
+                                                        <div className="d-block d-lg-flex justify-content-between flex-wrap">
+                                                            <div className="d-block d-lg-flex gap-5 flex-wrap">
+                                                                <div className='mb-3 mb-lg-0'>
                                                                     <h6 className="text-445B64 fs-14 mb-1">User Name</h6>
                                                                     <h6 className="text-0D161A fw-medium mb-0">{users?.firstname} {users?.lastname}</h6>
                                                                 </div>
-                                                                <div>
+                                                                <div className='mb-3 mb-lg-0'>
                                                                     <h6 className="text-445B64 fs-14 mb-1">Phone Number</h6>
                                                                     <h6 className="text-0D161A fw-medium mb-0">{users?.mobile}</h6>
                                                                 </div>
-                                                                <div>
+                                                                <div className='mb-3 mb-lg-0'>
                                                                     <h6 className="text-445B64 fs-14 mb-1">Email Address</h6>
                                                                     <h6 className="text-0D161A fw-medium mb-0">{users?.email}</h6>
                                                                 </div>
-                                                                <div>
+                                                                <div className='mb-3 mb-lg-0'>
                                                                     <h6 className="text-445B64 fs-14 mb-1">Total Checks</h6>
                                                                     <h6 className="text-0D161A fw-medium mb-0">{cheques?.length}</h6>
                                                                 </div>
-                                                                <div>
+                                                                <div className='mb-3 mb-lg-0'>
                                                                     <h6 className="text-445B64 fs-14 mb-1">Total Amount</h6>
                                                                     <h6 className="text-0D161A fw-medium mb-0">${totalAmount}</h6>
                                                                 </div>
-                                                                <div>
+                                                                <div className='mb-3 mb-lg-0'>
                                                                     <h6 className="text-445B64 fs-14 mb-1">Date</h6>
                                                                     <h6 className="text-0D161A fw-medium mb-0">July 14, 2015</h6>
                                                                 </div>
@@ -232,8 +232,8 @@ const UserInformation = () => {
                                                 </div>
                                             </div>
                                             {/* Pagination Controls */}
-                                            <div className="d-flex justify-content-between mt-4 mb-1 pt-2">
-                                                <h6 className="mb-0 text-445B64">Showing 1 to 10 of 50 entries</h6>
+                                            <div className="d-block d-lg-flex justify-content-between mt-4 mb-1 pt-2">
+                                                <h6 className="mb-3 mb-lg-0 text-445B64">Showing 1 to 10 of 50 entries</h6>
                                                 <nav>
                                                     <ul className="pagination justify-content-end">
                                                         <li className={`page-item ${currentPage === 1 && 'disabled'}`}>

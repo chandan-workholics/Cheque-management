@@ -151,7 +151,7 @@ const TicketDetails = () => {
                                                                     rows="3"
                                                                 />
                                                                 <div className="d-flex justify-content-between">
-                                                                    <button className="btn bg-F6FFFE text-445B64 fs-14" style={{ border: '1px solid #D7D7D7' }}>
+                                                                    <button className="btn bg-F6FFFE text-445B64 fs-14 me-2 me-lg-0" style={{ border: '1px solid #D7D7D7' }}>
                                                                         <span className="me-2 text-00C7BE">
                                                                             <i className="fa-solid fa-arrow-up-from-bracket text-4FD1C5 fs-6"></i>
                                                                         </span>

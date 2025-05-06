@@ -120,10 +120,11 @@ body {
   min-height: 100vh;
 }
 
-.w-60px{
+.w-60px {
   width: 60px;
 }
-.w-110px{
+
+.w-110px {
   width: 110px;
 }
 
@@ -202,6 +203,8 @@ body {
 .header {
   border-bottom: 1px solid #F0F5F6;
   position: fixed;
+  top: 0;
+  left: 0;
   z-index: 11;
   background-color: #FFFFFF;
 }
@@ -283,7 +286,10 @@ body {
   background-repeat: no-repeat;
   overflow: hidden;
 }
-
+.offcanvas-body .sidebar {
+  padding-top: 0 !important;
+  min-height: 86vh;
+}
 /* Sidebar - CSS - End */
 
 
@@ -307,6 +313,19 @@ body {
   .inputFile {
     border: 1px dashed #D7D7D7;
     background: #F6FFFE;
+  }
+}
+
+.dashboard-page {
+
+  .nav-pills .nav-link{
+    color: #445B64;
+    background-color: transparent;
+  }
+  .nav-pills .nav-link.active,
+  .nav-pills .show>.nav-link {
+    color: #01A99A;
+    background-color: #EFFFFE;
   }
 }
 
