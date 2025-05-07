@@ -4,6 +4,8 @@ import Sidebar from '../components/Sidebar';
 import axios from 'axios';
 import Chart from 'react-apexcharts';
 import ReactApexChart from 'react-apexcharts';
+import BorderBtm from '../assets/images/boderBtm.png'
+import BorderBtm2 from '../assets/images/borderBtm2.png'
 
 
 const URL = process.env.REACT_APP_URL;
@@ -19,9 +21,9 @@ const Dashboard = () => {
             },
             labels: [],
             legend: {
-                position: 'bottom',
+                position: 'right',
             },
-            colors: ['#00C7BE', '#FF6B6B', '#FFA500'],
+            colors: ['#008CFF', '#E84D4D', '#FFAE4C'],
             responsive: [{
                 breakpoint: 480,
                 options: {
@@ -88,7 +90,7 @@ const Dashboard = () => {
                                                     <div className="d-flex align-items-center">
                                                         <div className="bg-F2F2F7 rounded-3 p-3 me-3 d-flex align-items-center justify-content-center">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                <path d="M14.6667 18.6667H5.33333V16H14.6667M18.6667 13.3333H5.33333V10.6667H18.6667M18.6667 8H5.33333V5.33333H18.6667M21.3333 0H2.66667C1.18667 0 0 1.18667 0 2.66667V21.3333C0 22.0406 0.280951 22.7189 0.781048 23.219C1.28115 23.719 1.95942 24 2.66667 24H21.3333C22.0406 24 22.7189 23.719 23.219 23.219C23.719 22.7189 24 22.0406 24 21.3333V2.66667C24 1.95942 23.719 1.28115 23.219 0.781048C22.7189 0.280951 22.0406 0 21.3333 0Z" fill="#445B64" />
+                                                                <path d="M14.6667 18.6667H5.33333V16H14.6667M18.6667 13.3333H5.33333V10.6667H18.6667M18.6667 8H5.33333V5.33333H18.6667M21.3333 0H2.66667C1.18667 0 0 1.18667 0 2.66667V21.3333C0 22.0406 0.280951 22.7189 0.781048 23.219C1.28115 23.719 1.95942 24 2.66667 24H21.3333C22.0406 24 22.7189 23.719 23.219 23.219C23.719 22.7189 24 22.0406 24 21.3333V2.66667C24 1.95942 23.719 1.28115 23.219 0.781048C22.7189 0.280951 22.0406 0 21.3333 0Z" fill="#000000" />
                                                             </svg>
                                                         </div>
                                                         <div>
@@ -105,7 +107,7 @@ const Dashboard = () => {
                                                     <div className="d-flex align-items-center">
                                                         <div className="bg-F2F2F7 rounded-3 p-3 me-3 d-flex align-items-center justify-content-center">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                <path d="M14.6667 18.6667H5.33333V16H14.6667M18.6667 13.3333H5.33333V10.6667H18.6667M18.6667 8H5.33333V5.33333H18.6667M21.3333 0H2.66667C1.18667 0 0 1.18667 0 2.66667V21.3333C0 22.0406 0.280951 22.7189 0.781048 23.219C1.28115 23.719 1.95942 24 2.66667 24H21.3333C22.0406 24 22.7189 23.719 23.219 23.219C23.719 22.7189 24 22.0406 24 21.3333V2.66667C24 1.95942 23.719 1.28115 23.219 0.781048C22.7189 0.280951 22.0406 0 21.3333 0Z" fill="#445B64" />
+                                                                <path d="M14.6667 18.6667H5.33333V16H14.6667M18.6667 13.3333H5.33333V10.6667H18.6667M18.6667 8H5.33333V5.33333H18.6667M21.3333 0H2.66667C1.18667 0 0 1.18667 0 2.66667V21.3333C0 22.0406 0.280951 22.7189 0.781048 23.219C1.28115 23.719 1.95942 24 2.66667 24H21.3333C22.0406 24 22.7189 23.719 23.219 23.219C23.719 22.7189 24 22.0406 24 21.3333V2.66667C24 1.95942 23.719 1.28115 23.219 0.781048C22.7189 0.280951 22.0406 0 21.3333 0Z" fill="#000000" />
                                                             </svg>
                                                         </div>
                                                         <div>
@@ -122,7 +124,7 @@ const Dashboard = () => {
                                                     <div className="d-flex align-items-center">
                                                         <div className="bg-F2F2F7 rounded-3 p-3 me-3 d-flex align-items-center justify-content-center">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                <path d="M14.6667 18.6667H5.33333V16H14.6667M18.6667 13.3333H5.33333V10.6667H18.6667M18.6667 8H5.33333V5.33333H18.6667M21.3333 0H2.66667C1.18667 0 0 1.18667 0 2.66667V21.3333C0 22.0406 0.280951 22.7189 0.781048 23.219C1.28115 23.719 1.95942 24 2.66667 24H21.3333C22.0406 24 22.7189 23.719 23.219 23.219C23.719 22.7189 24 22.0406 24 21.3333V2.66667C24 1.95942 23.719 1.28115 23.219 0.781048C22.7189 0.280951 22.0406 0 21.3333 0Z" fill="#445B64" />
+                                                                <path d="M14.6667 18.6667H5.33333V16H14.6667M18.6667 13.3333H5.33333V10.6667H18.6667M18.6667 8H5.33333V5.33333H18.6667M21.3333 0H2.66667C1.18667 0 0 1.18667 0 2.66667V21.3333C0 22.0406 0.280951 22.7189 0.781048 23.219C1.28115 23.719 1.95942 24 2.66667 24H21.3333C22.0406 24 22.7189 23.719 23.219 23.219C23.719 22.7189 24 22.0406 24 21.3333V2.66667C24 1.95942 23.719 1.28115 23.219 0.781048C22.7189 0.280951 22.0406 0 21.3333 0Z" fill="#000000" />
                                                             </svg>
                                                         </div>
                                                         <div>
@@ -139,7 +141,7 @@ const Dashboard = () => {
                                                     <div className="d-flex align-items-center">
                                                         <div className="bg-F2F2F7 rounded-3 p-3 me-3 d-flex align-items-center justify-content-center">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                <path d="M14.6667 18.6667H5.33333V16H14.6667M18.6667 13.3333H5.33333V10.6667H18.6667M18.6667 8H5.33333V5.33333H18.6667M21.3333 0H2.66667C1.18667 0 0 1.18667 0 2.66667V21.3333C0 22.0406 0.280951 22.7189 0.781048 23.219C1.28115 23.719 1.95942 24 2.66667 24H21.3333C22.0406 24 22.7189 23.719 23.219 23.219C23.719 22.7189 24 22.0406 24 21.3333V2.66667C24 1.95942 23.719 1.28115 23.219 0.781048C22.7189 0.280951 22.0406 0 21.3333 0Z" fill="#445B64" />
+                                                                <path d="M14.6667 18.6667H5.33333V16H14.6667M18.6667 13.3333H5.33333V10.6667H18.6667M18.6667 8H5.33333V5.33333H18.6667M21.3333 0H2.66667C1.18667 0 0 1.18667 0 2.66667V21.3333C0 22.0406 0.280951 22.7189 0.781048 23.219C1.28115 23.719 1.95942 24 2.66667 24H21.3333C22.0406 24 22.7189 23.719 23.219 23.219C23.719 22.7189 24 22.0406 24 21.3333V2.66667C24 1.95942 23.719 1.28115 23.219 0.781048C22.7189 0.280951 22.0406 0 21.3333 0Z" fill="#000000" />
                                                             </svg>
                                                         </div>
                                                         <div>
@@ -156,7 +158,7 @@ const Dashboard = () => {
                                                     <div className="d-flex align-items-center">
                                                         <div className="bg-F2F2F7 rounded-3 p-3 me-3 d-flex align-items-center justify-content-center">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                <path d="M14.6667 18.6667H5.33333V16H14.6667M18.6667 13.3333H5.33333V10.6667H18.6667M18.6667 8H5.33333V5.33333H18.6667M21.3333 0H2.66667C1.18667 0 0 1.18667 0 2.66667V21.3333C0 22.0406 0.280951 22.7189 0.781048 23.219C1.28115 23.719 1.95942 24 2.66667 24H21.3333C22.0406 24 22.7189 23.719 23.219 23.219C23.719 22.7189 24 22.0406 24 21.3333V2.66667C24 1.95942 23.719 1.28115 23.219 0.781048C22.7189 0.280951 22.0406 0 21.3333 0Z" fill="#445B64" />
+                                                                <path d="M14.6667 18.6667H5.33333V16H14.6667M18.6667 13.3333H5.33333V10.6667H18.6667M18.6667 8H5.33333V5.33333H18.6667M21.3333 0H2.66667C1.18667 0 0 1.18667 0 2.66667V21.3333C0 22.0406 0.280951 22.7189 0.781048 23.219C1.28115 23.719 1.95942 24 2.66667 24H21.3333C22.0406 24 22.7189 23.719 23.219 23.219C23.719 22.7189 24 22.0406 24 21.3333V2.66667C24 1.95942 23.719 1.28115 23.219 0.781048C22.7189 0.280951 22.0406 0 21.3333 0Z" fill="#000000" />
                                                             </svg>
                                                         </div>
                                                         <div>
@@ -173,7 +175,7 @@ const Dashboard = () => {
                                                     <div className="d-flex align-items-center">
                                                         <div className="bg-F2F2F7 rounded-3 p-3 me-3 d-flex align-items-center justify-content-center">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                <path d="M14.6667 18.6667H5.33333V16H14.6667M18.6667 13.3333H5.33333V10.6667H18.6667M18.6667 8H5.33333V5.33333H18.6667M21.3333 0H2.66667C1.18667 0 0 1.18667 0 2.66667V21.3333C0 22.0406 0.280951 22.7189 0.781048 23.219C1.28115 23.719 1.95942 24 2.66667 24H21.3333C22.0406 24 22.7189 23.719 23.219 23.219C23.719 22.7189 24 22.0406 24 21.3333V2.66667C24 1.95942 23.719 1.28115 23.219 0.781048C22.7189 0.280951 22.0406 0 21.3333 0Z" fill="#445B64" />
+                                                                <path d="M14.6667 18.6667H5.33333V16H14.6667M18.6667 13.3333H5.33333V10.6667H18.6667M18.6667 8H5.33333V5.33333H18.6667M21.3333 0H2.66667C1.18667 0 0 1.18667 0 2.66667V21.3333C0 22.0406 0.280951 22.7189 0.781048 23.219C1.28115 23.719 1.95942 24 2.66667 24H21.3333C22.0406 24 22.7189 23.719 23.219 23.219C23.719 22.7189 24 22.0406 24 21.3333V2.66667C24 1.95942 23.719 1.28115 23.219 0.781048C22.7189 0.280951 22.0406 0 21.3333 0Z" fill="#000000" />
                                                             </svg>
                                                         </div>
                                                         <div>
@@ -190,7 +192,7 @@ const Dashboard = () => {
                                                     <div className="d-flex align-items-center">
                                                         <div className="bg-F2F2F7 rounded-3 p-3 me-3 d-flex align-items-center justify-content-center">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                <path d="M14.6667 18.6667H5.33333V16H14.6667M18.6667 13.3333H5.33333V10.6667H18.6667M18.6667 8H5.33333V5.33333H18.6667M21.3333 0H2.66667C1.18667 0 0 1.18667 0 2.66667V21.3333C0 22.0406 0.280951 22.7189 0.781048 23.219C1.28115 23.719 1.95942 24 2.66667 24H21.3333C22.0406 24 22.7189 23.719 23.219 23.219C23.719 22.7189 24 22.0406 24 21.3333V2.66667C24 1.95942 23.719 1.28115 23.219 0.781048C22.7189 0.280951 22.0406 0 21.3333 0Z" fill="#445B64" />
+                                                                <path d="M14.6667 18.6667H5.33333V16H14.6667M18.6667 13.3333H5.33333V10.6667H18.6667M18.6667 8H5.33333V5.33333H18.6667M21.3333 0H2.66667C1.18667 0 0 1.18667 0 2.66667V21.3333C0 22.0406 0.280951 22.7189 0.781048 23.219C1.28115 23.719 1.95942 24 2.66667 24H21.3333C22.0406 24 22.7189 23.719 23.219 23.219C23.719 22.7189 24 22.0406 24 21.3333V2.66667C24 1.95942 23.719 1.28115 23.219 0.781048C22.7189 0.280951 22.0406 0 21.3333 0Z" fill="#000000" />
                                                             </svg>
                                                         </div>
                                                         <div>
@@ -207,10 +209,10 @@ const Dashboard = () => {
                                             <div className="card shadow-sm border-0 rounded-4">
                                                 <div className="card-body">
                                                     <div className="row border-bottom pb-2">
-                                                        <div className="col-md-4">
-                                                            <h6 className="mb-3 text-445B64">Report</h6>
+                                                        <div className="col-4 mt-auto">
+                                                            <h6 className="mb-0 text-445B64">Report</h6>
                                                         </div>
-                                                        <div className="col-md-8 d-flex justify-content-end">
+                                                        <div className="col-8 d-flex justify-content-end">
                                                             <div className="bg-F6F6F6 p-1 rounded-3 d-flex align-items-center">
                                                                 <ul className="nav nav-pills" id="chartTabs" role="tablist">
                                                                     <li className="nav-item" role="presentation">
@@ -258,6 +260,9 @@ const Dashboard = () => {
                                                                 </ul>
                                                             </div>
                                                         </div>
+                                                        <div className="col-12">
+                                                            <img src={BorderBtm} alt="" className="w-100" />
+                                                        </div>
                                                     </div>
                                                     {/* Tab Panes */}
                                                     <div className="tab-content" id="chartTabsContent">
@@ -282,7 +287,13 @@ const Dashboard = () => {
                                                                 options={{
                                                                     chart: { id: 'weekly-bar' },
                                                                     xaxis: { categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] },
-                                                                    colors: ['#FFA500'],
+                                                                    colors: ['#008CFF'],
+                                                                    plotOptions: {
+                                                                        bar: {
+                                                                            borderRadius: 10, // Set bar corner radius here
+                                                                            horizontal: false, // Keep bars vertical
+                                                                        },
+                                                                    },
                                                                 }}
                                                                 series={[{ name: 'Checks', data: data?.chart?.weekly || [] }]}
                                                                 type="bar"
@@ -303,7 +314,13 @@ const Dashboard = () => {
                                                                     xaxis: {
                                                                         categories: data?.chart?.monthly?.map(item => item.date) || [],
                                                                     },
-                                                                    colors: ['#FF4560'],
+                                                                    colors: ['#E84D4D'],
+                                                                    plotOptions: {
+                                                                        bar: {
+                                                                            borderRadius: 10, // Set bar corner radius here
+                                                                            horizontal: false, // Keep bars vertical
+                                                                        },
+                                                                    },
                                                                 }}
                                                                 series={[{
                                                                     name: 'Checks',
@@ -321,7 +338,10 @@ const Dashboard = () => {
                                         <div className="col-12 col-xl-5 mb-3">
                                             <div className="card shadow-sm border-0 rounded-4">
                                                 <div className="card-body">
-                                                    <h6 className="mb-3 text-445B64 pb-2 border-bottom">Check Status</h6>
+                                                    <h6 className="mb-0 text-445B64">Check Status</h6>
+                                                    <div className="col-12">
+                                                        <img src={BorderBtm2} alt="" className="w-100" />
+                                                    </div>
                                                     <ReactApexChart
                                                         options={chartData.options}
                                                         series={chartData.series}

@@ -28,7 +28,7 @@ body {
 }
 
 .bg-00C7BE {
-  background-color: #00C7BE;
+  background-color: #008CFF;
 }
 
 .bg-F6F6F6 {
@@ -40,7 +40,7 @@ body {
 }
 
 .bg-EFFFFE {
-  background-color: #EFFFFE;
+  background-color: #DEF0FF;
 }
 
 .bg-FFF6F6 {
@@ -52,15 +52,15 @@ body {
 }
 
 .bg-4FD1C5 {
-  background-color: #4FD1C5;
+  background-color: #008CFF !important;
 }
 
 .bg-E84D4D {
-  background-color: #E84D4D;
+  background-color: #E84D4D !important;
 }
 
 .bg-E4FFFD {
-  background-color: #E4FFFD;
+  background-color: #E5F3FF !important;
 }
 
 .bg-F5F5F5 {
@@ -72,7 +72,7 @@ body {
 }
 
 .bg-F6FFFE {
-  background-color: #F6FFFE;
+  background-color: #E5F3FF;
 }
 
 .bg-FAFAFA {
@@ -87,15 +87,15 @@ body {
 
 /* Text-Color-Start */
 .text-445B64 {
-  color: #445B64;
+  color: #000000;
 }
 
 .text-445B64-img {
-  color: #445B64 !important;
+  color: #000000 !important;
 }
 
 .text-00C7BE {
-  color: #00C7BE;
+  color: #008CFF;
 }
 
 .text-515151 {
@@ -103,7 +103,7 @@ body {
 }
 
 .text-01A99A {
-  color: #01A99A !important;
+  color: #008CFF !important;
 }
 
 .text-E84D4D {
@@ -142,19 +142,19 @@ body {
 
 .sign-btn,
 .theme-btn {
-  background-color: #00C7BE;
-  border: 1px solid #00C7BE;
+  background-color: #008CFF !important;
+  border: 1px solid #008CFF;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
   border-radius: 10px;
-  color: #FFFFFF;
+  color: #FFFFFF !important;
   padding: 12px;
 }
 
-.sign-btn:hover {
-  border: 1px solid #00C7BE;
-  color: #00C7BE;
+/* .sign-btn:hover {
+  border: 1px solid #008CFF;
+  color: #008CFF;
   background-color: #FFFFFF;
-}
+} */
 
 .sign-page .form-control {
   border: 1px solid #EEEEEE;
@@ -164,7 +164,7 @@ body {
 
 .form-control:focus,
 .form-select:focus {
-  border-color: #00C7BE;
+  border-color: #008CFF;
   box-shadow: none;
 }
 
@@ -184,8 +184,8 @@ body {
 }
 
 .form-check-input:checked {
-  background-color: #4FD1C5;
-  border-color: #01A99A;
+  background-color: #008CFF;
+  border-color: #008CFF;
   box-shadow: 0px -2px 4px 0px #00598680 inset !important;
   box-shadow: 0px 2px 4px 0px #DEF4FF80 inset !important;
 
@@ -226,7 +226,7 @@ body {
 
 .dropdown-item.active,
 .dropdown-item:active {
-  background-color: #00c7be;
+  background-color: #008CFF;
 }
 
 /* Header - CSS - End */
@@ -236,7 +236,7 @@ body {
   width: 15.3%;
   min-height: 100vh;
   background-color: #FFFFFF;
-  color: #445B64;
+  color: #000000;
   padding-top: 80px !important;
 }
 
@@ -247,20 +247,23 @@ body {
 }
 
 .sidebar .nav-link {
-  color: #445B64;
+  color: #000000;
   transition: background 0.3s;
   display: flex;
   align-items: center;
   gap: 15px;
+  border-radius: 14px;
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
 
 .sidebar .nav-link:hover,
 .sidebar .nav-link.active {
-  background-color: #EAF9F7;
-  color: #445B64;
+  background-color: #E5F3FF;
+  color: #000000;
 
   .sidebar-icon {
-    background: #00C7BE;
+    background: #008CFF;
 
     svg path {
       fill: #FFFFFF;
@@ -286,10 +289,12 @@ body {
   background-repeat: no-repeat;
   overflow: hidden;
 }
+
 .offcanvas-body .sidebar {
   padding-top: 0 !important;
   min-height: 86vh;
 }
+
 /* Sidebar - CSS - End */
 
 
@@ -298,7 +303,7 @@ body {
 .new-cheque-form {
   .form-label {
     font-size: 14px;
-    color: #445B64;
+    color: #000000;
   }
 
   .form-control,
@@ -307,25 +312,26 @@ body {
     border-radius: 8px;
     border: 1px solid #DEE6E9;
     background: #F0F5F6;
-    color: #445B64;
+    color: #000000;
   }
 
   .inputFile {
     border: 1px dashed #D7D7D7;
-    background: #F6FFFE;
+    background: #E5F3FF;
   }
 }
 
 .dashboard-page {
 
-  .nav-pills .nav-link{
-    color: #445B64;
+  .nav-pills .nav-link {
+    color: #000000;
     background-color: transparent;
   }
+
   .nav-pills .nav-link.active,
   .nav-pills .show>.nav-link {
-    color: #01A99A;
-    background-color: #EFFFFE;
+    color: #008CFF;
+    background-color: #DEF0FF;
   }
 }
 
@@ -340,7 +346,7 @@ body {
     width: 40px;
     height: 40px;
     border: 1px solid #DEE6E9;
-    color: #445B64;
+    color: #000000;
     border-radius: 60px;
     display: flex;
     justify-content: center;
@@ -349,7 +355,7 @@ body {
 
   table {
     th {
-      color: #445B64 !important;
+      color: #000000 !important;
       font-weight: normal;
       padding: 10px;
     }
@@ -391,7 +397,7 @@ body {
     .page-link.active {
       z-index: 3;
       color: #000000DE;
-      background-color: #00C7BE;
+      background-color: #008CFF;
     }
 
     .disabled>.page-link,

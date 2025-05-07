@@ -91,7 +91,7 @@ const SignIn = () => {
             <div className="container-fluid sign-page">
                 <div className="row sign-main-container">
                 <ToastContainer position='top-right' autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
-                    <div className="col-lg-6 sign-left-bg h-100 d-flex justify-content-center align-items-center">
+                    <div className="col-lg-6 sign-left-bg h-100 d-none d-lg-flex justify-content-center align-items-center">
                         <img src={logoLeft} alt="" className="" />
                     </div>
                     <div className="col-lg-6 h-100 bg-EEEEEE position-relative">
@@ -135,7 +135,7 @@ const SignIn = () => {
                                     </div>
 
                                     <h6 className="text-end text-445B64 mb-3">
-                                        <Link to="/cm-admin/forget-password" className="text-00C7BE text-decoration-none">
+                                        <Link to="/cm-admin/" className="text-00C7BE text-decoration-none">
                                             Forget Password
                                         </Link>
                                     </h6>
