@@ -305,7 +305,7 @@ const MyTicket = () => {
 
             {/* Image Preview Modal */}
             <div className="modal fade" id="imagePreviewModal" tabIndex="-1" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered">
+                <div className="modal-dialog modal-dialog-centered" style={{width:'fit-content'}}>
                     <div className="modal-content bg-transparent border-0 shadow rounded-4">
                         <div className="modal-body text-center p-0">
                             {previewImage && (
