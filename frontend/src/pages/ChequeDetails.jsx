@@ -18,7 +18,7 @@ const ChequeDetails = () => {
                 setChequeDetails(response?.data?.data)
             }
         } catch (error) {
-            console.log("Error in fetching cheque:" + error.message);
+            console.log("Error in fetching check:" + error.message);
         }
     }
 

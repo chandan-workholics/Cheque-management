@@ -149,7 +149,7 @@ const ForgetPassword = () => {
                                     </button>
                                     <h6 className="text-center text-445B64">
                                         <Link to='/cheque-management/' className='text-00C7BE text-decoration-none'>
-                                            <i class="fa-solid fa-chevron-left me-2"></i>
+                                            <i className="fa-solid fa-chevron-left me-2"></i>
                                             Back to Sign-in
                                         </Link>
                                     </h6>
