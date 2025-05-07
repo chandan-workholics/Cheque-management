@@ -208,7 +208,7 @@ const Dashboard = () => {
                                         <div className="col-12 col-xl-7 mb-3">
                                             <div className="card shadow-sm border-0 rounded-4">
                                                 <div className="card-body">
-                                                    <div className="row border-bottom pb-2">
+                                                    <div className="row pb-2">
                                                         <div className="col-4 mt-auto">
                                                             <h6 className="mb-0 text-445B64">Report</h6>
                                                         </div>

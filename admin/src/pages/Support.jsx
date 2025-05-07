@@ -124,7 +124,7 @@ const Support = () => {
                                                                                         <td>{val?.subject}</td>
                                                                                         <td><span className="text-primary">{val?.status}</span></td>
                                                                                         <td>{moment(val?.createdAt).format("MMM DD, YYYY hh:mm A")}</td>
-                                                                                        <td>{val?.subject}</td>
+                                                                                        <td></td>
                                                                                         <td className="">
                                                                                             <div className="d-flex justify-content-center">
                                                                                                 <Link to={`/cm-admin/ticket-details/${val?._id}`} className="btn">
