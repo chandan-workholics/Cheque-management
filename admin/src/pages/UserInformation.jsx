@@ -509,7 +509,7 @@ const UserInformation = () => {
                                                                                 <td>{cheque?.checkType}</td>
                                                                                 <td>{cheque?.amount}</td>
                                                                                 <td>{cheque?.comment}</td>
-                                                                                <td>{cheque?.date}</td>
+                                                                                <td>{new Date(cheque?.date).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}</td>
                                                                                 <td className="text-01A99A">{cheque?.status}</td>
                                                                                 <td>
                                                                                     <div className="d-flex justify-content-center">
