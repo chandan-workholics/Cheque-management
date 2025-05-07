@@ -52,15 +52,15 @@ const TicketDetails = () => {
                                                         <div className="col-12">
                                                             <div className="border-bottom">
                                                                 <div className="row gap-3 p-3">
-                                                                    <div class="col-12 col-lg-3 col-xl-2 ">
-                                                                        <select class="form-control bg-F0F5F6">
+                                                                    <div className="col-12 col-lg-3 col-xl-2 ">
+                                                                        <select className="form-control bg-F0F5F6">
                                                                             <option value="">New</option>
                                                                             <option value="Personal">New 1</option>
                                                                             <option value="Business">New 2</option>
                                                                         </select>
                                                                     </div>
-                                                                    <div class="col-12 col-lg-3 col-xl-2">
-                                                                        <select class="form-control bg-F0F5F6">
+                                                                    <div className="col-12 col-lg-3 col-xl-2">
+                                                                        <select className="form-control bg-F0F5F6">
                                                                             <option value="">Jane smith</option>
                                                                             <option value="Personal">New 1</option>
                                                                             <option value="Business">New 2</option>
@@ -75,6 +75,7 @@ const TicketDetails = () => {
                                                                         <div className="border-end">
                                                                         <div className="table-responsive p-2">
                                                                             <table className="table mb-0">
+                                                                                <tbody>
                                                                                 <tr>
                                                                                     <td className='text-445B64-img w-60px'>Name</td>
                                                                                     <td><span className="text-445B64-img">-</span> John Doe</td>
@@ -87,6 +88,7 @@ const TicketDetails = () => {
                                                                                     <td className='text-445B64-img w-60px'>Phone</td>
                                                                                     <td><span className="text-445B64-img">-</span> 6466466464654</td>
                                                                                 </tr>
+                                                                                </tbody>
                                                                             </table>
                                                                         </div>
                                                                     </div>
@@ -95,6 +97,7 @@ const TicketDetails = () => {
                                                                         <h6 className="text-445B64 fw-semibold p-3 mb-0  border-bottom">Ticket Info</h6>
                                                                         <div className="table-responsive p-2">
                                                                             <table className="table mb-0">
+                                                                                <tbody>
                                                                                 <tr>
                                                                                     <td className='text-445B64-img w-110px'>Priority</td>
                                                                                     <td><span className="text-445B64-img">-</span> High</td>
@@ -107,6 +110,7 @@ const TicketDetails = () => {
                                                                                     <td className='text-445B64-img w-110px'>Last Updated</td>
                                                                                     <td><span className="text-445B64-img">-</span> Apr 28, 2023 02:15 PM</td>
                                                                                 </tr>
+                                                                                </tbody>
                                                                             </table>
                                                                         </div>
                                                                     </div>

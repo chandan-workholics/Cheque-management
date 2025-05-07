@@ -43,6 +43,7 @@ const Profile = () => {
     return (
         <>
             <div className="container-fluid">
+                <ToastContainer position='top-right' autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
                 <Header />
                 <div className="">
                     <div className="row mh-100vh">

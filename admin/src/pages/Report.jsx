@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import { Link } from 'react-router-dom';
@@ -73,7 +73,7 @@ const Report = () => {
                                                                                 <input className="form-check-input table-checkbox"
                                                                                     type="checkbox" value="" id="flexCheckDefault" />
                                                                             </td>
-                                                                            <td scope="row">1</td>
+                                                                            <td>1</td>
                                                                             <td>Courtney Henry</td>
                                                                             <td>(704) 555-0127</td>
                                                                             <td>curtis.weaver@example.com</td>

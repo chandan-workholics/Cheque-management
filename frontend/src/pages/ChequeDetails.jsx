@@ -150,7 +150,7 @@ const ChequeDetails = () => {
                                                                     </div>
                                                                     <div className="col-lg-6">
                                                                         <label className="form-label text-445B64">Back Image</label>
-                                                                        <img src={chequeDetails?.imageUrl2} alt='Profile' className='w-100 border rounded-4 overflow-hidden' />
+                                                                        <img src={chequeDetails?.imageUrl2 || null} alt='Profile' className='w-100 border rounded-4 overflow-hidden' />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -167,7 +167,7 @@ const ChequeDetails = () => {
                                                                     </div>
                                                                     <div className="col-lg-6">
                                                                         <label className="form-label text-445B64">Back Image</label>
-                                                                        <img src={chequeDetails?.imageUrl4} alt='Profile' className='w-100 border rounded-4 overflow-hidden' />
+                                                                        <img src={chequeDetails?.imageUrl4 || null} alt='Profile' className='w-100 border rounded-4 overflow-hidden' />
                                                                     </div>
                                                                 </div>
                                                             </div>

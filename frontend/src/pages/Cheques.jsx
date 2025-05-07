@@ -104,15 +104,9 @@ const Cheques = () => {
                                                                 <i className="fa fa-search text-445B64 position-absolute top-0 start-0" style={{ margin: "8px" }}></i>
                                                             </div>
                                                         </div>
-<<<<<<< HEAD
-                                                        <div className="col-lg-5 d-flex justify-content-around align-items-center">
-                                                            <button className='btn fs-14 text-445B64 p-0' onClick={handleAddCheque}>
-                                                                <i className="fa fa-plus me-2"></i>Add Check
-=======
                                                         <div className="col-lg-3 d-flex justify-content-around align-items-center">
                                                             <button className='btn btn-light py-1 px-2 fs-14 text-445B64 p-0' onClick={handleAddCheque}>
                                                                 <i className="fa fa-plus me-2"></i>Add Cheque
->>>>>>> 3f56af5b5e79b3f3b232d60601ae455c7c334d9c
                                                             </button>
                                                         </div>
                                                     </div>

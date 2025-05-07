@@ -12,21 +12,6 @@ const AllCheques = () => {
     const [cheques, setCheques] = useState([]);
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-    const [showModal, setShowModal] = useState(false);
-    const [newCheque, setNewCheque] = useState({
-        imageUrl: "",
-        customerFirstName: "",
-        customerMiddleName: "",
-        customerLastName: "",
-        licenseNo: "",
-        date: "",
-        company: "",
-        status: "",
-        amount: "",
-        checkType: "",
-        comment: "",
-        imageFile: null,
-    });
     const rowsPerPage = 10;
 
     // Pagination logic
@@ -111,7 +96,7 @@ const AllCheques = () => {
                                                                             style={{ margin: "11px" }}></i>
                                                                     </div>
                                                                     <div className="table-circular-icon bg-F0F5F6" style={{ cursor: "pointer" }} >
-                                                                        <i class="fa-solid fa-square-plus"></i>
+                                                                        <i className="fa-solid fa-square-plus"></i>
                                                                     </div>
                                                                 </div>
                                                             </div>
