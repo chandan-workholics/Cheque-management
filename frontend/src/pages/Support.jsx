@@ -146,7 +146,7 @@ const Support = () => {
                                                                         <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmit} style={{ opacity: 0, cursor: 'pointer' }} />
                                                                         <div className="">
                                                                             <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
-                                                                            <div className="text-445B64">Upload Cheque Image </div>
+                                                                            <div className="text-445B64">Upload Check Image </div>
                                                                         </div>
                                                                     </div>
                                                                     <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
@@ -161,7 +161,7 @@ const Support = () => {
                                                                         />
                                                                         <div className="">
                                                                             <i className="fa-solid fa-camera fs-4 text-01A99A"></i>
-                                                                            <div className="text-445B64">Capture Cheque Image</div>
+                                                                            <div className="text-445B64">Capture Check Image</div>
                                                                         </div>
                                                                     </div>
                                                                 </div>

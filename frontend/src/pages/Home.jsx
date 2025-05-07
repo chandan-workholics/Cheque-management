@@ -409,7 +409,7 @@ const Home = () => {
                           </div>
                         </div>
                         <div className="col-md-6">
-                          <label className="form-label text-445B64">Cheque Image</label>
+                          <label className="form-label text-445B64">Check Image</label>
 
 
                           <div className="d-flex gap-2 gap-lg-3">

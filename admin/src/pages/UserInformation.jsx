@@ -14,6 +14,8 @@ const UserInformation = () => {
     const [cheques, setCheques] = useState([]);
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
+    const [showModal, setShowModal] = useState(false);
+    const [report, setReport] = useState([]);
     const rowsPerPage = 10;
 
     // Pagination logic
@@ -26,7 +28,6 @@ const UserInformation = () => {
         try {
             setLoading(true);
             const response = await axios.get(`${URL}/admin/get-all-users-byId/${id}`);
-            console.log(response)
             if (response.status >= 200 && response.status < 300) {
                 setUsers(response?.data?.data)
             }
@@ -41,7 +42,6 @@ const UserInformation = () => {
         try {
             setLoading(true);
             const response = await axios.get(`${URL}/check/get-checkByVenderId/${id}`);
-            console.log(response)
             if (response.status >= 200 && response.status < 300) {
                 setCheques(response?.data?.data)
             }
@@ -66,6 +66,289 @@ const UserInformation = () => {
         }
     };
 
+    const [formData, setFormData] = useState({
+        customerFirstName: '',
+        customerMiddleName: '',
+        customerLastName: '',
+        licenseNo: '',
+        date: '',
+        company: '',
+        checkType: '',
+        amount: '',
+        imageUrl: '',
+        extractedText: '',
+    });
+
+    const [formDataback, setFormDataback] = useState({
+        customerFirstName: '',
+        customerMiddleName: '',
+        customerLastName: '',
+        licenseNo: '',
+        date: '',
+        company: '',
+        checkType: '',
+        amount: '',
+        imageUrl: '',
+        extractedText: '',
+    });
+
+    const [licenseData, setLicenseData] = useState({
+        imageUrl: '',
+        name: '',
+        licenseNo: '',
+        class: '',
+        dob: '',
+        sex: '',
+        eyes: '',
+        height: '',
+        address: '',
+        issuedDate: '',
+        expiryDate: '',
+    });
+
+    const [licenseDataback, setLicenseDataback] = useState({
+        imageUrl: '',
+        name: '',
+        licenseNo: '',
+        class: '',
+        dob: '',
+        sex: '',
+        eyes: '',
+        height: '',
+        address: '',
+        issuedDate: '',
+        expiryDate: '',
+    });
+
+    const [status, setStatus] = useState({});
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const file = e.target.files[0];
+        if (!file) {
+            alert("Please upload a cheque image.");
+            return;
+        }
+        const formData = new FormData();
+        formData.append('image', file);
+        try {
+            const response = await axios.post(`${URL}/scan-check`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            const result = response.data;
+            if (result && result.customerName) {
+                const parsedData = {
+                    customerFirstName: result.customerFirstName || '',
+                    customerMiddleName: result.customerMiddleName || '',
+                    customerLastName: result.customerLastName || '',
+                    date: result.date || '',
+                    company: result.company || '',
+                    checkType: result.checkType || '',
+                    amount: result.amountNumeric || '',
+                    amountWords: result.amountWords || '',
+                    payee: result.payee || '',
+                    memo: result.memo || '',
+                    imageUrl: result.imageUrl || '',
+                    extractedText: result.extractedText || ''
+                };
+                setFormData(parsedData);
+            }
+        } catch (error) {
+            console.error('Error during image upload:', error);
+        }
+
+    };
+
+    const handleSubmitback = async (e) => {
+        e.preventDefault();
+        const file = e.target.files[0];
+        if (!file) {
+            alert("Please upload a cheque image.");
+            return;
+        }
+        const formData = new FormData();
+        formData.append('image', file);
+        try {
+            const response = await axios.post(`${URL}/scan-check`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            const result = response.data;
+            if (result && result.customerName) {
+                const parsedData = {
+                    customerName: result.customerName || '',
+                    date: result.date || '',
+                    company: result.company || '',
+                    checkType: result.checkType || '',
+                    amount: result.amountNumeric || '',
+                    amountWords: result.amountWords || '',
+                    payee: result.payee || '',
+                    memo: result.memo || '',
+                    imageUrl: result.imageUrl || '',
+                    extractedText: result.extractedText || ''
+                };
+                setFormDataback(parsedData);
+            }
+        } catch (error) {
+            console.error('Error during image upload:', error);
+        }
+
+    };
+
+    const handleSubmitLicense = async (e) => {
+        e.preventDefault();
+        const file = e.target.files[0];
+        if (!file) {
+            alert("Please upload a License image.");
+            return;
+        }
+        const formData = new FormData();
+        formData.append('image', file);
+        try {
+            const response = await axios.post(`${URL}/scan-license`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            const result = response.data;
+            if (result) {
+                const parsedData = {
+                    imageUrl: result.imageUrl || '',
+                    name: result.name || '',
+                    licenseNo: result.licenseNo || '',
+                    dob: result.dob || '',
+                    sex: result.sex || '',
+                    eyes: result.eyes || '',
+                    height: result.height || '',
+                    address: result.address || '',
+                    issuedDate: result.issuedDate || '',
+                    expiryDate: result.expiryDate || '',
+                };
+                setLicenseData(parsedData);
+            }
+        } catch (error) {
+            console.error('Error during image upload:', error);
+        }
+
+    };
+
+    const handleSubmitLicenseback = async (e) => {
+        e.preventDefault();
+        const file = e.target.files[0];
+        if (!file) {
+            alert("Please upload a License image.");
+            return;
+        }
+        const formData = new FormData();
+        formData.append('image', file);
+        try {
+            const response = await axios.post(`${URL}/scan-license`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            const result = response.data;
+            if (result) {
+                const parsedData = {
+                    imageUrl: result.imageUrl || '',
+                    name: result.name || '',
+                    licenseNo: result.licenseNo || '',
+                    dob: result.dob || '',
+                    sex: result.sex || '',
+                    eyes: result.eyes || '',
+                    height: result.height || '',
+                    address: result.address || '',
+                    issuedDate: result.issuedDate || '',
+                    expiryDate: result.expiryDate || '',
+                };
+                setLicenseDataback(parsedData);
+            }
+        } catch (error) {
+            console.error('Error during image upload:', error);
+        }
+    };
+
+    const handleStatus = async () => {
+        try {
+            const response = await axios.get(`${URL}/check/status`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            if (response.status >= 200 && response.status < 300) {
+                setStatus(response?.data || []);
+            }
+        } catch (error) {
+            console.log("Error in fetching data");
+        }
+    }
+
+    useEffect(() => {
+        handleStatus();
+    }, [])
+
+    const handleSave = async (e) => {
+        e.preventDefault();
+        if (!formData.imageUrl || !licenseData.imageUrl) {
+            toast.error('Please upload both Cheque and License front images');
+            return;
+        }
+
+        try {
+            const response = await axios.post(`${URL}/check/add-check`, {
+                imageUrl: formData.imageUrl || '',
+                imageUrl2: formDataback.imageUrl || '',
+                imageUrl3: licenseData.imageUrl || '',
+                imageUrl4: licenseDataback.imageUrl || '',
+                customerFirstName: formData.customerFirstName,
+                customerMiddleName: formData.customerMiddleName,
+                customerLastName: formData.customerLastName,
+                licenseNo: licenseData.licenseNo,
+                date: new Date(Date.now()).toLocaleString('en-GB', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    hour12: false,
+                }),
+                company: formData.company,
+                checkType: formData.checkType,
+                amount: formData.amount,
+                status: formData.status,
+                extractedText: formData.extractedText,
+                comment: formData.comment || 'xyz',
+                venderId: id,
+            });
+
+            if (response.status >= 200 && response.status < 300) {
+                toast.success('Check added successfully');
+                setShowModal(false);
+                // Update the check list state
+                if (response.data?.data) {
+                    setReport((prev) => [response.data.data, ...prev]); // <— Add new data to list
+                }
+
+                // Optional: clear the form
+                setFormData({});
+                setLicenseData({});
+                setFormDataback({});
+                setLicenseDataback({});
+            } else {
+                toast.error('Failed to add check');
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            toast.error('An error occurred while submitting the form');
+        }
+    };
+
     const totalAmount = cheques.reduce((sum, cheque) => {
         const num = parseFloat(cheque.amount?.replace(/[^\d.-]/g, '') || 0);
         return sum + (isNaN(num) ? 0 : num);
@@ -73,8 +356,8 @@ const UserInformation = () => {
 
 
     useEffect(() => {
-        fetchUsers();
-        fetchCheques();
+        fetchUsers();// eslint-disable-next-line react-hooks/exhaustive-deps
+        fetchCheques();// eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const handleBack = () => {
@@ -156,7 +439,14 @@ const UserInformation = () => {
                                                                 </div>
                                                                 <div className='mb-3 mb-lg-0'>
                                                                     <h6 className="text-445B64 fs-14 mb-1">Date</h6>
-                                                                    <h6 className="text-0D161A fw-medium mb-0">July 14, 2015</h6>
+                                                                    <h6 className="text-0D161A fw-medium mb-0">
+                                                                        {new Date("July 14, 2015").toLocaleDateString("en-GB", {
+                                                                            day: "numeric",
+                                                                            month: "long",
+                                                                            year: "numeric",
+                                                                        }).replace(/(\w+) (\d{4})$/, "$1, $2")}
+                                                                    </h6>
+
                                                                 </div>
                                                             </div>
                                                             <div>
@@ -171,8 +461,17 @@ const UserInformation = () => {
 
                                             </div>
                                             <div className="card border-0 rounded-3">
-                                                <div className="card-body">
-                                                    <h6 className="text-0D161A fw-medium mb-0">Check List</h6>
+                                                <div className='d-flex justify-content-between'>
+                                                    <div className="card-body">
+                                                        <h6 className="text-0D161A fw-medium mb-0">Check List</h6>
+                                                    </div>
+                                                    <div
+                                                        className="table-circular-icon bg-F0F5F6 m-2"
+                                                        style={{ cursor: "pointer" }}
+                                                        onClick={() => setShowModal(true)}
+                                                    >
+                                                        <i className="fa-solid fa-user-plus"></i>
+                                                    </div>
                                                 </div>
                                                 <div className="card-body p-0">
                                                     <div className="row">
@@ -210,7 +509,7 @@ const UserInformation = () => {
                                                                                 <td>{cheque?.checkType}</td>
                                                                                 <td>{cheque?.amount}</td>
                                                                                 <td>{cheque?.comment}</td>
-                                                                                <td>{cheque?.date}</td>
+                                                                                <td>{new Date(cheque?.date).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}</td>
                                                                                 <td className="text-01A99A">{cheque?.status}</td>
                                                                                 <td>
                                                                                     <div className="d-flex justify-content-center">
@@ -261,6 +560,149 @@ const UserInformation = () => {
                                             </div>
                                         </div>
                                     </div>
+                                    {showModal && (
+                                        <div className="modal fade show d-block" tabIndex="-1" role="dialog" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                                            <div className="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+                                                <div className="modal-content">
+                                                    <div className="modal-header">
+                                                        <h5 className="modal-title">
+                                                            <i className="fa-solid fa-file-circle-plus me-2"></i> New Check
+                                                        </h5>
+                                                        <button type="button" className="btn-close" onClick={() => setShowModal(false)} />
+                                                    </div>
+
+                                                    <div className="modal-body">
+                                                        <form>
+                                                            <div className="row g-3">
+                                                                {/* License Image Upload */}
+                                                                <div className="col-md-6">
+                                                                    <label className="form-label">License Front & Back</label>
+                                                                    <div className="d-flex gap-3">
+                                                                        <div className="form-control text-center position-relative">
+                                                                            <input type="file" onChange={handleSubmitLicense} className="position-absolute w-100 h-100 top-0 start-0" style={{ opacity: 0, cursor: 'pointer' }} />
+                                                                            <div>
+                                                                                <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-info" />
+                                                                                <p className="mb-0">Upload Front</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className="form-control text-center position-relative">
+                                                                            <input type="file" onChange={handleSubmitLicenseback} className="position-absolute w-100 h-100 top-0 start-0" style={{ opacity: 0, cursor: 'pointer' }} />
+                                                                            <div>
+                                                                                <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-info" />
+                                                                                <p className="mb-0">Upload Back</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="row mt-3">
+                                                                        {licenseData?.imageUrl && (
+                                                                            <div className="col-md-6">
+                                                                                <label className="form-label">Front Image</label>
+                                                                                <img src={licenseData.imageUrl} className="img-fluid rounded border" />
+                                                                            </div>
+                                                                        )}
+                                                                        {licenseDataback?.imageUrl && (
+                                                                            <div className="col-md-6">
+                                                                                <label className="form-label">Back Image</label>
+                                                                                <img src={licenseDataback.imageUrl} className="img-fluid rounded border" />
+                                                                            </div>
+                                                                        )}
+                                                                    </div>
+                                                                </div>
+
+                                                                {/* Check Image Upload */}
+                                                                <div className="col-md-6">
+                                                                    <label className="form-label">Check Front & Back</label>
+                                                                    <div className="d-flex gap-3">
+                                                                        <div className="form-control text-center position-relative">
+                                                                            <input type="file" onChange={handleSubmit} className="position-absolute w-100 h-100 top-0 start-0" style={{ opacity: 0, cursor: 'pointer' }} />
+                                                                            <div>
+                                                                                <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-info" />
+                                                                                <p className="mb-0">Upload Front</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className="form-control text-center position-relative">
+                                                                            <input type="file" onChange={handleSubmitback} className="position-absolute w-100 h-100 top-0 start-0" style={{ opacity: 0, cursor: 'pointer' }} />
+                                                                            <div>
+                                                                                <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-info" />
+                                                                                <p className="mb-0">Upload Back</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="row mt-3">
+                                                                        {formData?.imageUrl && (
+                                                                            <div className="col-md-6">
+                                                                                <label className="form-label">Front Image</label>
+                                                                                <img src={formData.imageUrl} className="img-fluid rounded border" />
+                                                                            </div>
+                                                                        )}
+                                                                        {formDataback?.imageUrl && (
+                                                                            <div className="col-md-6">
+                                                                                <label className="form-label">Back Image</label>
+                                                                                <img src={formDataback.imageUrl} className="img-fluid rounded border" />
+                                                                            </div>
+                                                                        )}
+                                                                    </div>
+                                                                </div>
+
+                                                                {/* Text Inputs */}
+                                                                <div className="col-md-4">
+                                                                    <label className="form-label">First Name</label>
+                                                                    <input type="text" className="form-control" value={licenseData.customerFirstName || formData.customerFirstName} onChange={(e) => setFormData({ ...formData, customerFirstName: e.target.value })} />
+                                                                </div>
+                                                                <div className="col-md-4">
+                                                                    <label className="form-label">Middle Name</label>
+                                                                    <input type="text" className="form-control" value={licenseData.customerMiddleName || formData.customerMiddleName} onChange={(e) => setFormData({ ...formData, customerMiddleName: e.target.value })} />
+                                                                </div>
+                                                                <div className="col-md-4">
+                                                                    <label className="form-label">Last Name</label>
+                                                                    <input type="text" className="form-control" value={licenseData.customerLastName || formData.customerLastName} onChange={(e) => setFormData({ ...formData, customerLastName: e.target.value })} />
+                                                                </div>
+                                                                <div className="col-md-6">
+                                                                    <label className="form-label">License No</label>
+                                                                    <input type="text" className="form-control" value={licenseData.licenseNo || ''} onChange={(e) => setLicenseData({ ...licenseData, licenseNo: e.target.value })} />
+                                                                </div>
+                                                                <div className="col-md-6">
+                                                                    <label className="form-label">Company</label>
+                                                                    <input type="text" className="form-control" value={formData.company || ''} onChange={(e) => setFormData({ ...formData, company: e.target.value })} />
+                                                                </div>
+                                                                <div className="col-md-4">
+                                                                    <label className="form-label">Check Type</label>
+                                                                    <select className="form-select" value={formData.checkType || ''} onChange={(e) => setFormData({ ...formData, checkType: e.target.value })}>
+                                                                        <option value="">Select</option>
+                                                                        <option value="Personal">Personal</option>
+                                                                        <option value="Business">Business</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div className="col-md-4">
+                                                                    <label className="form-label">Status</label>
+                                                                    <select className="form-select" value={formData.status || ''} onChange={(e) => setFormData({ ...formData, status: e.target.value })}>
+                                                                        <option value="">Select</option>
+                                                                        <option value="good">Good</option>
+                                                                        <option value="bad">Bad</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div className="col-md-4">
+                                                                    <label className="form-label">Amount</label>
+                                                                    <input type="text" className="form-control" value={formData.amount || ''} onChange={(e) => setFormData({ ...formData, amount: e.target.value })} />
+                                                                </div>
+                                                                <div className="col-12">
+                                                                    <label className="form-label">Comments</label>
+                                                                    <textarea className="form-control" rows="3" value={formData.comment || ''} onChange={(e) => setFormData({ ...formData, comment: e.target.value })}></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
+                                                    <div className="modal-footer">
+                                                        <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>Cancel</button>
+                                                        <button type="button" className="btn btn-primary" onClick={handleSave}>Save Check</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+
+
                                 </div>
                             </div>
                         </div>
@@ -272,3 +714,4 @@ const UserInformation = () => {
 }
 
 export default UserInformation
+
