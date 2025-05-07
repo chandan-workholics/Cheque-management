@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import { toast,ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const URL = process.env.REACT_APP_URL;
@@ -90,7 +90,7 @@ const Cheques = () => {
                                                 </div>
                                                 <div className="col-12 col-lg-6">
                                                     <div className="row">
-                                                        <div className="col-lg-7">
+                                                        <div className="col-lg-9">
                                                             <div className="d-flex position-relative" style={{ width: "100%" }}>
                                                                 <input
                                                                     className="form-control form-control-sm rounded-3 me-2 shadow-none bg-F0F5F6"
@@ -104,17 +104,23 @@ const Cheques = () => {
                                                                 <i className="fa fa-search text-445B64 position-absolute top-0 start-0" style={{ margin: "8px" }}></i>
                                                             </div>
                                                         </div>
-                                                        <div className="col-lg-5 d-flex justify-content-around align-items-center">
-                                                            <button className='btn fs-14 text-445B64 p-0' onClick={handleAddCheque}>
+                                                        <div className="col-lg-3 d-flex justify-content-around align-items-center">
+                                                            <button className='btn btn-light py-1 px-2 fs-14 text-445B64 p-0' onClick={handleAddCheque}>
                                                                 <i className="fa fa-plus me-2"></i>Add Cheque
                                                             </button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div className="col-12">
+                                    <div className="card border-0 rounded-3 mb-1 overflow-hidden">
+                                        <div className="card-body p-0">
                                             {/* Table Starts Here */}
-                                            <div className="table-responsive mt-3">
+                                            <div className="table-responsive">
                                                 <table className="table table-hover">
                                                     <thead>
                                                         <tr>
