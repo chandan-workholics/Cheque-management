@@ -14,6 +14,20 @@ const UserInformation = () => {
     const [cheques, setCheques] = useState([]);
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
+    const [showModal, setShowModal] = useState(false);
+    const [formData, setFormData] = useState({
+        customerFirstName: '',
+        customerMiddleName: '',
+        customerLastName: '',
+        licenseNo: '',
+        date: '',
+        company: '',
+        checkType: '',
+        amount: '',
+        status: '',
+        extractedText: '',
+        comment: ''
+    });
     const rowsPerPage = 10;
 
     // Pagination logic
@@ -26,7 +40,6 @@ const UserInformation = () => {
         try {
             setLoading(true);
             const response = await axios.get(`${URL}/admin/get-all-users-byId/${id}`);
-            console.log(response)
             if (response.status >= 200 && response.status < 300) {
                 setUsers(response?.data?.data)
             }
@@ -41,7 +54,6 @@ const UserInformation = () => {
         try {
             setLoading(true);
             const response = await axios.get(`${URL}/check/get-checkByVenderId/${id}`);
-            console.log(response)
             if (response.status >= 200 && response.status < 300) {
                 setCheques(response?.data?.data)
             }
@@ -63,6 +75,47 @@ const UserInformation = () => {
         } catch (error) {
             toast.error("Error in deleting cheque: " + error.message);
             console.error("Error in deleting cheque", error);
+        }
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const payload = {
+                ...formData,
+                venderId: id
+            };
+            const res = await axios.post(`http://localhost:5000/api/v1/check/add-check`, payload);
+            console.log(res)
+            if (res.status >= 200 && res.status < 300) {
+                toast.success("Check added successfully");
+                setShowModal(false);
+                setFormData({
+                    customerFirstName: '',
+                    customerMiddleName: '',
+                    customerLastName: '',
+                    licenseNo: '',
+                    date: '',
+                    company: '',
+                    checkType: '',
+                    amount: '',
+                    status: '',
+                    extractedText: '',
+                    comment: ''
+                });
+                fetchCheques();
+            }
+        } catch (error) {
+            toast.error("Error adding check");
+            console.error(error);
         }
     };
 
@@ -156,7 +209,14 @@ const UserInformation = () => {
                                                                 </div>
                                                                 <div className='mb-3 mb-lg-0'>
                                                                     <h6 className="text-445B64 fs-14 mb-1">Date</h6>
-                                                                    <h6 className="text-0D161A fw-medium mb-0">July 14, 2015</h6>
+                                                                    <h6 className="text-0D161A fw-medium mb-0">
+                                                                        {new Date("July 14, 2015").toLocaleDateString("en-GB", {
+                                                                            day: "numeric",
+                                                                            month: "long",
+                                                                            year: "numeric",
+                                                                        }).replace(/(\w+) (\d{4})$/, "$1, $2")}
+                                                                    </h6>
+
                                                                 </div>
                                                             </div>
                                                             <div>
@@ -173,6 +233,9 @@ const UserInformation = () => {
                                             <div className="card border-0 rounded-3">
                                                 <div className="card-body">
                                                     <h6 className="text-0D161A fw-medium mb-0">Check List</h6>
+                                                </div>
+                                                <div className="text-end me-3 mb-2"> <div className="table-circular-icon bg-F0F5F6 d-inline-block p-2 rounded-circle" style={{ cursor: "pointer" }} onClick={() => setShowModal(true)} >
+                                                    <i className="fa-solid fa-square-plus text-primary"></i> </div>
                                                 </div>
                                                 <div className="card-body p-0">
                                                     <div className="row">
@@ -261,6 +324,152 @@ const UserInformation = () => {
                                             </div>
                                         </div>
                                     </div>
+                                    {showModal && (
+                                        <div
+                                            className="modal d-block"
+                                            tabIndex="-1"
+                                            role="dialog"
+                                            style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+                                        >
+                                            <div className="modal-dialog modal-lg" role="document">
+                                                <div className="modal-content">
+                                                    <div className="modal-header">
+                                                        <h5 className="modal-title">Add New Check</h5>
+                                                        <button
+                                                            type="button"
+                                                            className="btn-close"
+                                                            onClick={() => setShowModal(false)}
+                                                        ></button>
+                                                    </div>
+                                                    <div className="modal-body">
+                                                        <form onSubmit={handleSubmit}>
+                                                            <div className="row g-3">
+                                                                <div className="col-md-4">
+                                                                    <label className="form-label">Customer First Name</label>
+                                                                    <input
+                                                                        name="customerFirstName"
+                                                                        className="form-control"
+                                                                        value={formData.customerFirstName}
+                                                                        onChange={handleChange}
+                                                                        required
+                                                                    />
+                                                                </div>
+                                                                <div className="col-md-4">
+                                                                    <label className="form-label">Customer Middle Name</label>
+                                                                    <input
+                                                                        name="customerMiddleName"
+                                                                        className="form-control"
+                                                                        value={formData.customerMiddleName}
+                                                                        onChange={handleChange}
+                                                                    />
+                                                                </div>
+                                                                <div className="col-md-4">
+                                                                    <label className="form-label">Customer Last Name</label>
+                                                                    <input
+                                                                        name="customerLastName"
+                                                                        className="form-control"
+                                                                        value={formData.customerLastName}
+                                                                        onChange={handleChange}
+                                                                        required
+                                                                    />
+                                                                </div>
+                                                                <div className="col-md-6">
+                                                                    <label className="form-label">License No</label>
+                                                                    <input
+                                                                        name="licenseNo"
+                                                                        className="form-control"
+                                                                        value={formData.licenseNo}
+                                                                        onChange={handleChange}
+                                                                        required
+                                                                    />
+                                                                </div>
+                                                                <div className="col-md-6">
+                                                                    <label className="form-label">Date</label>
+                                                                    <input
+                                                                        type="date"
+                                                                        name="date"
+                                                                        className="form-control"
+                                                                        value={formData.date}
+                                                                        onChange={handleChange}
+                                                                        required
+                                                                    />
+                                                                </div>
+                                                                <div className="col-md-6">
+                                                                    <label className="form-label">Company</label>
+                                                                    <input
+                                                                        name="company"
+                                                                        className="form-control"
+                                                                        value={formData.company}
+                                                                        onChange={handleChange}
+                                                                        required
+                                                                    />
+                                                                </div>
+                                                                <div className="col-md-6">
+                                                                    <label className="form-label">Check Type</label>
+                                                                    <input
+                                                                        name="checkType"
+                                                                        className="form-control"
+                                                                        value={formData.checkType}
+                                                                        onChange={handleChange}
+                                                                        required
+                                                                    />
+                                                                </div>
+                                                                <div className="col-md-6">
+                                                                    <label className="form-label">Amount</label>
+                                                                    <input
+                                                                        type="number"
+                                                                        name="amount"
+                                                                        className="form-control"
+                                                                        value={formData.amount}
+                                                                        onChange={handleChange}
+                                                                        required
+                                                                    />
+                                                                </div>
+                                                                <div className="col-md-6">
+                                                                    <label className="form-label">Status</label>
+                                                                    <select
+                                                                        name="status"
+                                                                        className="form-control"
+                                                                        value={formData.status}
+                                                                        onChange={handleChange}
+                                                                        required
+                                                                    >
+                                                                        <option value="">Select Status</option>
+                                                                        <option value="good">Active</option>
+                                                                        <option value="bad">InActive</option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div className="col-md-12">
+                                                                    <label className="form-label">Comment</label>
+                                                                    <textarea
+                                                                        name="comment"
+                                                                        className="form-control"
+                                                                        value={formData.comment}
+                                                                        onChange={handleChange}
+                                                                        required
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                            <div className="mt-4 text-end">
+                                                                <button type="submit" className="btn btn-primary">
+                                                                    Submit
+                                                                </button>
+                                                                <button
+                                                                    type="button"
+                                                                    className="btn btn-secondary ms-2"
+                                                                    onClick={() => setShowModal(false)}
+                                                                >
+                                                                    Cancel
+                                                                </button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+
                                 </div>
                             </div>
                         </div>
@@ -272,3 +481,4 @@ const UserInformation = () => {
 }
 
 export default UserInformation
+

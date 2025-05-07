@@ -75,9 +75,8 @@ const UserList = () => {
                     bussiness: '',
                     isActive: '',
                     role: '',
-                    name: ''
                 });
-                fetchUsers(); // Refresh user list
+                fetchUsers(); 
             }
         } catch (error) {
             toast.error("Failed to add user: " + error.message);
@@ -291,10 +290,6 @@ const UserList = () => {
                                                         <option value="true">Active</option>
                                                         <option value="false">Inactive</option>
                                                     </select>
-                                                </div>
-                                                <div className="col-md-6">
-                                                    <label className="form-label">name</label>
-                                                    <input type="text" className="form-control" value={newUser.name} onChange={e => setNewUser({ ...newUser, name: e.target.value })} />
                                                 </div>
                                             </div>
                                         </form>
