@@ -49,7 +49,7 @@ const Header = () => {
                         </li>
                         <li className="nav-item me-lg-0 d-block d-lg-none">
                             <Link className="nav-link header-icon" to=''>
-                                <button className="btn border-0 bg-transparent p-0 mb-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+                                <button className="btn border-0 bg-transparent p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
                                     <i className="fa-solid fa-bars"></i>
                                 </button>
                             </Link>
