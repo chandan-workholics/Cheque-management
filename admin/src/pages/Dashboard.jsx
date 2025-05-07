@@ -4,6 +4,8 @@ import Sidebar from '../components/Sidebar';
 import axios from 'axios';
 import Chart from 'react-apexcharts';
 import ReactApexChart from 'react-apexcharts';
+import BorderBtm from '../assets/images/boderBtm.png'
+import BorderBtm2 from '../assets/images/borderBtm2.png'
 
 
 const URL = process.env.REACT_APP_URL;
@@ -207,10 +209,10 @@ const Dashboard = () => {
                                             <div className="card shadow-sm border-0 rounded-4">
                                                 <div className="card-body">
                                                     <div className="row border-bottom pb-2">
-                                                        <div className="col-md-4">
-                                                            <h6 className="mb-3 text-445B64">Report</h6>
+                                                        <div className="col-4 mt-auto">
+                                                            <h6 className="mb-0 text-445B64">Report</h6>
                                                         </div>
-                                                        <div className="col-md-8 d-flex justify-content-end">
+                                                        <div className="col-8 d-flex justify-content-end">
                                                             <div className="bg-F6F6F6 p-1 rounded-3 d-flex align-items-center">
                                                                 <ul className="nav nav-pills" id="chartTabs" role="tablist">
                                                                     <li className="nav-item" role="presentation">
@@ -257,6 +259,9 @@ const Dashboard = () => {
                                                                     </li>
                                                                 </ul>
                                                             </div>
+                                                        </div>
+                                                        <div className="col-12">
+                                                            <img src={BorderBtm} alt="" className="w-100" />
                                                         </div>
                                                     </div>
                                                     {/* Tab Panes */}
@@ -333,7 +338,10 @@ const Dashboard = () => {
                                         <div className="col-12 col-xl-5 mb-3">
                                             <div className="card shadow-sm border-0 rounded-4">
                                                 <div className="card-body">
-                                                    <h6 className="mb-3 text-445B64 pb-2 border-bottom">Check Status</h6>
+                                                    <h6 className="mb-0 text-445B64">Check Status</h6>
+                                                    <div className="col-12">
+                                                        <img src={BorderBtm2} alt="" className="w-100" />
+                                                    </div>
                                                     <ReactApexChart
                                                         options={chartData.options}
                                                         series={chartData.series}
