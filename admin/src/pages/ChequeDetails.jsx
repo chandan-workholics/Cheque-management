@@ -146,7 +146,7 @@ const ChequeDetails = () => {
                                                         <div className='col-lg-6 mb-1 mb-lg-0'>
                                                             <div className="card border-0 rounded-3">
                                                                 <div className="card-body">
-                                                                    <label className="form-label text-445B64 fw-medium">Cheque Image</label>
+                                                                    <label className="form-label text-445B64 fw-medium">Check Image</label>
                                                                     <div className="row">
                                                                         <div className="col-lg-6 mb-3 mb-lg-0">
                                                                             <label className="form-label text-445B64">Front Image</label>

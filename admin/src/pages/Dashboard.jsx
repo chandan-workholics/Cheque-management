@@ -111,7 +111,7 @@ const Dashboard = () => {
                                                             </svg>
                                                         </div>
                                                         <div>
-                                                            <h6 className="mb-1 fw-medium text-445B64">New Cheques</h6>
+                                                            <h6 className="mb-1 fw-medium text-445B64">New Checks</h6>
                                                             <h4 className="mb-0 text-00C7BE fw-bold">{data?.newCheck}</h4>
                                                         </div>
                                                     </div>
@@ -128,7 +128,7 @@ const Dashboard = () => {
                                                             </svg>
                                                         </div>
                                                         <div>
-                                                            <h6 className="mb-1 fw-medium text-445B64">Good Cheques</h6>
+                                                            <h6 className="mb-1 fw-medium text-445B64">Good Checks</h6>
                                                             <h4 className="mb-0 text-00C7BE fw-bold">{data?.goodCheck}</h4>
                                                         </div>
                                                     </div>
@@ -145,7 +145,7 @@ const Dashboard = () => {
                                                             </svg>
                                                         </div>
                                                         <div>
-                                                            <h6 className="mb-1 fw-medium text-445B64">Bad Cheques</h6>
+                                                            <h6 className="mb-1 fw-medium text-445B64">Bad Checks</h6>
                                                             <h4 className="mb-0 text-00C7BE fw-bold">{data?.badCheck}</h4>
                                                         </div>
                                                     </div>
