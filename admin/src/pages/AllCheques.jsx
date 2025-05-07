@@ -35,16 +35,16 @@ const AllCheques = () => {
     }
 
     const handleDeleteCheque = async (id) => {
-        if (!window.confirm("Are you sure you want to delete this cheque?")) return;
+        if (!window.confirm("Are you sure you want to delete this check?")) return;
         try {
             const response = await axios.delete(`${URL}/admin/delete-checks/${id}`);
             if (response.status >= 200 && response.status < 300) {
-                toast.success("Cheque deleted successfully!");
+                toast.success("Check deleted successfully!");
                 fetchCheques();
             }
         } catch (error) {
-            toast.error("Error in deleting cheque: " + error.message);
-            console.error("Error in deleting cheque", error);
+            toast.error("Error in deleting check: " + error.message);
+            console.error("Error in deleting check", error);
         }
     };
 

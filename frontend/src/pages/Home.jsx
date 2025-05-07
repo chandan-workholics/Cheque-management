@@ -108,7 +108,7 @@ const Home = () => {
     e.preventDefault();
     const file = e.target.files[0];
     if (!file) {
-      alert("Please upload a cheque image.");
+      alert("Please upload a check image.");
       return;
     }
     const formData = new FormData();
@@ -269,7 +269,7 @@ const Home = () => {
       });
       if (response.status >= 200 && response.status < 300) {
 
-        toast.success('check added successfully');
+        toast.success('Check added successfully!');
       } else {
         toast.error('Failed to add check');
       }

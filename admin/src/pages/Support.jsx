@@ -115,8 +115,8 @@ const Support = () => {
                                                                             <>
                                                                                 <tbody key={index}>
                                                                                     <tr>
-                                                                                        <td class="text-center">
-                                                                                            <input class="form-check-input table-checkbox"
+                                                                                        <td className="text-center">
+                                                                                            <input className="form-check-input table-checkbox"
                                                                                                 type="checkbox" value="" id="flexCheckDefault" />
                                                                                         </td>
                                                                                         <td scope="row">{index + 1}</td>
@@ -125,10 +125,10 @@ const Support = () => {
                                                                                         <td><span className="text-primary">{val?.status}</span></td>
                                                                                         <td>{moment(val?.createdAt).format("MMM DD, YYYY hh:mm A")}</td>
                                                                                         <td>{val?.subject}</td>
-                                                                                        <td class="">
+                                                                                        <td className="">
                                                                                             <div className="d-flex justify-content-center">
                                                                                                 <Link to={`/cm-admin/ticket-details/${val?._id}`} className="btn">
-                                                                                                    <i class="fa-solid fa-eye text-445B64"></i>
+                                                                                                    <i className="fa-solid fa-eye text-445B64"></i>
                                                                                                 </Link>
                                                                                             </div>
                                                                                         </td>

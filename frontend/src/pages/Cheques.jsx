@@ -21,7 +21,7 @@ const Cheques = () => {
                 setCheques(response.data.data);
             }
         } catch (error) {
-            console.error("Error fetching cheques:", error);
+            console.error("Error fetching check:", error);
         }
     };
 
@@ -30,12 +30,12 @@ const Cheques = () => {
         try {
             const response = await axios.delete(`${URL}/check/delete-check/${id}`);
             if (response.status >= 200 && response.status < 300) {
-                toast.success("Cheque deleted successfully!");
+                toast.success("Check deleted successfully!");
                 fetchCheques();
             }
         } catch (error) {
-            toast.error("Error in deleting cheque: " + error.message);
-            console.error("Error in deleting cheque", error);
+            toast.error("Error in deleting check: " + error.message);
+            console.error("Error in deleting check", error);
         }
     };
 
