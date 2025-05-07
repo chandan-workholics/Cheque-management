@@ -14,6 +14,7 @@ const MyTicket = () => {
     const [data, setData] = useState([]);
     const vendorId = localStorage.getItem("userId");
     const [message, setMessage] = useState('');
+    const [image, setImage] = useState('');
 
 
     const handleBack = () => {
@@ -54,7 +55,8 @@ const MyTicket = () => {
         const payload = {
             ticketId: ticketid,
             senderId: vendorId,
-            message
+            message,
+            image: image
         };
 
         try {
@@ -66,12 +68,38 @@ const MyTicket = () => {
 
             if (response.status >= 200 && response.status < 300) {
                 setMessage('');
+                setImage('');
                 getChat(response?.data?.chat?.ticketId); // refresh chat
             }
         } catch (error) {
             console.error('Send chat error:', error);
         }
     };
+
+    const handleUpload = async (e) => {
+        e.preventDefault();
+        const file = e.target.files[0];
+        if (!file) {
+            alert("Please upload a image.");
+            return;
+        }
+        const formData = new FormData();
+        formData.append('image', file);
+        try {
+            const response = await axios.post(`${URL}/upload-image`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            const result = response.data;
+            if (result) {
+                setImage(result?.data?.imageUrl);
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
 
 
 
@@ -214,16 +242,27 @@ const MyTicket = () => {
                                                                                         value={message}
                                                                                         onChange={(e) => setMessage(e.target.value)}
                                                                                     />
-                                                                                    <div className="d-flex justify-content-between">
-                                                                                        <button
-                                                                                            className="btn bg-F6FFFE text-445B64 fs-14"
-                                                                                            style={{ border: '1px solid #D7D7D7' }}
-                                                                                        >
-                                                                                            <span className="me-2 text-00C7BE">
-                                                                                                <i className="fa-solid fa-arrow-up-from-bracket text-4FD1C5 fs-6"></i>
-                                                                                            </span>
+
+                                                                                    <div className="mb-3">
+                                                                                        <label htmlFor="formFile" className="btn bg-F6FFFE text-445B64 fs-14 d-inline-flex align-items-center" style={{ border: '1px solid #D7D7D7', cursor: 'pointer' }}>
+                                                                                            <i className="fa-solid fa-arrow-up-from-bracket text-4FD1C5 fs-6 me-2"></i>
                                                                                             Upload Attachment
-                                                                                        </button>
+                                                                                        </label>
+                                                                                        <input
+                                                                                            type="file"
+                                                                                            id="formFile"
+                                                                                            className="d-none"
+                                                                                            onChange={handleUpload}
+                                                                                        />
+                                                                                    </div>
+
+                                                                                    {image && (
+                                                                                        <div className='mb-3'>
+                                                                                            <img src={image} alt="Attachment Preview" className='w-100 border rounded-4' />
+                                                                                        </div>
+                                                                                    )}
+
+                                                                                    <div className="d-flex justify-content-between">
                                                                                         <button
                                                                                             className="btn sign-btn p-0 px-5 fs-14"
                                                                                             onClick={sendChat}
@@ -232,6 +271,7 @@ const MyTicket = () => {
                                                                                         </button>
                                                                                     </div>
                                                                                 </div>
+
                                                                             </td>
                                                                         </tr>
                                                                     </React.Fragment>

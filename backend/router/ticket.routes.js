@@ -7,6 +7,7 @@ const chatController = require('../controllers/chat.controller');
 router.post('/tickets', ticketController.createTicket);
 router.get('/tickets/vendor/:vendorId', ticketController.getTicketsByVendor);
 
+
 // Chat routes
 router.post('/tickets/chat', chatController.addChatMessage);
 router.get('/tickets/chat/:ticketId', chatController.getChatByTicket);

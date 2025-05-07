@@ -15,12 +15,12 @@ exports.createTicket = async (req, res) => {
 
 
 exports.getTicketsByVendor = async (req, res) => {
-    try {
-      const { vendorId } = req.params;
-      const tickets = await Ticket.find({ vendorId }).sort({ createdAt: -1 });
-      res.status(200).json(tickets);
-    } catch (error) {
-      res.status(500).json({ message: 'Error fetching tickets', error: error.message });
-    }
-  };
-  
+  try {
+    const { vendorId } = req.params;
+    const tickets = await Ticket.find({ vendorId }).sort({ createdAt: -1 });
+    res.status(200).json(tickets);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching tickets', error: error.message });
+  }
+};
+

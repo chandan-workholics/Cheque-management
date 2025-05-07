@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from 'react-router-dom';
 const URL = process.env.REACT_APP_URL;

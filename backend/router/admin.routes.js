@@ -18,5 +18,7 @@ router.get('/get-all-checks-byId/:id', adminController.getAllChecksById);
 router.put('/update-checks/:id', adminController.updateCheck);
 router.delete('/delete-checks/:id', adminController.deleteCheck);
 
+router.get('/tickets/get-all-tickets', adminController.getAllTickets);
+router.get('/tickets/get-ticketsById/:id', adminController.getTicketById);
 
 module.exports = router;

@@ -66,7 +66,7 @@ const SignIn = () => {
             if (response.status >= 200 && response.status < 300) {
                 localStorage.setItem("token", response.data.token);
                 localStorage.setItem("role", response.data.role);
-                localStorage.setItem("adminId", response.data.userId);
+                localStorage.setItem("adminId", response.data.adminId);
                 setTimeout(() => {
                     toast.success('Login successfully');
                 }, 1000);

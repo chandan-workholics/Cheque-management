@@ -1,6 +1,7 @@
 const Admin = require('../model/admin.model');
 const Check = require('../model/check.model');
 const Vender = require('../model/user.model');
+const Ticket = require('../model/ticket.model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const moment = require("moment");
@@ -208,11 +209,11 @@ exports.addUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
-    const newUser = new Vender({ firstname, lastname, mobile, bussiness, email, password: hashedPassword, otp,otpVerified:true });
+    const newUser = new Vender({ firstname, lastname, mobile, bussiness, email, password: hashedPassword, otp, otpVerified: true });
     await newUser.save();
-   
 
-    res.json({ message: 'User added successfully.' ,newUser });
+
+    res.json({ message: 'User added successfully.', newUser });
 };
 
 exports.getAllUsers = async (req, res) => {
@@ -349,5 +350,34 @@ exports.deleteCheck = async (req, res) => {
     } catch (error) {
         console.error('Error in deleteCheck:', error);
         return res.status(500).json({ message: 'Failed to delete Check', error: error.message });
+    }
+};
+
+
+exports.getAllTickets = async (req, res) => {
+    try {
+        const tickets = await Ticket.find().sort({ createdAt: -1 });
+        res.status(200).json(tickets);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching tickets', error: error.message });
+    }
+};
+
+
+
+
+exports.getTicketById = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const ticket = await Ticket.findById(id).populate('vendorId'); // assumes vendorId is a ref
+
+        if (!ticket) {
+            return res.status(404).json({ message: 'Ticket not found' });
+        }
+
+        res.status(200).json(ticket);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching ticket', error: error.message });
     }
 };

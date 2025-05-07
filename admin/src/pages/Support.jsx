@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom'
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
+import axios from 'axios';
+import moment from 'moment';
+const URL = process.env.REACT_APP_URL;
 
 const Support = () => {
     const usersData = Array.from({ length: 50 }, (_, index) => ({
@@ -13,7 +16,9 @@ const Support = () => {
         status: 'Active',
     }));
 
+    const [ticket, setTicket] = useState()
     const [users, setUsers] = useState([])
+    const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const rowsPerPage = 10;
 
@@ -22,6 +27,26 @@ const Support = () => {
     const indexOfFirstRow = indexOfLastRow - rowsPerPage;
     const currentRows = usersData.slice(indexOfFirstRow, indexOfLastRow);
     const totalPages = Math.ceil(usersData.length / rowsPerPage);
+
+
+    const getAllTickets = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.get(`${URL}/admin/tickets/get-all-tickets`);
+            if (response.status >= 200 && response.status < 300) {
+                setTicket(response?.data)
+            }
+        } catch (error) {
+            console.log("Error in fetching data", error);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        getAllTickets();
+    }, [])
+
 
     return (
         <>
@@ -85,27 +110,34 @@ const Support = () => {
                                                                             <th scope="col" class="text-445B64 text-center">Actions</th>
                                                                         </tr>
                                                                     </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td class="text-center">
-                                                                                <input class="form-check-input table-checkbox"
-                                                                                    type="checkbox" value="" id="flexCheckDefault" />
-                                                                            </td>
-                                                                            <td scope="row">1</td>
-                                                                            <td>#0001</td>
-                                                                            <td>Password Reset</td>
-                                                                            <td><span className="text-primary">New</span></td>
-                                                                            <td>July 14, 2015</td>
-                                                                            <td>Wade Warren</td>
-                                                                            <td class="">
-                                                                                <div className="d-flex justify-content-center">
-                                                                                    <Link to="/cm-admin/ticket-details" className="btn">
-                                                                                        <i class="fa-solid fa-eye text-445B64"></i>
-                                                                                    </Link>
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
+                                                                    {ticket?.map((val, index) => {
+                                                                        return (
+                                                                            <>
+                                                                                <tbody key={index}>
+                                                                                    <tr>
+                                                                                        <td class="text-center">
+                                                                                            <input class="form-check-input table-checkbox"
+                                                                                                type="checkbox" value="" id="flexCheckDefault" />
+                                                                                        </td>
+                                                                                        <td scope="row">{index + 1}</td>
+                                                                                        <td>#0001</td>
+                                                                                        <td>{val?.subject}</td>
+                                                                                        <td><span className="text-primary">{val?.status}</span></td>
+                                                                                        <td>{moment(val?.createdAt).format("MMM DD, YYYY hh:mm A")}</td>
+                                                                                        <td>{val?.subject}</td>
+                                                                                        <td class="">
+                                                                                            <div className="d-flex justify-content-center">
+                                                                                                <Link to={`/cm-admin/ticket-details/${val?._id}`} className="btn">
+                                                                                                    <i class="fa-solid fa-eye text-445B64"></i>
+                                                                                                </Link>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </>
+                                                                        )
+                                                                    })}
+
                                                                 </table>
                                                             </div>
                                                         </div>
