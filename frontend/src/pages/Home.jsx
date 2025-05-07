@@ -64,7 +64,6 @@ const Home = () => {
 
   const [status, setStatus] = useState({});
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const file = e.target.files[0];
@@ -124,10 +123,7 @@ const Home = () => {
       const result = response.data;
       if (result && result.customerName) {
         const parsedData = {
-
-          customerFirstName: result.customerFirstName || '',
-          customerMiddleName: result.customerMiddleName || '',
-          customerLastName: result.customerLastName || '',
+          customerName: result.customerName || '',
           date: result.date || '',
           company: result.company || '',
           checkType: result.checkType || '',
@@ -251,9 +247,7 @@ const Home = () => {
         imageUrl2: formDataback.imageUrl || '',
         imageUrl3: licenseData.imageUrl || '',
         imageUrl4: licenseDataback.imageUrl || '',
-        customerFirstName: formData.customerFirstName || '',
-        customerMiddleName: formData.customerMiddleName || '',
-        customerLastName: formData.customerLastName || '',
+        customerName: formData.customerName,
         licenseNo: licenseData.licenseNo,
         date: new Date(Date.now()).toLocaleString('en-GB', {
           day: '2-digit',
@@ -306,7 +300,7 @@ const Home = () => {
                           <div className="d-flex align-items-center mb-3">
                             <div className="bg-light rounded-3 p-3 me-3 d-flex align-items-center justify-content-center">
                               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 15 16" fill="none">
-                                <path d="M9.16667 12.1667H3.33333V10.5H9.16667M11.6667 8.83333H3.33333V7.16667H11.6667M11.6667 5.5H3.33333V3.83333H11.6667M13.3333 0.5H1.66667C0.741667 0.5 0 1.24167 0 2.16667V13.8333C0 14.2754 0.175595 14.6993 0.488155 15.0118C0.800716 15.3244 1.22464 15.5 1.66667 15.5H13.3333C13.7754 15.5 14.1993 15.3244 14.5118 15.0118C14.8244 14.6993 15 14.2754 15 13.8333V2.16667C15 1.72464 14.8244 1.30072 14.5118 0.988155C14.1993 0.675595 13.7754 0.5 13.3333 0.5Z" fill="#445B64" />
+                                <path d="M9.16667 12.1667H3.33333V10.5H9.16667M11.6667 8.83333H3.33333V7.16667H11.6667M11.6667 5.5H3.33333V3.83333H11.6667M13.3333 0.5H1.66667C0.741667 0.5 0 1.24167 0 2.16667V13.8333C0 14.2754 0.175595 14.6993 0.488155 15.0118C0.800716 15.3244 1.22464 15.5 1.66667 15.5H13.3333C13.7754 15.5 14.1993 15.3244 14.5118 15.0118C14.8244 14.6993 15 14.2754 15 13.8333V2.16667C15 1.72464 14.8244 1.30072 14.5118 0.988155C14.1993 0.675595 13.7754 0.5 13.3333 0.5Z" fill="#000000" />
                               </svg>
                             </div>
                             <div>
@@ -330,7 +324,7 @@ const Home = () => {
                           <div className="d-flex align-items-center mb-3">
                             <div className="bg-light rounded-3 p-3 me-3 d-flex align-items-center justify-content-center">
                               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 15 16" fill="none">
-                                <path d="M9.16667 12.1667H3.33333V10.5H9.16667M11.6667 8.83333H3.33333V7.16667H11.6667M11.6667 5.5H3.33333V3.83333H11.6667M13.3333 0.5H1.66667C0.741667 0.5 0 1.24167 0 2.16667V13.8333C0 14.2754 0.175595 14.6993 0.488155 15.0118C0.800716 15.3244 1.22464 15.5 1.66667 15.5H13.3333C13.7754 15.5 14.1993 15.3244 14.5118 15.0118C14.8244 14.6993 15 14.2754 15 13.8333V2.16667C15 1.72464 14.8244 1.30072 14.5118 0.988155C14.1993 0.675595 13.7754 0.5 13.3333 0.5Z" fill="#445B64" />
+                                <path d="M9.16667 12.1667H3.33333V10.5H9.16667M11.6667 8.83333H3.33333V7.16667H11.6667M11.6667 5.5H3.33333V3.83333H11.6667M13.3333 0.5H1.66667C0.741667 0.5 0 1.24167 0 2.16667V13.8333C0 14.2754 0.175595 14.6993 0.488155 15.0118C0.800716 15.3244 1.22464 15.5 1.66667 15.5H13.3333C13.7754 15.5 14.1993 15.3244 14.5118 15.0118C14.8244 14.6993 15 14.2754 15 13.8333V2.16667C15 1.72464 14.8244 1.30072 14.5118 0.988155C14.1993 0.675595 13.7754 0.5 13.3333 0.5Z" fill="#000000" />
                               </svg>
                             </div>
                             <div>
@@ -352,7 +346,7 @@ const Home = () => {
                           <div className="d-flex align-items-center mb-3">
                             <div className="bg-light rounded-3 p-3 me-3 d-flex align-items-center justify-content-center">
                               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 15 16" fill="none">
-                                <path d="M9.16667 12.1667H3.33333V10.5H9.16667M11.6667 8.83333H3.33333V7.16667H11.6667M11.6667 5.5H3.33333V3.83333H11.6667M13.3333 0.5H1.66667C0.741667 0.5 0 1.24167 0 2.16667V13.8333C0 14.2754 0.175595 14.6993 0.488155 15.0118C0.800716 15.3244 1.22464 15.5 1.66667 15.5H13.3333C13.7754 15.5 14.1993 15.3244 14.5118 15.0118C14.8244 14.6993 15 14.2754 15 13.8333V2.16667C15 1.72464 14.8244 1.30072 14.5118 0.988155C14.1993 0.675595 13.7754 0.5 13.3333 0.5Z" fill="#445B64" />
+                                <path d="M9.16667 12.1667H3.33333V10.5H9.16667M11.6667 8.83333H3.33333V7.16667H11.6667M11.6667 5.5H3.33333V3.83333H11.6667M13.3333 0.5H1.66667C0.741667 0.5 0 1.24167 0 2.16667V13.8333C0 14.2754 0.175595 14.6993 0.488155 15.0118C0.800716 15.3244 1.22464 15.5 1.66667 15.5H13.3333C13.7754 15.5 14.1993 15.3244 14.5118 15.0118C14.8244 14.6993 15 14.2754 15 13.8333V2.16667C15 1.72464 14.8244 1.30072 14.5118 0.988155C14.1993 0.675595 13.7754 0.5 13.3333 0.5Z" fill="#000000" />
                               </svg>
                             </div>
                             <div>
@@ -374,7 +368,7 @@ const Home = () => {
                   <div className="card rounded-4 overflow-hidden border-0 shadow-sm">
                     <div className="card-header bg-white d-flex align-items-center py-3">
                       <svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" viewBox="0 0 15 16" fill="none">
-                        <path d="M9.16667 12.1667H3.33333V10.5H9.16667M11.6667 8.83333H3.33333V7.16667H11.6667M11.6667 5.5H3.33333V3.83333H11.6667M13.3333 0.5H1.66667C0.741667 0.5 0 1.24167 0 2.16667V13.8333C0 14.2754 0.175595 14.6993 0.488155 15.0118C0.800716 15.3244 1.22464 15.5 1.66667 15.5H13.3333C13.7754 15.5 14.1993 15.3244 14.5118 15.0118C14.8244 14.6993 15 14.2754 15 13.8333V2.16667C15 1.72464 14.8244 1.30072 14.5118 0.988155C14.1993 0.675595 13.7754 0.5 13.3333 0.5Z" fill="#445B64" />
+                        <path d="M9.16667 12.1667H3.33333V10.5H9.16667M11.6667 8.83333H3.33333V7.16667H11.6667M11.6667 5.5H3.33333V3.83333H11.6667M13.3333 0.5H1.66667C0.741667 0.5 0 1.24167 0 2.16667V13.8333C0 14.2754 0.175595 14.6993 0.488155 15.0118C0.800716 15.3244 1.22464 15.5 1.66667 15.5H13.3333C13.7754 15.5 14.1993 15.3244 14.5118 15.0118C14.8244 14.6993 15 14.2754 15 13.8333V2.16667C15 1.72464 14.8244 1.30072 14.5118 0.988155C14.1993 0.675595 13.7754 0.5 13.3333 0.5Z" fill="#000000" />
                       </svg>
                       <h6 className='ms-2 mb-0 text-445B64'>New Checks</h6>
                     </div>
@@ -461,13 +455,13 @@ const Home = () => {
                               <div className="row">
                                 <label className="form-label text-445B64">Customer Name</label>
                                 <div className="col-md-4 mb-3">
-                                  <input type="text" className="form-control" placeholder='First Name' value={formData.customerFirstName} onChange={(e) => setFormData({ ...formData, customerFirstName: e.target.value })} />
+                                  <input type="text" className="form-control" placeholder='First Name' value={licenseData.firstname || formData.customerFirstName} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
                                 </div>
                                 <div className="col-md-4 mb-3">
-                                  <input type="text" className="form-control" placeholder='Middle Name' value={formData.customerMiddleName} onChange={(e) => setFormData({ ...formData, customerMiddleName: e.target.value })} />
+                                  <input type="text" className="form-control" placeholder='Middle Name' value={licenseData.middlename || formData.customerMiddleName} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
                                 </div>
                                 <div className="col-md-4 mb-3">
-                                  <input type="text" className="form-control" placeholder='Last Name' value={formData.customerLastName} onChange={(e) => setFormData({ ...formData, customerLastName: e.target.value })} />
+                                  <input type="text" className="form-control" placeholder='Last Name' value={licenseData.lastname || formData.customerLastName} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
                                 </div>
                               </div>
                             </div>
