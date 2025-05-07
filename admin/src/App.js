@@ -28,7 +28,7 @@ function App() {
           <Route path="/cm-admin/report" element={<ProtectedRoute element={<Report />}/>} />
           <Route path="/cm-admin/export-report" element={<ProtectedRoute element={<ReportExport />}/>} />
           <Route path="/cm-admin/support" element={<ProtectedRoute element={<Support />}/>} />
-          <Route path="/cm-admin/ticket-details" element={<ProtectedRoute element={<TicketDetails />}/>} />
+          <Route path="/cm-admin/ticket-details/:id" element={<ProtectedRoute element={<TicketDetails />}/>} />
         </Routes>
       </BrowserRouter>
     </>

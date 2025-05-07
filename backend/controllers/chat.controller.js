@@ -2,9 +2,9 @@ const Chat = require('../model/chat.model');
 
 exports.addChatMessage = async (req, res) => {
   try {
-    const { ticketId, senderId, message } = req.body;
+    const { ticketId, senderId, message,image } = req.body;
 
-    const chat = new Chat({ ticketId, senderId, message });
+    const chat = new Chat({ ticketId, senderId, message,image });
     await chat.save();
 
     res.status(201).json({ message: 'Message sent', chat });

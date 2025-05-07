@@ -1,8 +1,112 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
+import { useNavigate, useParams } from "react-router"
+import axios from 'axios';
+import moment from 'moment';
+const URL = process.env.REACT_APP_URL;
 
 const TicketDetails = () => {
+
+    const [ticketDetails, setticketDetails] = useState('');
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
+    const { id } = useParams()
+    const adminId = localStorage.getItem("adminId");
+    const [data, setData] = useState([]);
+    const [message, setMessage] = useState('');
+    const [image, setImage] = useState('');
+
+    const fetchticketDetails = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.get(`${URL}/admin/tickets/get-ticketsById/${id}`);
+            if (response.status >= 200 && response.status < 300) {
+                setticketDetails(response?.data)
+            }
+        } catch (error) {
+            console.log("Error in fetching ticket:" + error.message);
+        } finally {
+            setLoading(false);
+        }
+    }
+    const handleBack = () => {
+        navigate(-1)
+    }
+
+
+
+    const getChat = async () => {
+        try {
+
+            const response = await axios.get(`${URL}/complain/tickets/chat/${id}`);
+
+            if (response.status >= 200 && response.status < 300) {
+                setData(response?.data || []);
+            }
+        } catch (error) {
+            console.log("Error fetching chat:", error);
+        }
+    }
+
+    const sendChat = async () => {
+        if (!message.trim()) return;
+
+        const payload = {
+            ticketId: id,
+            senderId: adminId,
+            message,
+            image: image
+        };
+
+        try {
+            const response = await axios.post(`${URL}/complain/tickets/chat/`, payload, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.status >= 200 && response.status < 300) {
+                setMessage('');
+                setImage('');
+                getChat(response?.data?.chat?.ticketId); // refresh chat
+            }
+        } catch (error) {
+            console.error('Send chat error:', error);
+        }
+    };
+
+
+    const handleUpload = async (e) => {
+        e.preventDefault();
+        const file = e.target.files[0];
+        if (!file) {
+            alert("Please upload a image.");
+            return;
+        }
+        const formData = new FormData();
+        formData.append('image', file);
+        try {
+            const response = await axios.post(`${URL}/upload-image`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            const result = response.data;
+            if (result) {
+                setImage(result?.data?.imageUrl);
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+    useEffect(() => {
+        fetchticketDetails();// eslint-disable-next-line react-hooks/exhaustive-deps
+        getChat();// eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
     return (
         <>
             <div className="container-fluid">
@@ -35,7 +139,7 @@ const TicketDetails = () => {
                                                         </div>
                                                         <div className="col-4 col-lg-6 d-flex justify-content-end align-items-center">
                                                             <div className="d-flex justify-content-end">
-                                                                <button className="btn btn-sm rounded-2 btn-light text-445B64">
+                                                                <button className="btn btn-sm rounded-2 btn-light text-445B64" onClick={handleBack}>
                                                                     <i className="fa-solid fa-arrow-left-long me-2 text-445B64"></i>
                                                                     Back
                                                                 </button>
@@ -73,25 +177,23 @@ const TicketDetails = () => {
                                                                     <div className="w-100 w-lg-50">
                                                                         <h6 className="text-445B64 fw-semibold p-3 mb-0 border-end border-bottom">User Info</h6>
                                                                         <div className="border-end">
-                                                                        <div className="table-responsive p-2">
-                                                                            <table className="table mb-0">
-                                                                                <tbody>
-                                                                                <tr>
-                                                                                    <td className='text-445B64-img w-60px'>Name</td>
-                                                                                    <td><span className="text-445B64-img">-</span> John Doe</td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td className='text-445B64-img w-60px'>Email</td>
-                                                                                    <td><span className="text-445B64-img">-</span> john@example.com</td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td className='text-445B64-img w-60px'>Phone</td>
-                                                                                    <td><span className="text-445B64-img">-</span> 6466466464654</td>
-                                                                                </tr>
-                                                                                </tbody>
-                                                                            </table>
+                                                                            <div className="table-responsive p-2">
+                                                                                <table className="table mb-0">
+                                                                                    <tr>
+                                                                                        <td className='text-445B64-img w-60px'>Name</td>
+                                                                                        <td><span className="text-445B64-img">-</span> {ticketDetails?.vendorId?.firstname} {ticketDetails?.vendorId?.lastname}</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td className='text-445B64-img w-60px'>Email</td>
+                                                                                        <td><span className="text-445B64-img">-</span> {ticketDetails?.vendorId?.email}</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td className='text-445B64-img w-60px'>Phone</td>
+                                                                                        <td><span className="text-445B64-img">-</span> {ticketDetails?.vendorId?.mobile}</td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
                                                                     </div>
                                                                     <div className="w-100 w-lg-50">
                                                                         <h6 className="text-445B64 fw-semibold p-3 mb-0  border-bottom">Ticket Info</h6>
@@ -104,11 +206,12 @@ const TicketDetails = () => {
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td className='text-445B64-img w-110px'>Created</td>
-                                                                                    <td><span className="text-445B64-img">-</span>  Apr 25, 2023</td>
+                                                                                    <td><span className="text-445B64-img">-</span>  {moment(ticketDetails?.createdAt).format("MMM DD, YYYY hh:mm A")}</td>
+
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td className='text-445B64-img w-110px'>Last Updated</td>
-                                                                                    <td><span className="text-445B64-img">-</span> Apr 28, 2023 02:15 PM</td>
+                                                                                    <td><span className="text-445B64-img">-</span> {moment(ticketDetails?.updatedAt).format("MMM DD, YYYY hh:mm A")}</td>
                                                                                 </tr>
                                                                                 </tbody>
                                                                             </table>
@@ -118,9 +221,9 @@ const TicketDetails = () => {
                                                             </div>
                                                             <div className="">
                                                                 <div className="row">
-                                                                    
+
                                                                     <div className="col-12 col-lg-6">
-                                                                        
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -134,38 +237,63 @@ const TicketDetails = () => {
                                                 <div className="card-body p-0">
                                                     <div className="row">
                                                         <div className="col-12">
-                                                            <div className="border-bottom p-3">
-                                                                <div className="text-muted fs-13 mb-1">
-                                                                    Apr 27, 2023 11:32 AM
-                                                                </div>
-                                                                <h6 className='mb-0 fs-14'>Hi, I'm unable to login to my account since yesterday. Please help.
-                                                                </h6>
-                                                            </div>
-                                                            <div className="border-bottom p-3">
-                                                                <div className="text-muted fs-13 mb-1">
-                                                                    Apr 28, 2023 11:32 AM
-                                                                </div>
-                                                                <h6 className='mb-0 fs-14'>Hello John, we are looking into it.</h6>
-                                                            </div>
+                                                            {data?.length > 0 ? (
+                                                                data.map((chat, chatIndex) => (
+                                                                    <div key={chat._id || chatIndex} className="border-bottom mb-2">
+                                                                        <div className="text-muted fs-13 mb-1">
+                                                                            {moment(chat?.createdAt).format("MMM DD, YYYY hh:mm A")}
+                                                                        </div>
+                                                                        <h6 className="fs-14">
+                                                                            <strong>{chat?.senderId?.role === 'vendor' ? 'Vendor' : 'Admin'}:</strong> {chat?.message}
+                                                                        </h6>
+                                                                    </div>
+                                                                ))
+                                                            ) : (
+                                                                <p className="text-muted">No chat messages found.</p>
+                                                            )}
+
+
+
                                                             {/* Reply Box */}
-                                                            <div className="p-3">
+                                                            <div className="mt-3">
                                                                 <textarea
-                                                                    className="form-control bg-white mb-3 fs-14"
+                                                                    className="form-control bg-FAFAFA mb-3 fs-14"
                                                                     placeholder="Write your reply"
                                                                     rows="3"
+                                                                    value={message}
+                                                                    onChange={(e) => setMessage(e.target.value)}
                                                                 />
-                                                                <div className="d-flex justify-content-between">
-                                                                    <button className="btn bg-F6FFFE text-445B64 fs-14 me-2 me-lg-0" style={{ border: '1px solid #D7D7D7' }}>
-                                                                        <span className="me-2 text-00C7BE">
-                                                                            <i className="fa-solid fa-arrow-up-from-bracket text-4FD1C5 fs-6"></i>
-                                                                        </span>
+
+                                                                <div className="mb-3">
+                                                                    <label htmlFor="formFile" className="btn bg-F6FFFE text-445B64 fs-14 d-inline-flex align-items-center" style={{ border: '1px solid #D7D7D7', cursor: 'pointer' }}>
+                                                                        <i className="fa-solid fa-arrow-up-from-bracket text-4FD1C5 fs-6 me-2"></i>
                                                                         Upload Attachment
-                                                                    </button>
-                                                                    <button className="btn sign-btn p-0 px-5 fs-14">
+                                                                    </label>
+                                                                    <input
+                                                                        type="file"
+                                                                        id="formFile"
+                                                                        className="d-none"
+                                                                        onChange={handleUpload}
+                                                                    />
+                                                                </div>
+
+                                                                {image && (
+                                                                    <div className='mb-3'>
+                                                                        <img src={image} alt="Attachment Preview" className='w-100 border rounded-4' />
+                                                                    </div>
+                                                                )}
+
+                                                                <div className="d-flex justify-content-between">
+                                                                    <button
+                                                                        className="btn sign-btn p-0 px-5 fs-14"
+                                                                        onClick={sendChat}
+                                                                    >
                                                                         Send reply
                                                                     </button>
                                                                 </div>
                                                             </div>
+
+
                                                         </div>
                                                     </div>
                                                 </div>
