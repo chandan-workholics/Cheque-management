@@ -15,7 +15,7 @@ const MyTicket = () => {
     const vendorId = localStorage.getItem("userId");
     const [message, setMessage] = useState('');
     const [image, setImage] = useState('');
-
+    const [previewImage, setPreviewImage] = useState('');
 
     const handleBack = () => {
         navigate(-1);
@@ -227,6 +227,16 @@ const MyTicket = () => {
                                                                                             <h6 className="fs-14">
                                                                                                 <strong>{chat?.senderId?.role === 'vendor' ? 'Vendor' : 'Admin'}:</strong> {chat?.message}
                                                                                             </h6>
+                                                                                            <div className="">
+                                                                                                {chat?.image ? <img
+                                                                                                    src={chat?.image}
+                                                                                                    style={{ maxHeight: '200px', cursor: 'pointer' }}
+                                                                                                    alt="chat"
+                                                                                                    data-bs-toggle="modal"
+                                                                                                    data-bs-target="#imagePreviewModal"
+                                                                                                    onClick={() => setPreviewImage(chat?.image)}
+                                                                                                /> : <></>}
+                                                                                            </div>
                                                                                         </div>
                                                                                     ))
                                                                                 ) : (
@@ -257,14 +267,16 @@ const MyTicket = () => {
                                                                                     </div>
 
                                                                                     {image && (
-                                                                                        <div className='mb-3'>
-                                                                                            <img src={image} alt="Attachment Preview" className='w-100 border rounded-4' />
+                                                                                        <div className='row mb-3'>
+                                                                                            <div className="col-md-6 col-lg-4">
+                                                                                                <img src={image} alt="Attachment Preview" className='w-100 border rounded-4' />
+                                                                                            </div>
                                                                                         </div>
                                                                                     )}
 
                                                                                     <div className="d-flex justify-content-between">
                                                                                         <button
-                                                                                            className="btn sign-btn p-0 px-5 fs-14"
+                                                                                            className="btn sign-btn py-2 px-5 fs-14"
                                                                                             onClick={sendChat}
                                                                                         >
                                                                                             Send reply
@@ -290,6 +302,19 @@ const MyTicket = () => {
                     </div>
                 </div>
             </div >
+
+            {/* Image Preview Modal */}
+            <div className="modal fade" id="imagePreviewModal" tabIndex="-1" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered" style={{width:'fit-content'}}>
+                    <div className="modal-content bg-transparent border-0 shadow rounded-4">
+                        <div className="modal-body text-center p-0">
+                            {previewImage && (
+                                <img src={previewImage} alt="Preview" className="img-fluid rounded-4" />
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </>
     )
 }
