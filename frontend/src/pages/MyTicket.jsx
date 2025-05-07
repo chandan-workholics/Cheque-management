@@ -167,65 +167,75 @@ const MyTicket = () => {
                                                                     <th className='border-bottom'></th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody >
-                                                                {/* Ticket Row 1 */}
+                                                            <tbody>
                                                                 {tickets?.map((ticket, index) => (
-                                                                    <tr key={index} data-bs-toggle="collapse" data-bs-target={`#ticket${index}`} className="cursor-pointer">
-                                                                        <td>{index + 1}</td>
-                                                                        <td>{ticket.subject}</td>
-                                                                        <td><span className="text-primary">{ticket.status}</span></td>
-                                                                        <td>{ticket.category}</td>
-                                                                        <td>{ticket.description}</td>
-                                                                        <td><i className="fa-solid fa-chevron-down text-01A99A" onClick={() => getChat(ticket._id)}></i></td>
-                                                                    </tr>
-                                                                ))}
+                                                                    <React.Fragment key={index}>
+                                                                        <tr
+                                                                            data-bs-toggle="collapse"
+                                                                            data-bs-target={`#ticket${index}`}
+                                                                            className="cursor-pointer"
+                                                                        >
+                                                                            <td>{index + 1}</td>
+                                                                            <td>{ticket.subject}</td>
+                                                                            <td><span className="text-primary">{ticket.status}</span></td>
+                                                                            <td>{ticket.category}</td>
+                                                                            <td>{ticket.description}</td>
+                                                                            <td>
+                                                                                <i
+                                                                                    className="fa-solid fa-chevron-down text-01A99A"
+                                                                                    onClick={() => getChat(ticket._id)}
+                                                                                ></i>
+                                                                            </td>
+                                                                        </tr>
 
-                                                                {/* chat start with vender with admin */}
+                                                                        <tr className="collapse" id={`ticket${index}`}>
+                                                                            <td className="border-bottom bg-FAFAFA" colSpan="6">
+                                                                                {data?.length > 0 ? (
+                                                                                    data.map((chat, chatIndex) => (
+                                                                                        <div key={chat._id || chatIndex} className="border-bottom mb-2">
+                                                                                            <div className="text-muted fs-13 mb-1">
+                                                                                                {moment(chat?.createdAt).format("MMM DD, YYYY hh:mm A")}
+                                                                                            </div>
+                                                                                            <h6 className="fs-14">
+                                                                                                <strong>{chat?.senderId?.role === 'vendor' ? 'Vendor' : 'Admin'}:</strong> {chat?.message}
+                                                                                            </h6>
+                                                                                        </div>
+                                                                                    ))
+                                                                                ) : (
+                                                                                    <p className="text-muted">No chat messages found.</p>
+                                                                                )}
 
-                                                                <tr className="collapse" id="ticket1">
-                                                                    <td className='border-bottom bg-FAFAFA' colSpan="6">
-                                                                        {/* Message 1 */}
-                                                                        {data?.length > 0 ? data.map((chat, index) => (
-                                                                            <div key={chat._id || index} className="border-bottom mb-2">
-                                                                                <div className="text-muted fs-13 mb-1">
-                                                                                    {moment(chat?.createdAt).format("MMM DD, YYYY hh:mm A")}
+                                                                                {/* Reply Box */}
+                                                                                <div className="mt-3">
+                                                                                    <textarea
+                                                                                        className="form-control bg-FAFAFA mb-3 fs-14"
+                                                                                        placeholder="Write your reply"
+                                                                                        rows="3"
+                                                                                        value={message}
+                                                                                        onChange={(e) => setMessage(e.target.value)}
+                                                                                    />
+                                                                                    <div className="d-flex justify-content-between">
+                                                                                        <button
+                                                                                            className="btn bg-F6FFFE text-445B64 fs-14"
+                                                                                            style={{ border: '1px solid #D7D7D7' }}
+                                                                                        >
+                                                                                            <span className="me-2 text-00C7BE">
+                                                                                                <i className="fa-solid fa-arrow-up-from-bracket text-4FD1C5 fs-6"></i>
+                                                                                            </span>
+                                                                                            Upload Attachment
+                                                                                        </button>
+                                                                                        <button
+                                                                                            className="btn sign-btn p-0 px-5 fs-14"
+                                                                                            onClick={sendChat}
+                                                                                        >
+                                                                                            Send reply
+                                                                                        </button>
+                                                                                    </div>
                                                                                 </div>
-                                                                                <h6 className='fs-14'>
-                                                                                    <strong>{chat?.senderId?.role === 'vendor' ? 'Vendor' : 'Admin'}:</strong> {chat?.message}
-                                                                                </h6>
-                                                                            </div>
-                                                                        )) : (
-                                                                            <p className="text-muted">No chat messages found.</p>
-                                                                        )}
-
-
-                                                                        {/* Reply Box */}
-                                                                        <div className="mt-3">
-                                                                            <textarea
-                                                                                className="form-control bg-FAFAFA mb-3 fs-14"
-                                                                                placeholder="Write your reply"
-                                                                                rows="3"
-                                                                                value={message}
-                                                                                onChange={(e) => setMessage(e.target.value)}
-                                                                            />
-                                                                            <div className="d-flex justify-content-between">
-                                                                                <button className="btn bg-F6FFFE text-445B64 fs-14" style={{ border: '1px solid #D7D7D7' }}>
-                                                                                    <span className="me-2 text-00C7BE">
-                                                                                        <i className="fa-solid fa-arrow-up-from-bracket text-4FD1C5 fs-6"></i>
-                                                                                    </span>
-                                                                                    Upload Attachment
-                                                                                </button>
-                                                                                <button className="btn sign-btn p-0 px-5 fs-14" onClick={sendChat}>
-                                                                                    Send reply
-                                                                                </button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-
-
-                                                                {/* chat start with vender with admin */}
-
+                                                                            </td>
+                                                                        </tr>
+                                                                    </React.Fragment>
+                                                                ))}
                                                             </tbody>
 
                                                         </table>
