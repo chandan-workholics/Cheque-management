@@ -150,11 +150,11 @@ const ChequeDetails = () => {
                                                                     <div className="row">
                                                                         <div className="col-lg-6 mb-3 mb-lg-0">
                                                                             <label className="form-label text-445B64">Front Image</label>
-                                                                            <img src={chequeDetails?.imageUrl} alt="Cheque Front" className="img-fluid rounded" />
+                                                                            <img src={chequeDetails?.imageUrl} alt="Check Front" className="img-fluid rounded" />
                                                                         </div>
                                                                         <div className="col-lg-6">
                                                                             <label className="form-label text-445B64">Back Image</label>
-                                                                            <img src={chequeDetails?.imageUrl2} alt="Cheque Front" className="img-fluid rounded" />
+                                                                            <img src={chequeDetails?.imageUrl2} alt="Check Front" className="img-fluid rounded" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -167,11 +167,11 @@ const ChequeDetails = () => {
                                                                     <div className="row">
                                                                         <div className="col-lg-6 mb-3 mb-lg-0">
                                                                             <label className="form-label text-445B64">Front Image</label>
-                                                                            <img src={chequeDetails?.imageUrl3} alt="Check Front" className="img-fluid rounded" />
+                                                                            <img src={chequeDetails?.imageUrl3} alt="License Front" className="img-fluid rounded" />
                                                                         </div>
                                                                         <div className="col-lg-6">
                                                                             <label className="form-label text-445B64">Back Image</label>
-                                                                            <img src={chequeDetails?.imageUrl4} alt="Check Front" className="img-fluid rounded" />
+                                                                            <img src={chequeDetails?.imageUrl4} alt="License Front" className="img-fluid rounded" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
