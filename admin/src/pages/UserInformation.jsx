@@ -461,16 +461,16 @@ const UserInformation = () => {
 
                                             </div>
                                             <div className="card border-0 rounded-3">
-                                                <div className='d-flex justify-content-between'>
-                                                    <div className="card-body">
-                                                        <h6 className="text-0D161A fw-medium mb-0">Check List</h6>
-                                                    </div>
-                                                    <div
-                                                        className="table-circular-icon bg-F0F5F6 m-2"
-                                                        style={{ cursor: "pointer" }}
-                                                        onClick={() => setShowModal(true)}
-                                                    >
-                                                        <i className="fa-solid fa-user-plus"></i>
+                                                <div className=''>
+                                                    <div className="card-body py-2 d-flex justify-content-between border-bottom">
+                                                        <h6 className="text-0D161A fw-medium mb-0 d-flex align-items-center">Check List</h6>
+                                                        <h6
+                                                            className="table-circular-icon bg-F0F5F6 mb-0"
+                                                            style={{ cursor: "pointer" }}
+                                                            onClick={() => setShowModal(true)}
+                                                        >
+                                                            <i className="fa-solid fa-user-plus fs-14"></i>
+                                                        </h6>
                                                     </div>
                                                 </div>
                                                 <div className="card-body p-0">
@@ -563,11 +563,11 @@ const UserInformation = () => {
                                     {showModal && (
                                         <div className="modal fade show d-block" tabIndex="-1" role="dialog" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
                                             <div className="modal-dialog modal-xl modal-dialog-scrollable" role="document">
-                                                <div className="modal-content">
+                                                <div className="modal-content border-0 rounded-4">
                                                     <div className="modal-header">
-                                                        <h5 className="modal-title">
-                                                            <i className="fa-solid fa-file-circle-plus me-2"></i> New Check
-                                                        </h5>
+                                                        <h6 className="modal-title">
+                                                            <i className="fa-solid fa-file-circle-plus me-1"></i> New Check
+                                                        </h6>
                                                         <button type="button" className="btn-close" onClick={() => setShowModal(false)} />
                                                     </div>
 
@@ -578,14 +578,14 @@ const UserInformation = () => {
                                                                 <div className="col-md-6">
                                                                     <label className="form-label">License Front & Back</label>
                                                                     <div className="d-flex gap-3">
-                                                                        <div className="form-control text-center position-relative">
+                                                                        <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
                                                                             <input type="file" onChange={handleSubmitLicense} className="position-absolute w-100 h-100 top-0 start-0" style={{ opacity: 0, cursor: 'pointer' }} />
                                                                             <div>
                                                                                 <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-info" />
                                                                                 <p className="mb-0">Upload Front</p>
                                                                             </div>
                                                                         </div>
-                                                                        <div className="form-control text-center position-relative">
+                                                                        <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
                                                                             <input type="file" onChange={handleSubmitLicenseback} className="position-absolute w-100 h-100 top-0 start-0" style={{ opacity: 0, cursor: 'pointer' }} />
                                                                             <div>
                                                                                 <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-info" />
@@ -613,14 +613,14 @@ const UserInformation = () => {
                                                                 <div className="col-md-6">
                                                                     <label className="form-label">Check Front & Back</label>
                                                                     <div className="d-flex gap-3">
-                                                                        <div className="form-control text-center position-relative">
+                                                                        <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
                                                                             <input type="file" onChange={handleSubmit} className="position-absolute w-100 h-100 top-0 start-0" style={{ opacity: 0, cursor: 'pointer' }} />
                                                                             <div>
                                                                                 <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-info" />
                                                                                 <p className="mb-0">Upload Front</p>
                                                                             </div>
                                                                         </div>
-                                                                        <div className="form-control text-center position-relative">
+                                                                        <div className="form-control inputFile p-4 text-center position-relative d-flex justify-content-center align-items-center">
                                                                             <input type="file" onChange={handleSubmitback} className="position-absolute w-100 h-100 top-0 start-0" style={{ opacity: 0, cursor: 'pointer' }} />
                                                                             <div>
                                                                                 <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-info" />
@@ -645,27 +645,27 @@ const UserInformation = () => {
                                                                 </div>
 
                                                                 {/* Text Inputs */}
-                                                                <div className="col-md-4">
+                                                                <div className="col-md-3">
                                                                     <label className="form-label">First Name</label>
                                                                     <input type="text" className="form-control" value={licenseData.customerFirstName || formData.customerFirstName} onChange={(e) => setFormData({ ...formData, customerFirstName: e.target.value })} />
                                                                 </div>
-                                                                <div className="col-md-4">
+                                                                <div className="col-md-3">
                                                                     <label className="form-label">Middle Name</label>
                                                                     <input type="text" className="form-control" value={licenseData.customerMiddleName || formData.customerMiddleName} onChange={(e) => setFormData({ ...formData, customerMiddleName: e.target.value })} />
                                                                 </div>
-                                                                <div className="col-md-4">
+                                                                <div className="col-md-3">
                                                                     <label className="form-label">Last Name</label>
                                                                     <input type="text" className="form-control" value={licenseData.customerLastName || formData.customerLastName} onChange={(e) => setFormData({ ...formData, customerLastName: e.target.value })} />
                                                                 </div>
-                                                                <div className="col-md-6">
+                                                                <div className="col-md-3">
                                                                     <label className="form-label">License No</label>
                                                                     <input type="text" className="form-control" value={licenseData.licenseNo || ''} onChange={(e) => setLicenseData({ ...licenseData, licenseNo: e.target.value })} />
                                                                 </div>
-                                                                <div className="col-md-6">
+                                                                <div className="col-md-3">
                                                                     <label className="form-label">Company</label>
                                                                     <input type="text" className="form-control" value={formData.company || ''} onChange={(e) => setFormData({ ...formData, company: e.target.value })} />
                                                                 </div>
-                                                                <div className="col-md-4">
+                                                                <div className="col-md-3">
                                                                     <label className="form-label">Check Type</label>
                                                                     <select className="form-select" value={formData.checkType || ''} onChange={(e) => setFormData({ ...formData, checkType: e.target.value })}>
                                                                         <option value="">Select</option>
@@ -673,7 +673,7 @@ const UserInformation = () => {
                                                                         <option value="Business">Business</option>
                                                                     </select>
                                                                 </div>
-                                                                <div className="col-md-4">
+                                                                <div className="col-md-3">
                                                                     <label className="form-label">Status</label>
                                                                     <select className="form-select" value={formData.status || ''} onChange={(e) => setFormData({ ...formData, status: e.target.value })}>
                                                                         <option value="">Select</option>
@@ -681,7 +681,7 @@ const UserInformation = () => {
                                                                         <option value="bad">Bad</option>
                                                                     </select>
                                                                 </div>
-                                                                <div className="col-md-4">
+                                                                <div className="col-md-3">
                                                                     <label className="form-label">Amount</label>
                                                                     <input type="text" className="form-control" value={formData.amount || ''} onChange={(e) => setFormData({ ...formData, amount: e.target.value })} />
                                                                 </div>
@@ -694,8 +694,8 @@ const UserInformation = () => {
                                                     </div>
 
                                                     <div className="modal-footer">
-                                                        <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>Cancel</button>
-                                                        <button type="button" className="btn btn-primary" onClick={handleSave}>Save Check</button>
+                                                        <button type="button" className="btn btn-light bg-F0F5F6 border rounded-3" onClick={() => setShowModal(false)}>Cancel</button>
+                                                        <button type="button" className="btn bg-00C7BE btn-primary rounded-3" onClick={handleSave}>Save Check</button>
                                                     </div>
                                                 </div>
                                             </div>

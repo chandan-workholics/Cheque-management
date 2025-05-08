@@ -105,7 +105,7 @@ const ForgetPassword = () => {
                     </div>
                     <div className="col-lg-6 h-100 bg-EEEEEE position-relative">
                         <div className="row h-100">
-                            <div className="col-lg-6 mx-auto d-flex justify-content-center align-items-center">
+                            <div className="col-lg-8 col-xl-7 col-xxl-6 mx-auto d-flex justify-content-center align-items-center">
                                 <div className="w-100">
                                     <h3 className="fw-semibold">Forgot Password?</h3>
                                     <h6 className="mb-4 text-445B64">No worries, we’ll help you reset your password.</h6>
