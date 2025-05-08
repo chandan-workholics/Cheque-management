@@ -28,7 +28,7 @@ const Header = () => {
                     <div className="d-flex align-items-center">
                         <Link className="navbar-brand d-flex align-items-center" to=''>
                             <img src={logo} alt="" className="me-2" />
-                            <span className='fs-6 fw-semibold'>Cheque Management</span>
+                            <span className='fs-6 fw-semibold'>Check Management</span>
                         </Link>
                     </div>
                     {/* Navbar right-side */}

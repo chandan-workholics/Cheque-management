@@ -18,7 +18,7 @@ const ChequeDetails = () => {
                 setChequeDetails(response?.data?.data)
             }
         } catch (error) {
-            console.log("Error in fetching cheque:" + error.message);
+            console.log("Error in fetching check:" + error.message);
         } finally {
             setLoading(false);
         }
@@ -107,7 +107,15 @@ const ChequeDetails = () => {
                                                                     </div>
                                                                     <div className="mb-3">
                                                                         <h6 className="text-445B64 fs-14 mb-1">Date</h6>
-                                                                        <h6 className="text-0D161A fw-medium mb-0">{chequeDetails?.date}</h6>
+                                                                        <h6 className="text-0D161A fw-medium mb-0">
+                                                                            {chequeDetails?.date &&
+                                                                                new Date(chequeDetails.date).toLocaleDateString("en-GB", {
+                                                                                    day: "numeric",
+                                                                                    month: "long",
+                                                                                    year: "numeric",
+                                                                                }).replace(/(\w+) (\d{4})$/, "$1, $2")}
+                                                                        </h6>
+
                                                                     </div>
                                                                 </div>
                                                                 <div className="d-block d-lg-flex gap-5">
@@ -138,15 +146,15 @@ const ChequeDetails = () => {
                                                         <div className='col-lg-6 mb-1 mb-lg-0'>
                                                             <div className="card border-0 rounded-3">
                                                                 <div className="card-body">
-                                                                    <label className="form-label text-445B64 fw-medium">Cheque Image</label>
+                                                                    <label className="form-label text-445B64 fw-medium">Check Image</label>
                                                                     <div className="row">
                                                                         <div className="col-lg-6 mb-3 mb-lg-0">
                                                                             <label className="form-label text-445B64">Front Image</label>
-                                                                            <img src={chequeDetails?.imageUrl} alt="Cheque Front" className="img-fluid rounded" />
+                                                                            <img src={chequeDetails?.imageUrl} alt="Check Front" className="img-fluid rounded" />
                                                                         </div>
                                                                         <div className="col-lg-6">
                                                                             <label className="form-label text-445B64">Back Image</label>
-                                                                            <img src={chequeDetails?.imageUrl2} alt="Cheque Front" className="img-fluid rounded" />
+                                                                            <img src={chequeDetails?.imageUrl2} alt="Check Front" className="img-fluid rounded" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -159,11 +167,11 @@ const ChequeDetails = () => {
                                                                     <div className="row">
                                                                         <div className="col-lg-6 mb-3 mb-lg-0">
                                                                             <label className="form-label text-445B64">Front Image</label>
-                                                                            <img src={chequeDetails?.imageUrl3} alt="Cheque Front" className="img-fluid rounded" />
+                                                                            <img src={chequeDetails?.imageUrl3} alt="License Front" className="img-fluid rounded" />
                                                                         </div>
                                                                         <div className="col-lg-6">
                                                                             <label className="form-label text-445B64">Back Image</label>
-                                                                            <img src={chequeDetails?.imageUrl4} alt="Cheque Front" className="img-fluid rounded" />
+                                                                            <img src={chequeDetails?.imageUrl4} alt="License Front" className="img-fluid rounded" />
                                                                         </div>
                                                                     </div>
                                                                 </div>

@@ -21,21 +21,21 @@ const Cheques = () => {
                 setCheques(response.data.data);
             }
         } catch (error) {
-            console.error("Error fetching cheques:", error);
+            console.error("Error fetching check:", error);
         }
     };
 
     const handleDeleteCheque = async (id) => {
-        if (!window.confirm("Are you sure you want to delete this cheque?")) return;
+        if (!window.confirm("Are you sure you want to delete this check?")) return;
         try {
             const response = await axios.delete(`${URL}/check/delete-check/${id}`);
             if (response.status >= 200 && response.status < 300) {
-                toast.success("Cheque deleted successfully!");
+                toast.success("Check deleted successfully!");
                 fetchCheques();
             }
         } catch (error) {
-            toast.error("Error in deleting cheque: " + error.message);
-            console.error("Error in deleting cheque", error);
+            toast.error("Error in deleting check: " + error.message);
+            console.error("Error in deleting check", error);
         }
     };
 
@@ -84,7 +84,7 @@ const Cheques = () => {
                                                             <div className="table-circular-icon bg-F0F5F6 me-3" style={{ cursor: "pointer" }}>
                                                                 <i className="fa fa-list"></i>
                                                             </div>
-                                                            <span className="text-445B64 fw-medium">All Cheques</span>
+                                                            <span className="text-445B64 fw-medium">All Checks</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -106,7 +106,7 @@ const Cheques = () => {
                                                         </div>
                                                         <div className="col-lg-3 d-flex justify-content-around align-items-center">
                                                             <button className='btn btn-light py-1 px-2 fs-14 text-445B64 p-0' onClick={handleAddCheque}>
-                                                                <i className="fa fa-plus me-2"></i>Add Cheque
+                                                                <i className="fa fa-plus me-2"></i>Add Check
                                                             </button>
                                                         </div>
                                                     </div>
@@ -147,7 +147,15 @@ const Cheques = () => {
                                                                     <td>{item.checkType}</td>
                                                                     <td>{item.amount}</td>
                                                                     <td>{item.comment?.length > 10 ? item.comment.substring(0, 10) + '...' : item.comment}</td>
-                                                                    <td>{item.date}</td>
+                                                                    <td>
+                                                                        {item?.date &&
+                                                                            new Date(item.date).toLocaleDateString("en-GB", {
+                                                                                day: "numeric",
+                                                                                month: "long",
+                                                                                year: "numeric",
+                                                                            }).replace(/(\w+) (\d{4})$/, "$1, $2")}
+                                                                    </td>
+
                                                                     <td>{item.status}</td>
                                                                     <td>
                                                                         <div className="d-flex justify-content-center">

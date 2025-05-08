@@ -111,7 +111,7 @@ const Dashboard = () => {
                                                             </svg>
                                                         </div>
                                                         <div>
-                                                            <h6 className="mb-1 fw-medium text-445B64">New Cheques</h6>
+                                                            <h6 className="mb-1 fw-medium text-445B64">New Checks</h6>
                                                             <h4 className="mb-0 text-00C7BE fw-bold">{data?.newCheck}</h4>
                                                         </div>
                                                     </div>
@@ -128,7 +128,7 @@ const Dashboard = () => {
                                                             </svg>
                                                         </div>
                                                         <div>
-                                                            <h6 className="mb-1 fw-medium text-445B64">Good Cheques</h6>
+                                                            <h6 className="mb-1 fw-medium text-445B64">Good Checks</h6>
                                                             <h4 className="mb-0 text-00C7BE fw-bold">{data?.goodCheck}</h4>
                                                         </div>
                                                     </div>
@@ -145,7 +145,7 @@ const Dashboard = () => {
                                                             </svg>
                                                         </div>
                                                         <div>
-                                                            <h6 className="mb-1 fw-medium text-445B64">Bad Cheques</h6>
+                                                            <h6 className="mb-1 fw-medium text-445B64">Bad Checks</h6>
                                                             <h4 className="mb-0 text-00C7BE fw-bold">{data?.badCheck}</h4>
                                                         </div>
                                                     </div>
@@ -208,7 +208,7 @@ const Dashboard = () => {
                                         <div className="col-12 col-xl-7 mb-3">
                                             <div className="card shadow-sm border-0 rounded-4">
                                                 <div className="card-body">
-                                                    <div className="row border-bottom pb-2">
+                                                    <div className="row pb-2">
                                                         <div className="col-4 mt-auto">
                                                             <h6 className="mb-0 text-445B64">Report</h6>
                                                         </div>
