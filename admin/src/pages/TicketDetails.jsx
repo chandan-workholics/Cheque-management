@@ -16,6 +16,7 @@ const TicketDetails = () => {
     const [data, setData] = useState([]);
     const [message, setMessage] = useState('');
     const [image, setImage] = useState('');
+    const [previewImage, setPreviewImage] = useState('');
 
     const fetchticketDetails = async () => {
         try {
@@ -200,19 +201,19 @@ const TicketDetails = () => {
                                                                         <div className="table-responsive p-2">
                                                                             <table className="table mb-0">
                                                                                 <tbody>
-                                                                                <tr>
-                                                                                    <td className='text-445B64-img w-110px'>Priority</td>
-                                                                                    <td><span className="text-445B64-img">-</span> High</td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td className='text-445B64-img w-110px'>Created</td>
-                                                                                    <td><span className="text-445B64-img">-</span>  {moment(ticketDetails?.createdAt).format("MMM DD, YYYY hh:mm A")}</td>
+                                                                                    <tr>
+                                                                                        <td className='text-445B64-img w-110px'>Priority</td>
+                                                                                        <td><span className="text-445B64-img">-</span> High</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td className='text-445B64-img w-110px'>Created</td>
+                                                                                        <td><span className="text-445B64-img">-</span>  {moment(ticketDetails?.createdAt).format("MMM DD, YYYY hh:mm A")}</td>
 
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td className='text-445B64-img w-110px'>Last Updated</td>
-                                                                                    <td><span className="text-445B64-img">-</span> {moment(ticketDetails?.updatedAt).format("MMM DD, YYYY hh:mm A")}</td>
-                                                                                </tr>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td className='text-445B64-img w-110px'>Last Updated</td>
+                                                                                        <td><span className="text-445B64-img">-</span> {moment(ticketDetails?.updatedAt).format("MMM DD, YYYY hh:mm A")}</td>
+                                                                                    </tr>
                                                                                 </tbody>
                                                                             </table>
                                                                         </div>
@@ -239,23 +240,33 @@ const TicketDetails = () => {
                                                         <div className="col-12">
                                                             {data?.length > 0 ? (
                                                                 data.map((chat, chatIndex) => (
-                                                                    <div key={chat._id || chatIndex} className="border-bottom mb-2">
+                                                                    <div key={chat._id || chatIndex} className="border-bottom py-2 px-3">
                                                                         <div className="text-muted fs-13 mb-1">
                                                                             {moment(chat?.createdAt).format("MMM DD, YYYY hh:mm A")}
                                                                         </div>
                                                                         <h6 className="fs-14">
                                                                             <strong>{chat?.senderId?.role === 'vendor' ? 'Vendor' : 'Admin'}:</strong> {chat?.message}
                                                                         </h6>
+                                                                        <div className="">
+                                                                            {chat?.image ? <img
+                                                                                src={chat?.image}
+                                                                                style={{ maxHeight: '200px', cursor: 'pointer' }}
+                                                                                alt="chat"
+                                                                                data-bs-toggle="modal"
+                                                                                data-bs-target="#imagePreviewModal"
+                                                                                onClick={() => setPreviewImage(chat?.image)}
+                                                                            /> : <></>}
+                                                                        </div>
                                                                     </div>
                                                                 ))
                                                             ) : (
-                                                                <p className="text-muted">No chat messages found.</p>
+                                                                <p className="text-muted p-3">No chat messages found.</p>
                                                             )}
 
 
 
                                                             {/* Reply Box */}
-                                                            <div className="mt-3">
+                                                            <div className="mt-3 p-3">
                                                                 <textarea
                                                                     className="form-control bg-FAFAFA mb-3 fs-14"
                                                                     placeholder="Write your reply"
@@ -278,14 +289,16 @@ const TicketDetails = () => {
                                                                 </div>
 
                                                                 {image && (
-                                                                    <div className='mb-3'>
-                                                                        <img src={image} alt="Attachment Preview" className='w-100 border rounded-4' />
+                                                                    <div className='row mb-3'>
+                                                                        <div className="col-md-6 col-lg-4">
+                                                                            <img src={image} alt="Attachment Preview" className='w-100 border rounded-4' />
+                                                                        </div>
                                                                     </div>
                                                                 )}
 
                                                                 <div className="d-flex justify-content-between">
                                                                     <button
-                                                                        className="btn sign-btn p-0 px-5 fs-14"
+                                                                        className="btn sign-btn py-2 px-5 fs-14"
                                                                         onClick={sendChat}
                                                                     >
                                                                         Send reply
@@ -306,6 +319,19 @@ const TicketDetails = () => {
                     </div>
                 </div>
             </div >
+
+            {/* Image Preview Modal */}
+            <div className="modal fade" id="imagePreviewModal" tabIndex="-1" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered" style={{ width: 'fit-content' }}>
+                    <div className="modal-content bg-transparent border-0 shadow rounded-4">
+                        <div className="modal-body text-center p-0">
+                            {previewImage && (
+                                <img src={previewImage} alt="Preview" className="img-fluid rounded-4" />
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </>
     )
 }
