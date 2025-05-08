@@ -26,7 +26,7 @@ const Cheques = () => {
     };
 
     const handleDeleteCheque = async (id) => {
-        if (!window.confirm("Are you sure you want to delete this cheque?")) return;
+        if (!window.confirm("Are you sure you want to delete this check?")) return;
         try {
             const response = await axios.delete(`${URL}/check/delete-check/${id}`);
             if (response.status >= 200 && response.status < 300) {

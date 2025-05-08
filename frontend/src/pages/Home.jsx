@@ -8,6 +8,10 @@ const URL = process.env.REACT_APP_URL;
 
 const Home = () => {
   const venderId = localStorage.getItem("userId");
+  const [loading, setLoading] = useState(false);
+  const [loading1,setLoading1] = useState(false);
+  const [loading2,setLoading2] = useState(false);
+  const[loading3,setLoading3] = useState(false);
   const [formData, setFormData] = useState({
     customerFirstName: '',
     customerMiddleName: '',
@@ -74,6 +78,7 @@ const Home = () => {
     const formData = new FormData();
     formData.append('image', file);
     try {
+      setLoading(true)
       const response = await axios.post(`${URL}/scan-check`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -100,6 +105,8 @@ const Home = () => {
       }
     } catch (error) {
       console.error('Error during image upload:', error);
+    } finally {
+      setLoading(false)
     }
 
   };
@@ -114,6 +121,7 @@ const Home = () => {
     const formData = new FormData();
     formData.append('image', file);
     try {
+      setLoading1(true)
       const response = await axios.post(`${URL}/scan-check`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -138,6 +146,8 @@ const Home = () => {
       }
     } catch (error) {
       console.error('Error during image upload:', error);
+    } finally {
+      setLoading1(false)
     }
 
   };
@@ -152,6 +162,7 @@ const Home = () => {
     const formData = new FormData();
     formData.append('image', file);
     try {
+      setLoading2(true)
       const response = await axios.post(`${URL}/scan-license`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -175,6 +186,8 @@ const Home = () => {
       }
     } catch (error) {
       console.error('Error during image upload:', error);
+    } finally {
+      setLoading2(false)
     }
 
   };
@@ -189,6 +202,7 @@ const Home = () => {
     const formData = new FormData();
     formData.append('image', file);
     try {
+      setLoading3(true)
       const response = await axios.post(`${URL}/scan-license`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -212,8 +226,9 @@ const Home = () => {
       }
     } catch (error) {
       console.error('Error during image upload:', error);
+    } finally {
+      setLoading3(false)
     }
-
   };
 
   const handleStatus = async () => {
@@ -247,7 +262,9 @@ const Home = () => {
         imageUrl2: formDataback.imageUrl || '',
         imageUrl3: licenseData.imageUrl || '',
         imageUrl4: licenseDataback.imageUrl || '',
-        customerName: formData.customerName,
+        customerFirstName: formData.customerFirstName,
+        customerLastName: formData.customerLastName,
+        customerMiddleName: formData.customerMiddleName,
         licenseNo: licenseData.licenseNo,
         date: new Date(Date.now()).toLocaleString('en-GB', {
           day: '2-digit',
@@ -393,18 +410,49 @@ const Home = () => {
                             </div>
                           </div>
                           <div className="row">
-                            {licenseData?.imageUrl &&
-                              <div className='col-lg-6'>
-                                <label className="form-label text-445B64 mb-1 mt-3">Front Image</label>
-                                <img src={licenseData.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
+                            {loading2 ? (
+                              <div className="col-6 text-center py-5 px-5">
+                              <div className="spinner-border text-primary" role="status">
+                                <span className="visually-hidden">Loading...</span>
                               </div>
-                            }
-                            {licenseData?.imageUrl &&
-                              <div className='col-lg-6'>
-                                <label className="form-label text-445B64 mb-1 mt-3">Back Image</label>
-                                <img src={licenseDataback.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
-                              </div>
-                            }
+                            </div>
+                            
+                            ) : (
+                              <>
+                                {licenseData?.imageUrl && (
+                                  <div className='col-lg-6'>
+                                    <label className="form-label text-445B64 mb-1 mt-3">Front Image</label>
+                                    <img
+                                      src={licenseData.imageUrl}
+                                      alt="Front License"
+                                      className='w-100 border rounded-4 overflow-hidden'
+                                    />
+                                  </div>
+                                )}
+                              </>
+                            )}
+                            {loading3 ? (
+                             <div className="col-6 text-center py-5 px-5">
+                             <div className="spinner-border text-primary" role="status">
+                               <span className="visually-hidden">Loading...</span>
+                             </div>
+                           </div>
+                           
+                            ) : (
+                              <>
+                                {licenseDataback?.imageUrl && (
+                                  <div className='col-lg-6'>
+                                    <label className="form-label text-445B64 mb-1 mt-3">Back Image</label>
+                                    <img
+                                      src={licenseDataback.imageUrl}
+                                      alt="Back License"
+                                      className='w-100 border rounded-4 overflow-hidden'
+                                    />
+                                  </div>
+                                )}
+                              </>
+                            )}
+
                             <div className="col-lg-6"></div>
                           </div>
                         </div>
@@ -429,21 +477,45 @@ const Home = () => {
                               </div>
                             </div>
                           </div>
+
                           <div className="row">
-                            {formData?.imageUrl &&
-                              <div className='col-lg-6'>
-                                <label className="form-label text-445B64 mb-1 mt-3">Front Image</label>
-                                <img src={formData.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
+                            {loading ? (
+                             <div className="col-6 text-center py-5 px-5">
+                             <div className="spinner-border text-primary" role="status">
+                               <span className="visually-hidden">Loading...</span>
+                             </div>
+                           </div>
+                           
+                            ) : (
+                              <>
+                                {formData?.imageUrl && (
+                                  <div className='col-lg-6'>
+                                    <label className="form-label text-445B64 mb-1 mt-3">Front Image</label>
+                                    <img src={formData.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
+                                  </div>
+                                )}
+                                </>
+                            )}
+                             {loading1 ? (
+                              <div className="col-6 text-center py-5 px-5">
+                              <div className="spinner-border text-primary" role="status">
+                                <span className="visually-hidden">Loading...</span>
                               </div>
-                            }
-                            {formData?.imageUrl &&
-                              <div className='col-lg-6'>
-                                <label className="form-label text-445B64 mb-1 mt-3">Back Image</label>
-                                <img src={formDataback.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
-                              </div>
-                            }
+                            </div>
+                            
+                            ) : (
+                              <>
+                                {formData?.imageUrl && (
+                                  <div className='col-lg-6'>
+                                    <label className="form-label text-445B64 mb-1 mt-3">Back Image</label>
+                                    <img src={formDataback.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
+                                  </div>
+                                )}
+                              </>
+                            )}
                           </div>
                         </div>
+
                         <div className="col-12 d-flex justify-content-end">
                           <button type="button" className="btn btn-sm py-1 px-3 theme-btn rounded-3 mt-3 " data-bs-toggle="modal" data-bs-target="#exampleModal">
                             Please Check all Details
@@ -455,13 +527,13 @@ const Home = () => {
                               <div className="row">
                                 <label className="form-label text-445B64">Customer Name</label>
                                 <div className="col-md-4 mb-3">
-                                  <input type="text" className="form-control" placeholder='First Name' value={licenseData.firstname || formData.customerFirstName} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
+                                  <input type="text" className="form-control" placeholder='First Name' value={licenseData.customerFirstName || formData.customerFirstName} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
                                 </div>
                                 <div className="col-md-4 mb-3">
-                                  <input type="text" className="form-control" placeholder='Middle Name' value={licenseData.middlename || formData.customerMiddleName} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
+                                  <input type="text" className="form-control" placeholder='Middle Name' value={licenseData.customerMiddleName || formData.customerMiddleName} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
                                 </div>
                                 <div className="col-md-4 mb-3">
-                                  <input type="text" className="form-control" placeholder='Last Name' value={licenseData.lastname || formData.customerLastName} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
+                                  <input type="text" className="form-control" placeholder='Last Name' value={licenseData.customerLastName || formData.customerLastName} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
                                 </div>
                               </div>
                             </div>
@@ -526,10 +598,10 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div >
 
       {/* image-preview-Modal */}
-      <div className="modal modal-xl fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      < div className="modal modal-xl fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
