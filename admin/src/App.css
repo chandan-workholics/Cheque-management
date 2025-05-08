@@ -300,7 +300,8 @@ body {
 
 /* Home - CSS - Start */
 
-.new-cheque-form {
+.new-cheque-form,
+.modal-body {
   .form-label {
     font-size: 14px;
     color: #000000;

@@ -13,7 +13,7 @@ const VerifyEmail = () => {
                     </div>
                     <div className="col-lg-6 h-100 bg-EEEEEE position-relative">
                         <div className="row h-100">
-                            <div className="col-lg-6 mx-auto d-flex justify-content-center align-items-center">
+                            <div className="col-lg-8 col-xl-7 col-xxl-6 mx-auto d-flex justify-content-center align-items-center">
                                 <div className="w-100 text-center">
                                     <img src={emailVerifyImg} alt="" className="mb-3" style={{ width: '70px' }} />
                                     <h5 className="text-center fw-semibold">Verify your Email</h5>
