@@ -326,15 +326,13 @@ const UserInformation = () => {
                 comment: formData.comment || 'xyz',
                 venderId: id,
             });
-
             if (response.status >= 200 && response.status < 300) {
                 toast.success('Check added successfully');
                 setShowModal(false);
                 // Update the check list state
                 if (response.data?.data) {
-                    setReport((prev) => [response.data.data, ...prev]); // <— Add new data to list
+                    setReport((prev) => [response.data.data, ...prev]); 
                 }
-
                 // Optional: clear the form
                 setFormData({});
                 setLicenseData({});
@@ -348,7 +346,6 @@ const UserInformation = () => {
             toast.error('An error occurred while submitting the form');
         }
     };
-
     const totalAmount = cheques.reduce((sum, cheque) => {
         const num = parseFloat(cheque.amount?.replace(/[^\d.-]/g, '') || 0);
         return sum + (isNaN(num) ? 0 : num);
@@ -469,7 +466,7 @@ const UserInformation = () => {
                                                             style={{ cursor: "pointer" }}
                                                             onClick={() => setShowModal(true)}
                                                         >
-                                                            <i className="fa-solid fa-user-plus fs-14"></i>
+                                                            <i class="fa-solid fa-file-circle-plus"></i>
                                                         </h6>
                                                     </div>
                                                 </div>
@@ -508,7 +505,7 @@ const UserInformation = () => {
                                                                                 <td>{cheque?.licenseNo}</td>
                                                                                 <td>{cheque?.checkType}</td>
                                                                                 <td>{cheque?.amount}</td>
-                                                                                <td>{cheque?.comment}</td>
+                                                                                <td>{cheque?.comment?.length > 10 ? cheque?.comment.substring(0, 10) + '...' : cheque?.comment}</td>
                                                                                 <td>{new Date(cheque?.date).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}</td>
                                                                                 <td className="text-01A99A">{cheque?.status}</td>
                                                                                 <td>
