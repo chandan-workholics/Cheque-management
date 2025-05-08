@@ -113,7 +113,7 @@ const SignIn = () => {
 
           <div className="col-lg-6 sign-right-bg h-100 bg-EEEEEE position-relative">
             <div className="row h-100 w-100">
-              <div className="col-lg-8 mx-auto d-flex justify-content-center align-items-center">
+              <div className="col-lg-8 col-xl-7 col-xxl-6 mx-auto d-flex justify-content-center align-items-center">
                 <div className="w-100">
                   {showForgotPassword ? (
                     <>

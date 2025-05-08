@@ -180,18 +180,20 @@ const TicketDetails = () => {
                                                                         <div className="border-end">
                                                                             <div className="table-responsive p-2">
                                                                                 <table className="table mb-0">
-                                                                                    <tr>
-                                                                                        <td className='text-445B64-img w-60px'>Name</td>
-                                                                                        <td><span className="text-445B64-img">-</span> {ticketDetails?.vendorId?.firstname} {ticketDetails?.vendorId?.lastname}</td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <td className='text-445B64-img w-60px'>Email</td>
-                                                                                        <td><span className="text-445B64-img">-</span> {ticketDetails?.vendorId?.email}</td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <td className='text-445B64-img w-60px'>Phone</td>
-                                                                                        <td><span className="text-445B64-img">-</span> {ticketDetails?.vendorId?.mobile}</td>
-                                                                                    </tr>
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td className='text-445B64-img w-60px border-0'>Name</td>
+                                                                                            <td><span className="text-445B64-img border-0">-</span> {ticketDetails?.vendorId?.firstname} {ticketDetails?.vendorId?.lastname}</td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td className='text-445B64-img w-60px border-0'>Email</td>
+                                                                                            <td><span className="text-445B64-img border-0">-</span> {ticketDetails?.vendorId?.email}</td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td className='text-445B64-img w-60px border-0'>Phone</td>
+                                                                                            <td><span className="text-445B64-img border-0">-</span> {ticketDetails?.vendorId?.mobile}</td>
+                                                                                        </tr>
+                                                                                    </tbody>
                                                                                 </table>
                                                                             </div>
                                                                         </div>
@@ -202,29 +204,21 @@ const TicketDetails = () => {
                                                                             <table className="table mb-0">
                                                                                 <tbody>
                                                                                     <tr>
-                                                                                        <td className='text-445B64-img w-110px'>Priority</td>
-                                                                                        <td><span className="text-445B64-img">-</span> High</td>
+                                                                                        <td className='text-445B64-img w-110px border-0'>Priority</td>
+                                                                                        <td><span className="text-445B64-img border-0">-</span> High</td>
                                                                                     </tr>
                                                                                     <tr>
-                                                                                        <td className='text-445B64-img w-110px'>Created</td>
-                                                                                        <td><span className="text-445B64-img">-</span>  {moment(ticketDetails?.createdAt).format("MMM DD, YYYY hh:mm A")}</td>
+                                                                                        <td className='text-445B64-img w-110px border-0'>Created</td>
+                                                                                        <td><span className="text-445B64-img border-0">-</span>  {moment(ticketDetails?.createdAt).format("MMM DD, YYYY hh:mm A")}</td>
 
                                                                                     </tr>
                                                                                     <tr>
-                                                                                        <td className='text-445B64-img w-110px'>Last Updated</td>
-                                                                                        <td><span className="text-445B64-img">-</span> {moment(ticketDetails?.updatedAt).format("MMM DD, YYYY hh:mm A")}</td>
+                                                                                        <td className='text-445B64-img w-110px border-0'>Last Updated</td>
+                                                                                        <td><span className="text-445B64-img border-0">-</span> {moment(ticketDetails?.updatedAt).format("MMM DD, YYYY hh:mm A")}</td>
                                                                                     </tr>
                                                                                 </tbody>
                                                                             </table>
                                                                         </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="">
-                                                                <div className="row">
-
-                                                                    <div className="col-12 col-lg-6">
-
                                                                     </div>
                                                                 </div>
                                                             </div>

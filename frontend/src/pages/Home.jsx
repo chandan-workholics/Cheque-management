@@ -727,6 +727,27 @@ const Home = () => {
 
   const validateForm = () => {
     const newErrors = {};
+
+    if (!formData.customerFirstName?.trim()) {
+      newErrors.customerFirstName = "Please fill this field";
+    }
+    if (!licenseData.licenseNo?.trim()) {
+      newErrors.licenseNo = "Please fill this field";
+    }
+    if (!formData.company?.trim()) {
+      newErrors.company = "Please fill this field";
+    }
+    if (!formData.checkType?.trim()) {
+      newErrors.checkType = "Please select check type";
+    }
+    if (!formData.status?.trim()) {
+      newErrors.status = "Please select status";
+    }
+    if (!formData.amount?.trim()) {
+      newErrors.amount = "Please enter amount";
+    }
+
+    setErrors(newErrors);
     requiredFields.forEach(field => {
       if (field === 'licenseNo') {
         if (!licenseData.licenseNo || licenseData.licenseNo.trim() === '') {
@@ -977,10 +998,10 @@ const Home = () => {
         amount: formData.amount,
         status: formData.status,
         extractedText: formData.extractedText,
-        comment: formData.comment || 'xyz',
+        comment: formData.comment,
         venderId: venderId
       });
-     console.log(response)
+      console.log(response)
       if (response.status >= 200 && response.status < 300) {
         toast.success('Check added successfully!');
       } else {
@@ -995,10 +1016,10 @@ const Home = () => {
   return (
     <>
       <div className="container-fluid">
+        <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
         <Header />
         <div className="">
           <div className="row mh-100vh">
-            <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
             <div className="col-lg-2 col-xl-2 d-none d-lg-block position-relative">
               <Sidebar />
             </div>
@@ -1233,7 +1254,11 @@ const Home = () => {
                                       }
                                     }}
                                   />
-
+                                  {errors.customerFirstName && (
+                                    <div className="text-danger mt-1" style={{ fontSize: '0.6rem' }}>
+                                      "Please fill the customer first name"
+                                    </div>
+                                  )}
                                 </div>
                                 <div className="col-md-4 mb-3">
                                   <input type="text" className="form-control" placeholder='Middle Name' value={licenseData.customerMiddleName || formData.customerMiddleName} onChange={(e) => setFormData({ ...formData, customerMiddleName: e.target.value })} />
@@ -1246,7 +1271,7 @@ const Home = () => {
                             <div className="col-md-3 mb-3">
                               <label className="form-label text-445B64">License No  <span className='text-danger'>*</span></label>
                               <input type="text" className={`form-control ${errors.licenseNo ? 'border border-danger' : licenseData.licenseNo ? 'border border-success' : ''}`} value={licenseData.licenseNo || ''}
-                                  onChange={(e) => {
+                                onChange={(e) => {
                                   const value = e.target.value;
                                   setLicenseData({ ...licenseData, licenseNo: value });
                                   if (value.trim() !== '') {
@@ -1254,6 +1279,11 @@ const Home = () => {
                                   }
                                 }}
                               />
+                              {errors.licenseNo && (
+                                <div className="text-danger mt-1" style={{ fontSize: '0.6rem' }}>
+                                  "Please fill the license number"
+                                </div>
+                              )}
                             </div>
                             {/* <div className="col-md-4 mb-3">
                               <label className="form-label text-445B64">Date</label>
@@ -1276,7 +1306,11 @@ const Home = () => {
                                   }
                                 }}
                               />
-
+                              {errors.company && (
+                                <div className="text-danger mt-1" style={{ fontSize: '0.6rem' }}>
+                                  "Please fill the company"
+                                </div>
+                              )}
                             </div>
                             <div className="col-md-3 mb-3">
                               <label className="form-label text-445B64">
@@ -1288,8 +1322,6 @@ const Home = () => {
                                 onChange={(e) => {
                                   const value = e.target.value;
                                   setFormData({ ...formData, checkType: value });
-
-                                  // Clear error instantly if a value is selected
                                   if (value.trim() !== '') {
                                     setErrors((prev) => ({ ...prev, checkType: null }));
                                   }
@@ -1299,7 +1331,13 @@ const Home = () => {
                                 <option value="Personal">Personal</option>
                                 <option value="Business">Business</option>
                               </select>
+                              {errors.checkType && (
+                                <div className="text-danger mt-1" style={{ fontSize: '0.6rem' }}>
+                                  "Please Select the check type"
+                                </div>
+                              )}
                             </div>
+
 
                             <div className="col-md-3 mb-3">
                               <label className="form-label text-445B64">Status <span className='text-danger'>*</span></label>
@@ -1318,7 +1356,13 @@ const Home = () => {
                                 <option value="good">Good</option>
                                 <option value="bad">Bad</option>
                               </select>
+                              {errors.status && (
+                                <div className="text-danger mt-1" style={{ fontSize: '0.6rem' }}>
+                                  "Please select the status"
+                                </div>
+                              )}
                             </div>
+
 
                             <div className="col-md-3 mb-3">
                               <label className="form-label text-445B64">Amount <span className='text-danger'>*</span></label>
@@ -1334,8 +1378,12 @@ const Home = () => {
                                   }
                                 }}
                               />
+                              {errors.amount && (
+                                <div className="text-danger mt-1" style={{ fontSize: '0.6rem' }}>
+                                  "Please fill the amount"
+                                </div>
+                              )}
                             </div>
-
                           </div>
                         </div>
                         <div className="col-md-4 mb-3 pb-4 mt-0 mt-lg-3">
