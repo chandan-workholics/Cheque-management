@@ -9,6 +9,7 @@ lerna-debug.log*
 
 node_modules
 service-account-key.json
+.env
 dist
 dist-ssr
 *.local
