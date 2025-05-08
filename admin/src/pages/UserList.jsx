@@ -13,6 +13,7 @@ const UserList = () => {
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [showModal, setShowModal] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
     const [newUser, setNewUser] = useState({
         firstname: '',
         lastname: '',
@@ -71,12 +72,12 @@ const UserList = () => {
                     lastname: '',
                     mobile: '',
                     email: '',
-                    password:'',
+                    password: '',
                     bussiness: '',
                     isActive: '',
                     role: '',
                 });
-                fetchUsers(); 
+                fetchUsers();
             }
         } catch (error) {
             toast.error("Failed to add user: " + error.message);
@@ -89,6 +90,20 @@ const UserList = () => {
         fetchUsers();
     }, [])
 
+    const filteredUsers = users.filter((item, index) => {
+        const search = searchTerm.toLowerCase();
+        return (
+            (index + 1).toString().includes(search) ||
+            item.firstname?.toLowerCase().includes(search) ||
+            item.lastname?.toLowerCase().includes(search) ||
+            item.mobile?.toString().toLowerCase().includes(search) ||
+            item.email?.toLowerCase().includes(search) ||
+            item.bussiness?.toLowerCase().includes(search) ||
+            item.role?.toLowerCase().includes(search) ||
+            item.status?.toLowerCase().includes(search) ||
+            item.otp?.toString().toLowerCase().includes(search)
+        )
+    })
 
     return (
         <>
@@ -127,7 +142,7 @@ const UserList = () => {
                                                                     <div className="position-relative pe-0 pe-lg-4 me-3"
                                                                         style={{ width: "-webkit-fill-available" }}>
                                                                         <input className="form-control rounded-3 me-2 shadow-none bg-F0F5F6" style={{ paddingLeft: "40px" }}
-                                                                            type="search" placeholder="Search" aria-label="Search" />
+                                                                         onChange={(e) => setSearchTerm(e.target.value)}   type="search" placeholder="Search" aria-label="Search" />
                                                                         <i className="fa-solid fa-magnifying-glass text-445B64 position-absolute top-0 start-0"
                                                                             style={{ margin: "11px" }}></i>
                                                                     </div>
@@ -172,9 +187,9 @@ const UserList = () => {
                                                                                     </div>
                                                                                 </td>
                                                                             </tr>
-                                                                        ) : (
-                                                                            users?.length > 0 && users.map((user, index) => (
-                                                                                <tr key={index}>
+                                                                        ) : filteredUsers.length > 0 ? (
+                                                                            filteredUsers.map((user, index) => (
+                                                                                <tr key={user._id}>
                                                                                     <td className="text-center">
                                                                                         <input className="form-check-input table-checkbox" type="checkbox" />
                                                                                     </td>
@@ -183,7 +198,7 @@ const UserList = () => {
                                                                                     <td>{user?.mobile}</td>
                                                                                     <td>{user?.email}</td>
                                                                                     <td>{user?.bussiness}</td>
-                                                                                    <td>{user?.isActive === true ? "active" : "not active"}</td>
+                                                                                    <td>{user?.isActive ? "active" : "not active"}</td>
                                                                                     <td>{user?.role}</td>
                                                                                     <td>{user?.otp}</td>
                                                                                     <td>
@@ -198,8 +213,13 @@ const UserList = () => {
                                                                                     </td>
                                                                                 </tr>
                                                                             ))
+                                                                        ) : (
+                                                                            <tr>
+                                                                                <td colSpan="11" className='text-center'>No cheques found</td>
+                                                                            </tr>
                                                                         )}
                                                                     </tbody>
+
                                                                 </table>
                                                             </div>
                                                         </div>
