@@ -7,7 +7,9 @@ const routes = require('./router');
 const { scanCheck } = require('./controllers/visionController');
 const { scanLicense } = require('./controllers/visionController');
 const { uploadImage } = require('./controllers/visionController');
-const { uploadImages } = require('./controllers/visionController');
+
+const { uploadImages } = require('./controllers/scan.controller');
+
 
 require('dotenv').config();
 
@@ -34,9 +36,9 @@ const upload = multer({ storage });
 // Routes
 app.post('/api/v1/scan-check', upload.single('image'), scanCheck);
 app.post('/api/v1/scan-license', upload.single('image'), scanLicense);
-app.post('/api/v1/upload-image', upload.single('image'), uploadImages);
+app.post('/api/v1/upload-image', upload.single('image'), uploadImage);
 
-app.post('/api/v1/upload', upload.single('image'), uploadImage);
+app.post('/api/v1/upload-images', upload.single('image'), uploadImages);
 
 // Start server
 app.listen(PORT, () => {
