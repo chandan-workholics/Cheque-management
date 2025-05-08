@@ -68,7 +68,7 @@ body {
 }
 
 .bg-FFF0F0 {
-  background-color: #FFF0F0;
+  background-color: #FFF0F0 !important;
 }
 
 .bg-F6FFFE {
