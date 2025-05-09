@@ -602,12 +602,7 @@ const Home = () => {
                             )}
                           </div>
                         </div>
-                        <div className="col-12 d-flex justify-content-end">
-                          <button type="button" className="btn btn-sm py-1 px-3 theme-btn rounded-3 mt-3 " data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Please Check all Details
-                          </button>
-                        </div>
-                        <div className="col-lg-8">
+                        <div className="col-lg-12">
                           <div className="row">
                             <div className="col-md-9">
                               <div className="row">
@@ -645,10 +640,6 @@ const Home = () => {
                               <input type="text" className="form-control" value={licenseData.licenseNo || formData.licenseNo} onChange={(e) => setFormData({ ...licenseData, licenseNo: e.target.value })} />
                             </div>
                             <div className="col-md-3 mb-3">
-                              <label className="form-label text-445B64">Company </label>
-                              <input type="text" className="form-control" value={formData.company || ''} onChange={(e) => { const value = e.target.value; setFormData({ ...formData, company: e.target.value }) }} />
-                            </div>
-                            <div className="col-md-3 mb-3">
                               <label className="form-label text-445B64"> Check Type </label>
                               <select className="form-control" value={formData.checkType || ''} onChange={(e) => { const value = e.target.value; setFormData({ ...formData, checkType: value }) }} >
                                 <option value="">Select Check Type</option>
@@ -676,16 +667,16 @@ const Home = () => {
                                 </div>
                               )}
                             </div>
-                          </div>
-                        </div>
-                        <div className="col-md-4 mb-3 pb-4 mt-0 mt-lg-3">
+                            <div className="col-md-6 mb-3 ">
                           <label className="form-label text-445B64">Comments</label>
-                          <textarea className="form-control h-100" value={formData.comment || ''} onChange={(e) => setFormData({ ...formData, comment: e.target.value })} />
+                          <input className="form-control" value={formData.comment || ''} onChange={(e) => setFormData({ ...formData, comment: e.target.value })} />
                         </div>
-
-                        <div className="col-lg-4 me-auto mt-0 text-center">
+                          </div>
+                          <div className="col-lg-4 me-auto mt-0 text-center">
                           <button className="btn theme-btn px-5 py-2 rounded-3 mt-3 w-100" onClick={handleSave}>Save</button>
                         </div>
+                        </div>
+                        
                       </div>
                     </div>
                   </div>
