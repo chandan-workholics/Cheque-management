@@ -124,7 +124,7 @@ exports.scanLicenses = async (req, res) => {
 
   } catch (error) {
     console.error('Error scanning license:', error);
-    res.status(500).json({ error: 'Failed to process license image' });
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -233,6 +233,6 @@ exports.scanChecks = async (req, res) => {
 
   } catch (error) {
     console.error('Error during scan:', error);
-    res.status(500).json({ error: 'Failed to process image' });
+    res.status(500).json({ error: error.message });
   }
 };
