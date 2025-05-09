@@ -19,6 +19,15 @@ body {
 .fs-13 {
   font-size: 13px;
 }
+.fs-12 {
+  font-size: 12px;
+}
+.fs-11 {
+  font-size: 11px;
+}
+.fs-10 {
+  font-size: 10px;
+}
 
 /* Text-Size - End */
 
@@ -41,6 +50,9 @@ body {
 
 .bg-EFFFFE {
   background-color: #DEF0FF;
+}
+.bg-light-green-EFFFFE {
+  background-color: #EFFFFE;
 }
 
 .bg-FFF6F6 {
@@ -78,14 +90,29 @@ body {
 .bg-FAFAFA {
   background-color: #FAFAFA;
 }
+.bg-FFF9EE {
+  background-color: #FFF9EE;
+}
+.bg-F8F8F8 {
+  background-color: #F8F8F8;
+}
 
 /* Background-Color-End */
 
 /* Text-Color-Start */
+.text-000000 {
+  color: #000000;
+}
 .text-445B64 {
   color: #000000;
 }
+.text-616161 {
+  color: #616161;
+}
 
+.text-8A48E9 {
+  color: #8A48E9;
+}
 .text-00C7BE {
   color: #008CFF;
 }
@@ -98,8 +125,15 @@ body {
   color: #008CFF;
 }
 
+.text-green-01A99A {
+  color: #01A99A;
+}
+
 .text-E84D4D {
   color: #E84D4D;
+}
+.text-FF0808 {
+  color: #FF0808;
 }
 
 .text-0D161A {
@@ -373,5 +407,20 @@ body {
     border: #DEE6E9;
   }
 }
-
 /* Main-Content - CSS - End */
+
+
+/* Mobile View - CSS - Start */
+.mobile-bg{
+  background-image: url('../src/assets/images/mobileBg.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  .inputFile {
+    border: 1px dashed #DFDFDF;
+    background: #FFFFFF;
+    border-radius: 12px;
+  }
+}
+/* Mobile View - CSS - End */
