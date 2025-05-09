@@ -19,6 +19,7 @@ import ForgetPassword from "./pages/ForgetPassword";
 import ProtectedRoute from "./pages/Common_Method/protectedroute";
 import ForgetPasswordVerification from "./pages/ForgetPasswordVerification";
 import Profile from "./pages/Profile";
+import MobileAddCheck from "./pages/MobileAddCheck";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
           <Route path="/cheque-management/forget-password" element={<ForgetPassword/>}/>
           <Route path="/cheque-management/forget-password-verification" element={<ForgetPasswordVerification/>}/>
           <Route path="/cheque-management/profile" element={<Profile/>}/>
+          <Route path="/cheque-management/upload-check" element={<MobileAddCheck/>}/>
         </Routes>
       </BrowserRouter>
     </>
