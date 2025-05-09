@@ -11,6 +11,7 @@ const AllCheques = () => {
 
     const [cheques, setCheques] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const rowsPerPage = 10;
 
@@ -48,7 +49,21 @@ const AllCheques = () => {
         }
     };
 
-  
+    const filteredCheques = cheques.filter((item, index) => {
+        const search = searchTerm.toLowerCase();
+        return (
+            (index + 1).toString().includes(search) ||
+            item.customerFirstName?.toLowerCase().includes(search) ||
+            item.customerLastName?.toLowerCase().includes(search) ||
+            item.company?.toLowerCase().includes(search) ||
+            item.licenseNo?.toString().toLowerCase().includes(search) ||
+            item.checkType?.toLowerCase().includes(search) ||
+            item.amount?.toString().toLowerCase().includes(search) ||
+            item.comment?.toLowerCase().includes(search) ||
+            item.date?.toLowerCase().includes(search) ||
+            item.status?.toLowerCase().includes(search)
+        );
+    });
 
     useEffect(() => {
         fetchCheques();
@@ -91,7 +106,7 @@ const AllCheques = () => {
                                                                     <div className="position-relative pe-0 pe-lg-4 me-3"
                                                                         style={{ width: "-webkit-fill-available" }}>
                                                                         <input className="form-control rounded-3 me-2 shadow-none bg-F0F5F6" style={{ paddingLeft: "40px" }}
-                                                                            type="search" placeholder="Search" aria-label="Search" />
+                                                                            onChange={(e) => setSearchTerm(e.target.value)} type="search" placeholder="Search" aria-label="Search" />
                                                                         <i className="fa-solid fa-magnifying-glass text-445B64 position-absolute top-0 start-0"
                                                                             style={{ margin: "11px" }}></i>
                                                                     </div>
@@ -135,47 +150,49 @@ const AllCheques = () => {
                                                                                     <span className="spinner-border text-primary" role="status" />
                                                                                 </td>
                                                                             </tr>
-                                                                        ) : cheques?.length > 0 ? (
-                                                                            cheques.map((cheque, index) => (
-                                                                                <tr key={index}>
-                                                                                    <td className="text-center">
-                                                                                        <input className="form-check-input table-checkbox" type="checkbox" />
-                                                                                    </td>
-                                                                                    <td>{indexOfFirstRow + index + 1}</td>
-                                                                                    <td>{cheque?.customerFirstName}</td>
-                                                                                    <td>{cheque?.company}</td>
-                                                                                    <td>{cheque?.licenseNo}</td>
-                                                                                    <td>{cheque?.chequeType}</td>
-                                                                                    <td>{cheque?.amount}</td>
-                                                                                    <td>{cheque?.comment?.length > 10 ? cheque?.comment.substring(0, 10) + '...' : cheque?.comment}</td>
-                                                                                    <td>
-                                                                                        {cheque?.date &&
-                                                                                            new Date(cheque.date).toLocaleDateString("en-GB", {
-                                                                                                day: "numeric",
-                                                                                                month: "long",
-                                                                                                year: "numeric",
-                                                                                            }).replace(/(\w+) (\d{4})$/, '$1, $2')}
-                                                                                    </td>
-
-                                                                                    <td className="text-01A99A">{cheque?.status}</td>
-                                                                                    <td>
-                                                                                        <div className="d-flex justify-content-center">
-                                                                                            <Link to={`/cm-admin/cheque-details/${cheque?._id}`} className="btn">
-                                                                                                <i className="fa-solid fa-eye text-445B64"></i>
-                                                                                            </Link>
-                                                                                            <button className="btn" onClick={() => handleDeleteCheque(cheque?._id)}>
-                                                                                                <i className="fa-solid fa-trash-can text-danger"></i>
-                                                                                            </button>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            ))
+                                                                        ) : filteredCheques.length > 0 ? (
+                                                                            filteredCheques
+                                                                                .slice(indexOfFirstRow, indexOfLastRow)
+                                                                                .map((cheque, index) => (
+                                                                                    <tr key={cheque._id}>
+                                                                                        <td className="text-center">
+                                                                                            <input className="form-check-input table-checkbox" type="checkbox" />
+                                                                                        </td>
+                                                                                        <td>{indexOfFirstRow + index + 1}</td>
+                                                                                        <td>{cheque?.customerFirstName}</td>
+                                                                                        <td>{cheque?.company}</td>
+                                                                                        <td>{cheque?.licenseNo}</td>
+                                                                                        <td>{cheque?.chequeType}</td>
+                                                                                        <td>{cheque?.amount}</td>
+                                                                                        <td>{cheque?.comment?.length > 10 ? cheque?.comment.substring(0, 10) + '...' : cheque?.comment}</td>
+                                                                                        <td>
+                                                                                            {cheque?.date &&
+                                                                                                new Date(cheque.date).toLocaleDateString("en-GB", {
+                                                                                                    day: "numeric",
+                                                                                                    month: "long",
+                                                                                                    year: "numeric",
+                                                                                                }).replace(/(\w+) (\d{4})$/, '$1, $2')}
+                                                                                        </td>
+                                                                                        <td className="text-01A99A">{cheque?.status}</td>
+                                                                                        <td>
+                                                                                            <div className="d-flex justify-content-center">
+                                                                                                <Link to={`/cm-admin/cheque-details/${cheque?._id}`} className="btn">
+                                                                                                    <i className="fa-solid fa-eye text-445B64"></i>
+                                                                                                </Link>
+                                                                                                <button className="btn" onClick={() => handleDeleteCheque(cheque?._id)}>
+                                                                                                    <i className="fa-solid fa-trash-can text-danger"></i>
+                                                                                                </button>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                ))
                                                                         ) : (
                                                                             <tr>
-                                                                                <td colSpan="11" className="text-center py-4 text-muted">No cheques found</td>
+                                                                                <td colSpan="11" className="text-center">No cheques found.</td>
                                                                             </tr>
                                                                         )}
                                                                     </tbody>
+
 
                                                                 </table>
                                                             </div>
