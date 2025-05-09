@@ -20,7 +20,7 @@ const Home = () => {
     licenseNo: '',
     date: '',
     company: '',
-    checkType: '',
+    checkType: 'Personal',
     amount: '',
     imageUrl: '',
     extractedText: '',
@@ -71,7 +71,7 @@ const Home = () => {
 
   const [status, setStatus] = useState({});
 
-  const requiredFields = ['customerFirstName', 'licenseNo', 'company', 'checkType', 'status', 'amount'];
+  const requiredFields = ['customerFirstName', 'amount'];
 
   const validateForm = () => {
     const newErrors = {};
@@ -79,34 +79,17 @@ const Home = () => {
     if (!formData.customerFirstName?.trim()) {
       newErrors.customerFirstName = "Please fill this field";
     }
-    if (!licenseData.licenseNo?.trim()) {
-      newErrors.licenseNo = "Please fill this field";
-    }
-    if (!formData.company?.trim()) {
-      newErrors.company = "Please fill this field";
-    }
-    if (!formData.checkType?.trim()) {
-      newErrors.checkType = "Please select check type";
-    }
-    if (!formData.status?.trim()) {
-      newErrors.status = "Please select status";
-    }
     if (!formData.amount?.trim()) {
       newErrors.amount = "Please enter amount";
     }
 
     setErrors(newErrors);
     requiredFields.forEach(field => {
-      if (field === 'licenseNo') {
-        if (!licenseData.licenseNo || licenseData.licenseNo.trim() === '') {
-          newErrors[field] = true;
-        }
-      } else {
-        if (!formData[field] || formData[field].trim() === '') {
-          newErrors[field] = true;
-        }
+      if (!formData[field] || formData[field].trim() === '') {
+        newErrors[field] = true;
       }
-    });
+    }
+    );
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -484,13 +467,23 @@ const Home = () => {
                             ) : (
                               <>
                                 {licenseData?.imageUrl && (
-                                  <div className='col-lg-6'>
+                                  <div className='col-lg-6 '>
                                     <label className="form-label text-445B64 mb-1 mt-3">Front Image</label>
+                                    <div className='position-relative mt-3'>
+                                    <button
+                                      type="button"
+                                      className="btn btn-sm btn-dark position-absolute top-0 end-0 m-1 rounded-circle p-1"
+                                      onClick={() => setLicenseData({ ...licenseData, imageUrl: '' })} 
+                                      style={{ zIndex: 1 }}
+                                    >
+                                      &times;
+                                    </button>
                                     <img
                                       src={licenseData.imageUrl}
                                       alt="Front License"
                                       className='w-100 border rounded-4 overflow-hidden'
                                     />
+                                    </div>
                                   </div>
                                 )}
                               </>
@@ -507,11 +500,21 @@ const Home = () => {
                                 {licenseDataback?.imageUrl && (
                                   <div className='col-lg-6'>
                                     <label className="form-label text-445B64 mb-1 mt-3">Back Image</label>
+                                    <div className='position-relative mt-3'>
+                                    <button
+                                      type="button"
+                                      className="btn btn-sm btn-dark position-absolute top-0 end-0 m-1 rounded-circle p-1"
+                                      onClick={() => setLicenseDataback({ ...licenseDataback, imageUrl: '' })} 
+                                      style={{ zIndex: 1 }}
+                                    >
+                                      &times;
+                                    </button>
                                     <img
                                       src={licenseDataback.imageUrl}
                                       alt="Back License"
                                       className='w-100 border rounded-4 overflow-hidden'
                                     />
+                                    </div>
                                   </div>
                                 )}
                               </>
@@ -555,7 +558,17 @@ const Home = () => {
                                 {formData?.imageUrl && (
                                   <div className='col-lg-6'>
                                     <label className="form-label text-445B64 mb-1 mt-3">Front Image</label>
+                                    <div className='position-relative mt-3'>
+                                    <button
+                                      type="button"
+                                      className="btn btn-sm btn-dark position-absolute top-0 end-0 m-1 rounded-circle p-1"
+                                      onClick={() => setFormData({ ...formData, imageUrl: '' })} 
+                                      style={{ zIndex: 1 }}
+                                    >
+                                      &times;
+                                    </button>
                                     <img src={formData.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
+                                    </div>
                                   </div>
                                 )}
                               </>
@@ -569,10 +582,20 @@ const Home = () => {
 
                             ) : (
                               <>
-                                {formData?.imageUrl && (
+                                {formDataback?.imageUrl && (
                                   <div className='col-lg-6'>
                                     <label className="form-label text-445B64 mb-1 mt-3">Back Image</label>
+                                    <div className='position-relative mt-3'>
+                                    <button
+                                      type="button"
+                                      className="btn btn-sm btn-dark position-absolute top-0 end-0 m-1 rounded-circle p-1"
+                                      onClick={() => setFormDataback({ ...formDataback, imageUrl: '' })} 
+                                      style={{ zIndex: 1 }}
+                                    >
+                                      &times;
+                                    </button>
                                     <img src={formDataback.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
+                                    </div>
                                   </div>
                                 )}
                               </>
@@ -592,6 +615,7 @@ const Home = () => {
                                 <div className="col-md-4 mb-3">
                                   <input
                                     type="text"
+                                    placeholder='First name'
                                     className={`form-control ${errors.customerFirstName ? 'border border-danger' : formData.customerFirstName ? 'border border-success' : ''}`}
                                     value={formData.customerFirstName || ''}
                                     onChange={(e) => {
@@ -617,101 +641,21 @@ const Home = () => {
                               </div>
                             </div>
                             <div className="col-md-3 mb-3">
-                              <label className="form-label text-445B64">License No  <span className='text-danger'>*</span></label>
-                              <input type="text" className={`form-control ${errors.licenseNo ? 'border border-danger' : licenseData.licenseNo ? 'border border-success' : ''}`} value={licenseData.licenseNo || ''}
-                                onChange={(e) => {
-                                  const value = e.target.value;
-                                  setLicenseData({ ...licenseData, licenseNo: value });
-                                  if (value.trim() !== '') {
-                                    setErrors((prev) => ({ ...prev, licenseNo: null }));
-                                  }
-                                }}
-                              />
-                              {errors.licenseNo && (
-                                <div className="text-danger mt-1" style={{ fontSize: '0.6rem' }}>
-                                  "Please fill the license number"
-                                </div>
-                              )}
-                            </div>
-                            {/* <div className="col-md-4 mb-3">
-                              <label className="form-label text-445B64">Date</label>
-                              <input type="text" className="form-control" value={formData.date || ''} onChange={(e) => setFormData({ ...formData, date: e.target.value })} />
-                            </div> */}
-
-                            <div className="col-md-3 mb-3">
-                              <label className="form-label text-445B64">Company <span className='text-danger'>*</span></label>
-                              <input
-                                type="text"
-                                className={`form-control ${errors.company ? 'border border-danger' : formData.company ? 'border border-success' : ''}`}
-                                placeholder='Company Name'
-                                value={formData.company || ''}
-                                onChange={(e) => {
-                                  const value = e.target.value;
-                                  setFormData({ ...formData, company: value });
-
-                                  if (value.trim() !== '') {
-                                    setErrors((prev) => ({ ...prev, company: null }));
-                                  }
-                                }}
-                              />
-                              {errors.company && (
-                                <div className="text-danger mt-1" style={{ fontSize: '0.6rem' }}>
-                                  "Please fill the company"
-                                </div>
-                              )}
+                              <label className="form-label text-445B64">License No </label>
+                              <input type="text" className="form-control" value={licenseData.licenseNo || formData.licenseNo} onChange={(e) => setFormData({ ...licenseData, licenseNo: e.target.value })} />
                             </div>
                             <div className="col-md-3 mb-3">
-                              <label className="form-label text-445B64">
-                                Check Type <span className='text-danger'>*</span>
-                              </label>
-                              <select
-                                className={`form-control ${errors.checkType ? 'border border-danger' : formData.checkType ? 'border border-success' : ''}`}
-                                value={formData.checkType || ''}
-                                onChange={(e) => {
-                                  const value = e.target.value;
-                                  setFormData({ ...formData, checkType: value });
-                                  if (value.trim() !== '') {
-                                    setErrors((prev) => ({ ...prev, checkType: null }));
-                                  }
-                                }}
-                              >
+                              <label className="form-label text-445B64">Company </label>
+                              <input type="text" className="form-control" value={formData.company || ''} onChange={(e) => { const value = e.target.value; setFormData({ ...formData, company: e.target.value }) }} />
+                            </div>
+                            <div className="col-md-3 mb-3">
+                              <label className="form-label text-445B64"> Check Type </label>
+                              <select className="form-control" value={formData.checkType || ''} onChange={(e) => { const value = e.target.value; setFormData({ ...formData, checkType: value }) }} >
                                 <option value="">Select Check Type</option>
                                 <option value="Personal">Personal</option>
                                 <option value="Business">Business</option>
                               </select>
-                              {errors.checkType && (
-                                <div className="text-danger mt-1" style={{ fontSize: '0.6rem' }}>
-                                  "Please Select the check type"
-                                </div>
-                              )}
                             </div>
-
-
-                            <div className="col-md-3 mb-3">
-                              <label className="form-label text-445B64">Status <span className='text-danger'>*</span></label>
-                              <select
-                                className={`form-control ${errors.status ? 'border border-danger' : formData.status ? 'border border-success' : ''}`}
-                                value={formData.status || ''}
-                                onChange={(e) => {
-                                  const value = e.target.value;
-                                  setFormData({ ...formData, status: value });
-                                  if (value.trim() !== '') {
-                                    setErrors((prev) => ({ ...prev, status: null }));
-                                  }
-                                }}
-                              >
-                                <option value="">Select Status</option>
-                                <option value="good">Good</option>
-                                <option value="bad">Bad</option>
-                              </select>
-                              {errors.status && (
-                                <div className="text-danger mt-1" style={{ fontSize: '0.6rem' }}>
-                                  "Please select the status"
-                                </div>
-                              )}
-                            </div>
-
-
                             <div className="col-md-3 mb-3">
                               <label className="form-label text-445B64">Amount <span className='text-danger'>*</span></label>
                               <input
