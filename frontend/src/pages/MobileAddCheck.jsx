@@ -346,7 +346,7 @@ const MobileAddCheck = () => {
                                                                     src={formData.imageUrl}
                                                                     alt="Profile"
                                                                     className="w-100 h-100 border rounded-4 overflow-hidden"
-                                                                    style={{ objectFit: 'fill' }}
+                                                                    style={{ objectFit: 'cover' }}
                                                                 />
                                                             </div>
 
@@ -360,7 +360,7 @@ const MobileAddCheck = () => {
                                                             >
                                                                 <div className="modal-dialog modal-dialog-centered">
                                                                     <div className="modal-content overflow-hidden bg-transparent border-0">
-                                                                        <div className="modal-footer border-0 p-0 bg-transparent">
+                                                                        {/* <div className="modal-footer border-0 p-0 bg-transparent">
                                                                             <button
                                                                                 type="button"
                                                                                 className="btn btn-secondary rounded-circle"
@@ -368,7 +368,7 @@ const MobileAddCheck = () => {
                                                                             >
                                                                                 <i class="fa-solid fa-xmark"></i>
                                                                             </button>
-                                                                        </div>
+                                                                        </div> */}
                                                                         <div className="modal-body p-0">
                                                                             <img
                                                                                 src={formData.imageUrl}
@@ -438,7 +438,7 @@ const MobileAddCheck = () => {
                                                                     src={formDataback.imageUrl}
                                                                     alt="Profile"
                                                                     className="w-100 h-100 border rounded-4 overflow-hidden"
-                                                                    style={{ objectFit: 'fill' }}
+                                                                    style={{ objectFit: 'cover' }}
                                                                 />
                                                             </div>
 
@@ -452,7 +452,7 @@ const MobileAddCheck = () => {
                                                             >
                                                                 <div className="modal-dialog modal-dialog-centered">
                                                                     <div className="modal-content overflow-hidden bg-transparent border-0">
-                                                                        <div className="modal-footer border-0 p-0 bg-transparent">
+                                                                        {/* <div className="modal-footer border-0 p-0 bg-transparent">
                                                                             <button
                                                                                 type="button"
                                                                                 className="btn btn-secondary rounded-circle"
@@ -460,7 +460,7 @@ const MobileAddCheck = () => {
                                                                             >
                                                                                 <i class="fa-solid fa-xmark"></i>
                                                                             </button>
-                                                                        </div>
+                                                                        </div> */}
                                                                         <div className="modal-body p-0">
                                                                             <img
                                                                                 src={formDataback.imageUrl}
@@ -553,7 +553,7 @@ const MobileAddCheck = () => {
                                                                     src={licenseData.imageUrl}
                                                                     alt="Profile"
                                                                     className="w-100 h-100 border rounded-4 overflow-hidden"
-                                                                    style={{ objectFit: 'fill' }}
+                                                                    style={{ objectFit: 'cover' }}
                                                                 />
                                                             </div>
 
@@ -567,7 +567,7 @@ const MobileAddCheck = () => {
                                                             >
                                                                 <div className="modal-dialog modal-dialog-centered">
                                                                     <div className="modal-content overflow-hidden bg-transparent border-0">
-                                                                        <div className="modal-footer border-0 p-0 bg-transparent">
+                                                                        {/* <div className="modal-footer border-0 p-0 bg-transparent">
                                                                             <button
                                                                                 type="button"
                                                                                 className="btn btn-secondary rounded-circle"
@@ -575,7 +575,7 @@ const MobileAddCheck = () => {
                                                                             >
                                                                                 <i class="fa-solid fa-xmark"></i>
                                                                             </button>
-                                                                        </div>
+                                                                        </div> */}
                                                                         <div className="modal-body p-0">
                                                                             <img
                                                                                 src={licenseData.imageUrl}
@@ -644,7 +644,7 @@ const MobileAddCheck = () => {
                                                                     src={licenseDataback.imageUrl}
                                                                     alt="Profile"
                                                                     className="w-100 h-100 border rounded-4 overflow-hidden"
-                                                                    style={{ objectFit: 'fill' }}
+                                                                    style={{ objectFit: 'cover' }}
                                                                 />
                                                             </div>
 
@@ -658,7 +658,7 @@ const MobileAddCheck = () => {
                                                             >
                                                                 <div className="modal-dialog modal-dialog-centered">
                                                                     <div className="modal-content overflow-hidden bg-transparent border-0">
-                                                                        <div className="modal-footer border-0 p-0 bg-transparent">
+                                                                        {/* <div className="modal-footer border-0 p-0 bg-transparent">
                                                                             <button
                                                                                 type="button"
                                                                                 className="btn btn-secondary rounded-circle"
@@ -666,7 +666,7 @@ const MobileAddCheck = () => {
                                                                             >
                                                                                 <i class="fa-solid fa-xmark"></i>
                                                                             </button>
-                                                                        </div>
+                                                                        </div> */}
                                                                         <div className="modal-body p-0">
                                                                             <img
                                                                                 src={licenseDataback.imageUrl}
