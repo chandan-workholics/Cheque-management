@@ -443,6 +443,26 @@ input::placeholder:after {
     border: 1px dashed #DFDFDF;
     background: #FFFFFF;
     border-radius: 12px;
+    padding: 44px !important;
+  }
+
+  .form-label {
+    font-size: 12px;
+    margin-bottom: 0;
+    color: #292929;
+  }
+
+  .form-control {
+    font-size: 14px;
+    margin-bottom: 0;
+    color: #000000;
+  }
+
+  input::placeholder {
+    color: #000000;
+  }
+  textarea::placeholder {
+    color: #000000;
   }
 
   .table {
