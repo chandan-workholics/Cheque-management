@@ -40,11 +40,7 @@ const checkBackRef = useRef(null);
     licenseNo: '',
     date: '',
     company: '',
-<<<<<<< HEAD
     checkType:'Personal',
-=======
-    checkType: 'Personal',
->>>>>>> d847ea8675f7abde6ce5e78105ae886b2329898c
     amount: '',
     imageUrl: '',
     extractedText: '',
@@ -482,7 +478,6 @@ const checkBackRef = useRef(null);
 
                     <div className="card-body">
                       <div className="row g-3 new-cheque-form">
-<<<<<<< HEAD
 
                       <div className="col-md-6">
                           <label className="form-label text-445B64">Check Image</label>
@@ -591,122 +586,12 @@ const checkBackRef = useRef(null);
                                 </div>
                               </div>
 
-=======
-                        <div className="col-md-6">
-                          <label className="form-label text-445B64">Check Image</label>
-
-
-                          <div className="d-flex gap-2 gap-lg-3">
-                            <div className="form-control inputFile p-3 p-lg-4 text-center position-relative d-flex justify-content-center align-items-center">
-                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmit} ref={checkFrontRef } style={{ opacity: 0, cursor: 'pointer' }} />
-                              <div className="">
-                                <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
-                                <div className="text-445B64">Upload/Capture Front </div>
-                              </div>
-                            </div>
-
-                            <div className="form-control inputFile p-3 p-lg-4 text-center position-relative d-flex justify-content-center align-items-center">
-                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmitback} ref={checkBackRef } style={{ opacity: 0, cursor: 'pointer' }} />
-                              <div className="">
-                                <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
-                                <div className="text-445B64">Upload/Capture Back </div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="row">
-                            {loading ? (
-                              <div className="col-6 text-center py-5 px-5">
-                                <div className="spinner-border text-primary" role="status">
-                                  <span className="visually-hidden">Loading...</span>
-                                </div>
-                              </div>
-
-                            ) : (
-                              <>
-                                {formData?.imageUrl && (
-                                  <div className='col-lg-6'>
-                                    <label className="form-label text-445B64 mb-1 mt-3">Front Image</label>
-                                    <div className='position-relative mt-3'>
-                                    <button
-                                      type="button"
-                                      className="btn btn-sm btn-dark position-absolute top-0 end-0 m-1 rounded-circle p-1"
-                                      // onClick={() => setFormData({ ...formData, imageUrl: null })} 
-                                      onClick={handleCancelCheckFront}
-                                      style={{ zIndex: 1 }}
-                                    >
-                                      &times;
-                                    </button>
-                                    <img src={formData.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
-                                    </div>
-                                  </div>
-                                )}
-                              </>
-                            )}
-                            {loading1 ? (
-                              <div className="col-6 text-center py-5 px-5">
-                                <div className="spinner-border text-primary" role="status">
-                                  <span className="visually-hidden">Loading...</span>
-                                </div>
-                              </div>
-
-                            ) : (
-                              <>
-                                {formDataback?.imageUrl && (
-                                  <div className='col-lg-6'>
-                                    <label className="form-label text-445B64 mb-1 mt-3">Back Image</label>
-                                    <div className='position-relative mt-3'>
-                                    <button
-                                      type="button"
-                                      className="btn btn-sm btn-dark position-absolute top-0 end-0 m-1 rounded-circle p-1"
-                                      // onClick={() => setFormDataback({ ...formDataback, imageUrl: null })} 
-                                      onClick={handleCancelCheckBack}
-                                      style={{ zIndex: 1 }}
-                                    >
-                                      &times;
-                                    </button>
-                                    <img src={formDataback.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
-                                    </div>
-                                  </div>
-                                )}
-                              </>
-                            )}
-                          </div>
-                        </div>
-                        <div className="col-md-6">
-                          <label className="form-label text-445B64">License Image</label>
-                          <div className="d-flex gap-2 gap-lg-3">
-                            <div className="form-control inputFile p-3 p-lg-4 text-center position-relative d-flex justify-content-center align-items-center">
-                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmitLicense} ref={licenseFrontRef } style={{ opacity: 0, cursor: 'pointer' }} />
-                              <div className="">
-                                <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
-                                <div className="text-445B64">Upload/Capture Front </div>
-                              </div>
-                            </div>
-                            <div className="form-control inputFile p-3 p-lg-4 text-center position-relative d-flex justify-content-center align-items-center">
-                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmitLicenseback} ref={licenseBackRef } style={{ opacity: 0, cursor: 'pointer' }} />
-                              <div className="">
-                                <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
-                                <div className="text-445B64">Upload/Capture Back  </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="row">
-                            {loading2 ? (
-                              <div className="col-6 text-center py-5 px-5">
-                                <div className="spinner-border text-primary" role="status">
-                                  <span className="visually-hidden">Loading...</span>
-                                </div>
-                              </div>
-
->>>>>>> d847ea8675f7abde6ce5e78105ae886b2329898c
                             ) : (
                               <>
                                 {licenseData?.imageUrl && (
                                   <div className='col-lg-6 '>
                                     <label className="form-label text-445B64 mb-1 mt-3">Front Image</label>
                                     <div className='position-relative mt-3'>
-<<<<<<< HEAD
                                       <button
                                         type="button"
                                         className="btn btn-sm btn-dark position-absolute top-0 end-0 m-1 rounded-circle p-1"
@@ -720,22 +605,6 @@ const checkBackRef = useRef(null);
                                         alt="Front License"
                                         className='w-100 border rounded-4 overflow-hidden'
                                       />
-=======
-                                    <button
-                                      type="button"
-                                      className="btn btn-sm btn-dark position-absolute top-0 end-0 m-1 rounded-circle p-1"
-                                      // onClick={() => setLicenseData({ ...licenseData, imageUrl: null })} 
-                                      onClick={handleCancelLicenseFront}
-                                      style={{ zIndex: 1 }}
-                                    >
-                                      &times;
-                                    </button>
-                                    <img
-                                      src={licenseData.imageUrl}
-                                      alt="Front License"
-                                      className='w-100 border rounded-4 overflow-hidden'
-                                    />
->>>>>>> d847ea8675f7abde6ce5e78105ae886b2329898c
                                     </div>
                                   </div>
                                 )}
@@ -754,7 +623,6 @@ const checkBackRef = useRef(null);
                                   <div className='col-lg-6'>
                                     <label className="form-label text-445B64 mb-1 mt-3">Back Image</label>
                                     <div className='position-relative mt-3'>
-<<<<<<< HEAD
                                       <button
                                         type="button"
                                         className="btn btn-sm btn-dark position-absolute top-0 end-0 m-1 rounded-circle p-1"
@@ -768,22 +636,6 @@ const checkBackRef = useRef(null);
                                         alt="Back License"
                                         className='w-100 border rounded-4 overflow-hidden'
                                       />
-=======
-                                    <button
-                                      type="button"
-                                      className="btn btn-sm btn-dark position-absolute top-0 end-0 m-1 rounded-circle p-1"
-                                      // onClick={() => setLicenseDataback({ ...licenseDataback, imageUrl: null })} 
-                                      onClick={handleCancelLicenseBack}
-                                      style={{ zIndex: 1 }}
-                                    >
-                                      &times;
-                                    </button>
-                                    <img
-                                      src={licenseDataback.imageUrl}
-                                      alt="Back License"
-                                      className='w-100 border rounded-4 overflow-hidden'
-                                    />
->>>>>>> d847ea8675f7abde6ce5e78105ae886b2329898c
                                     </div>
                                   </div>
                                 )}
@@ -793,7 +645,6 @@ const checkBackRef = useRef(null);
                             <div className="col-lg-6"></div>
                           </div>
                         </div>
-<<<<<<< HEAD
 
 
 
@@ -801,8 +652,6 @@ const checkBackRef = useRef(null);
 
 
 
-=======
->>>>>>> d847ea8675f7abde6ce5e78105ae886b2329898c
                         <div className="col-lg-12">
                           <div className="row">
                             <div className="col-md-9">
@@ -877,10 +726,6 @@ const checkBackRef = useRef(null);
                             <button className="btn theme-btn px-5 py-2 rounded-3 mt-3 w-100" onClick={handleSave}>Save</button>
                           </div>
                         </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> d847ea8675f7abde6ce5e78105ae886b2329898c
                       </div>
                     </div>
                   </div>
