@@ -510,6 +510,10 @@ input::placeholder:after {
     color: #ffffff;
     padding-left: 0;
   }
+  .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: transparent;
+}
 }
 
 @media only screen and (max-width: 767px) {
