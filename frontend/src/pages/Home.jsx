@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
-import { useState,useRef } from 'react';
+import { useState, useRef } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,9 +11,9 @@ const URL = process.env.REACT_APP_URL;
 
 const Home = () => {
   const licenseFrontRef = useRef(null);
-const licenseBackRef = useRef(null);
-const checkFrontRef = useRef(null);
-const checkBackRef = useRef(null);
+  const licenseBackRef = useRef(null);
+  const checkFrontRef = useRef(null);
+  const checkBackRef = useRef(null);
   const venderId = localStorage.getItem("userId");
   const [loading, setLoading] = useState(false);
   const [loading1, setLoading1] = useState(false);
@@ -27,7 +27,7 @@ const checkBackRef = useRef(null);
     licenseNo: '',
     date: '',
     company: '',
-    checkType:'Personal',
+    checkType: 'Personal',
     amount: '',
     imageUrl: '',
     extractedText: '',
@@ -40,7 +40,7 @@ const checkBackRef = useRef(null);
     licenseNo: '',
     date: '',
     company: '',
-    checkType:'Personal',
+    checkType: 'Personal',
     amount: '',
     imageUrl: '',
     extractedText: '',
@@ -80,28 +80,28 @@ const checkBackRef = useRef(null);
       licenseFrontRef.current.value = '';
     }
   };
-  
+
   const handleCancelLicenseBack = () => {
     setLicenseDataback({ ...licenseDataback, imageUrl: '' });
     if (licenseBackRef.current) {
       licenseBackRef.current.value = '';
     }
   };
-  
+
   const handleCancelCheckFront = () => {
     setFormData({ ...formData, imageUrl: '' });
     if (checkFrontRef.current) {
       checkFrontRef.current.value = '';
     }
   };
-  
+
   const handleCancelCheckBack = () => {
     setFormDataback({ ...formDataback, imageUrl: '' });
     if (checkBackRef.current) {
       checkBackRef.current.value = '';
     }
   };
-  
+
   const [errors, setErrors] = useState({});
 
   const [status, setStatus] = useState({});
@@ -360,7 +360,7 @@ const checkBackRef = useRef(null);
           hour12: false
         }),
         company: formData.company,
-        checkType: formData.checkType||'Personal',
+        checkType: formData.checkType || 'Personal',
         amount: formData.amount,
         status: formData.status,
         extractedText: formData.extractedText,
@@ -479,7 +479,7 @@ const checkBackRef = useRef(null);
                     <div className="card-body">
                       <div className="row g-3 new-cheque-form">
 
-                      <div className="col-md-6">
+                        <div className="col-md-6">
                           <label className="form-label text-445B64">Check Image</label>
 
 
@@ -648,7 +648,7 @@ const checkBackRef = useRef(null);
 
 
 
-                      
+
 
 
 
