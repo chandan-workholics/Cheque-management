@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const MobileAddCheck = () => {
     const [step, setStep] = useState(1);
@@ -15,9 +16,11 @@ const MobileAddCheck = () => {
                         <div className="container-fluid mobile-bg d-block d-lg-none position-relative" style={{ minHeight: '100vh' }}>
                             <div className="card border-0 bg-transparent">
                                 <div className="card-header bg-transparent p-3" style={{ margin: '0 -12px' }}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
-                                        <path d="M0.292893 7.29289C-0.0976311 7.68342 -0.0976311 8.31658 0.292893 8.70711L6.65685 15.0711C7.04738 15.4616 7.68054 15.4616 8.07107 15.0711C8.46159 14.6805 8.46159 14.0474 8.07107 13.6569L2.41421 8L8.07107 2.34315C8.46159 1.95262 8.46159 1.31946 8.07107 0.928932C7.68054 0.538408 7.04738 0.538408 6.65685 0.928932L0.292893 7.29289ZM1 8V9H17V8V7H1V8Z" fill="black" />
-                                    </svg>
+                                    <Link to='/cheque-management/dashboard'>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                                            <path d="M0.292893 7.29289C-0.0976311 7.68342 -0.0976311 8.31658 0.292893 8.70711L6.65685 15.0711C7.04738 15.4616 7.68054 15.4616 8.07107 15.0711C8.46159 14.6805 8.46159 14.0474 8.07107 13.6569L2.41421 8L8.07107 2.34315C8.46159 1.95262 8.46159 1.31946 8.07107 0.928932C7.68054 0.538408 7.04738 0.538408 6.65685 0.928932L0.292893 7.29289ZM1 8V9H17V8V7H1V8Z" fill="black" />
+                                        </svg>
+                                    </Link>
                                     <span className="fs-6 ms-2 text-000000 fw-semibold">Upload Check Image</span>
                                 </div>
                                 <div className="card-body bg-transparent px-0">
@@ -39,8 +42,8 @@ const MobileAddCheck = () => {
                                                             <path d="M7.29175 6.125V1.77083L11.6459 6.125M1.75008 0.583334C0.871331 0.583334 0.166748 1.28792 0.166748 2.16667V14.8333C0.166748 15.2533 0.333563 15.656 0.630496 15.9529C0.927428 16.2499 1.33016 16.4167 1.75008 16.4167H11.2501C11.67 16.4167 12.0727 16.2499 12.3697 15.9529C12.6666 15.656 12.8334 15.2533 12.8334 14.8333V5.33333L8.08342 0.583334H1.75008Z" fill="#008CFF" />
                                                         </svg>
                                                         <div className="ms-2">
-                                                            <h6 className="fs-14 text-000000 mb-0">main.jpg</h6>
-                                                            <h6 className="fs-13 text-000000 mb-0">2KB</h6>
+                                                            <h6 className="fs-13 text-000000 mb-0">main.jpg</h6>
+                                                            <h6 className="fs-10 text-000000 mb-0">2KB</h6>
                                                         </div>
                                                     </div>
                                                     <button className="border-0 bg-transparent">
@@ -68,8 +71,8 @@ const MobileAddCheck = () => {
                                                             <path d="M7.29175 6.125V1.77083L11.6459 6.125M1.75008 0.583334C0.871331 0.583334 0.166748 1.28792 0.166748 2.16667V14.8333C0.166748 15.2533 0.333563 15.656 0.630496 15.9529C0.927428 16.2499 1.33016 16.4167 1.75008 16.4167H11.2501C11.67 16.4167 12.0727 16.2499 12.3697 15.9529C12.6666 15.656 12.8334 15.2533 12.8334 14.8333V5.33333L8.08342 0.583334H1.75008Z" fill="#008CFF" />
                                                         </svg>
                                                         <div className="ms-2">
-                                                            <h6 className="fs-14 text-000000 mb-0">main.jpg</h6>
-                                                            <h6 className="fs-13 text-000000 mb-0">2KB</h6>
+                                                            <h6 className="fs-13 text-000000 mb-0">main.jpg</h6>
+                                                            <h6 className="fs-10 text-000000 mb-0">2KB</h6>
                                                         </div>
                                                     </div>
                                                     <button className="border-0 bg-transparent">
@@ -121,8 +124,8 @@ const MobileAddCheck = () => {
                                                             <path d="M7.29175 6.125V1.77083L11.6459 6.125M1.75008 0.583334C0.871331 0.583334 0.166748 1.28792 0.166748 2.16667V14.8333C0.166748 15.2533 0.333563 15.656 0.630496 15.9529C0.927428 16.2499 1.33016 16.4167 1.75008 16.4167H11.2501C11.67 16.4167 12.0727 16.2499 12.3697 15.9529C12.6666 15.656 12.8334 15.2533 12.8334 14.8333V5.33333L8.08342 0.583334H1.75008Z" fill="#008CFF" />
                                                         </svg>
                                                         <div className="ms-2">
-                                                            <h6 className="fs-14 text-000000 mb-0">main.jpg</h6>
-                                                            <h6 className="fs-13 text-000000 mb-0">2KB</h6>
+                                                            <h6 className="fs-13 text-000000 mb-0">main.jpg</h6>
+                                                            <h6 className="fs-10 text-000000 mb-0">2KB</h6>
                                                         </div>
                                                     </div>
                                                     <button className="border-0 bg-transparent">
@@ -150,8 +153,8 @@ const MobileAddCheck = () => {
                                                             <path d="M7.29175 6.125V1.77083L11.6459 6.125M1.75008 0.583334C0.871331 0.583334 0.166748 1.28792 0.166748 2.16667V14.8333C0.166748 15.2533 0.333563 15.656 0.630496 15.9529C0.927428 16.2499 1.33016 16.4167 1.75008 16.4167H11.2501C11.67 16.4167 12.0727 16.2499 12.3697 15.9529C12.6666 15.656 12.8334 15.2533 12.8334 14.8333V5.33333L8.08342 0.583334H1.75008Z" fill="#008CFF" />
                                                         </svg>
                                                         <div className="ms-2">
-                                                            <h6 className="fs-14 text-000000 mb-0">main.jpg</h6>
-                                                            <h6 className="fs-13 text-000000 mb-0">2KB</h6>
+                                                            <h6 className="fs-13 text-000000 mb-0">main.jpg</h6>
+                                                            <h6 className="fs-10 text-000000 mb-0">2KB</h6>
                                                         </div>
                                                     </div>
                                                     <button className="border-0 bg-transparent">
@@ -163,8 +166,8 @@ const MobileAddCheck = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="card position-fixed start-0 bottom-0 w-100 border-0">
-                                <div className="card-body" style={{ padding: '12px' }}>
+                            <div className="card bg-transparent position-fixed start-0 bottom-0 w-100 border-0">
+                                <div className="card-body bg-transparent" style={{ padding: '12px' }}>
                                     <button className='w-100 border-0 bg-transparent text-secondary mb-4 fw-semibold' onClick={skipStep}>Skip</button>
                                     <button className='theme-btn w-100' onClick={nextStep}>Next</button>
                                 </div>
@@ -175,10 +178,68 @@ const MobileAddCheck = () => {
 
                 {step === 3 && (
                     <div>
-                        <h2>Step 3</h2>
-                        <input type="password" placeholder="Password" />
-                        <button onClick={prevStep}>Back</button>
-                        <button onClick={() => alert('Form Submitted!')}>Submit</button>
+                        <div className="container-fluid mobile-bg d-block d-lg-none position-relative" style={{ minHeight: '100vh' }}>
+                            <div className="card border-0 bg-transparent">
+                                <div className="card-header bg-transparent p-3" style={{ margin: '0 -12px' }}>
+                                    <button className="border-0 bg-transparent" onClick={prevStep}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                                            <path d="M0.292893 7.29289C-0.0976311 7.68342 -0.0976311 8.31658 0.292893 8.70711L6.65685 15.0711C7.04738 15.4616 7.68054 15.4616 8.07107 15.0711C8.46159 14.6805 8.46159 14.0474 8.07107 13.6569L2.41421 8L8.07107 2.34315C8.46159 1.95262 8.46159 1.31946 8.07107 0.928932C7.68054 0.538408 7.04738 0.538408 6.65685 0.928932L0.292893 7.29289ZM1 8V9H17V8V7H1V8Z" fill="black" />
+                                        </svg>
+                                    </button>
+                                    <span className="fs-6 ms-2 text-000000 fw-semibold">Verify & Submit </span>
+                                </div>
+                                <div className="card-body bg-transparent px-0">
+                                    <div className="row">
+                                        <div className="col-12 mb-3">
+                                            {/* <label className="form-label text-445B64 mb-0 fs-14 fw-semibold">First Name
+                                                <span className='text-danger'>*</span>
+                                            </label> */}
+                                            <input type="text" className="form-control rounded-3" placeholder='First Name*' />
+                                        </div>
+                                        <div className="col-12 mb-3">
+                                            {/* <label className="form-label text-445B64 mb-0 fs-14 fw-semibold">Middle Name
+                                            </label> */}
+                                            <input type="text" className="form-control rounded-3" placeholder='Middle Name' />
+                                        </div>
+                                        <div className="col-12 mb-3">
+                                            {/* <label className="form-label text-445B64 mb-0 fs-14 fw-semibold">Last Name
+                                                <span className='text-danger'>*</span>
+                                            </label> */}
+                                            <input type="text" className="form-control rounded-3" placeholder='Last Name*' />
+                                        </div>
+                                        <div className="col-12 mb-3">
+                                            {/* <label className="form-label text-445B64 mb-0 fs-14 fw-semibold">License No
+                                            </label> */}
+                                            <input type="text" className="form-control rounded-3" placeholder='License No' />
+                                        </div>
+                                        <div className="col-12 mb-3 position-relative">
+                                            {/* <label className="form-label text-445B64 mb-0 fs-14 fw-semibold"> Check Type </label> */}
+                                            <i class="fa-solid fa-caret-down fs-4 text-secondary position-absolute" style={{ top: '9px', right: '24px' }}></i>
+                                            <select className="form-control" >
+                                                <option value="">Select Check Type</option>
+                                                <option value="Personal" selected>Personal</option>
+                                                <option value="Business">Business</option>
+                                            </select>
+                                        </div>
+                                        <div className="col-12 mb-3">
+                                            {/* <label className="form-label text-445B64 mb-0 fs-14 fw-semibold">Amount
+                                                <span className='text-danger'>*</span>
+                                            </label> */}
+                                            <input type="number" className="form-control rounded-3" placeholder='Amount*' />
+                                        </div>
+                                        <div className="col-12 mb-3">
+                                            {/* <label className="form-label text-445B64 mb-0 fs-14 fw-semibold">Comments</label> */}
+                                            <textarea className="form-control" placeholder='Comments' />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="card bg-transparent position-fixed start-0 bottom-0 w-100 border-0">
+                                <div className="card-body bg-transparent" style={{ padding: '12px' }}>
+                                    <button className='theme-btn w-100' onClick={() => alert('Form Submitted!')}>Submit</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 )}
             </div>

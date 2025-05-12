@@ -19,12 +19,15 @@ body {
 .fs-13 {
   font-size: 13px;
 }
+
 .fs-12 {
   font-size: 12px;
 }
+
 .fs-11 {
   font-size: 11px;
 }
+
 .fs-10 {
   font-size: 10px;
 }
@@ -51,6 +54,7 @@ body {
 .bg-EFFFFE {
   background-color: #DEF0FF;
 }
+
 .bg-light-green-EFFFFE {
   background-color: #EFFFFE;
 }
@@ -90,9 +94,11 @@ body {
 .bg-FAFAFA {
   background-color: #FAFAFA;
 }
+
 .bg-FFF9EE {
   background-color: #FFF9EE;
 }
+
 .bg-F8F8F8 {
   background-color: #F8F8F8;
 }
@@ -103,9 +109,11 @@ body {
 .text-000000 {
   color: #000000;
 }
+
 .text-445B64 {
   color: #000000;
 }
+
 .text-616161 {
   color: #616161;
 }
@@ -113,6 +121,7 @@ body {
 .text-8A48E9 {
   color: #8A48E9;
 }
+
 .text-00C7BE {
   color: #008CFF;
 }
@@ -132,6 +141,7 @@ body {
 .text-E84D4D {
   color: #E84D4D;
 }
+
 .text-FF0808 {
   color: #FF0808;
 }
@@ -347,6 +357,17 @@ body {
     background: #E5F3FF;
   }
 }
+
+input::placeholder {
+  color: #6c757d;
+  /* default gray */
+}
+
+input::placeholder:after {
+  content: '*';
+  color: red;
+}
+
 /* Add to your CSS */
 .btn-sm.rounded-circle {
   width: 24px;
@@ -407,11 +428,12 @@ body {
     border: #DEE6E9;
   }
 }
+
 /* Main-Content - CSS - End */
 
 
 /* Mobile View - CSS - Start */
-.mobile-bg{
+.mobile-bg {
   background-image: url('../src/assets/images/mobileBg.png');
   background-position: center;
   background-size: cover;
@@ -422,5 +444,36 @@ body {
     background: #FFFFFF;
     border-radius: 12px;
   }
+
+  .table {
+    width: max-content;
+
+    th {
+      font-size: 13px;
+      color: #445B64;
+    }
+
+    td {
+      font-size: 14px;
+      color: #0D161A;
+    }
+  }
 }
+
+.MobSidebarBg {
+  background-image: url('../src/assets/images/sidebarBG.png');
+  background-position: right;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: #008CFF;
+
+  .nav-link {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: #ffffff;
+    padding-left: 0;
+  }
+}
+
 /* Mobile View - CSS - End */
