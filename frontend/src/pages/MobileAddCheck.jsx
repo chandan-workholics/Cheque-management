@@ -319,12 +319,12 @@ const MobileAddCheck = () => {
                                 </div>
                                 <div className="card-body bg-transparent px-0">
                                     <div className="mb-4">
-                                        <div className="form-control inputFile p-4 mb-3 text-center position-relative d-flex justify-content-center align-items-center">
+                                        <div className="form-control inputFile p-5 mb-3 text-center position-relative d-flex justify-content-center align-items-center">
                                             <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" ref={checkFrontRef} onChange={handleSubmit} style={{ opacity: 0, cursor: 'pointer' }} />
                                             {/* image box */}
 
                                             {loading ? (
-                                                <div className="col-6 text-center py-5 px-5">
+                                                <div className="position-absolute w-100 h-100 top-0 start-0 d-flex justify-content-center align-items-center py-5 px-5 bg-white">
                                                     <div className="spinner-border text-primary" role="status">
                                                         <span className="visually-hidden">Loading...</span>
                                                     </div>
@@ -333,19 +333,8 @@ const MobileAddCheck = () => {
                                             ) : (
                                                 <>
                                                     {formData?.imageUrl && (
-                                                        <div className='col-lg-6'>
-                                                            <label className="form-label text-445B64 mb-1 mt-3">Front Image</label>
-                                                            <div className='position-relative mt-3'>
-                                                                <button
-                                                                    type="button"
-                                                                    className="btn btn-sm btn-dark position-absolute top-0 end-0 m-1 rounded-circle p-1"
-                                                                    onClick={handleCancelCheckFront}
-                                                                    style={{ zIndex: 1 }}
-                                                                >
-                                                                    &times;
-                                                                </button>
-                                                                <img src={formData.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
-                                                            </div>
+                                                        <div className='position-absolute w-100 h-100 top-0 start-0'>
+                                                            <img src={formData.imageUrl} alt="Profile" className='w-100 h-100 border rounded-4 overflow-hidden' style={{ objectFit: 'fill' }} />
                                                         </div>
                                                     )}
                                                 </>
@@ -383,10 +372,10 @@ const MobileAddCheck = () => {
 
 
                                     <div className="">
-                                        <div className="form-control inputFile p-4 mb-3 text-center position-relative d-flex justify-content-center align-items-center">
+                                        <div className="form-control inputFile p-5 mb-3 text-center position-relative d-flex justify-content-center align-items-center">
                                             <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" ref={checkBackRef} onChange={handleSubmitback} style={{ opacity: 0, cursor: 'pointer' }} />
                                             {loading1 ? (
-                                                <div className="col-6 text-center py-5 px-5">
+                                                <div className="position-absolute w-100 h-100 top-0 start-0 d-flex justify-content-center align-items-center py-5 px-5 bg-white">
                                                     <div className="spinner-border text-primary" role="status">
                                                         <span className="visually-hidden">Loading...</span>
                                                     </div>
@@ -395,19 +384,8 @@ const MobileAddCheck = () => {
                                             ) : (
                                                 <>
                                                     {formDataback?.imageUrl && (
-                                                        <div className='col-lg-6'>
-                                                            <label className="form-label text-445B64 mb-1 mt-3">Back Image</label>
-                                                            <div className='position-relative mt-3'>
-                                                                <button
-                                                                    type="button"
-                                                                    className="btn btn-sm btn-dark position-absolute top-0 end-0 m-1 rounded-circle p-1"
-                                                                    onClick={handleCancelCheckBack}
-                                                                    style={{ zIndex: 1 }}
-                                                                >
-                                                                    &times;
-                                                                </button>
-                                                                <img src={formDataback.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
-                                                            </div>
+                                                        <div className='position-absolute w-100 h-100 top-0 start-0'>
+                                                            <img src={formDataback.imageUrl} alt="Profile" className='w-100 h-100 border rounded-4 overflow-hidden' style={{ objectFit: 'fill' }} />
                                                         </div>
                                                     )}
                                                 </>
