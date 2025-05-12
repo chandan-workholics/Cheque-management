@@ -34,7 +34,7 @@ const Header = () => {
                     {/* Navbar right-side */}
 
                     <ul className="navbar-nav ms-auto mb-lg-0 d-flex flex-row">
-                        <li className="nav-item me-lg-0">
+                        <li className="nav-item me-lg-0 d-none d-lg-block">
                             <Link className="nav-link header-icon me-2" to=''>
                                 <i className="fa-solid fa-bell fs-5"></i>
                             </Link>
@@ -49,9 +49,13 @@ const Header = () => {
                             </ul>
                         </li>
                         <li className="nav-item me-lg-0 d-block d-lg-none">
-                            <Link className="nav-link header-icon" to=''>
+                            <Link className="nav-link" to=''>
                                 <button className="btn border-0 bg-transparent p-0 mb-lg-1 mb-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
-                                    <i className="fa-solid fa-bars"></i>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24" fill="none">
+                                        <path d="M0 2H25.6668" stroke="#008CFF" stroke-width="2.5" />
+                                        <path d="M5 12L26 12" stroke="#008CFF" stroke-width="2.5" />
+                                        <path d="M0 22.5335H25.6668" stroke="#008CFF" stroke-width="2.5" />
+                                    </svg>
                                 </button>
                             </Link>
                         </li>
