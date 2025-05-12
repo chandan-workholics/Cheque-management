@@ -401,7 +401,7 @@ const Home = () => {
                     </div>
                   </div>
 
-                  
+
                   {/* New Check Form */}
                   <div className="card rounded-4 overflow-hidden border-0 shadow-sm">
                     <div className="card-header bg-white d-flex align-items-center py-3">
@@ -422,7 +422,7 @@ const Home = () => {
 
                           <div className="d-flex gap-2 gap-lg-3">
                             <div className="form-control inputFile p-3 p-lg-4 text-center position-relative d-flex justify-content-center align-items-center">
-                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmit} style={{ opacity: 0, cursor: 'pointer' }} />
+                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" ref={checkFrontRef} onChange={handleSubmit} style={{ opacity: 0, cursor: 'pointer' }} />
                               <div className="">
                                 <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
                                 <div className="text-445B64">Upload/Capture Front </div>
@@ -430,7 +430,7 @@ const Home = () => {
                             </div>
 
                             <div className="form-control inputFile p-3 p-lg-4 text-center position-relative d-flex justify-content-center align-items-center">
-                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmitback} style={{ opacity: 0, cursor: 'pointer' }} />
+                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" ref={checkBackRef} onChange={handleSubmitback} style={{ opacity: 0, cursor: 'pointer' }} />
                               <div className="">
                                 <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
                                 <div className="text-445B64">Upload/Capture Back </div>
@@ -455,7 +455,7 @@ const Home = () => {
                                       <button
                                         type="button"
                                         className="btn btn-sm btn-dark position-absolute top-0 end-0 m-1 rounded-circle p-1"
-                                        onClick={() => setFormData({ ...formData, imageUrl: '' })}
+                                        onClick={handleCancelCheckFront}
                                         style={{ zIndex: 1 }}
                                       >
                                         &times;
@@ -482,7 +482,7 @@ const Home = () => {
                                       <button
                                         type="button"
                                         className="btn btn-sm btn-dark position-absolute top-0 end-0 m-1 rounded-circle p-1"
-                                        onClick={() => setFormDataback({ ...formDataback, imageUrl: '' })}
+                                        onClick={handleCancelCheckBack}
                                         style={{ zIndex: 1 }}
                                       >
                                         &times;
@@ -501,14 +501,14 @@ const Home = () => {
                           <label className="form-label text-445B64">License Image</label>
                           <div className="d-flex gap-2 gap-lg-3">
                             <div className="form-control inputFile p-3 p-lg-4 text-center position-relative d-flex justify-content-center align-items-center">
-                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmitLicense} style={{ opacity: 0, cursor: 'pointer' }} />
+                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" ref={licenseFrontRef} onChange={handleSubmitLicense} style={{ opacity: 0, cursor: 'pointer' }} />
                               <div className="">
                                 <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
                                 <div className="text-445B64">Upload/Capture Front </div>
                               </div>
                             </div>
                             <div className="form-control inputFile p-3 p-lg-4 text-center position-relative d-flex justify-content-center align-items-center">
-                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmitLicenseback} style={{ opacity: 0, cursor: 'pointer' }} />
+                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" ref={licenseBackRef} onChange={handleSubmitLicenseback} style={{ opacity: 0, cursor: 'pointer' }} />
                               <div className="">
                                 <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
                                 <div className="text-445B64">Upload/Capture Back  </div>
@@ -532,7 +532,7 @@ const Home = () => {
                                       <button
                                         type="button"
                                         className="btn btn-sm btn-dark position-absolute top-0 end-0 m-1 rounded-circle p-1"
-                                        onClick={() => setLicenseData({ ...licenseData, imageUrl: '' })}
+                                        onClick={handleCancelLicenseFront}
                                         style={{ zIndex: 1 }}
                                       >
                                         &times;
@@ -563,7 +563,7 @@ const Home = () => {
                                       <button
                                         type="button"
                                         className="btn btn-sm btn-dark position-absolute top-0 end-0 m-1 rounded-circle p-1"
-                                        onClick={() => setLicenseDataback({ ...licenseDataback, imageUrl: '' })}
+                                        onClick={handleCancelLicenseBack}
                                         style={{ zIndex: 1 }}
                                       >
                                         &times;
