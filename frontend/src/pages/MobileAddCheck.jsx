@@ -1,17 +1,16 @@
-import React, { useEffect } from 'react';
-import Header from '../components/header';
-import Sidebar from '../components/Sidebar';
+
 import { useState, useRef } from 'react';
 import axios from 'axios';
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import MobileHeader from '../components/MobileHeader';
+
 import { Link } from 'react-router-dom';
-import RecentCheck from '../components/RecentCheck';
+
+import { useNavigate } from 'react-router-dom';
 const URL = process.env.REACT_APP_URL;
 
 const MobileAddCheck = () => {
-
+    const navigate = useNavigate();
     const [showPreview, setShowPreview] = useState(false);
     const [step, setStep] = useState(1);
 
@@ -295,7 +294,7 @@ const MobileAddCheck = () => {
             console.log(response)
             if (response.status >= 200 && response.status < 300) {
                 // toast.success('Check added successfully!');
-               alert('Check added successfully!');
+                alert('Check added successfully!');
                 const parsedData = {
                     customerFirstName: '',
                     customerMiddleName: '',
@@ -311,6 +310,7 @@ const MobileAddCheck = () => {
                     extractedText: ''
                 };
                 setFormData(parsedData);
+                navigate(-1);
             } else {
                 toast.error('Failed to add check');
             }
