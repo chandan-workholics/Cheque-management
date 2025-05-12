@@ -294,7 +294,23 @@ const MobileAddCheck = () => {
             });
             console.log(response)
             if (response.status >= 200 && response.status < 300) {
-                toast.success('Check added successfully!');
+                // toast.success('Check added successfully!');
+               alert('Check added successfully!');
+                const parsedData = {
+                    customerFirstName: '',
+                    customerMiddleName: '',
+                    customerLastName: '',
+                    date: '',
+                    company: '',
+                    checkType: '',
+                    amount: '',
+                    amountWords: '',
+                    payee: '',
+                    memo: '',
+                    imageUrl: '',
+                    extractedText: ''
+                };
+                setFormData(parsedData);
             } else {
                 toast.error('Failed to add check');
             }
