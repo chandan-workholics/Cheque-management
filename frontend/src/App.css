@@ -466,6 +466,20 @@ input::placeholder:after {
     color: #000000;
   }
 
+  .expand-img-icon {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #008cff;
+    color: white;
+    border-radius: 5px;
+  }
+
   .table {
     width: max-content;
     min-width: 100%;
@@ -495,6 +509,14 @@ input::placeholder:after {
     align-items: center;
     color: #ffffff;
     padding-left: 0;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .navbar-brand img {
+    width: 100px;
+    height: 35px;
+    object-fit: contain;
   }
 }
 

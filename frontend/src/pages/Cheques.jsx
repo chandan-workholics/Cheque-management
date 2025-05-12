@@ -93,7 +93,7 @@ const Cheques = () => {
                                                         <div className="col-lg-9">
                                                             <div className="d-flex position-relative" style={{ width: "100%" }}>
                                                                 <input
-                                                                    className="form-control form-control-sm rounded-3 me-2 shadow-none bg-F0F5F6"
+                                                                    className="form-control form-control-sm rounded-3 me-lg-2 shadow-none bg-F0F5F6"
                                                                     value={searchTerm}
                                                                     onChange={(e) => setSearchTerm(e.target.value)}
                                                                     type="search"
@@ -104,7 +104,7 @@ const Cheques = () => {
                                                                 <i className="fa fa-search text-445B64 position-absolute top-0 start-0" style={{ margin: "8px" }}></i>
                                                             </div>
                                                         </div>
-                                                        <div className="col-lg-3 d-flex justify-content-around align-items-center">
+                                                        <div className="col-lg-3 mt-3 mt-lg-0 d-flex justify-content-end align-items-center">
                                                             <button className='btn btn-light py-1 px-2 fs-14 text-445B64 p-0' onClick={handleAddCheque}>
                                                                 <i className="fa fa-plus me-2"></i>Add Check
                                                             </button>

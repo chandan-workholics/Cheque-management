@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../assets/images/logo.png'
+import logo from '../assets/images/EzKash.png'
 import supportIconImg from '../assets/images/supportIconImg.png';
 import { NavLink, Link, useNavigate } from 'react-router-dom'
 import { toast, ToastContainer } from "react-toastify";
@@ -23,12 +23,11 @@ const Header = () => {
     return (
         <>
             <div className="header w-100">
-                <nav className="navbar navbar-expand-lg bg-body-white px-3 w-100">
+                <nav className="navbar navbar-expand-lg bg-body-white shadow-sm px-3 w-100">
                     <ToastContainer position="top-right" autoClose={2000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
                     <div className="d-flex align-items-center">
                         <Link className="navbar-brand d-flex align-items-center" to=''>
-                            <img src={logo} alt="" className="me-2" />
-                            <span className='fs-6 fw-semibold'>Check Management</span>
+                            <img src={logo} alt="" className="" />
                         </Link>
                     </div>
                     {/* Navbar right-side */}
@@ -50,7 +49,7 @@ const Header = () => {
                         </li>
                         <li className="nav-item me-lg-0 d-block d-lg-none">
                             <Link className="nav-link header-icon" to=''>
-                                <button className="btn border-0 bg-transparent p-0 mb-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+                                <button className="btn border-0 bg-transparent p-0 mb-lg-1 mb-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
                                     <i className="fa-solid fa-bars"></i>
                                 </button>
                             </Link>
@@ -61,8 +60,9 @@ const Header = () => {
 
             <div className="offcanvas offcanvas-start w-75 w-md-50 " data-bs-scroll="true" tabIndex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
                 <div className="offcanvas-header border-bottom">
-                    <img src={logo} alt="" className="me-2" />
-                    <h6 className="offcanvas-title fw-semibold" id="offcanvasWithBothOptionsLabel">Cheque Management</h6>
+                    <div className="navbar-brand">
+                        <img src={logo} alt="" className="me-2" />
+                    </div>
                     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div className="offcanvas-body">
