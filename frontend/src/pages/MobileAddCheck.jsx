@@ -598,24 +598,26 @@ const MobileAddCheck = () => {
                                                 <div className="text-445B64 fw-semibold mt-3">Upload or Capture Front Image </div>
                                             </div>
                                         </div>
-                                        <div className="card bg-transparent">
-                                            <div className="card-body bg-transparent p-2">
-                                                <div className="d-flex align-items-center justify-content-between">
-                                                    <div className="d-flex align-items-center">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" viewBox="0 0 13 17" fill="none">
-                                                            <path d="M7.29175 6.125V1.77083L11.6459 6.125M1.75008 0.583334C0.871331 0.583334 0.166748 1.28792 0.166748 2.16667V14.8333C0.166748 15.2533 0.333563 15.656 0.630496 15.9529C0.927428 16.2499 1.33016 16.4167 1.75008 16.4167H11.2501C11.67 16.4167 12.0727 16.2499 12.3697 15.9529C12.6666 15.656 12.8334 15.2533 12.8334 14.8333V5.33333L8.08342 0.583334H1.75008Z" fill="#008CFF" />
-                                                        </svg>
-                                                        <div className="ms-2">
-                                                            <h6 className="fs-13 text-000000 mb-0">main.jpg</h6>
-                                                            <h6 className="fs-10 text-000000 mb-0">2KB</h6>
+                                        {licenseData?.imageUrl && (
+                                            <div className="card bg-transparent">
+                                                <div className="card-body bg-transparent p-2">
+                                                    <div className="d-flex align-items-center justify-content-between">
+                                                        <div className="d-flex align-items-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" viewBox="0 0 13 17" fill="none">
+                                                                <path d="M7.29175 6.125V1.77083L11.6459 6.125M1.75008 0.583334C0.871331 0.583334 0.166748 1.28792 0.166748 2.16667V14.8333C0.166748 15.2533 0.333563 15.656 0.630496 15.9529C0.927428 16.2499 1.33016 16.4167 1.75008 16.4167H11.2501C11.67 16.4167 12.0727 16.2499 12.3697 15.9529C12.6666 15.656 12.8334 15.2533 12.8334 14.8333V5.33333L8.08342 0.583334H1.75008Z" fill="#008CFF" />
+                                                            </svg>
+                                                            <div className="ms-2">
+                                                                <h6 className="fs-13 text-000000 mb-0">main.jpg</h6>
+                                                                <h6 className="fs-10 text-000000 mb-0">2KB</h6>
+                                                            </div>
                                                         </div>
+                                                        <button className="border-0 bg-transparent" onClick={handleCancelLicenseFront}>
+                                                            <i class="fa-solid fa-trash text-FF0808"></i>
+                                                        </button>
                                                     </div>
-                                                    <button className="border-0 bg-transparent" onClick={handleCancelLicenseFront}>
-                                                        <i class="fa-solid fa-trash text-FF0808"></i>
-                                                    </button>
                                                 </div>
                                             </div>
-                                        </div>
+                                        )}
                                     </div>
                                     <div className="">
                                         <div className="form-control inputFile p-4 mb-3 text-center position-relative d-flex justify-content-center align-items-center">
@@ -686,30 +688,32 @@ const MobileAddCheck = () => {
                                                 <div className="text-445B64 fw-semibold mt-3">Upload or Capture Back Image </div>
                                             </div>
                                         </div>
-                                        <div className="card bg-transparent">
-                                            <div className="card-body bg-transparent p-2">
-                                                <div className="d-flex align-items-center justify-content-between">
-                                                    <div className="d-flex align-items-center">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" viewBox="0 0 13 17" fill="none">
-                                                            <path d="M7.29175 6.125V1.77083L11.6459 6.125M1.75008 0.583334C0.871331 0.583334 0.166748 1.28792 0.166748 2.16667V14.8333C0.166748 15.2533 0.333563 15.656 0.630496 15.9529C0.927428 16.2499 1.33016 16.4167 1.75008 16.4167H11.2501C11.67 16.4167 12.0727 16.2499 12.3697 15.9529C12.6666 15.656 12.8334 15.2533 12.8334 14.8333V5.33333L8.08342 0.583334H1.75008Z" fill="#008CFF" />
-                                                        </svg>
-                                                        <div className="ms-2">
-                                                            <h6 className="fs-13 text-000000 mb-0">main.jpg</h6>
-                                                            <h6 className="fs-10 text-000000 mb-0">2KB</h6>
+                                        {licenseDataback?.imageUrl && (
+                                            <div className="card bg-transparent">
+                                                <div className="card-body bg-transparent p-2">
+                                                    <div className="d-flex align-items-center justify-content-between">
+                                                        <div className="d-flex align-items-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" viewBox="0 0 13 17" fill="none">
+                                                                <path d="M7.29175 6.125V1.77083L11.6459 6.125M1.75008 0.583334C0.871331 0.583334 0.166748 1.28792 0.166748 2.16667V14.8333C0.166748 15.2533 0.333563 15.656 0.630496 15.9529C0.927428 16.2499 1.33016 16.4167 1.75008 16.4167H11.2501C11.67 16.4167 12.0727 16.2499 12.3697 15.9529C12.6666 15.656 12.8334 15.2533 12.8334 14.8333V5.33333L8.08342 0.583334H1.75008Z" fill="#008CFF" />
+                                                            </svg>
+                                                            <div className="ms-2">
+                                                                <h6 className="fs-13 text-000000 mb-0">main.jpg</h6>
+                                                                <h6 className="fs-10 text-000000 mb-0">2KB</h6>
+                                                            </div>
                                                         </div>
+                                                        <button className="border-0 bg-transparent" onClick={handleCancelLicenseBack}>
+                                                            <i class="fa-solid fa-trash text-FF0808"></i>
+                                                        </button>
                                                     </div>
-                                                    <button className="border-0 bg-transparent" onClick={handleCancelLicenseBack}>
-                                                        <i class="fa-solid fa-trash text-FF0808"></i>
-                                                    </button>
                                                 </div>
                                             </div>
-                                        </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>
                             <div className="card bg-transparent position-absolute start-0 bottom-0 w-100 border-0">
                                 <div className="card-body bg-transparent" style={{ padding: '12px' }}>
-                                    <button className='w-100 border-0 bg-transparent text-secondary mb-4 fw-semibold' onClick={skipStep}>Skip</button>
+                                    <button className='w-100 border-0 bg-transparent text-secondary mb-3 fw-semibold' onClick={skipStep}>Skip</button>
                                     <button className='theme-btn w-100' onClick={nextStep}>Next</button>
                                 </div>
                             </div>
@@ -791,8 +795,8 @@ const MobileAddCheck = () => {
                                             )}
                                         </div>
                                         <div className="col-12 mb-3">
-                                            <label className="form-label text-445B64">Comments</label>
-                                            <input className="form-control" value={formData.comment || ''} onChange={(e) => setFormData({ ...formData, comment: e.target.value })} />
+                                            <label className="form-label text-445B64">Comment</label>
+                                            <textarea className="form-control" placeholder='Write Your Comment... ' value={formData.comment || ''} onChange={(e) => setFormData({ ...formData, comment: e.target.value })} />
                                         </div>
                                     </div>
                                 </div>
