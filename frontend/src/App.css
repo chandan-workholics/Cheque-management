@@ -461,12 +461,14 @@ input::placeholder:after {
   input::placeholder {
     color: #000000;
   }
+
   textarea::placeholder {
     color: #000000;
   }
 
   .table {
     width: max-content;
+    min-width: 100%;
 
     th {
       font-size: 13px;

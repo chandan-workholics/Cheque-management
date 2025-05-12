@@ -8,7 +8,7 @@ const MobileHeader = () => {
         <>
             <nav class="navbar fixed-top bg-body-tertiary border-bottom shadow-sm">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand p-0" href="#">
                         <img src={mobLogo} alt="Logo" class="d-inline-block align-text-top" />
                     </a>
                     <button class="btn border-0 bg-transparent" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
