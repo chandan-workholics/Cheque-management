@@ -13,6 +13,7 @@ const Home = () => {
   const [loading1, setLoading1] = useState(false);
   const [loading2, setLoading2] = useState(false);
   const [loading3, setLoading3] = useState(false);
+
   const [formData, setFormData] = useState({
     customerFirstName: '',
     customerMiddleName: '',
@@ -20,7 +21,7 @@ const Home = () => {
     licenseNo: '',
     date: '',
     company: '',
-    checkType: 'Personal',
+    checkType:'Personal',
     amount: '',
     imageUrl: '',
     extractedText: '',
@@ -33,7 +34,7 @@ const Home = () => {
     licenseNo: '',
     date: '',
     company: '',
-    checkType: '',
+    checkType:'Personal',
     amount: '',
     imageUrl: '',
     extractedText: '',
@@ -325,7 +326,7 @@ const Home = () => {
           hour12: false
         }),
         company: formData.company,
-        checkType: formData.checkType,
+        checkType: formData.checkType||'Personal',
         amount: formData.amount,
         status: formData.status,
         extractedText: formData.extractedText,
@@ -343,6 +344,8 @@ const Home = () => {
       toast.error('An error occurred while submitting the form');
     }
   };
+
+  console.log(formData)
 
   return (
     <>
@@ -436,94 +439,13 @@ const Home = () => {
                       </svg>
                       <h6 className='ms-2 mb-0 text-445B64'>New Checks</h6>
                     </div>
+
+
+
                     <div className="card-body">
                       <div className="row g-3 new-cheque-form">
-                        <div className="col-md-6">
-                          <label className="form-label text-445B64">License Image</label>
-                          <div className="d-flex gap-2 gap-lg-3">
-                            <div className="form-control inputFile p-3 p-lg-4 text-center position-relative d-flex justify-content-center align-items-center">
-                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmitLicense} style={{ opacity: 0, cursor: 'pointer' }} />
-                              <div className="">
-                                <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
-                                <div className="text-445B64">Upload/Capture Front </div>
-                              </div>
-                            </div>
-                            <div className="form-control inputFile p-3 p-lg-4 text-center position-relative d-flex justify-content-center align-items-center">
-                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmitLicenseback} style={{ opacity: 0, cursor: 'pointer' }} />
-                              <div className="">
-                                <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
-                                <div className="text-445B64">Upload/Capture Back  </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="row">
-                            {loading2 ? (
-                              <div className="col-6 text-center py-5 px-5">
-                                <div className="spinner-border text-primary" role="status">
-                                  <span className="visually-hidden">Loading...</span>
-                                </div>
-                              </div>
 
-                            ) : (
-                              <>
-                                {licenseData?.imageUrl && (
-                                  <div className='col-lg-6 '>
-                                    <label className="form-label text-445B64 mb-1 mt-3">Front Image</label>
-                                    <div className='position-relative mt-3'>
-                                    <button
-                                      type="button"
-                                      className="btn btn-sm btn-dark position-absolute top-0 end-0 m-1 rounded-circle p-1"
-                                      onClick={() => setLicenseData({ ...licenseData, imageUrl: '' })} 
-                                      style={{ zIndex: 1 }}
-                                    >
-                                      &times;
-                                    </button>
-                                    <img
-                                      src={licenseData.imageUrl}
-                                      alt="Front License"
-                                      className='w-100 border rounded-4 overflow-hidden'
-                                    />
-                                    </div>
-                                  </div>
-                                )}
-                              </>
-                            )}
-                            {loading3 ? (
-                              <div className="col-6 text-center py-5 px-5">
-                                <div className="spinner-border text-primary" role="status">
-                                  <span className="visually-hidden">Loading...</span>
-                                </div>
-                              </div>
-
-                            ) : (
-                              <>
-                                {licenseDataback?.imageUrl && (
-                                  <div className='col-lg-6'>
-                                    <label className="form-label text-445B64 mb-1 mt-3">Back Image</label>
-                                    <div className='position-relative mt-3'>
-                                    <button
-                                      type="button"
-                                      className="btn btn-sm btn-dark position-absolute top-0 end-0 m-1 rounded-circle p-1"
-                                      onClick={() => setLicenseDataback({ ...licenseDataback, imageUrl: '' })} 
-                                      style={{ zIndex: 1 }}
-                                    >
-                                      &times;
-                                    </button>
-                                    <img
-                                      src={licenseDataback.imageUrl}
-                                      alt="Back License"
-                                      className='w-100 border rounded-4 overflow-hidden'
-                                    />
-                                    </div>
-                                  </div>
-                                )}
-                              </>
-                            )}
-
-                            <div className="col-lg-6"></div>
-                          </div>
-                        </div>
-                        <div className="col-md-6">
+                      <div className="col-md-6">
                           <label className="form-label text-445B64">Check Image</label>
 
 
@@ -559,15 +481,15 @@ const Home = () => {
                                   <div className='col-lg-6'>
                                     <label className="form-label text-445B64 mb-1 mt-3">Front Image</label>
                                     <div className='position-relative mt-3'>
-                                    <button
-                                      type="button"
-                                      className="btn btn-sm btn-dark position-absolute top-0 end-0 m-1 rounded-circle p-1"
-                                      onClick={() => setFormData({ ...formData, imageUrl: '' })} 
-                                      style={{ zIndex: 1 }}
-                                    >
-                                      &times;
-                                    </button>
-                                    <img src={formData.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
+                                      <button
+                                        type="button"
+                                        className="btn btn-sm btn-dark position-absolute top-0 end-0 m-1 rounded-circle p-1"
+                                        onClick={() => setFormData({ ...formData, imageUrl: '' })}
+                                        style={{ zIndex: 1 }}
+                                      >
+                                        &times;
+                                      </button>
+                                      <img src={formData.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
                                     </div>
                                   </div>
                                 )}
@@ -586,15 +508,15 @@ const Home = () => {
                                   <div className='col-lg-6'>
                                     <label className="form-label text-445B64 mb-1 mt-3">Back Image</label>
                                     <div className='position-relative mt-3'>
-                                    <button
-                                      type="button"
-                                      className="btn btn-sm btn-dark position-absolute top-0 end-0 m-1 rounded-circle p-1"
-                                      onClick={() => setFormDataback({ ...formDataback, imageUrl: '' })} 
-                                      style={{ zIndex: 1 }}
-                                    >
-                                      &times;
-                                    </button>
-                                    <img src={formDataback.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
+                                      <button
+                                        type="button"
+                                        className="btn btn-sm btn-dark position-absolute top-0 end-0 m-1 rounded-circle p-1"
+                                        onClick={() => setFormDataback({ ...formDataback, imageUrl: '' })}
+                                        style={{ zIndex: 1 }}
+                                      >
+                                        &times;
+                                      </button>
+                                      <img src={formDataback.imageUrl} alt="Profile" className='w-100 border rounded-4 overflow-hidden' />
                                     </div>
                                   </div>
                                 )}
@@ -602,6 +524,100 @@ const Home = () => {
                             )}
                           </div>
                         </div>
+
+
+                        <div className="col-md-6">
+                          <label className="form-label text-445B64">License Image</label>
+                          <div className="d-flex gap-2 gap-lg-3">
+                            <div className="form-control inputFile p-3 p-lg-4 text-center position-relative d-flex justify-content-center align-items-center">
+                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmitLicense} style={{ opacity: 0, cursor: 'pointer' }} />
+                              <div className="">
+                                <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
+                                <div className="text-445B64">Upload/Capture Front </div>
+                              </div>
+                            </div>
+                            <div className="form-control inputFile p-3 p-lg-4 text-center position-relative d-flex justify-content-center align-items-center">
+                              <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" onChange={handleSubmitLicenseback} style={{ opacity: 0, cursor: 'pointer' }} />
+                              <div className="">
+                                <i className="fa-solid fa-arrow-up-from-bracket fs-4 text-01A99A"></i>
+                                <div className="text-445B64">Upload/Capture Back  </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="row">
+                            {loading2 ? (
+                              <div className="col-6 text-center py-5 px-5">
+                                <div className="spinner-border text-primary" role="status">
+                                  <span className="visually-hidden">Loading...</span>
+                                </div>
+                              </div>
+
+                            ) : (
+                              <>
+                                {licenseData?.imageUrl && (
+                                  <div className='col-lg-6 '>
+                                    <label className="form-label text-445B64 mb-1 mt-3">Front Image</label>
+                                    <div className='position-relative mt-3'>
+                                      <button
+                                        type="button"
+                                        className="btn btn-sm btn-dark position-absolute top-0 end-0 m-1 rounded-circle p-1"
+                                        onClick={() => setLicenseData({ ...licenseData, imageUrl: '' })}
+                                        style={{ zIndex: 1 }}
+                                      >
+                                        &times;
+                                      </button>
+                                      <img
+                                        src={licenseData.imageUrl}
+                                        alt="Front License"
+                                        className='w-100 border rounded-4 overflow-hidden'
+                                      />
+                                    </div>
+                                  </div>
+                                )}
+                              </>
+                            )}
+                            {loading3 ? (
+                              <div className="col-6 text-center py-5 px-5">
+                                <div className="spinner-border text-primary" role="status">
+                                  <span className="visually-hidden">Loading...</span>
+                                </div>
+                              </div>
+
+                            ) : (
+                              <>
+                                {licenseDataback?.imageUrl && (
+                                  <div className='col-lg-6'>
+                                    <label className="form-label text-445B64 mb-1 mt-3">Back Image</label>
+                                    <div className='position-relative mt-3'>
+                                      <button
+                                        type="button"
+                                        className="btn btn-sm btn-dark position-absolute top-0 end-0 m-1 rounded-circle p-1"
+                                        onClick={() => setLicenseDataback({ ...licenseDataback, imageUrl: '' })}
+                                        style={{ zIndex: 1 }}
+                                      >
+                                        &times;
+                                      </button>
+                                      <img
+                                        src={licenseDataback.imageUrl}
+                                        alt="Back License"
+                                        className='w-100 border rounded-4 overflow-hidden'
+                                      />
+                                    </div>
+                                  </div>
+                                )}
+                              </>
+                            )}
+
+                            <div className="col-lg-6"></div>
+                          </div>
+                        </div>
+
+
+
+                      
+
+
+
                         <div className="col-lg-12">
                           <div className="row">
                             <div className="col-md-9">
@@ -628,10 +644,10 @@ const Home = () => {
                                   )}
                                 </div>
                                 <div className="col-md-4 mb-3">
-                                  <input type="text" className="form-control" placeholder='Middle Name' value={licenseData.customerMiddleName || formData.customerMiddleName} onChange={(e) => setFormData({ ...formData, customerMiddleName: e.target.value })} />
+                                  <input type="text" className="form-control" placeholder='Middle Name' value={formData.customerMiddleName} onChange={(e) => setFormData({ ...formData, customerMiddleName: e.target.value })} />
                                 </div>
                                 <div className="col-md-4 mb-3">
-                                  <input type="text" className="form-control" placeholder='Last Name' value={licenseData.customerLastName || formData.customerLastName} onChange={(e) => setFormData({ ...formData, customerLastName: e.target.value })} />
+                                  <input type="text" className="form-control" placeholder='Last Name' value={formData.customerLastName} onChange={(e) => setFormData({ ...formData, customerLastName: e.target.value })} />
                                 </div>
                               </div>
                             </div>
@@ -641,8 +657,8 @@ const Home = () => {
                             </div>
                             <div className="col-md-3 mb-3">
                               <label className="form-label text-445B64"> Check Type </label>
-                              <select className="form-control" value={formData.checkType || ''} onChange={(e) => { const value = e.target.value; setFormData({ ...formData, checkType: value }) }} >
-                                <option value="">Select Check Type</option>
+                              <select className="form-control" value={formData.checkType} onChange={(e) => { const value = e.target.value; setFormData({ ...formData, checkType: value }) }} >
+                                {/* <option value="">Select Check Type</option> */}
                                 <option value="Personal">Personal</option>
                                 <option value="Business">Business</option>
                               </select>
@@ -668,15 +684,15 @@ const Home = () => {
                               )}
                             </div>
                             <div className="col-md-6 mb-3 ">
-                          <label className="form-label text-445B64">Comments</label>
-                          <input className="form-control" value={formData.comment || ''} onChange={(e) => setFormData({ ...formData, comment: e.target.value })} />
-                        </div>
+                              <label className="form-label text-445B64">Comments</label>
+                              <input className="form-control" value={formData.comment || ''} onChange={(e) => setFormData({ ...formData, comment: e.target.value })} />
+                            </div>
                           </div>
                           <div className="col-lg-4 me-auto mt-0 text-center">
-                          <button className="btn theme-btn px-5 py-2 rounded-3 mt-3 w-100" onClick={handleSave}>Save</button>
+                            <button className="btn theme-btn px-5 py-2 rounded-3 mt-3 w-100" onClick={handleSave}>Save</button>
+                          </div>
                         </div>
-                        </div>
-                        
+
                       </div>
                     </div>
                   </div>
