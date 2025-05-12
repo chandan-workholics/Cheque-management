@@ -11,6 +11,8 @@ import RecentCheck from '../components/RecentCheck';
 const URL = process.env.REACT_APP_URL;
 
 const MobileAddCheck = () => {
+
+    const [showPreview, setShowPreview] = useState(false);
     const [step, setStep] = useState(1);
 
     const nextStep = () => setStep((prev) => Math.min(prev + 1, 3));
@@ -319,7 +321,7 @@ const MobileAddCheck = () => {
                                 </div>
                                 <div className="card-body bg-transparent px-0">
                                     <div className="mb-4">
-                                        <div className="form-control inputFile p-5 mb-3 text-center position-relative d-flex justify-content-center align-items-center">
+                                        <div className="form-control inputFile p-4 mb-3 text-center position-relative d-flex justify-content-center align-items-center">
                                             <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" ref={checkFrontRef} onChange={handleSubmit} style={{ opacity: 0, cursor: 'pointer' }} />
                                             {/* image box */}
 
@@ -333,9 +335,51 @@ const MobileAddCheck = () => {
                                             ) : (
                                                 <>
                                                     {formData?.imageUrl && (
-                                                        <div className='position-absolute w-100 h-100 top-0 start-0'>
-                                                            <img src={formData.imageUrl} alt="Profile" className='w-100 h-100 border rounded-4 overflow-hidden' style={{ objectFit: 'fill' }} />
-                                                        </div>
+                                                        <>
+                                                            <div
+                                                                className="position-absolute w-100 h-100 top-0 start-0"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#formData"
+                                                                style={{ cursor: 'pointer' }}
+                                                            >
+                                                                <img
+                                                                    src={formData.imageUrl}
+                                                                    alt="Profile"
+                                                                    className="w-100 h-100 border rounded-4 overflow-hidden"
+                                                                    style={{ objectFit: 'fill' }}
+                                                                />
+                                                            </div>
+
+                                                            {/* Bootstrap Modal */}
+                                                            <div
+                                                                className="modal fade"
+                                                                id="formData"
+                                                                tabIndex="-1"
+                                                                aria-labelledby="imagePreviewLabel"
+                                                                aria-hidden="true"
+                                                            >
+                                                                <div className="modal-dialog modal-dialog-centered">
+                                                                    <div className="modal-content overflow-hidden bg-transparent border-0">
+                                                                        <div className="modal-footer border-0 p-0 bg-transparent">
+                                                                            <button
+                                                                                type="button"
+                                                                                className="btn btn-secondary rounded-circle"
+                                                                                data-bs-dismiss="modal"
+                                                                            >
+                                                                                <i class="fa-solid fa-xmark"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div className="modal-body p-0">
+                                                                            <img
+                                                                                src={formData.imageUrl}
+                                                                                alt="Preview"
+                                                                                className="img-fluid w-100 rounded"
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </>
                                                     )}
                                                 </>
                                             )}
@@ -348,31 +392,30 @@ const MobileAddCheck = () => {
                                                 <div className="text-445B64 fw-semibold mt-3">Upload or Capture Front Image </div>
                                             </div>
                                         </div>
-                                        <div className="card bg-transparent">
-                                            <div className="card-body bg-transparent p-2">
-                                                <div className="d-flex align-items-center justify-content-between">
-                                                    <div className="d-flex align-items-center">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" viewBox="0 0 13 17" fill="none">
-                                                            <path d="M7.29175 6.125V1.77083L11.6459 6.125M1.75008 0.583334C0.871331 0.583334 0.166748 1.28792 0.166748 2.16667V14.8333C0.166748 15.2533 0.333563 15.656 0.630496 15.9529C0.927428 16.2499 1.33016 16.4167 1.75008 16.4167H11.2501C11.67 16.4167 12.0727 16.2499 12.3697 15.9529C12.6666 15.656 12.8334 15.2533 12.8334 14.8333V5.33333L8.08342 0.583334H1.75008Z" fill="#008CFF" />
-                                                        </svg>
-                                                        <div className="ms-2">
-                                                            <h6 className="fs-13 text-000000 mb-0">main.jpg</h6>
-                                                            <h6 className="fs-10 text-000000 mb-0">2KB</h6>
+                                        {formData?.imageUrl && (
+                                            <div className="card bg-transparent">
+                                                <div className="card-body bg-transparent p-2">
+                                                    <div className="d-flex align-items-center justify-content-between">
+                                                        <div className="d-flex align-items-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" viewBox="0 0 13 17" fill="none">
+                                                                <path d="M7.29175 6.125V1.77083L11.6459 6.125M1.75008 0.583334C0.871331 0.583334 0.166748 1.28792 0.166748 2.16667V14.8333C0.166748 15.2533 0.333563 15.656 0.630496 15.9529C0.927428 16.2499 1.33016 16.4167 1.75008 16.4167H11.2501C11.67 16.4167 12.0727 16.2499 12.3697 15.9529C12.6666 15.656 12.8334 15.2533 12.8334 14.8333V5.33333L8.08342 0.583334H1.75008Z" fill="#008CFF" />
+                                                            </svg>
+                                                            <div className="ms-2">
+                                                                <h6 className="fs-13 text-000000 mb-0">main.jpg</h6>
+                                                                <h6 className="fs-10 text-000000 mb-0">2KB</h6>
+                                                            </div>
                                                         </div>
+                                                        <button className="border-0 bg-transparent" type="button" onClick={handleCancelCheckFront}>
+                                                            <i class="fa-solid fa-trash text-FF0808"></i>
+                                                        </button>
                                                     </div>
-                                                    <button className="border-0 bg-transparent" type="button" onClick={handleCancelCheckFront}>
-                                                        <i class="fa-solid fa-trash text-FF0808"></i>
-                                                    </button>
                                                 </div>
                                             </div>
-                                        </div>
+                                        )}
                                     </div>
 
-
-
-
                                     <div className="">
-                                        <div className="form-control inputFile p-5 mb-3 text-center position-relative d-flex justify-content-center align-items-center">
+                                        <div className="form-control inputFile p-4 mb-3 text-center position-relative d-flex justify-content-center align-items-center">
                                             <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" ref={checkBackRef} onChange={handleSubmitback} style={{ opacity: 0, cursor: 'pointer' }} />
                                             {loading1 ? (
                                                 <div className="position-absolute w-100 h-100 top-0 start-0 d-flex justify-content-center align-items-center py-5 px-5 bg-white">
@@ -384,9 +427,51 @@ const MobileAddCheck = () => {
                                             ) : (
                                                 <>
                                                     {formDataback?.imageUrl && (
-                                                        <div className='position-absolute w-100 h-100 top-0 start-0'>
-                                                            <img src={formDataback.imageUrl} alt="Profile" className='w-100 h-100 border rounded-4 overflow-hidden' style={{ objectFit: 'fill' }} />
-                                                        </div>
+                                                        <>
+                                                            <div
+                                                                className="position-absolute w-100 h-100 top-0 start-0"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#formDataback"
+                                                                style={{ cursor: 'pointer' }}
+                                                            >
+                                                                <img
+                                                                    src={formDataback.imageUrl}
+                                                                    alt="Profile"
+                                                                    className="w-100 h-100 border rounded-4 overflow-hidden"
+                                                                    style={{ objectFit: 'fill' }}
+                                                                />
+                                                            </div>
+
+                                                            {/* Bootstrap Modal */}
+                                                            <div
+                                                                className="modal fade"
+                                                                id="formDataback"
+                                                                tabIndex="-1"
+                                                                aria-labelledby="imagePreviewLabel"
+                                                                aria-hidden="true"
+                                                            >
+                                                                <div className="modal-dialog modal-dialog-centered">
+                                                                    <div className="modal-content overflow-hidden bg-transparent border-0">
+                                                                        <div className="modal-footer border-0 p-0 bg-transparent">
+                                                                            <button
+                                                                                type="button"
+                                                                                className="btn btn-secondary rounded-circle"
+                                                                                data-bs-dismiss="modal"
+                                                                            >
+                                                                                <i class="fa-solid fa-xmark"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div className="modal-body p-0">
+                                                                            <img
+                                                                                src={formDataback.imageUrl}
+                                                                                alt="Preview"
+                                                                                className="img-fluid w-100 rounded"
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </>
                                                     )}
                                                 </>
                                             )}
@@ -398,28 +483,30 @@ const MobileAddCheck = () => {
                                                 <div className="text-445B64 fw-semibold mt-3">Upload or Capture Back Image </div>
                                             </div>
                                         </div>
-                                        <div className="card bg-transparent">
-                                            <div className="card-body bg-transparent p-2">
-                                                <div className="d-flex align-items-center justify-content-between">
-                                                    <div className="d-flex align-items-center">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" viewBox="0 0 13 17" fill="none">
-                                                            <path d="M7.29175 6.125V1.77083L11.6459 6.125M1.75008 0.583334C0.871331 0.583334 0.166748 1.28792 0.166748 2.16667V14.8333C0.166748 15.2533 0.333563 15.656 0.630496 15.9529C0.927428 16.2499 1.33016 16.4167 1.75008 16.4167H11.2501C11.67 16.4167 12.0727 16.2499 12.3697 15.9529C12.6666 15.656 12.8334 15.2533 12.8334 14.8333V5.33333L8.08342 0.583334H1.75008Z" fill="#008CFF" />
-                                                        </svg>
-                                                        <div className="ms-2">
-                                                            <h6 className="fs-13 text-000000 mb-0">main.jpg</h6>
-                                                            <h6 className="fs-10 text-000000 mb-0">2KB</h6>
+                                        {formDataback?.imageUrl && (
+                                            <div className="card bg-transparent">
+                                                <div className="card-body bg-transparent p-2">
+                                                    <div className="d-flex align-items-center justify-content-between">
+                                                        <div className="d-flex align-items-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" viewBox="0 0 13 17" fill="none">
+                                                                <path d="M7.29175 6.125V1.77083L11.6459 6.125M1.75008 0.583334C0.871331 0.583334 0.166748 1.28792 0.166748 2.16667V14.8333C0.166748 15.2533 0.333563 15.656 0.630496 15.9529C0.927428 16.2499 1.33016 16.4167 1.75008 16.4167H11.2501C11.67 16.4167 12.0727 16.2499 12.3697 15.9529C12.6666 15.656 12.8334 15.2533 12.8334 14.8333V5.33333L8.08342 0.583334H1.75008Z" fill="#008CFF" />
+                                                            </svg>
+                                                            <div className="ms-2">
+                                                                <h6 className="fs-13 text-000000 mb-0">main.jpg</h6>
+                                                                <h6 className="fs-10 text-000000 mb-0">2KB</h6>
+                                                            </div>
                                                         </div>
+                                                        <button className="border-0 bg-transparent" onClick={handleCancelCheckBack}>
+                                                            <i class="fa-solid fa-trash text-FF0808"></i>
+                                                        </button>
                                                     </div>
-                                                    <button className="border-0 bg-transparent" onClick={handleCancelCheckBack}>
-                                                        <i class="fa-solid fa-trash text-FF0808"></i>
-                                                    </button>
                                                 </div>
                                             </div>
-                                        </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>
-                            <div className="card position-fixed start-0 bottom-0 w-100 border-0">
+                            <div className="card position-absolute start-0 bottom-0 w-100 border-0">
                                 <div className="card-body" style={{ padding: '12px' }}>
                                     <button className='theme-btn w-100' onClick={nextStep}>Next</button>
                                 </div>
@@ -446,7 +533,7 @@ const MobileAddCheck = () => {
                                             <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" ref={licenseFrontRef} onChange={handleSubmitLicense} style={{ opacity: 0, cursor: 'pointer' }} />
 
                                             {loading2 ? (
-                                                <div className="col-6 text-center py-5 px-5">
+                                                <div className="position-absolute w-100 h-100 top-0 start-0 d-flex justify-content-center align-items-center py-5 px-5 bg-white">
                                                     <div className="spinner-border text-primary" role="status">
                                                         <span className="visually-hidden">Loading...</span>
                                                     </div>
@@ -455,24 +542,51 @@ const MobileAddCheck = () => {
                                             ) : (
                                                 <>
                                                     {licenseData?.imageUrl && (
-                                                        <div className='col-lg-6 '>
-                                                            <label className="form-label text-445B64 mb-1 mt-3">Front Image</label>
-                                                            <div className='position-relative mt-3'>
-                                                                <button
-                                                                    type="button"
-                                                                    className="btn btn-sm btn-dark position-absolute top-0 end-0 m-1 rounded-circle p-1"
-                                                                    onClick={handleCancelLicenseFront}
-                                                                    style={{ zIndex: 1 }}
-                                                                >
-                                                                    &times;
-                                                                </button>
+                                                        <>
+                                                            <div
+                                                                className="position-absolute w-100 h-100 top-0 start-0"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#licenseData"
+                                                                style={{ cursor: 'pointer' }}
+                                                            >
                                                                 <img
                                                                     src={licenseData.imageUrl}
-                                                                    alt="Front License"
-                                                                    className='w-100 border rounded-4 overflow-hidden'
+                                                                    alt="Profile"
+                                                                    className="w-100 h-100 border rounded-4 overflow-hidden"
+                                                                    style={{ objectFit: 'fill' }}
                                                                 />
                                                             </div>
-                                                        </div>
+
+                                                            {/* Bootstrap Modal */}
+                                                            <div
+                                                                className="modal fade"
+                                                                id="licenseData"
+                                                                tabIndex="-1"
+                                                                aria-labelledby="imagePreviewLabel"
+                                                                aria-hidden="true"
+                                                            >
+                                                                <div className="modal-dialog modal-dialog-centered">
+                                                                    <div className="modal-content overflow-hidden bg-transparent border-0">
+                                                                        <div className="modal-footer border-0 p-0 bg-transparent">
+                                                                            <button
+                                                                                type="button"
+                                                                                className="btn btn-secondary rounded-circle"
+                                                                                data-bs-dismiss="modal"
+                                                                            >
+                                                                                <i class="fa-solid fa-xmark"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div className="modal-body p-0">
+                                                                            <img
+                                                                                src={licenseData.imageUrl}
+                                                                                alt="Preview"
+                                                                                className="img-fluid w-100 rounded"
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </>
                                                     )}
                                                 </>
                                             )}
@@ -508,7 +622,7 @@ const MobileAddCheck = () => {
                                             <input className="position-absolute top-0 start-0 w-100 h-100" type="file" id="formFile" ref={licenseBackRef} onChange={handleSubmitLicenseback} style={{ opacity: 0, cursor: 'pointer' }} />
 
                                             {loading3 ? (
-                                                <div className="col-6 text-center py-5 px-5">
+                                                <div className="position-absolute w-100 h-100 top-0 start-0 d-flex justify-content-center align-items-center py-5 px-5 bg-white">
                                                     <div className="spinner-border text-primary" role="status">
                                                         <span className="visually-hidden">Loading...</span>
                                                     </div>
@@ -517,24 +631,51 @@ const MobileAddCheck = () => {
                                             ) : (
                                                 <>
                                                     {licenseDataback?.imageUrl && (
-                                                        <div className='col-lg-6'>
-                                                            <label className="form-label text-445B64 mb-1 mt-3">Back Image</label>
-                                                            <div className='position-relative mt-3'>
-                                                                <button
-                                                                    type="button"
-                                                                    className="btn btn-sm btn-dark position-absolute top-0 end-0 m-1 rounded-circle p-1"
-                                                                    onClick={handleCancelLicenseBack}
-                                                                    style={{ zIndex: 1 }}
-                                                                >
-                                                                    &times;
-                                                                </button>
+                                                        <>
+                                                            <div
+                                                                className="position-absolute w-100 h-100 top-0 start-0"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#licenseDataback"
+                                                                style={{ cursor: 'pointer' }}
+                                                            >
                                                                 <img
                                                                     src={licenseDataback.imageUrl}
-                                                                    alt="Back License"
-                                                                    className='w-100 border rounded-4 overflow-hidden'
+                                                                    alt="Profile"
+                                                                    className="w-100 h-100 border rounded-4 overflow-hidden"
+                                                                    style={{ objectFit: 'fill' }}
                                                                 />
                                                             </div>
-                                                        </div>
+
+                                                            {/* Bootstrap Modal */}
+                                                            <div
+                                                                className="modal fade"
+                                                                id="licenseDataback"
+                                                                tabIndex="-1"
+                                                                aria-labelledby="imagePreviewLabel"
+                                                                aria-hidden="true"
+                                                            >
+                                                                <div className="modal-dialog modal-dialog-centered">
+                                                                    <div className="modal-content overflow-hidden bg-transparent border-0">
+                                                                        <div className="modal-footer border-0 p-0 bg-transparent">
+                                                                            <button
+                                                                                type="button"
+                                                                                className="btn btn-secondary rounded-circle"
+                                                                                data-bs-dismiss="modal"
+                                                                            >
+                                                                                <i class="fa-solid fa-xmark"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div className="modal-body p-0">
+                                                                            <img
+                                                                                src={licenseDataback.imageUrl}
+                                                                                alt="Preview"
+                                                                                className="img-fluid w-100 rounded"
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </>
                                                     )}
                                                 </>
                                             )}
@@ -566,7 +707,7 @@ const MobileAddCheck = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="card bg-transparent position-fixed start-0 bottom-0 w-100 border-0">
+                            <div className="card bg-transparent position-absolute start-0 bottom-0 w-100 border-0">
                                 <div className="card-body bg-transparent" style={{ padding: '12px' }}>
                                     <button className='w-100 border-0 bg-transparent text-secondary mb-4 fw-semibold' onClick={skipStep}>Skip</button>
                                     <button className='theme-btn w-100' onClick={nextStep}>Next</button>
@@ -664,6 +805,38 @@ const MobileAddCheck = () => {
                         </div>
                     </div>
                 )}
+            </div>
+
+
+
+            {/* Modal for image preview */}
+            <div
+                className="modal fade"
+                id="imagePreviewModal"
+                tabIndex="-1"
+                aria-labelledby="imagePreviewLabel"
+                aria-hidden="true"
+            >
+                <div className="modal-dialog modal-dialog-centered">
+                    <div className="modal-content">
+                        <div className="modal-body p-0">
+                            <img
+                                src={formData.imageUrl}
+                                alt="Preview"
+                                className="img-fluid w-100 rounded"
+                            />
+                        </div>
+                        <div className="modal-footer">
+                            <button
+                                type="button"
+                                className="btn btn-secondary"
+                                data-bs-dismiss="modal"
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     )

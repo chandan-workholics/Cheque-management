@@ -445,6 +445,17 @@ input::placeholder:after {
     border-radius: 12px;
   }
 
+  .form-label,
+  .form-control {
+    font-size: 14px;
+    margin-bottom: 0;
+    color: #000000;
+  }
+
+  input::placeholder {
+    color: #000000;
+  }
+
   .table {
     width: max-content;
 
