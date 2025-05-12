@@ -35,12 +35,44 @@ exports.scanCheck = async (req, res) => {
     }
 
     // Try searching for more flexible payee patterns that may vary in wording, punctuation, or capitalization
+    // const payeePatterns = [
+    //   /pay to the order of\s+([A-Za-z0-9\s,.'-]+)/i,
+    //   /payee:\s+([A-Za-z0-9\s,.'-]+)/i,
+    //   /order of\s+([A-Za-z0-9\s,.'-]+)/i,
+    //   /([A-Za-z0-9\s,.'-]+)\s+payee/i,  // Reverse order for testing
+    // ];
+
+    // const payeePatterns = [
+    //   /pay\s*\n*\s*to\s*\n*\s*the\s*\n*\s*order\s*\n*\s*of\s*([\s\S]{1,100}?)(?:\n|$)/i,
+    //   /payee\s*[:\-]?\s*([\s\S]{1,100}?)(?:\n|$)/i,
+    //   /order\s*of\s*([\s\S]{1,100}?)(?:\n|$)/i,
+    //   /([\s\S]{1,100}?)\s+payee/i,
+    // ];
+
+
     const payeePatterns = [
-      /pay to the order of\s+([A-Za-z0-9\s,.'-]+)/i,
-      /payee:\s+([A-Za-z0-9\s,.'-]+)/i,
-      /order of\s+([A-Za-z0-9\s,.'-]+)/i,
-      /([A-Za-z0-9\s,.'-]+)\s+payee/i,  // Reverse order for testing
+      /pay to the order of\s+([A-Za-z\s,.'-]+)/i,
+      /payee:\s+([A-Za-z\s,.'-]+)/i,
+      /order of\s+([A-Za-z\s,.'-]+)/i,
+      /([A-Za-z\s,.'-]+)\s+payee/i,  // Reverse order for testing
+
+      /pay\s*\n*\s*to\s*\n*\s*the\s*\n*\s*order\s*\n*\s*of\s*([\s\S]{1,100}?)(?:\n|$)/i,
+      /payee\s*[:\-]?\s*([\s\S]{1,100}?)(?:\n|$)/i,
+      /order\s*of\s*([\s\S]{1,100}?)(?:\n|$)/i,
+      /([\s\S]{1,100}?)\s+payee/i,
+
+      /PAY\s*\n*\s*TO\s*\n*\s*THE\s*\n*\s*ORDER\s*\n*\s*OF\s*([\s\S]{1,100}?)/i,  // Added pattern
+      /TO\s*\n*\s*THE\s*\n*\s*ORDER\s*\n*\s*OF\s*:\s*([\s\S]{1,100}?)/i,  // Added pattern
+
+      // Adjusted pattern to capture name properly (letters and spaces only) between "TO THE" and "ORDER"
+      /TO\s*\n*\s*THE\s*\n*([A-Za-z\s]+)\s*ORDER/i,  // Captures only letters and spaces for the name
+
+      // Added specific pattern to capture address part after "OF"
+      /ORDER\s*\n*\s*([\d\w\s]+)\s*\n*OF\s*([\s\S]{1,100})/i, // Captures numeric address properly
     ];
+
+
+
 
     // Try to find any payee name using the variations
     let payeeText = '';
@@ -77,11 +109,6 @@ exports.scanCheck = async (req, res) => {
     const customerMiddleName = nameParts.length > 2
       ? nameParts.slice(1, nameParts.length - 1).join(' ')
       : '';
-
-
-
-
-
 
 
     // === Amount Numeric ===
@@ -121,8 +148,6 @@ exports.scanCheck = async (req, res) => {
     res.status(500).json({ error: 'Failed to process image' });
   }
 };
-
-
 
 
 exports.scanLicense = async (req, res) => {
@@ -226,7 +251,6 @@ exports.uploadImage = async (req, res) => {
     res.status(500).json({ success: false, message: 'Failed to upload image' });
   }
 };
-
 
 
 
