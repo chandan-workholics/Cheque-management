@@ -50,25 +50,72 @@ exports.scanCheck = async (req, res) => {
     // ];
 
 
+    // const payeePatterns = [
+    //   /pay to the order of\s+([A-Za-z\s,.'-]+)/i,
+    //   /payee:\s+([A-Za-z\s,.'-]+)/i,
+    //   /order of\s+([A-Za-z\s,.'-]+)/i,
+    //   /([A-Za-z\s,.'-]+)\s+payee/i,  // Reverse order for testing
+
+    //   /pay\s*\n*\s*to\s*\n*\s*the\s*\n*\s*order\s*\n*\s*of\s*([\s\S]{1,100}?)(?:\n|$)/i,
+    //   /payee\s*[:\-]?\s*([\s\S]{1,100}?)(?:\n|$)/i,
+    //   /order\s*of\s*([\s\S]{1,100}?)(?:\n|$)/i,
+    //   /([\s\S]{1,100}?)\s+payee/i,
+
+    //   /PAY\s*\n*\s*TO\s*\n*\s*THE\s*\n*\s*ORDER\s*\n*\s*OF\s*([\s\S]{1,100}?)/i,  // Added pattern
+    //   /TO\s*\n*\s*THE\s*\n*\s*ORDER\s*\n*\s*OF\s*:\s*([\s\S]{1,100}?)/i,  // Added pattern
+
+    //   // Adjusted pattern to capture name properly (letters and spaces only) between "TO THE" and "ORDER"
+    //   /TO\s*\n*\s*THE\s*\n*([A-Za-z\s]+)\s*ORDER/i,  // Captures only letters and spaces for the name
+
+    //   // Added specific pattern to capture address part after "OF"
+    //   /ORDER\s*\n*\s*([\d\w\s]+)\s*\n*OF\s*([\s\S]{1,100})/i, // Captures numeric address properly
+    // ];
+
+
+    // const payeePatterns = [
+    //   /pay\s*\n*\s*to\s*\n*\s*the\s*\n*\s*order\s*\n*\s*of:\s*([\s\S]{1,100}?)(?:\n|$)/i,  // NEW multiline variant
+
+    //   /pay to the order of\s+([A-Za-z\s,.'-]+)/i,
+    //   /payee:\s+([A-Za-z\s,.'-]+)/i,
+    //   /order of\s+([A-Za-z\s,.'-]+)/i,
+    //   /([A-Za-z\s,.'-]+)\s+payee/i,
+
+    //   /pay\s*\n*\s*to\s*\n*\s*the\s*\n*\s*order\s*\n*\s*of\s*([\s\S]{1,100}?)(?:\n|$)/i,
+    //   /payee\s*[:\-]?\s*([\s\S]{1,100}?)(?:\n|$)/i,
+    //   /order\s*of\s*([\s\S]{1,100}?)(?:\n|$)/i,
+    //   /([\s\S]{1,100}?)\s+payee/i,
+
+    //   /PAY\s*\n*\s*TO\s*\n*\s*THE\s*\n*\s*ORDER\s*\n*\s*OF\s*([\s\S]{1,100}?)/i,
+    //   /TO\s*\n*\s*THE\s*\n*\s*ORDER\s*\n*\s*OF\s*:\s*([\s\S]{1,100}?)/i,
+
+    //   /TO\s*\n*\s*THE\s*\n*([A-Za-z\s]+)\s*ORDER/i,
+
+    //   /ORDER\s*\n*\s*([\d\w\s]+)\s*\n*OF\s*([\s\S]{1,100})/i
+    // ];
+
+
     const payeePatterns = [
+      /pay\s*\n*\s*to\s*\n*\s*the\s*\n*\s*order\s*\n*\s*of:\s*([\s\S]{1,100}?)(?:\n|$)/i,
+
       /pay to the order of\s+([A-Za-z\s,.'-]+)/i,
       /payee:\s+([A-Za-z\s,.'-]+)/i,
       /order of\s+([A-Za-z\s,.'-]+)/i,
-      /([A-Za-z\s,.'-]+)\s+payee/i,  // Reverse order for testing
+      /([A-Za-z\s,.'-]+)\s+payee/i,
 
       /pay\s*\n*\s*to\s*\n*\s*the\s*\n*\s*order\s*\n*\s*of\s*([\s\S]{1,100}?)(?:\n|$)/i,
       /payee\s*[:\-]?\s*([\s\S]{1,100}?)(?:\n|$)/i,
       /order\s*of\s*([\s\S]{1,100}?)(?:\n|$)/i,
       /([\s\S]{1,100}?)\s+payee/i,
 
-      /PAY\s*\n*\s*TO\s*\n*\s*THE\s*\n*\s*ORDER\s*\n*\s*OF\s*([\s\S]{1,100}?)/i,  // Added pattern
-      /TO\s*\n*\s*THE\s*\n*\s*ORDER\s*\n*\s*OF\s*:\s*([\s\S]{1,100}?)/i,  // Added pattern
+      /PAY\s*\n*\s*TO\s*\n*\s*THE\s*\n*\s*ORDER\s*\n*\s*OF\s*([\s\S]{1,100}?)/i,
+      /TO\s*\n*\s*THE\s*\n*\s*ORDER\s*\n*\s*OF\s*:\s*([\s\S]{1,100}?)/i,
 
-      // Adjusted pattern to capture name properly (letters and spaces only) between "TO THE" and "ORDER"
-      /TO\s*\n*\s*THE\s*\n*([A-Za-z\s]+)\s*ORDER/i,  // Captures only letters and spaces for the name
+      /TO\s*\n*\s*THE\s*\n*([A-Za-z\s]+)\s*ORDER/i,
 
-      // Added specific pattern to capture address part after "OF"
-      /ORDER\s*\n*\s*([\d\w\s]+)\s*\n*OF\s*([\s\S]{1,100})/i, // Captures numeric address properly
+      /ORDER\s*\n*\s*([\d\w\s]+)\s*\n*OF\s*([\s\S]{1,100})/i,
+
+      /to\s+the\s+([A-Za-z\s.'-]{1,100})/i,                   // NEW: Same-line "To The <name>"
+      /to\s+the\s*\n\s*([A-Za-z\s.'-]{1,100})/i               // NEW: Multiline "To The\n<name>"
     ];
 
 
