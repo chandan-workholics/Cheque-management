@@ -146,11 +146,17 @@ const ChequeDetails = () => {
                                                                 <div className="row">
                                                                     <div className="col-lg-6 mb-3 mb-lg-0">
                                                                         <label className="form-label text-445B64">Front Image</label>
-                                                                        <img src={chequeDetails?.imageUrl} alt='Profile' className='w-100 border rounded-4 overflow-hidden' />
+                                                                        {chequeDetails?.imageUrl ?
+                                                                            <img src={chequeDetails?.imageUrl} alt='Profile' className='w-100 border rounded-4 overflow-hidden' /> :
+                                                                            <h6 className="text-secondary fs-14">Image not Found</h6>
+                                                                        }
                                                                     </div>
                                                                     <div className="col-lg-6">
                                                                         <label className="form-label text-445B64">Back Image</label>
-                                                                        <img src={chequeDetails?.imageUrl2 || null} alt='Profile' className='w-100 border rounded-4 overflow-hidden' />
+                                                                        {chequeDetails?.imageUrl2 ?
+                                                                            <img src={chequeDetails?.imageUrl2} alt='Profile' className='w-100 border rounded-4 overflow-hidden' /> :
+                                                                            <h6 className="text-secondary fs-14">Image not Found</h6>
+                                                                        }
                                                                     </div>
                                                                 </div>
                                                             </div>
