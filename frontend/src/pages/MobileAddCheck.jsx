@@ -256,7 +256,7 @@ const MobileAddCheck = () => {
 
     const handleSave = async (e) => {
         e.preventDefault();
-        if (!formData.imageUrl || !licenseData.imageUrl) {
+        if (!formData.imageUrl) {
             toast.error('Please upload both Cheque and License front images');
             return;
         }
