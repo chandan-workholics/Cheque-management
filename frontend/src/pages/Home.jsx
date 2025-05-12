@@ -21,87 +21,21 @@ const Home = () => {
   const [loading2, setLoading2] = useState(false);
   const [loading3, setLoading3] = useState(false);
 
-  const [formData, setFormData] = useState({
-    customerFirstName: '',
-    customerMiddleName: '',
-    customerLastName: '',
-    licenseNo: '',
-    date: '',
-    company: '',
-    checkType: 'Personal',
-    amount: '',
-    imageUrl: '',
-    extractedText: '',
-  });
+  const [formData, setFormData] = useState({ customerFirstName: '', customerMiddleName: '', customerLastName: '', licenseNo: '', date: '', company: '', checkType: 'Personal', amount: '', imageUrl: '', extractedText: '', });
 
-  const [formDataback, setFormDataback] = useState({
-    customerFirstName: '',
-    customerMiddleName: '',
-    customerLastName: '',
-    licenseNo: '',
-    date: '',
-    company: '',
-    checkType: 'Personal',
-    amount: '',
-    imageUrl: '',
-    extractedText: '',
-  });
+  const [formDataback, setFormDataback] = useState({ customerFirstName: '', customerMiddleName: '', customerLastName: '', licenseNo: '', date: '', company: '', checkType: 'Personal', amount: '', imageUrl: '', extractedText: '', });
 
-  const [licenseData, setLicenseData] = useState({
-    imageUrl: '',
-    name: '',
-    licenseNo: '',
-    class: '',
-    dob: '',
-    sex: '',
-    eyes: '',
-    height: '',
-    address: '',
-    issuedDate: '',
-    expiryDate: '',
-  });
+  const [licenseData, setLicenseData] = useState({ imageUrl: '', name: '', licenseNo: '', class: '', dob: '', sex: '', eyes: '', height: '', address: '', issuedDate: '', expiryDate: '', });
 
-  const [licenseDataback, setLicenseDataback] = useState({
-    imageUrl: '',
-    name: '',
-    licenseNo: '',
-    class: '',
-    dob: '',
-    sex: '',
-    eyes: '',
-    height: '',
-    address: '',
-    issuedDate: '',
-    expiryDate: '',
-  });
+  const [licenseDataback, setLicenseDataback] = useState({ imageUrl: '', name: '', licenseNo: '', class: '', dob: '', sex: '', eyes: '', height: '', address: '', issuedDate: '', expiryDate: '', });
 
-  const handleCancelLicenseFront = () => {
-    setLicenseData({ ...licenseData, imageUrl: '' });
-    if (licenseFrontRef.current) {
-      licenseFrontRef.current.value = '';
-    }
-  };
+  const handleCancelLicenseFront = () => { setLicenseData({ ...licenseData, imageUrl: '' }); if (licenseFrontRef.current) { licenseFrontRef.current.value = ''; } };
 
-  const handleCancelLicenseBack = () => {
-    setLicenseDataback({ ...licenseDataback, imageUrl: '' });
-    if (licenseBackRef.current) {
-      licenseBackRef.current.value = '';
-    }
-  };
+  const handleCancelLicenseBack = () => { setLicenseDataback({ ...licenseDataback, imageUrl: '' }); if (licenseBackRef.current) { licenseBackRef.current.value = ''; } };
 
-  const handleCancelCheckFront = () => {
-    setFormData({ ...formData, imageUrl: '' });
-    if (checkFrontRef.current) {
-      checkFrontRef.current.value = '';
-    }
-  };
+  const handleCancelCheckFront = () => { setFormData({ ...formData, imageUrl: '' }); if (checkFrontRef.current) { checkFrontRef.current.value = ''; } };
 
-  const handleCancelCheckBack = () => {
-    setFormDataback({ ...formDataback, imageUrl: '' });
-    if (checkBackRef.current) {
-      checkBackRef.current.value = '';
-    }
-  };
+  const handleCancelCheckBack = () => { setFormDataback({ ...formDataback, imageUrl: '' }); if (checkBackRef.current) { checkBackRef.current.value = ''; } };
 
   const [errors, setErrors] = useState({});
 
@@ -466,6 +400,8 @@ const Home = () => {
                       </div>
                     </div>
                   </div>
+
+                  
                   {/* New Check Form */}
                   <div className="card rounded-4 overflow-hidden border-0 shadow-sm">
                     <div className="card-header bg-white d-flex align-items-center py-3">
@@ -767,7 +703,16 @@ const Home = () => {
         </div>
       </div>
 
+
+
+
+
+
+
       {/* Mobile-View Start */}
+
+
+
       <div className="container-fluid mobile-bg d-block d-lg-none" style={{ minHeight: '100vh' }}>
         <MobileHeader />
         <div className="row mb-2 pt-5 mt-4">
@@ -853,6 +798,13 @@ const Home = () => {
       </div>
 
       {/* Mobile-View End */}
+
+
+
+
+
+
+
     </>
   )
 }
