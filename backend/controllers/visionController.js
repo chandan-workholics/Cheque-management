@@ -29,9 +29,6 @@ exports.scanCheck = async (req, res) => {
     });
 
 
-
-
-
     const extractedText = result.fullTextAnnotation?.text || '';
     if (!extractedText) {
       return res.status(400).json({ error: 'No text extracted from image' });
@@ -55,10 +52,6 @@ exports.scanCheck = async (req, res) => {
       }
     }
 
-    // if (!payeeText) {
-    //   return res.status(400).json({ error: 'Payee not found in the text' });
-    // }
-
 
     // Now, process the extracted name
     let customerName = payeeText || 'Unknown Customer';
@@ -68,10 +61,24 @@ exports.scanCheck = async (req, res) => {
 
 
     // Split into first, middle, and last names
-    const nameParts = customerName.split(' ');
+
+    // Split by line, filter out empty lines
+    const lines = customerName.split('\n').map(line => line.trim()).filter(line => line);
+
+    // Assume the first line is the actual name
+    const fullNameLine = lines[0] || '';
+
+    // Split into words
+    const nameParts = fullNameLine.split(' ').filter(part => part);
+
+    // Extract parts
     const customerFirstName = nameParts[0] || '';
-    const customerMiddleName = nameParts.length > 1 ? nameParts.slice(1, nameParts.length - 1).join(' ') : '';
     const customerLastName = nameParts.length > 1 ? nameParts[nameParts.length - 1] : '';
+    const customerMiddleName = nameParts.length > 2
+      ? nameParts.slice(1, nameParts.length - 1).join(' ')
+      : '';
+
+
 
 
 
@@ -92,7 +99,7 @@ exports.scanCheck = async (req, res) => {
 
     const parsedData = {
       imageUrl,
-      customerName:customerFirstName,
+      customerName: customerName,
       customerFirstName,
       customerMiddleName,
       customerLastName,
@@ -102,11 +109,11 @@ exports.scanCheck = async (req, res) => {
       payee: '',
       memo: '',
       company: '',
-      checkType:'',
+      checkType: '',
       extractedText,
     };
 
-   
+
 
     res.json(parsedData);
   } catch (error) {
@@ -117,62 +124,6 @@ exports.scanCheck = async (req, res) => {
 
 
 
-
-
-
-// exports.scanLicense = async (req, res) => {
-//   try {
-//     if (!req.file) {
-//       return res.status(400).json({ error: 'No image uploaded' });
-//     }
-
-//     const filename = `${Date.now()}-${req.file.originalname}`;
-//     const filepath = path.join(__dirname, '..', 'upload', filename);
-//     fs.writeFileSync(filepath, req.file.buffer);
-//     const imageUrl = `${baseUrl}/upload/${filename}`;
-
-//     // OCR using Google Vision API
-//     const [result] = await client.textDetection({
-//       image: { content: req.file.buffer },
-//     });
-
-//     const extractedText = result.textAnnotations?.[0]?.description || '';
-
-
-//     // Better regex patterns
-//     const nameMatch = extractedText.match(/(?:1\s+)?SAMPLE\s+([A-Z]+\s+[A-Z]+)/i);
-//     const licenseNoMatch = extractedText.match(/(?:DL\s*No\.?|DL\s*#|License\s*Number|Driver(?:'s)?\s*License\s*Number|DMV\s*ID\s*Number|DLN|License\s*No\.?)[:\s]*([\dA-Z\s]+)/i);
-
-//     const classMatch = extractedText.match(/CLASS[:\s]+([A-Z]+)/i);
-//     const dobMatch = extractedText.match(/DOB[:\s]+(\d{2}\/\d{2}\/\d{4})/i);
-//     const sexMatch = extractedText.match(/SEX[:\s]+([MF])/i);
-//     const eyesMatch = extractedText.match(/EYES[:\s]+([A-Z]+)/i);
-//     const heightMatch = extractedText.match(/(?:HT|HGT)[:\s]+([\d\-\'"]+)/i);
-//     const issuedMatch = extractedText.match(/(?:ISSUED|ISS)[:\s]+(\d{2}\/\d{2}\/\d{4})/i);
-//     const expiresMatch = extractedText.match(/(?:EXPIRES|EXP)[:\s]+(\d{2}\/\d{2}\/\d{4})/i);
-//     const addressMatch = extractedText.match(/(?:\d+\s+[A-Z\s]+(?:APT\.?\s*\d*)?,?\s+[A-Z\s]+,\s+[A-Z]{2}\s+\d{5})/i);
-
-//     const parsedLicense = {
-//       imageUrl,
-//       name: nameMatch?.[1]?.trim() || '',
-//       licenseNo: licenseNoMatch?.[1]?.replace(/\s+/g, '').trim() || '',
-//       class: classMatch?.[1] || '',
-//       dob: dobMatch?.[1] || '',
-//       sex: sexMatch?.[1] || '',
-//       eyes: eyesMatch?.[1] || '',
-//       height: heightMatch?.[1] || '',
-//       address: addressMatch?.[0] || '',
-//       issuedDate: issuedMatch?.[1] || '',
-//       expiryDate: expiresMatch?.[1] || ''
-//     };
-
-//     res.json(parsedLicense);
-
-//   } catch (error) {
-//     console.error('Error scanning license:', error);
-//     res.status(500).json({ error: 'Failed to process license image' });
-//   }
-// };
 
 exports.scanLicense = async (req, res) => {
   try {
