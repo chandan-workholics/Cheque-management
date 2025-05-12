@@ -78,8 +78,8 @@ const Cheques = () => {
                                     <div className="card border-0 rounded-3 mb-1">
                                         <div className="card-body p-2">
                                             <div className="row">
-                                                <div className="col-12 col-lg-6">
-                                                    <div className="d-flex justify-content-between mb-3 mb-lg-0">
+                                                <div className="col-12 col-md-3 col-lg-3">
+                                                    <div className="d-flex justify-content-between mb-3 mb-md-0">
                                                         <div className="d-flex align-items-center">
                                                             <div className="table-circular-icon bg-F0F5F6 me-3" style={{ cursor: "pointer" }}>
                                                                 <i className="fa fa-list"></i>
@@ -88,9 +88,9 @@ const Cheques = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className="col-12 col-lg-6">
+                                                <div className="col-12 col-md-9 col-lg-9">
                                                     <div className="row">
-                                                        <div className="col-lg-9">
+                                                        <div className="col-md-9">
                                                             <div className="d-flex position-relative" style={{ width: "100%" }}>
                                                                 <input
                                                                     className="form-control form-control-sm rounded-3 me-lg-2 shadow-none bg-F0F5F6"
@@ -104,7 +104,7 @@ const Cheques = () => {
                                                                 <i className="fa fa-search text-445B64 position-absolute top-0 start-0" style={{ margin: "8px" }}></i>
                                                             </div>
                                                         </div>
-                                                        <div className="col-lg-3 mt-3 mt-lg-0 d-flex justify-content-end align-items-center">
+                                                        <div className="col-md-3 mt-3 mt-md-0 d-flex justify-content-end align-items-center">
                                                             <button className='btn btn-light py-1 px-2 fs-14 text-445B64 p-0' onClick={handleAddCheque}>
                                                                 <i className="fa fa-plus me-2"></i>Add Check
                                                             </button>
