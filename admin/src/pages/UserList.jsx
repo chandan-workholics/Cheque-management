@@ -228,7 +228,7 @@ const UserList = () => {
                                             </div>
                                             {/* Pagination Controls */}
                                             <div className="d-block d-lg-flex justify-content-between mt-4 mb-1 pt-2">
-                                                <h6 className="mb-3 mb-lg-0 text-445B64">Showing 1 to 10 of 50 entries</h6>
+                                                <h6 className="mb-3 mb-lg-0 text-445B64">Showing {indexOfFirstRow + 1} to {Math.min(indexOfLastRow, users.length)} of {users.length} entries</h6>
                                                 <nav>
                                                     <ul className="pagination justify-content-end">
                                                         <li className={`page-item ${currentPage === 1 && 'disabled'}`}>

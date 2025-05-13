@@ -12,6 +12,9 @@ const URL = process.env.REACT_APP_URL;
 const MobileAddCheck = () => {
     const navigate = useNavigate();
     const [showPreview, setShowPreview] = useState(false);
+    const [fileName, setFileName] = useState('');
+  const [fileSize, setFileSize] = useState('');
+  const [showUploadInfo, setShowUploadInfo] = useState(false);
     const [step, setStep] = useState(1);
 
     const nextStep = () => setStep((prev) => Math.min(prev + 1, 3));
@@ -46,6 +49,14 @@ const MobileAddCheck = () => {
 
     const handleCancelCheckBack = () => { setFormDataback({ ...formDataback, imageUrl: '' }); if (checkBackRef.current) { checkBackRef.current.value = ''; } };
 
+ const formatBytes = (bytes, decimals = 2) => {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+  };
 
     const [errors, setErrors] = useState({});
 
@@ -75,7 +86,11 @@ const MobileAddCheck = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const file = e.target.files[0];
-        if (!file) {
+       if (file) {
+            setFileName(file.name);
+            setFileSize(formatBytes(file.size));
+            setShowUploadInfo(true);
+          }else{
             alert("Please upload a cheque image.");
             return;
         }
@@ -122,8 +137,12 @@ const MobileAddCheck = () => {
     const handleSubmitback = async (e) => {
         e.preventDefault();
         const file = e.target.files[0];
-        if (!file) {
-            alert("Please upload a check image.");
+       if (file) {
+            setFileName(file.name);
+            setFileSize(formatBytes(file.size));
+            setShowUploadInfo(true);
+          }else{
+            alert("Please upload a cheque image.");
             return;
         }
         const formData = new FormData();
@@ -167,8 +186,12 @@ const MobileAddCheck = () => {
     const handleSubmitLicense = async (e) => {
         e.preventDefault();
         const file = e.target.files[0];
-        if (!file) {
-            alert("Please upload a License image.");
+        if (file) {
+            setFileName(file.name);
+            setFileSize(formatBytes(file.size));
+            setShowUploadInfo(true);
+          }else{
+            alert("Please upload a license image.");
             return;
         }
         const formData = new FormData();
@@ -212,8 +235,12 @@ const MobileAddCheck = () => {
     const handleSubmitLicenseback = async (e) => {
         e.preventDefault();
         const file = e.target.files[0];
-        if (!file) {
-            alert("Please upload a License image.");
+       if (file) {
+            setFileName(file.name);
+            setFileSize(formatBytes(file.size));
+            setShowUploadInfo(true);
+          }else{
+            alert("Please upload a license image.");
             return;
         }
         const formData = new FormData();
@@ -420,8 +447,8 @@ const MobileAddCheck = () => {
                                                                 <path d="M7.29175 6.125V1.77083L11.6459 6.125M1.75008 0.583334C0.871331 0.583334 0.166748 1.28792 0.166748 2.16667V14.8333C0.166748 15.2533 0.333563 15.656 0.630496 15.9529C0.927428 16.2499 1.33016 16.4167 1.75008 16.4167H11.2501C11.67 16.4167 12.0727 16.2499 12.3697 15.9529C12.6666 15.656 12.8334 15.2533 12.8334 14.8333V5.33333L8.08342 0.583334H1.75008Z" fill="#008CFF" />
                                                             </svg>
                                                             <div className="ms-2">
-                                                                <h6 className="fs-13 text-000000 mb-0">main.jpg</h6>
-                                                                <h6 className="fs-10 text-000000 mb-0">2KB</h6>
+                                                                <h6 className="fs-13 text-000000 mb-0">{fileName}</h6>
+                                                                <h6 className="fs-10 text-000000 mb-0">{fileSize}</h6>
                                                             </div>
                                                         </div>
                                                         <button className="border-0 bg-transparent" type="button" onClick={handleCancelCheckFront}>
@@ -514,8 +541,8 @@ const MobileAddCheck = () => {
                                                                 <path d="M7.29175 6.125V1.77083L11.6459 6.125M1.75008 0.583334C0.871331 0.583334 0.166748 1.28792 0.166748 2.16667V14.8333C0.166748 15.2533 0.333563 15.656 0.630496 15.9529C0.927428 16.2499 1.33016 16.4167 1.75008 16.4167H11.2501C11.67 16.4167 12.0727 16.2499 12.3697 15.9529C12.6666 15.656 12.8334 15.2533 12.8334 14.8333V5.33333L8.08342 0.583334H1.75008Z" fill="#008CFF" />
                                                             </svg>
                                                             <div className="ms-2">
-                                                                <h6 className="fs-13 text-000000 mb-0">main.jpg</h6>
-                                                                <h6 className="fs-10 text-000000 mb-0">2KB</h6>
+                                                                <h6 className="fs-13 text-000000 mb-0">{fileName}</h6>
+                                                                <h6 className="fs-10 text-000000 mb-0">{fileSize}</h6>
                                                             </div>
                                                         </div>
                                                         <button className="border-0 bg-transparent" onClick={handleCancelCheckBack}>
@@ -632,8 +659,8 @@ const MobileAddCheck = () => {
                                                                 <path d="M7.29175 6.125V1.77083L11.6459 6.125M1.75008 0.583334C0.871331 0.583334 0.166748 1.28792 0.166748 2.16667V14.8333C0.166748 15.2533 0.333563 15.656 0.630496 15.9529C0.927428 16.2499 1.33016 16.4167 1.75008 16.4167H11.2501C11.67 16.4167 12.0727 16.2499 12.3697 15.9529C12.6666 15.656 12.8334 15.2533 12.8334 14.8333V5.33333L8.08342 0.583334H1.75008Z" fill="#008CFF" />
                                                             </svg>
                                                             <div className="ms-2">
-                                                                <h6 className="fs-13 text-000000 mb-0">main.jpg</h6>
-                                                                <h6 className="fs-10 text-000000 mb-0">2KB</h6>
+                                                                <h6 className="fs-13 text-000000 mb-0">{fileName}</h6>
+                                                                <h6 className="fs-10 text-000000 mb-0">{fileSize}</h6>
                                                             </div>
                                                         </div>
                                                         <button className="border-0 bg-transparent" onClick={handleCancelLicenseFront}>
@@ -725,8 +752,8 @@ const MobileAddCheck = () => {
                                                                 <path d="M7.29175 6.125V1.77083L11.6459 6.125M1.75008 0.583334C0.871331 0.583334 0.166748 1.28792 0.166748 2.16667V14.8333C0.166748 15.2533 0.333563 15.656 0.630496 15.9529C0.927428 16.2499 1.33016 16.4167 1.75008 16.4167H11.2501C11.67 16.4167 12.0727 16.2499 12.3697 15.9529C12.6666 15.656 12.8334 15.2533 12.8334 14.8333V5.33333L8.08342 0.583334H1.75008Z" fill="#008CFF" />
                                                             </svg>
                                                             <div className="ms-2">
-                                                                <h6 className="fs-13 text-000000 mb-0">main.jpg</h6>
-                                                                <h6 className="fs-10 text-000000 mb-0">2KB</h6>
+                                                                <h6 className="fs-13 text-000000 mb-0">{fileName}</h6>
+                                                                <h6 className="fs-10 text-000000 mb-0">{fileSize}</h6>
                                                             </div>
                                                         </div>
                                                         <button className="border-0 bg-transparent" onClick={handleCancelLicenseBack}>

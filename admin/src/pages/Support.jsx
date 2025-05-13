@@ -23,8 +23,8 @@ const Support = () => {
     const rowsPerPage = 10;
 
     // Pagination logic
-    // const indexOfLastRow = currentPage * rowsPerPage;
-    // const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+    const indexOfLastRow = currentPage * rowsPerPage;
+    const indexOfFirstRow = indexOfLastRow - rowsPerPage;
     // const currentRows = usersData.slice(indexOfFirstRow, indexOfLastRow);
     const totalPages = Math.ceil(usersData.length / rowsPerPage);
 
@@ -146,7 +146,7 @@ const Support = () => {
                                             </div>
                                             {/* Pagination Controls */}
                                             <div className="d-block d-lg-flex justify-content-between mt-4 mb-1 pt-2">
-                                                <h6 className="mb-3 mb-lg-0 text-445B64">Showing 1 to 10 of 50 entries</h6>
+                                                <h6 className="mb-3 mb-lg-0 text-445B64">Showing {indexOfFirstRow + 1} to {Math.min(indexOfLastRow, ticket.length)} of {ticket.length} entries</h6>
                                                 <nav>
                                                     <ul className="pagination justify-content-end">
                                                         <li className={`page-item ${currentPage === 1 && 'disabled'}`}>
