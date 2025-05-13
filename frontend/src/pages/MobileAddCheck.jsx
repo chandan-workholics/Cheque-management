@@ -405,16 +405,17 @@ const MobileAddCheck = () => {
                                                                 aria-hidden="true"
                                                             >
                                                                 <div className="modal-dialog modal-dialog-centered">
+                                                                    <div className="modal-footer position-absolute top-0 end-0 border-0 p-0 bg-transparent">
+                                                                        <button
+                                                                            type="button"
+                                                                            className="btn btn-secondary rounded-circle"
+                                                                            data-bs-dismiss="modal"
+                                                                        >
+                                                                            <i class="fa-solid fa-xmark"></i>
+                                                                        </button>
+                                                                    </div>
                                                                     <div className="modal-content overflow-hidden bg-transparent border-0">
-                                                                        {/* <div className="modal-footer border-0 p-0 bg-transparent">
-                                                                            <button
-                                                                                type="button"
-                                                                                className="btn btn-secondary rounded-circle"
-                                                                                data-bs-dismiss="modal"
-                                                                            >
-                                                                                <i class="fa-solid fa-xmark"></i>
-                                                                            </button>
-                                                                        </div> */}
+
                                                                         <div className="modal-body p-0">
                                                                             <img
                                                                                 src={formData.imageUrl}
@@ -500,16 +501,16 @@ const MobileAddCheck = () => {
                                                                 aria-hidden="true"
                                                             >
                                                                 <div className="modal-dialog modal-dialog-centered">
+                                                                    <div className="modal-footer position-absolute top-0 end-0 border-0 p-0 bg-transparent">
+                                                                        <button
+                                                                            type="button"
+                                                                            className="btn btn-secondary rounded-circle"
+                                                                            data-bs-dismiss="modal"
+                                                                        >
+                                                                            <i class="fa-solid fa-xmark"></i>
+                                                                        </button>
+                                                                    </div>
                                                                     <div className="modal-content overflow-hidden bg-transparent border-0">
-                                                                        {/* <div className="modal-footer border-0 p-0 bg-transparent">
-                                                                            <button
-                                                                                type="button"
-                                                                                className="btn btn-secondary rounded-circle"
-                                                                                data-bs-dismiss="modal"
-                                                                            >
-                                                                                <i class="fa-solid fa-xmark"></i>
-                                                                            </button>
-                                                                        </div> */}
                                                                         <div className="modal-body p-0">
                                                                             <img
                                                                                 src={formDataback.imageUrl}
@@ -618,16 +619,16 @@ const MobileAddCheck = () => {
                                                                 aria-hidden="true"
                                                             >
                                                                 <div className="modal-dialog modal-dialog-centered">
+                                                                    <div className="modal-footer position-absolute top-0 end-0 border-0 p-0 bg-transparent">
+                                                                        <button
+                                                                            type="button"
+                                                                            className="btn btn-secondary rounded-circle"
+                                                                            data-bs-dismiss="modal"
+                                                                        >
+                                                                            <i class="fa-solid fa-xmark"></i>
+                                                                        </button>
+                                                                    </div>
                                                                     <div className="modal-content overflow-hidden bg-transparent border-0">
-                                                                        {/* <div className="modal-footer border-0 p-0 bg-transparent">
-                                                                            <button
-                                                                                type="button"
-                                                                                className="btn btn-secondary rounded-circle"
-                                                                                data-bs-dismiss="modal"
-                                                                            >
-                                                                                <i class="fa-solid fa-xmark"></i>
-                                                                            </button>
-                                                                        </div> */}
                                                                         <div className="modal-body p-0">
                                                                             <img
                                                                                 src={licenseData.imageUrl}
@@ -712,16 +713,16 @@ const MobileAddCheck = () => {
                                                                 aria-hidden="true"
                                                             >
                                                                 <div className="modal-dialog modal-dialog-centered">
+                                                                    <div className="modal-footer position-absolute top-0 end-0 border-0 p-0 bg-transparent">
+                                                                        <button
+                                                                            type="button"
+                                                                            className="btn btn-secondary rounded-circle"
+                                                                            data-bs-dismiss="modal"
+                                                                        >
+                                                                            <i class="fa-solid fa-xmark"></i>
+                                                                        </button>
+                                                                    </div>
                                                                     <div className="modal-content overflow-hidden bg-transparent border-0">
-                                                                        {/* <div className="modal-footer border-0 p-0 bg-transparent">
-                                                                            <button
-                                                                                type="button"
-                                                                                className="btn btn-secondary rounded-circle"
-                                                                                data-bs-dismiss="modal"
-                                                                            >
-                                                                                <i class="fa-solid fa-xmark"></i>
-                                                                            </button>
-                                                                        </div> */}
                                                                         <div className="modal-body p-0">
                                                                             <img
                                                                                 src={licenseDataback.imageUrl}
