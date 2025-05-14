@@ -219,47 +219,48 @@ exports.scanCheck = async (req, res) => {
     const cleanText = extractedText.replace(/\r\n/g, '\n').trim();
     const lines = cleanText.split('\n');
 
+
     // === PAYEE NAME Extraction ===
     let customerName = '';
-const blacklist = [
-  'INC', 'LLC', 'BANK', 'VOID', 'MEMO', 'CHECK', 'BOX',
-  'DOCUMENT', 'CHEMICALLY', 'REACTIVE', 'STOCK', 'NURSERY',
-  'SIGNATURE', 'DOLLARS', 'WARNING', 'PEACHES', 'GRAPES',
-  'APPLES', 'TEXAS', 'SHADE', 'TREES', 'FIGS', 'PLUMS',
-  'WALNUTS', 'PEARS'
-];
+    const blacklist = [
+      'INC', 'LLC', 'BANK', 'VOID', 'MEMO', 'CHECK', 'BOX',
+      'DOCUMENT', 'CHEMICALLY', 'REACTIVE', 'STOCK', 'NURSERY',
+      'SIGNATURE', 'DOLLARS', 'WARNING', 'PEACHES', 'GRAPES',
+      'APPLES', 'TEXAS', 'SHADE', 'TREES', 'FIGS', 'PLUMS',
+      'WALNUTS', 'PEARS'
+    ];
 
-// Find the line index of "PAY TO THE ORDER OF"
-const payeeIndex = lines.findIndex(line =>
-  /pay\s*to\s*the\s*order\s*of/i.test(line)
-);
+    // Find the line index of "PAY TO THE ORDER OF"
+    const payeeIndex = lines.findIndex(line =>
+      /pay\s*to\s*the\s*order\s*of/i.test(line)
+    );
 
-// Try to find the actual payee in the next 8 lines
-const candidates = {};
-if (payeeIndex !== -1) {
-  for (let i = payeeIndex + 1; i <= payeeIndex + 8 && i < lines.length; i++) {
-    const line = lines[i].trim();
+    // Try to find the actual payee in the next 8 lines
+    const candidates = {};
+    if (payeeIndex !== -1) {
+      for (let i = payeeIndex + 1; i <= payeeIndex + 8 && i < lines.length; i++) {
+        const line = lines[i].trim();
 
-    // Skip empty lines
-    if (!line || line.length < 3) continue;
+        // Skip empty lines
+        if (!line || line.length < 3) continue;
 
-    // Skip lines that contain blacklisted terms
-    if (blacklist.some(word => line.toUpperCase().includes(word))) continue;
+        // Skip lines that contain blacklisted terms
+        if (blacklist.some(word => line.toUpperCase().includes(word))) continue;
 
-    // Accept lines with 2+ capitalized words (e.g., SOCORRO PONCE)
-    if (/^[A-Z][A-Z\s.'-]{2,}$/.test(line)) {
-      candidates[line] = (candidates[line] || 0) + 1;
+        // Accept lines with 2+ capitalized words (e.g., SOCORRO PONCE)
+        if (/^[A-Z][A-Z\s.'-]{2,}$/.test(line)) {
+          candidates[line] = (candidates[line] || 0) + 1;
+        }
+      }
     }
-  }
-}
 
-// Pick the most frequent or first valid candidate
-const topPayee = Object.entries(candidates).sort((a, b) => b[1] - a[1])[0];
-if (topPayee) {
-  customerName = topPayee[0]
-    .toLowerCase()
-    .replace(/\b\w/g, c => c.toUpperCase()); // Title Case
-}
+    // Pick the most frequent or first valid candidate
+    const topPayee = Object.entries(candidates).sort((a, b) => b[1] - a[1])[0];
+    if (topPayee) {
+      customerName = topPayee[0]
+        .toLowerCase()
+        .replace(/\b\w/g, c => c.toUpperCase()); // Title Case
+    }
 
 
     const payeePatterns = [
