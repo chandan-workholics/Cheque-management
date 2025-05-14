@@ -14,7 +14,7 @@ router.put('/update-users/:id', adminController.updateUser);
 router.delete('/delete-users/:id', adminController.deleteUser);
 
 
-router.get('/get-all-checks',authenticate, isAdmin, adminController.getAllChecks);
+router.get('/get-all-checks', adminController.getAllChecks);
 router.get('/get-all-checks-byId/:id', adminController.getAllChecksById);
 router.put('/update-checks/:id', adminController.updateCheck);
 router.delete('/delete-checks/:id', adminController.deleteCheck);
