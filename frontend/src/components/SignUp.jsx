@@ -3,6 +3,7 @@ import logoLeft from '../assets/images/logoLeft.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import signLogo from '../assets/images/signLogo.png'
 import axios from 'axios';
 const URL = process.env.REACT_APP_URL;
 
@@ -11,7 +12,7 @@ const SignUp = () => {
   const [formData, setFormData] = useState({
     bussiness: '',
     firstname: '',
-    middlename:'',
+    middlename: '',
     lastname: '',
     email: '',
     mobile: '',
@@ -139,6 +140,9 @@ const SignUp = () => {
             <div className="row h-100 w-100">
               <div className="col-lg-8 col-xl-7 col-xxl-6 mx-auto d-flex justify-content-center align-items-center">
                 <div className="w-100">
+                  <div className="text-center mb-5">
+                    <img src={signLogo} alt="" className="sign-logo" />
+                  </div>
                   <h3 className="fw-semibold">Register now</h3>
                   <h6 className="mb-4 text-445B64">Please enter your credentials to sign up</h6>
                   {/* Business */}
@@ -147,8 +151,8 @@ const SignUp = () => {
                   {/* first name */}
                   <input className="form-control mb-3 rounded-3" type="text" id='firstname' name='firstname' value={formData.firstname} onChange={handleChange} placeholder="First name" aria-label="example" required />
                   {formErrors.firstname && <small className="text-danger">{formErrors.firstname}</small>}
-                   {/* Middle name */}
-                   <input className="form-control mb-3 rounded-3" type="text" id='middlename' name='middlename' value={formData.middlename} onChange={handleChange} placeholder="Middle name" aria-label="example" required />
+                  {/* Middle name */}
+                  <input className="form-control mb-3 rounded-3" type="text" id='middlename' name='middlename' value={formData.middlename} onChange={handleChange} placeholder="Middle name" aria-label="example" required />
                   {formErrors.middlename && <small className="text-danger">{formErrors.middlename}</small>}
                   {/* last name */}
                   <input className="form-control mb-3 rounded-3" type="text" id='lastname' name='lastname' value={formData.lastname} onChange={handleChange} placeholder="Last name" aria-label="example" required />

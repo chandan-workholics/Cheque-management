@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import signLogo from '../assets/images/signLogo.png'
 
 const URL = process.env.REACT_APP_URL;
 
@@ -117,6 +118,9 @@ const SignIn = () => {
                 <div className="w-100">
                   {showForgotPassword ? (
                     <>
+                      <div className="text-center mb-5">
+                        <img src={signLogo} alt="" className="sign-logo" />
+                      </div>
                       <h3 className="fw-semibold">Forgot Password</h3>
                       <h6 className="mb-4 text-445B64">Enter your registered email</h6>
                       <input
@@ -141,6 +145,9 @@ const SignIn = () => {
                     </>
                   ) : (
                     <>
+                      <div className="text-center mb-5">
+                        <img src={signLogo} alt="" className="sign-logo" />
+                      </div>
                       <h3 className="fw-semibold">Welcome!</h3>
                       <h6 className="mb-4 text-445B64">Please enter your credentials to log in</h6>
                       <input

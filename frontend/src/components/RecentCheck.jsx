@@ -64,7 +64,7 @@ const RecentCheck = () => {
             <div className="row">
                 <div className="col-12">
                     <h6 className="fw-semibold">Recent Check</h6>
-                    <div className="card rounded-4 mb-1 overflow-hidden">
+                    <div className="card border-0 shadow rounded-4 mb-1 overflow-hidden">
                         <div className="card-body p-0">
                             {/* Table Starts Here */}
                             <div className="table-responsive">

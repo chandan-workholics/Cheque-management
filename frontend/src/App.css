@@ -162,6 +162,10 @@ body {
   max-height: fit-content;
 }
 
+.sign-logo {
+  width: 180px;
+}
+
 .sign-left-bg {
   background-image: url('./assets/images/signLeftImg.png');
   background-repeat: no-repeat;
@@ -446,7 +450,7 @@ input::placeholder:after {
   background-image: url('../src/assets/images/mobileBg.png');
   background-position: center;
   background-size: cover;
-  background-repeat: no-repeat;
+  background-repeat: repeat-y;
 
   .inputFile {
     border: 1px dashed #DFDFDF;
@@ -496,15 +500,26 @@ input::placeholder:after {
     th {
       font-size: 13px;
       color: #445B64;
+      font-weight: 500 !important;
     }
 
     td {
       font-size: 14px;
       color: #0D161A;
+      font-weight: 500 !important;
+      border: #F0F5F6;
     }
+
+    tr:nth-child(odd) {
+      background-color: #FAFAFA !important;
+    }
+
   }
 }
 
+.mob-addCheck-btn{
+  background: linear-gradient(0deg, rgba(0, 172, 238, 1) 0%, rgba(2, 126, 251, 1) 100%);
+}
 .MobSidebarBg {
   background-image: url('../src/assets/images/sidebarBG.png');
   background-position: right;
