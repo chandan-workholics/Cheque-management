@@ -37,9 +37,9 @@ const RecentCheck = () => {
         }
     };
 
-    const handleAddCheque = () => {
-        navigate("/cheque-management/dashboard");
-    };
+    // const handleAddCheque = () => {
+    //     navigate("/cheque-management/dashboard");
+    // };
 
     const filteredCheques = cheques.filter((item, index) => {
         const search = searchTerm.toLowerCase();
@@ -63,8 +63,8 @@ const RecentCheck = () => {
         <>
             <div className="row">
                 <div className="col-12">
-                    <h6 className="fw-semibold">Recent Check</h6>
-                    <div className="card rounded-4 mb-1 overflow-hidden">
+                    <h6 className="fw-semibold">Recent Checks</h6>
+                    <div className="card border-0 shadow rounded-4 mb-1 overflow-hidden">
                         <div className="card-body p-0">
                             {/* Table Starts Here */}
                             <div className="table-responsive">
@@ -73,14 +73,13 @@ const RecentCheck = () => {
                                         <tr>
                                             <th>#</th>
                                             <th>Customer Name</th>
-                                            <th>Company</th>
-                                            <th>License No</th>
+                                            <th>ID Number</th>
                                             <th>Type</th>
                                             <th>Amount</th>
                                             <th>Comment</th>
-                                            <th>Date</th>
+                                            <th>Date & Time</th>
                                             <th>Status</th>
-                                            <th>Actions</th>
+                                            <th className='text-center'>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -89,18 +88,19 @@ const RecentCheck = () => {
                                                 <tr key={item._id}>
                                                     <td>{index + 1}</td>
                                                     <td>{item.customerFirstName}</td>
-                                                    <td>{item.company}</td>
                                                     <td>{item.licenseNo}</td>
                                                     <td>{item.checkType}</td>
                                                     <td>{item.amount}</td>
                                                     <td>{item.comment?.length > 10 ? item.comment.substring(0, 10) + '...' : item.comment}</td>
                                                     <td>
-                                                        {item?.date &&
-                                                            new Date(item.date).toLocaleDateString("en-GB", {
-                                                                day: "numeric",
-                                                                month: "long",
-                                                                year: "numeric",
-                                                            }).replace(/(\w+) (\d{4})$/, "$1, $2")}
+                                                        {item?.date
+                                                            // &&
+                                                            // new Date(item.date).toLocaleDateString("en-GB", {
+                                                            //     day: "numeric",
+                                                            //     month: "long",
+                                                            //     year: "numeric",
+                                                            // }).replace(/(\w+) (\d{4})$/, "$1, $2")
+                                                        }
                                                     </td>
 
                                                     <td>{item.status}</td>

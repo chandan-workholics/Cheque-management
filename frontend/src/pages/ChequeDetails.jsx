@@ -86,11 +86,11 @@ const ChequeDetails = () => {
                                                         <div className="d-block d-lg-flex justify-content-between">
                                                             <div className="d-block d-lg-flex gap-5 flex-wrap">
                                                                 <div className="mb-3">
-                                                                    <h6 className="text-445B64 fs-14 mb-1">Customer Name</h6>
+                                                                    <h6 className="text-445B64 fs-14 mb-1" style={{color:'#445B64'}}>Customer Name</h6>
                                                                     <h6 className="text-0D161A fw-semibold fs-14">{chequeDetails?.customerFirstName}</h6>
                                                                 </div>
                                                                 <div className="mb-3">
-                                                                    <h6 className="text-445B64 fs-14 mb-1">License No</h6>
+                                                                    <h6 className="text-445B64 fs-14 mb-1" style={{color:'#445B64'}}>ID Number</h6>
                                                                     <h6 className="text-0D161A fw-semibold fs-14">{chequeDetails?.licenseNo}</h6>
                                                                 </div>
                                                                 {/* <div className="mb-3">
@@ -98,15 +98,15 @@ const ChequeDetails = () => {
                                                                     <h6 className="text-0D161A fw-semibold fs-14">{chequeDetails?.company}</h6>
                                                                 </div> */}
                                                                 <div className="mb-3">
-                                                                    <h6 className="text-445B64 fs-14 mb-1">Check Type</h6>
+                                                                    <h6 className="text-445B64 fs-14 mb-1" style={{color:'#445B64'}}>Check Type</h6>
                                                                     <h6 className="text-0D161A fw-semibold fs-14">{chequeDetails?.checkType}</h6>
                                                                 </div>
                                                                 <div className="mb-3">
-                                                                    <h6 className="text-445B64 fs-14 mb-1">Amount</h6>
+                                                                    <h6 className="text-445B64 fs-14 mb-1" style={{color:'#445B64'}}>Amount</h6>
                                                                     <h6 className="text-0D161A fw-semibold fs-14">${chequeDetails?.amount}</h6>
                                                                 </div>
                                                                 <div className="mb-3">
-                                                                    <h6 className="text-445B64 fs-14 mb-1">Date</h6>
+                                                                    <h6 className="text-445B64 fs-14 mb-1" style={{color:'#445B64'}}>Date & Time</h6>
                                                                     <h6 className="text-0D161A fw-semibold mb-0 fs-14">
                                                                         {chequeDetails?.date}
                                                                     </h6>
@@ -115,7 +115,7 @@ const ChequeDetails = () => {
                                                             </div>
                                                             <div className="d-block d-lg-flex gap-3 align-chequeDetails?s-start">
                                                                 <div className="mb-3">
-                                                                    <h6 className="text-445B64 fs-14 mb-1">Status</h6>
+                                                                    <h6 className="text-445B64 fs-14 mb-1" style={{color:'#445B64'}}>Status</h6>
                                                                     <div>
                                                                         <button className={`btn btn-sm rounded-2 lh-1 text-white ${chequeDetails?.isActive ? "bg-4FD1C5" : "bg-E84D4D"}`}>
                                                                             {chequeDetails?.isActive ? "Active" : "Deactive"}
@@ -127,7 +127,7 @@ const ChequeDetails = () => {
 
                                                         <div className="d-block d-lg-flex gap-5 mt-3">
                                                             <div className="mb-3 w-100">
-                                                                <h6 className="text-445B64 fs-14 mb-1">Comments</h6>
+                                                                <h6 className="text-445B64 fs-14 mb-1" style={{color:'#445B64'}}>Comments</h6>
                                                                 <div className="card rounded-3">
                                                                     <div className="card-body p-2">
                                                                         <p className="text-0D161A fw-light fs-13 mb-0">{chequeDetails?.comment || "No comments available."}</p>
@@ -150,14 +150,14 @@ const ChequeDetails = () => {
                                                                         <label className="form-label text-445B64">Front Image</label>
                                                                         {chequeDetails?.imageUrl ?
                                                                             <img src={chequeDetails?.imageUrl} alt='Profile' className='w-100 border rounded-4 overflow-hidden' /> :
-                                                                            <h6 className="text-secondary fs-14">Image not Found</h6>
+                                                                            <h6 className="text-secondary fs-14">Image not Available</h6>
                                                                         }
                                                                     </div>
                                                                     <div className="col-lg-6">
                                                                         <label className="form-label text-445B64">Back Image</label>
                                                                         {chequeDetails?.imageUrl2 ?
                                                                             <img src={chequeDetails?.imageUrl2} alt='Profile' className='w-100 border rounded-4 overflow-hidden' /> :
-                                                                            <h6 className="text-secondary fs-14">Image not Found</h6>
+                                                                            <h6 className="text-secondary fs-14">Image not Available</h6>
                                                                         }
                                                                     </div>
                                                                 </div>
