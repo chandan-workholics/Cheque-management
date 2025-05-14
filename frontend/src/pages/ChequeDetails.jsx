@@ -108,11 +108,7 @@ const ChequeDetails = () => {
                                                                 <div className="mb-3">
                                                                     <h6 className="text-445B64 fs-14 mb-1">Date</h6>
                                                                     <h6 className="text-0D161A fw-semibold mb-0 fs-14">
-                                                                        {new Date("July 14, 2015").toLocaleDateString("en-GB", {
-                                                                            day: "numeric",
-                                                                            month: "long",
-                                                                            year: "numeric",
-                                                                        }).replace(/(\w+) (\d{4})$/, "$1, $2")}
+                                                                        {chequeDetails?.date}
                                                                     </h6>
 
                                                                 </div>

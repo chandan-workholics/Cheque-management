@@ -5,12 +5,9 @@ const client = new vision.ImageAnnotatorClient({
   keyFilename: './service-account-key.json'
 });
 
-
 const fs = require('fs');
 const path = require('path');
-const Check = require('../model/check.model');
 const baseUrl = 'http://206.189.130.102:5000';
-//const baseUrl = 'http://137.184.217.34:5000'
 
 
 exports.scanCheck = async (req, res) => {
