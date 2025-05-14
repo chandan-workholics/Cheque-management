@@ -12,10 +12,10 @@ const token = localStorage.getItem('token')
 
 const MobileAddCheck = () => {
     const navigate = useNavigate();
-    const [showPreview, setShowPreview] = useState(false);
+
     const [fileName, setFileName] = useState('');
     const [fileSize, setFileSize] = useState('');
-    const [showUploadInfo, setShowUploadInfo] = useState(false);
+
     const [step, setStep] = useState(1);
 
     const nextStep = () => setStep((prev) => Math.min(prev + 1, 3));
@@ -90,7 +90,7 @@ const MobileAddCheck = () => {
         if (file) {
             setFileName(file.name);
             setFileSize(formatBytes(file.size));
-            setShowUploadInfo(true);
+
         } else {
             alert("Please upload a cheque image.");
             return;
@@ -142,7 +142,7 @@ const MobileAddCheck = () => {
         if (file) {
             setFileName(file.name);
             setFileSize(formatBytes(file.size));
-            setShowUploadInfo(true);
+
         } else {
             alert("Please upload a cheque image.");
             return;
@@ -191,7 +191,7 @@ const MobileAddCheck = () => {
         if (file) {
             setFileName(file.name);
             setFileSize(formatBytes(file.size));
-            setShowUploadInfo(true);
+
         } else {
             alert("Please upload a license image.");
             return;
@@ -240,7 +240,7 @@ const MobileAddCheck = () => {
         if (file) {
             setFileName(file.name);
             setFileSize(formatBytes(file.size));
-            setShowUploadInfo(true);
+
         } else {
             alert("Please upload a license image.");
             return;

@@ -159,17 +159,12 @@ const Cheques = () => {
                                                                     <td>{item.amount}</td>
                                                                     <td>{item.comment?.length > 10 ? item.comment.substring(0, 10) + '...' : item.comment}</td>
                                                                     <td>
-                                                                        {item?.date &&
-                                                                            new Date(item.date).toLocaleDateString("en-GB", {
-                                                                                day: "numeric",
-                                                                                month: "long",
-                                                                                year: "numeric",
-                                                                            }).replace(/(\w+) (\d{4})$/, "$1, $2")}
+                                                                        {item?.date }
                                                                     </td>
 
                                                                     <td>{item.status}</td>
                                                                     <td>
-                                                                        <div className="d-flex justify-content-center">
+                                                                        <div className=" justify-content-center">
                                                                             <Link to={`/cheque-management/cheque-details/${item?._id}`} className="btn">
                                                                                 <i className="fa-solid fa-eye text-445B64"></i>
                                                                             </Link><button className="btn" onClick={() => handleDeleteCheque(item._id)}>
