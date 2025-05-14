@@ -71,7 +71,8 @@ exports.scanCheck = async (req, res) => {
       : '';
 
     // === Amount Numeric ===
-    const amountMatch = extractedText.match(/\$\s?(\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2}))/);
+  const amountMatch = extractedText.match(/\$?\s?(\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2}))/);
+
     const amountNumeric = amountMatch ? amountMatch[1].replace(',', '') : '';
 
     // === Amount in Words ===
