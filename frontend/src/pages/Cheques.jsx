@@ -5,7 +5,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+const token = localStorage.getItem('token')
 const URL = process.env.REACT_APP_URL;
 
 const Cheques = () => {
@@ -16,7 +16,11 @@ const Cheques = () => {
     const fetchCheques = async () => {
         try {
             const vendorId = localStorage.getItem('userId');
-            const response = await axios.get(`${URL}/check/get-checkByVenderId/${vendorId}`);
+            const response = await axios.get(`${URL}/check/get-checkByVenderId/${vendorId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             if (response.data.data) {
                 setCheques(response.data.data);
             }
@@ -28,7 +32,11 @@ const Cheques = () => {
     const handleDeleteCheque = async (id) => {
         if (!window.confirm("Are you sure you want to delete this check?")) return;
         try {
-            const response = await axios.delete(`${URL}/check/delete-check/${id}`);
+            const response = await axios.delete(`${URL}/check/delete-check/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             if (response.status >= 200 && response.status < 300) {
                 toast.success("Check deleted successfully!");
                 fetchCheques();
