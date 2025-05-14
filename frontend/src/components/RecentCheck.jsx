@@ -37,9 +37,9 @@ const RecentCheck = () => {
         }
     };
 
-    const handleAddCheque = () => {
-        navigate("/cheque-management/dashboard");
-    };
+    // const handleAddCheque = () => {
+    //     navigate("/cheque-management/dashboard");
+    // };
 
     const filteredCheques = cheques.filter((item, index) => {
         const search = searchTerm.toLowerCase();
@@ -93,12 +93,14 @@ const RecentCheck = () => {
                                                     <td>{item.amount}</td>
                                                     <td>{item.comment?.length > 10 ? item.comment.substring(0, 10) + '...' : item.comment}</td>
                                                     <td>
-                                                        {item?.date &&
-                                                            new Date(item.date).toLocaleDateString("en-GB", {
-                                                                day: "numeric",
-                                                                month: "long",
-                                                                year: "numeric",
-                                                            }).replace(/(\w+) (\d{4})$/, "$1, $2")}
+                                                        {item?.date
+                                                            // &&
+                                                            // new Date(item.date).toLocaleDateString("en-GB", {
+                                                            //     day: "numeric",
+                                                            //     month: "long",
+                                                            //     year: "numeric",
+                                                            // }).replace(/(\w+) (\d{4})$/, "$1, $2")
+                                                        }
                                                     </td>
 
                                                     <td>{item.status}</td>

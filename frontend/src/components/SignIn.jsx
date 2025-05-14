@@ -122,7 +122,7 @@ const SignIn = () => {
                         <img src={signLogo} alt="" className="sign-logo" />
                       </div>
                       <h3 className="fw-semibold">Forgot password</h3>
-                      <h6 className="mb-4 text-445B64">Enter your email to receive an code</h6>
+                      <h6 className="mb-4 text-445B64">Enter your email to receive the code</h6>
                       <input
                         className="form-control mb-3 rounded-3"
                         type="email"
