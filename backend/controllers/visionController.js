@@ -202,96 +202,73 @@ exports.scanCheck = async (req, res) => {
     if (!req.file) {
       return res.status(400).json({ error: 'No image uploaded' });
     }
+    // Save image locally
     const filename = `${Date.now()}-${req.file.originalname}`;
     const filepath = path.join(__dirname, '..', 'upload', filename);
     fs.writeFileSync(filepath, req.file.buffer);
     const imageUrl = `${baseUrl}/upload/${filename}`;
-
+    // OCR detection
     const [result] = await client.documentTextDetection({
       image: { content: req.file.buffer },
     });
-
     const extractedText = result.fullTextAnnotation?.text || '';
     if (!extractedText) {
       return res.status(400).json({ error: 'No text extracted from image' });
     }
-
     const cleanText = extractedText.replace(/\r\n/g, '\n').trim();
-    const lines = cleanText.split('\n');
-
+    const lines = cleanText.split('\n').map(l => l.trim()).filter(Boolean);
     // === PAYEE NAME Extraction ===
     let customerName = '';
-const blacklist = [
-  'INC', 'LLC', 'BANK', 'VOID', 'MEMO', 'CHECK', 'BOX',
-  'DOCUMENT', 'CHEMICALLY', 'REACTIVE', 'STOCK', 'NURSERY',
-  'SIGNATURE', 'DOLLARS', 'WARNING', 'PEACHES', 'GRAPES',
-  'APPLES', 'TEXAS', 'SHADE', 'TREES', 'FIGS', 'PLUMS',
-  'WALNUTS', 'PEARS'
+    const blacklist = [
+      'INC', 'LLC', 'BANK', 'VOID', 'MEMO', 'CHECK', 'BOX', 'DOCUMENT',
+      'CHEMICALLY', 'REACTIVE', 'STOCK', 'NURSERY', 'SIGNATURE', 'DOLLARS',
+      'WARNING', 'PEACHES', 'GRAPES', 'APPLES', 'TEXAS', 'SHADE', 'TREES',
+      'FIGS', 'PLUMS', 'WALNUTS', 'PEARS'
+    ];
+    const payeeIndex = lines.findIndex(line =>
+      /pay\s*to\s*the\s*order\s*of/i.test(line)
+    );
+    if (payeeIndex !== -1) {
+      for (let i = payeeIndex + 1; i <= payeeIndex + 6 && i < lines.length; i++) {
+        const line = lines[i].trim();
+        const isValidName = /^[A-Z][a-zA-Z]+(?: [A-Z][a-zA-Z]+)*$/.test(line);
+        const isBlacklisted = blacklist.some(word => line.toUpperCase().includes(word));
+        if (isValidName && !isBlacklisted) {
+          customerName = line;
+          break;
+        }
+      }
+    }
+    // Fallback using regex patterns
+    if (!customerName) {
+      const payeePatterns = [
+  // Common format: "Pay to the Order of John Doe"
+  /pay to the order of\s*[:\-]?\s*([A-Z][a-zA-Z&]+\s+[A-Z][a-zA-Z&]+(?:\s+[A-Z][a-zA-Z&]+)*)/i,
+
+  // Alternate label: "Payee: John Doe"
+  /payee\s*[:\-]?\s*([A-Z][a-zA-Z&]+\s+[A-Z][a-zA-Z&]+(?:\s+[A-Z][a-zA-Z&]+)*)/i,
+
+  // Handles split or misrecognized lines for "to the order of"
+  /to\s+the\s+order\s+of\s+([A-Z][a-zA-Z&]+\s+[A-Z][a-zA-Z&]+(?:\s+[A-Z][a-zA-Z&]+)*)/i,
+
+  // All caps payee name followed by DOLLARS (e.g. "SOCORRO PONCE\n***DOLLARS")
+  /([A-Z\s,.'-]{3,})\s*\n?.*DOLLARS/i,
+
+  // Fallback: Line with two or more capitalized words (name-like)
+  /^([A-Z][a-zA-Z&]+\s+[A-Z][a-zA-Z&]+(?:\s+[A-Z][a-zA-Z&]+)*)$/m
 ];
 
-// Find the line index of "PAY TO THE ORDER OF"
-const payeeIndex = lines.findIndex(line =>
-  /pay\s*to\s*the\s*order\s*of/i.test(line)
-);
-
-// Try to find the actual payee in the next 8 lines
-const candidates = {};
-if (payeeIndex !== -1) {
-  for (let i = payeeIndex + 1; i <= payeeIndex + 8 && i < lines.length; i++) {
-    const line = lines[i].trim();
-
-    // Skip empty lines
-    if (!line || line.length < 3) continue;
-
-    // Skip lines that contain blacklisted terms
-    if (blacklist.some(word => line.toUpperCase().includes(word))) continue;
-
-    // Accept lines with 2+ capitalized words (e.g., SOCORRO PONCE)
-    if (/^[A-Z][A-Z\s.'-]{2,}$/.test(line)) {
-      candidates[line] = (candidates[line] || 0) + 1;
-    }
-  }
-}
-
-// Pick the most frequent or first valid candidate
-const topPayee = Object.entries(candidates).sort((a, b) => b[1] - a[1])[0];
-if (topPayee) {
-  customerName = topPayee[0]
-    .toLowerCase()
-    .replace(/\b\w/g, c => c.toUpperCase()); // Title Case
-}
-
-
-    const payeePatterns = [
-      /pay\s*\n*\s*to\s*\n*\s*the\s*\n*\s*order\s*\n*\s*of:\s*([\s\S]{1,100}?)(?:\n|$)/i,
-      /pay to the order of\s+([A-Za-z\s,.'-]+)/i,
-      /payee:\s+([A-Za-z\s,.'-]+)/i,
-      /order of\s+([A-Za-z\s,.'-]+)/i,
-      /([A-Za-z\s,.'-]+)\s+payee/i,
-      /pay\s*\n*\s*to\s*\n*\s*the\s*\n*\s*order\s*\n*\s*of\s*([\s\S]{1,100}?)(?:\n|$)/i,
-      /payee\s*[:\-]?\s*([\s\S]{1,100}?)(?:\n|$)/i,
-      /order\s*of\s*([\s\S]{1,100}?)(?:\n|$)/i,
-      /([\s\S]{1,100}?)\s+payee/i,
-      /PAY\s*\n*\s*TO\s*\n*\s*THE\s*\n*\s*ORDER\s*\n*\s*OF\s*([\s\S]{1,100}?)/i,
-      /TO\s*\n*\s*THE\s*\n*\s*ORDER\s*\n*\s*OF\s*:\s*([\s\S]{1,100}?)/i,
-      /TO\s*\n*\s*THE\s*\n*([A-Za-z\s]+)\s*ORDER/i,
-      /ORDER\s*\n*\s*([\d\w\s]+)\s*\n*OF\s*([\s\S]{1,100})/i,
-      /to\s+the\s+([A-Za-z\s.'-]{1,100})/i,
-      /to\s+the\s*\n\s*([A-Za-z\s.'-]{1,100})/i
-    ];
-
-    for (const pattern of payeePatterns) {
-      const match = cleanText.match(pattern);
-      if (match && match[1]) {
-        const candidate = match[1].replace(/\n/g, ' ').trim();
-
-        if (
-          candidate.length >= 3 &&
-          /^[A-Za-z ,.'-]+$/.test(candidate) &&
-          !/(INC|LLC|BANK|VOID|MEMO|CHECK|BOX|TEXAS|NURSERY|REACTIVE|DOCUMENT|SIGNATURE|CHEMICALLY|STOCK|GRAPES|DOLLARS|PLUMS)/i.test(candidate)
-        ) {
-          customerName = candidate;
-          break;
+      for (const pattern of payeePatterns) {
+        const match = cleanText.match(pattern);
+        if (match && match[1]) {
+          const candidate = match[1].replace(/\n/g, ' ').trim();
+          const isValid = candidate.length >= 3 &&
+            /^[A-Za-z ,.'-]+$/.test(candidate) &&
+            !blacklist.some(word => candidate.toUpperCase().includes(word));
+          if (isValid) {
+            customerName = candidate;
+            break;
+          }
         }
       }
     }
@@ -300,25 +277,35 @@ if (topPayee) {
     const nameParts = customerName.split(' ').filter(Boolean);
     const customerFirstName = nameParts[0] || '';
     const customerLastName = nameParts.length > 1 ? nameParts[nameParts.length - 1] : '';
-    const customerMiddleName =
-      nameParts.length > 2 ? nameParts.slice(1, -1).join(' ') : '';
+    const customerMiddleName = nameParts.length > 2 ? nameParts.slice(1, -1).join(' ') : '';
 
     // === Amount (Numeric) Extraction ===
     let amountNumeric = '';
-    const amountRegex = /\$+[\s]*([0-9]{1,3}(?:,[0-9]{3})*(?:\.\d{2}))/;
+    const amountRegex = /\$+\s*([0-9,]+\.\d{2})/;
     for (const line of lines) {
       const match = line.match(amountRegex);
       if (match) {
+        const num = match[1].replace(/,/g, '');
+        if (!isNaN(num)) {
+          amountNumeric = num;
+          break;
+        }
+      }
+    }
+
+    if (!amountNumeric) {
+      const fallbackLine = lines.find(line => /DOLLARS/i.test(line) && /\d/.test(line));
+      const match = fallbackLine?.match(/(\d{1,3}(?:,\d{3})*(?:\.\d{2}))/);
+      if (match) {
         amountNumeric = match[1].replace(/,/g, '');
-        break;
       }
     }
 
     // === Amount in Words ===
     let amountWords = '';
     for (const line of lines) {
-      if (/and\s+\d{1,2}\/100/i.test(line) && !line.includes('TAX')) {
-        amountWords = line.replace(/\*+$/, '').trim();
+      if (/([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*\s+and\s+\d{1,2}\/100)/i.test(line)) {
+        amountWords = line.replace(/[*]+$/, '').trim();
         break;
       }
     }
@@ -334,7 +321,7 @@ if (topPayee) {
       }
     }
 
-    // Final structured data
+    // === Final structured response ===
     const parsedData = {
       imageUrl,
       customerName,
@@ -357,6 +344,7 @@ if (topPayee) {
     res.status(500).json({ error: 'Failed to process image' });
   }
 };
+
 
 exports.scanLicense = async (req, res) => {
   try {
