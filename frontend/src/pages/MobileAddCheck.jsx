@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { Link } from 'react-router-dom';
-
+const token = localStorage.getItem('token')
 import { useNavigate } from 'react-router-dom';
 const URL = process.env.REACT_APP_URL;
 
@@ -86,6 +86,7 @@ const MobileAddCheck = () => {
             const response = await axios.post(`${URL}/scan-check`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
+                     Authorization: `Bearer ${token}`
                 },
             });
             setTimeout(() => {
