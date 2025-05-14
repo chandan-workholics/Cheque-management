@@ -134,7 +134,7 @@ const Cheques = () => {
                                                         <tr>
                                                             <th>#</th>
                                                             <th>Customer Name</th>
-                                                            <th>Company</th>
+                                                            {/* <th>Company</th> */}
                                                             <th>License No</th>
                                                             <th>Type</th>
                                                             <th>Amount</th>
@@ -150,7 +150,7 @@ const Cheques = () => {
                                                                 <tr key={item._id}>
                                                                     <td>{index + 1}</td>
                                                                     <td>{item.customerFirstName}</td>
-                                                                    <td>{item.company}</td>
+                                                                    {/* <td>{item.company}</td> */}
                                                                     <td>{item.licenseNo}</td>
                                                                     <td>{item.checkType}</td>
                                                                     <td>{item.amount}</td>
@@ -161,7 +161,7 @@ const Cheques = () => {
 
                                                                     <td>{item.status}</td>
                                                                     <td>
-                                                                        <div className="d-flex justify-content-center">
+                                                                        <div className=" justify-content-center">
                                                                             <Link to={`/cheque-management/cheque-details/${item?._id}`} className="btn">
                                                                                 <i className="fa-solid fa-eye text-445B64"></i>
                                                                             </Link><button className="btn" onClick={() => handleDeleteCheque(item._id)}>

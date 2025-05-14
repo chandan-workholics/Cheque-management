@@ -316,7 +316,7 @@ const Home = () => {
     }
   };
 
-  console.log(formData)
+
 
   return (
     <>
@@ -625,7 +625,7 @@ const Home = () => {
                               </div>
                             </div>
                             <div className="col-md-3 mb-3">
-                              <label className="form-label text-445B64">License No </label>
+                              <label className="form-label text-445B64">ID Number </label>
                               <input type="text" className="form-control" value={licenseData.licenseNo || formData.licenseNo} onChange={(e) => setFormData({ ...licenseData, licenseNo: e.target.value })} />
                             </div>
                             <div className="col-md-3 mb-3">
