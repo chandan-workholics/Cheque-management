@@ -63,7 +63,7 @@ const Header = () => {
                 </nav>
             </div>
 
-            <div className="offcanvas offcanvas-start w-md-50 MobSidebarBg " data-bs-scroll="true" tabIndex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+            <div className="offcanvas offcanvas-start w-100 w-md-50 MobSidebarBg " data-bs-scroll="true" tabIndex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
                 <div className="offcanvas-header border-0">
                     <div className="navbar-brand">
                         {/* <img src={logo} alt="" className="me-2" /> */}
