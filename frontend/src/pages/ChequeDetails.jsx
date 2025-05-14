@@ -154,14 +154,14 @@ const ChequeDetails = () => {
                                                                         <label className="form-label text-445B64">Front Image</label>
                                                                         {chequeDetails?.imageUrl ?
                                                                             <img src={chequeDetails?.imageUrl} alt='Profile' className='w-100 border rounded-4 overflow-hidden' /> :
-                                                                            <h6 className="text-secondary fs-14">Image not Found</h6>
+                                                                            <h6 className="text-secondary fs-14">Image not Available</h6>
                                                                         }
                                                                     </div>
                                                                     <div className="col-lg-6">
                                                                         <label className="form-label text-445B64">Back Image</label>
                                                                         {chequeDetails?.imageUrl2 ?
                                                                             <img src={chequeDetails?.imageUrl2} alt='Profile' className='w-100 border rounded-4 overflow-hidden' /> :
-                                                                            <h6 className="text-secondary fs-14">Image not Found</h6>
+                                                                            <h6 className="text-secondary fs-14">Image not Available</h6>
                                                                         }
                                                                     </div>
                                                                 </div>

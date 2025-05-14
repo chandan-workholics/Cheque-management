@@ -121,8 +121,8 @@ const SignIn = () => {
                       <div className="text-center mb-5">
                         <img src={signLogo} alt="" className="sign-logo" />
                       </div>
-                      <h3 className="fw-semibold">Forgot Password</h3>
-                      <h6 className="mb-4 text-445B64">Enter your registered email</h6>
+                      <h3 className="fw-semibold">Forgot password</h3>
+                      <h6 className="mb-4 text-445B64">Enter your email to receive an code</h6>
                       <input
                         className="form-control mb-3 rounded-3"
                         type="email"
@@ -131,7 +131,7 @@ const SignIn = () => {
                         placeholder="Enter your email"
                       />
                       <button className="btn w-100 sign-btn mb-3" onClick={handleForgetPassword}>
-                        {loading ? 'Sending OTP...' : 'Send OTP'}
+                        {loading ? 'Sending Code...' : 'Send Code'}
                       </button>
                       <h6 className="text-center text-445B64">
                         <span
@@ -139,7 +139,7 @@ const SignIn = () => {
                           onClick={() => setShowForgotPassword(false)}
                           style={{ cursor: 'pointer' }}
                         >
-                          Back to Sign In
+                          Back to sign in
                         </span>
                       </h6>
                     </>
@@ -149,7 +149,7 @@ const SignIn = () => {
                         <img src={signLogo} alt="" className="sign-logo" />
                       </div>
                       <h3 className="fw-semibold">Welcome!</h3>
-                      <h6 className="mb-4 text-445B64">Please enter your credentials to log in</h6>
+                      <h6 className="mb-4 text-445B64">Enter your email and password to sign in</h6>
                       <input
                         className="form-control mb-3 rounded-3"
                         type="email"
@@ -176,7 +176,7 @@ const SignIn = () => {
                           onClick={() => setShowForgotPassword(true)}
                           style={{ cursor: 'pointer' }}
                         >
-                          Forgot Password?
+                          Forgot password?
                         </span>
                       </h6>
                       <button className="btn w-100 sign-btn mb-3" onClick={handleSubmit}>

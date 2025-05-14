@@ -48,7 +48,7 @@ const Cheques = () => {
     };
 
     const handleAddCheque = () => {
-        navigate("/cheque-management/dashboard");
+        navigate("/cheque-management/upload-check");
     };
 
     const filteredCheques = cheques.filter((item, index) => {
@@ -139,14 +139,13 @@ const Cheques = () => {
                                                         <tr>
                                                             <th>#</th>
                                                             <th>Customer Name</th>
-                                                            <th>Company</th>
-                                                            <th>License No</th>
+                                                            <th>ID Number</th>
                                                             <th>Type</th>
                                                             <th>Amount</th>
                                                             <th>Comment</th>
-                                                            <th>Date</th>
+                                                            <th>Date & Time</th>
                                                             <th>Status</th>
-                                                            <th>Actions</th>
+                                                            <th className='text-center'>Actions</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -155,7 +154,6 @@ const Cheques = () => {
                                                                 <tr key={item._id}>
                                                                     <td>{index + 1}</td>
                                                                     <td>{item.customerFirstName}</td>
-                                                                    <td>{item.company}</td>
                                                                     <td>{item.licenseNo}</td>
                                                                     <td>{item.checkType}</td>
                                                                     <td>{item.amount}</td>

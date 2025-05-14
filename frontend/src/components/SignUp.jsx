@@ -144,7 +144,7 @@ const SignUp = () => {
                     <img src={signLogo} alt="" className="sign-logo" />
                   </div>
                   <h3 className="fw-semibold">Register now</h3>
-                  <h6 className="mb-4 text-445B64">Please enter your credentials to sign up</h6>
+                  <h6 className="mb-4 text-445B64">Please enter your details to sign up</h6>
                   {/* Business */}
                   <input className="form-control mb-3 rounded-3" type="text" id='bussiness' name='bussiness' value={formData.bussiness} onChange={handleChange} placeholder="Business name" aria-label="example" required />
                   {formErrors.business && <small className="text-danger">{formErrors.business}</small>}
@@ -152,7 +152,7 @@ const SignUp = () => {
                   <input className="form-control mb-3 rounded-3" type="text" id='firstname' name='firstname' value={formData.firstname} onChange={handleChange} placeholder="First name" aria-label="example" required />
                   {formErrors.firstname && <small className="text-danger">{formErrors.firstname}</small>}
                   {/* Middle name */}
-                  <input className="form-control mb-3 rounded-3" type="text" id='middlename' name='middlename' value={formData.middlename} onChange={handleChange} placeholder="Middle name" aria-label="example" required />
+                  <input className="form-control mb-3 rounded-3" type="text" id='middlename' name='middlename' value={formData.middlename} onChange={handleChange} placeholder="Middle name (optional)" aria-label="example" required />
                   {formErrors.middlename && <small className="text-danger">{formErrors.middlename}</small>}
                   {/* last name */}
                   <input className="form-control mb-3 rounded-3" type="text" id='lastname' name='lastname' value={formData.lastname} onChange={handleChange} placeholder="Last name" aria-label="example" required />
