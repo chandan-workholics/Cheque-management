@@ -13,208 +13,41 @@ const baseUrl = 'http://206.189.130.102:5000';
 //const baseUrl = 'http://137.184.217.34:5000'
 
 
-// exports.scanCheck = async (req, res) => {
-//   try {
-//     if (!req.file) return res.status(400).json({ error: 'No image uploaded' });
-
-//     // Save uploaded image
-//     const filename = `${Date.now()}-${req.file.originalname}`;
-//     const filepath = path.join(__dirname, '..', 'upload', filename);
-//     fs.writeFileSync(filepath, req.file.buffer);
-//     const imageUrl = `${baseUrl}/upload/${filename}`;
-
-//     // Use DOCUMENT_TEXT_DETECTION instead of TEXT_DETECTION
-//     const [result] = await client.documentTextDetection({
-//       image: { content: req.file.buffer },
-//     });
-
-
-//     const extractedText = result.fullTextAnnotation?.text || '';
-//     if (!extractedText) {
-//       return res.status(400).json({ error: 'No text extracted from image' });
-//     }
-
-//     // Try searching for more flexible payee patterns that may vary in wording, punctuation, or capitalization
-//     // const payeePatterns = [
-//     //   /pay to the order of\s+([A-Za-z0-9\s,.'-]+)/i,
-//     //   /payee:\s+([A-Za-z0-9\s,.'-]+)/i,
-//     //   /order of\s+([A-Za-z0-9\s,.'-]+)/i,
-//     //   /([A-Za-z0-9\s,.'-]+)\s+payee/i,  // Reverse order for testing
-//     // ];
-
-//     // const payeePatterns = [
-//     //   /pay\s*\n*\s*to\s*\n*\s*the\s*\n*\s*order\s*\n*\s*of\s*([\s\S]{1,100}?)(?:\n|$)/i,
-//     //   /payee\s*[:\-]?\s*([\s\S]{1,100}?)(?:\n|$)/i,
-//     //   /order\s*of\s*([\s\S]{1,100}?)(?:\n|$)/i,
-//     //   /([\s\S]{1,100}?)\s+payee/i,
-//     // ];
-
-
-//     // const payeePatterns = [
-//     //   /pay to the order of\s+([A-Za-z\s,.'-]+)/i,
-//     //   /payee:\s+([A-Za-z\s,.'-]+)/i,
-//     //   /order of\s+([A-Za-z\s,.'-]+)/i,
-//     //   /([A-Za-z\s,.'-]+)\s+payee/i,  // Reverse order for testing
-
-//     //   /pay\s*\n*\s*to\s*\n*\s*the\s*\n*\s*order\s*\n*\s*of\s*([\s\S]{1,100}?)(?:\n|$)/i,
-//     //   /payee\s*[:\-]?\s*([\s\S]{1,100}?)(?:\n|$)/i,
-//     //   /order\s*of\s*([\s\S]{1,100}?)(?:\n|$)/i,
-//     //   /([\s\S]{1,100}?)\s+payee/i,
-
-//     //   /PAY\s*\n*\s*TO\s*\n*\s*THE\s*\n*\s*ORDER\s*\n*\s*OF\s*([\s\S]{1,100}?)/i,  // Added pattern
-//     //   /TO\s*\n*\s*THE\s*\n*\s*ORDER\s*\n*\s*OF\s*:\s*([\s\S]{1,100}?)/i,  // Added pattern
-
-//     //   // Adjusted pattern to capture name properly (letters and spaces only) between "TO THE" and "ORDER"
-//     //   /TO\s*\n*\s*THE\s*\n*([A-Za-z\s]+)\s*ORDER/i,  // Captures only letters and spaces for the name
-
-//     //   // Added specific pattern to capture address part after "OF"
-//     //   /ORDER\s*\n*\s*([\d\w\s]+)\s*\n*OF\s*([\s\S]{1,100})/i, // Captures numeric address properly
-//     // ];
-
-
-//     // const payeePatterns = [
-//     //   /pay\s*\n*\s*to\s*\n*\s*the\s*\n*\s*order\s*\n*\s*of:\s*([\s\S]{1,100}?)(?:\n|$)/i,  // NEW multiline variant
-
-//     //   /pay to the order of\s+([A-Za-z\s,.'-]+)/i,
-//     //   /payee:\s+([A-Za-z\s,.'-]+)/i,
-//     //   /order of\s+([A-Za-z\s,.'-]+)/i,
-//     //   /([A-Za-z\s,.'-]+)\s+payee/i,
-
-//     //   /pay\s*\n*\s*to\s*\n*\s*the\s*\n*\s*order\s*\n*\s*of\s*([\s\S]{1,100}?)(?:\n|$)/i,
-//     //   /payee\s*[:\-]?\s*([\s\S]{1,100}?)(?:\n|$)/i,
-//     //   /order\s*of\s*([\s\S]{1,100}?)(?:\n|$)/i,
-//     //   /([\s\S]{1,100}?)\s+payee/i,
-
-//     //   /PAY\s*\n*\s*TO\s*\n*\s*THE\s*\n*\s*ORDER\s*\n*\s*OF\s*([\s\S]{1,100}?)/i,
-//     //   /TO\s*\n*\s*THE\s*\n*\s*ORDER\s*\n*\s*OF\s*:\s*([\s\S]{1,100}?)/i,
-
-//     //   /TO\s*\n*\s*THE\s*\n*([A-Za-z\s]+)\s*ORDER/i,
-
-//     //   /ORDER\s*\n*\s*([\d\w\s]+)\s*\n*OF\s*([\s\S]{1,100})/i
-//     // ];
-
-
-//     const payeePatterns = [
-//       /pay\s*\n*\s*to\s*\n*\s*the\s*\n*\s*order\s*\n*\s*of:\s*([\s\S]{1,100}?)(?:\n|$)/i,
-
-//       /pay to the order of\s+([A-Za-z\s,.'-]+)/i,
-//       /payee:\s+([A-Za-z\s,.'-]+)/i,
-//       /order of\s+([A-Za-z\s,.'-]+)/i,
-//       /([A-Za-z\s,.'-]+)\s+payee/i,
-
-//       /pay\s*\n*\s*to\s*\n*\s*the\s*\n*\s*order\s*\n*\s*of\s*([\s\S]{1,100}?)(?:\n|$)/i,
-//       /payee\s*[:\-]?\s*([\s\S]{1,100}?)(?:\n|$)/i,
-//       /order\s*of\s*([\s\S]{1,100}?)(?:\n|$)/i,
-//       /([\s\S]{1,100}?)\s+payee/i,
-
-//       /PAY\s*\n*\s*TO\s*\n*\s*THE\s*\n*\s*ORDER\s*\n*\s*OF\s*([\s\S]{1,100}?)/i,
-//       /TO\s*\n*\s*THE\s*\n*\s*ORDER\s*\n*\s*OF\s*:\s*([\s\S]{1,100}?)/i,
-
-//       /TO\s*\n*\s*THE\s*\n*([A-Za-z\s]+)\s*ORDER/i,
-
-//       /ORDER\s*\n*\s*([\d\w\s]+)\s*\n*OF\s*([\s\S]{1,100})/i,
-
-//       /to\s+the\s+([A-Za-z\s.'-]{1,100})/i,                   // NEW: Same-line "To The <name>"
-//       /to\s+the\s*\n\s*([A-Za-z\s.'-]{1,100})/i               // NEW: Multiline "To The\n<name>"
-//     ];
-
-
-
-
-//     // Try to find any payee name using the variations
-//     let payeeText = '';
-//     for (let pattern of payeePatterns) {
-//       const match = extractedText.match(pattern);
-//       if (match) {
-//         payeeText = match[1].trim();
-//         break;
-//       }
-//     }
-
-
-//     // Now, process the extracted name
-//     let customerName = payeeText || 'Unknown Customer';
-
-//     // Remove unwanted address info if present
-//     customerName = customerName.replace(/P\.?O\.? BOX[\w\s\-\.]+/, '').trim();
-
-
-//     // Split into first, middle, and last names
-
-//     // Split by line, filter out empty lines
-//     const lines = customerName.split('\n').map(line => line.trim()).filter(line => line);
-
-//     // Assume the first line is the actual name
-//     const fullNameLine = lines[0] || '';
-
-//     // Split into words
-//     const nameParts = fullNameLine.split(' ').filter(part => part);
-
-//     // Extract parts
-//     const customerFirstName = nameParts[0] || '';
-//     const customerLastName = nameParts.length > 1 ? nameParts[nameParts.length - 1] : '';
-//     const customerMiddleName = nameParts.length > 2
-//       ? nameParts.slice(1, nameParts.length - 1).join(' ')
-//       : '';
-
-
-//     // === Amount Numeric ===
-//     const amountMatch = extractedText.match(/\$\s?(\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2}))/);
-//     const amountNumeric = amountMatch ? amountMatch[1].replace(',', '') : '';
-
-//     // === Amount in Words ===
-//     const amountWordsMatch = extractedText.match(/([A-Z\s\-]+)\s+DOLLARS/i);
-//     const amountWords = amountWordsMatch ? amountWordsMatch[1].trim() + ' DOLLARS' : '';
-
-//     // === Date ===
-//     const dateMatch = extractedText.match(/(?:DATE|Dated)[:\s]*([0-9]{1,2}\/[0-9]{1,2}\/[0-9]{2,4})/i) ||
-//       extractedText.match(/([0-9]{1,2}\/[0-9]{1,2}\/[0-9]{2,4})/);
-//     const date = dateMatch ? dateMatch[1] : '';
-
-//     const parsedData = {
-//       imageUrl,
-//       customerName: customerName,
-//       customerFirstName,
-//       customerMiddleName,
-//       customerLastName,
-//       amountNumeric,
-//       amountWords,
-//       date,
-//       payee: '',
-//       memo: '',
-//       company: '',
-//       checkType: '',
-//       extractedText,
-//     };
-
-
-
-//     res.json(parsedData);
-//   } catch (error) {
-//     console.error('Error during scan:', error);
-//     res.status(500).json({ error: 'Failed to process image' });
-//   }
-// };
-
-
 exports.scanCheck = async (req, res) => {
   try {
+<<<<<<< HEAD
     if (!req.file) {
       return res.status(400).json({ error: 'No image uploaded' });
     }
     // Save image locally
+=======
+    if (!req.file) return res.status(400).json({ error: 'No image uploaded' });
+
+    // Save uploaded image
+>>>>>>> 07cc05ec7a5cd8aed0b38f0cf4d26bf96df99bcc
     const filename = `${Date.now()}-${req.file.originalname}`;
     const filepath = path.join(__dirname, '..', 'upload', filename);
     fs.writeFileSync(filepath, req.file.buffer);
     const imageUrl = `${baseUrl}/upload/${filename}`;
+<<<<<<< HEAD
     // OCR detection
     const [result] = await client.documentTextDetection({
       image: { content: req.file.buffer },
     });
+=======
+
+    // Use DOCUMENT_TEXT_DETECTION instead of TEXT_DETECTION
+    const [result] = await client.documentTextDetection({
+      image: { content: req.file.buffer },
+    });
+
+
+>>>>>>> 07cc05ec7a5cd8aed0b38f0cf4d26bf96df99bcc
     const extractedText = result.fullTextAnnotation?.text || '';
     if (!extractedText) {
       return res.status(400).json({ error: 'No text extracted from image' });
     }
+<<<<<<< HEAD
     const cleanText = extractedText.replace(/\r\n/g, '\n').trim();
     const lines = cleanText.split('\n').map(l => l.trim()).filter(Boolean);
     // === PAYEE NAME Extraction ===
@@ -270,13 +103,42 @@ exports.scanCheck = async (req, res) => {
             break;
           }
         }
+=======
+
+    const payeePatterns = [
+      /Pay\s+to\s+the\s+order\s+of\s+([\w\s\.\-&']+)/i,
+      /TO\s+THE\s+ORDER\s+OF:?\s+[\s\S]*?\n([\w\s\.\-&']+)/i,
+      /Order\s+Of:?\s+Amount:\s+([\w\s\.\-&']+)/i,
+      /TO\s+THE\s+ORDER\s*\n([\w\s\.\-&']+)\nOF/i,
+      /Order\s+Of:\s+([\w\s\.\-&']+)/i,
+      /\n([A-Z][\w\s\.\-&']{2,})\nTO\s+THE\s+ORDER/i
+    ];
+
+
+    // Try to find any payee name using the variations
+    let payeeText = '';
+    for (let pattern of payeePatterns) {
+      const match = extractedText.match(pattern);
+      if (match) {
+        payeeText = match[1].trim();
+        break;
+>>>>>>> 07cc05ec7a5cd8aed0b38f0cf4d26bf96df99bcc
       }
     }
 
-    // === Name Breakdown ===
-    const nameParts = customerName.split(' ').filter(Boolean);
+    let customerName = payeeText || 'Unknown Customer';
+
+    customerName = customerName.replace(/P\.?O\.? BOX[\w\s\-\.]+/, '').trim();
+
+    const lines = customerName.split('\n').map(line => line.trim()).filter(line => line);
+
+    const fullNameLine = lines[0] || '';
+
+    const nameParts = fullNameLine.split(' ').filter(part => part);
+
     const customerFirstName = nameParts[0] || '';
     const customerLastName = nameParts.length > 1 ? nameParts[nameParts.length - 1] : '';
+<<<<<<< HEAD
     const customerMiddleName = nameParts.length > 2 ? nameParts.slice(1, -1).join(' ') : '';
 
     // === Amount (Numeric) Extraction ===
@@ -309,33 +171,43 @@ exports.scanCheck = async (req, res) => {
         break;
       }
     }
+=======
+    const customerMiddleName = nameParts.length > 2
+      ? nameParts.slice(1, nameParts.length - 1).join(' ')
+      : '';
 
-    // === Date Extraction ===
-    let date = '';
-    const dateRegex = /(\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4})/;
-    for (const line of lines) {
-      const match = line.match(dateRegex);
-      if (match) {
-        date = match[1];
-        break;
-      }
-    }
+    // === Amount Numeric ===
+    const amountMatch = extractedText.match(/\$\s?(\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2}))/);
+    const amountNumeric = amountMatch ? amountMatch[1].replace(',', '') : '';
 
+    // === Amount in Words ===
+    const amountWordsMatch = extractedText.match(/([A-Z\s\-]+)\s+DOLLARS/i);
+    const amountWords = amountWordsMatch ? amountWordsMatch[1].trim() + ' DOLLARS' : '';
+>>>>>>> 07cc05ec7a5cd8aed0b38f0cf4d26bf96df99bcc
+
+    // === Date ===
+    const dateMatch = extractedText.match(/(?:DATE|Dated)[:\s]*([0-9]{1,2}\/[0-9]{1,2}\/[0-9]{2,4})/i) ||
+      extractedText.match(/([0-9]{1,2}\/[0-9]{1,2}\/[0-9]{2,4})/);
+    const date = dateMatch ? dateMatch[1] : '';
+
+<<<<<<< HEAD
     // === Final structured response ===
+=======
+>>>>>>> 07cc05ec7a5cd8aed0b38f0cf4d26bf96df99bcc
     const parsedData = {
       imageUrl,
-      customerName,
+      customerName: customerName,
       customerFirstName,
       customerMiddleName,
       customerLastName,
       amountNumeric,
       amountWords,
       date,
-      payee: customerName,
+      payee: '',
       memo: '',
       company: '',
       checkType: '',
-      extractedText: cleanText,
+      extractedText,
     };
 
     res.json(parsedData);
@@ -346,6 +218,11 @@ exports.scanCheck = async (req, res) => {
 };
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 07cc05ec7a5cd8aed0b38f0cf4d26bf96df99bcc
 exports.scanLicense = async (req, res) => {
   try {
     if (!req.file) {

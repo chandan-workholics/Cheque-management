@@ -3,7 +3,7 @@ import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+const token = localStorage.getItem('token')
 const URL = process.env.REACT_APP_URL;
 
 const Report = () => {
@@ -13,7 +13,11 @@ const Report = () => {
     const fetchReport = async () => {
         try {
             const vendorId = localStorage.getItem('userId');
-            const response = await axios.get(`${URL}/complain/tickets/vendor/${vendorId}`)
+            const response = await axios.get(`${URL}/complain/tickets/vendor/${vendorId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
             if (response) {
                 setReport(response?.data);
             }

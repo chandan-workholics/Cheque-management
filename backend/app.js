@@ -18,6 +18,22 @@ require('dotenv').config();
 require('./db/conn');
 
 const app = express();
+
+
+// Enable trust proxy if behind a proxy server
+// app.enable('trust proxy');
+
+// // Force HTTP to HTTPS redirection
+// app.use((req, res, next) => {
+//   if (req.secure) {
+//     return next();
+//   }
+//   res.redirect('https://' + req.headers.host + req.url);
+// });
+
+
+
+
 const PORT = process.env.PORT || 5000;
 
 // Middleware

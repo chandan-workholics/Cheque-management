@@ -1,19 +1,28 @@
 const jwt = require('jsonwebtoken');
 
 exports.authenticate = (req, res, next) => {
-  const token = req.header('Authorization');
-  if (!token) return res.status(401).json({ message: 'Access Denied' });
+  const authHeader = req.header('Authorization');
+
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ message: 'Access Denied: No or malformed token' });
+  }
+
+  const token = authHeader.split(' ')[1]; // Extract token after "Bearer"
 
   try {
-    const verified = jwt.verify(token.replace('Bearer ', ''), process.env.JWT_SECRET);
-    req.user = verified;
+    const verified = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = verified; // Attach decoded token payload to req.user
     next();
   } catch (error) {
-    res.status(400).json({ message: 'Invalid Token' });
+    return res.status(401).json({ message: 'Invalid or expired token' });
   }
 };
 
 exports.isAdmin = (req, res, next) => {
-  if (req.user.role !== 'admin') return res.status(403).json({ message: 'Admin access required' });
+  if (!req.user || req.user.role !== 'admin') {
+    return res.status(403).json({ message: 'Admin access required' });
+  }
   next();
 };
+
+

@@ -5,10 +5,11 @@ import { useState, useRef } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import MobileHeader from '../components/MobileHeader';
+
 import { Link } from 'react-router-dom';
 import RecentCheck from '../components/RecentCheck';
 const URL = process.env.REACT_APP_URL;
+const token = localStorage.getItem('token')
 
 const Home = () => {
   const licenseFrontRef = useRef(null);
@@ -251,6 +252,7 @@ const Home = () => {
       const response = await axios.get(`${URL}/check/status`, {
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
         }
       })
       if (response.status >= 200 && response.status < 300) {

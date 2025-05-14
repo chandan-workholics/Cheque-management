@@ -4,6 +4,7 @@ import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import { Link, useNavigate } from 'react-router-dom';
 const URL = process.env.REACT_APP_URL;
+const token = localStorage.getItem('token')
 
 const User = () => {
     const [userData, setUserData] = useState(null);
@@ -12,7 +13,11 @@ const User = () => {
         const fetchUser = async () => {
             try {
                 const userId = localStorage.getItem("userId")
-                const res = await axios.get(`${URL}/auth/get-venderById/${userId}`);
+                const res = await axios.get(`${URL}/auth/get-venderById/${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
                 setUserData(res.data.data);
             } catch (error) {
                 console.error('Error fetching user data:', error);

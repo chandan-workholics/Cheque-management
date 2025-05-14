@@ -5,15 +5,21 @@ import Sidebar from '../components/Sidebar';
 import axios from 'axios';
 
 const URL = process.env.REACT_APP_URL;
+const token = localStorage.getItem('token')
 
 const ChequeDetails = () => {
     const [chequeDetails, setChequeDetails] = useState('');
     const { id } = useParams()
     const navigate = useNavigate()
+
     const fetchChequeDetails = async () => {
         try {
 
-            const response = await axios.get(`${URL}/check/get-checkById/${id}`);
+            const response = await axios.get(`${URL}/check/get-checkById/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             if (response.status >= 200 && response.status < 300) {
                 setChequeDetails(response?.data?.data)
             }

@@ -4,7 +4,7 @@ import Sidebar from '../components/Sidebar';
 import axios from 'axios'
 import moment from 'moment'
 import { useNavigate } from 'react-router-dom';
-
+const token = localStorage.getItem('token')
 const URL = process.env.REACT_APP_URL;
 
 const MyTicket = () => {
@@ -24,7 +24,11 @@ const MyTicket = () => {
         try {
 
             const vendorId = localStorage.getItem("userId");
-            const response = await axios.get(`${URL}/complain/tickets/vendor/${vendorId}`)
+            const response = await axios.get(`${URL}/complain/tickets/vendor/${vendorId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
             if (response.status >= 200 && response.status < 300) {
                 setTickets(response?.data || [])
             }

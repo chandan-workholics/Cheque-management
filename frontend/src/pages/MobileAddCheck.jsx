@@ -8,13 +8,14 @@ import { Link } from 'react-router-dom';
 
 import { useNavigate } from 'react-router-dom';
 const URL = process.env.REACT_APP_URL;
+const token = localStorage.getItem('token')
 
 const MobileAddCheck = () => {
     const navigate = useNavigate();
     const [showPreview, setShowPreview] = useState(false);
     const [fileName, setFileName] = useState('');
-  const [fileSize, setFileSize] = useState('');
-  const [showUploadInfo, setShowUploadInfo] = useState(false);
+    const [fileSize, setFileSize] = useState('');
+    const [showUploadInfo, setShowUploadInfo] = useState(false);
     const [step, setStep] = useState(1);
 
     const nextStep = () => setStep((prev) => Math.min(prev + 1, 3));
@@ -49,14 +50,14 @@ const MobileAddCheck = () => {
 
     const handleCancelCheckBack = () => { setFormDataback({ ...formDataback, imageUrl: '' }); if (checkBackRef.current) { checkBackRef.current.value = ''; } };
 
- const formatBytes = (bytes, decimals = 2) => {
-    if (bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const dm = decimals < 0 ? 0 : decimals;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
-  };
+    const formatBytes = (bytes, decimals = 2) => {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const dm = decimals < 0 ? 0 : decimals;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+    };
 
     const [errors, setErrors] = useState({});
 
@@ -86,11 +87,11 @@ const MobileAddCheck = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const file = e.target.files[0];
-       if (file) {
+        if (file) {
             setFileName(file.name);
             setFileSize(formatBytes(file.size));
             setShowUploadInfo(true);
-          }else{
+        } else {
             alert("Please upload a cheque image.");
             return;
         }
@@ -101,6 +102,7 @@ const MobileAddCheck = () => {
             const response = await axios.post(`${URL}/scan-check`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
+                    Authorization: `Bearer ${token}`
                 },
             });
             setTimeout(() => {
@@ -137,11 +139,11 @@ const MobileAddCheck = () => {
     const handleSubmitback = async (e) => {
         e.preventDefault();
         const file = e.target.files[0];
-       if (file) {
+        if (file) {
             setFileName(file.name);
             setFileSize(formatBytes(file.size));
             setShowUploadInfo(true);
-          }else{
+        } else {
             alert("Please upload a cheque image.");
             return;
         }
@@ -190,7 +192,7 @@ const MobileAddCheck = () => {
             setFileName(file.name);
             setFileSize(formatBytes(file.size));
             setShowUploadInfo(true);
-          }else{
+        } else {
             alert("Please upload a license image.");
             return;
         }
@@ -235,11 +237,11 @@ const MobileAddCheck = () => {
     const handleSubmitLicenseback = async (e) => {
         e.preventDefault();
         const file = e.target.files[0];
-       if (file) {
+        if (file) {
             setFileName(file.name);
             setFileSize(formatBytes(file.size));
             setShowUploadInfo(true);
-          }else{
+        } else {
             alert("Please upload a license image.");
             return;
         }
