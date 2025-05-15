@@ -14,7 +14,7 @@ router.post('/verify-otp-for-password', authController.verifyOtpForPasswordReset
 router.post('/reset-password', authController.resetPassword);
 
 
-router.get('/get-all-vender', authController.getAllVender);
-router.get('/get-venderById/:id', authController.getAllVenderId);
+router.get('/get-all-vender', authenticate, authController.getAllVender);
+router.get('/get-venderById/:id', authenticate, authController.getAllVenderId);
 
 module.exports = router;
