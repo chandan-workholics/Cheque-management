@@ -45,7 +45,8 @@ const RecentCheck = () => {
         const search = searchTerm.toLowerCase();
         return (
             (index + 1).toString().includes(search) ||
-            item.customerName?.toLowerCase().includes(search) ||
+            item.customerFirstName?.toLowerCase().includes(search) ||
+            item.customerLastName?.toLowerCase().includes(search) ||
             item.company?.toLowerCase().includes(search) ||
             item.licenseNo?.toString().toLowerCase().includes(search) ||
             item.checkType?.toLowerCase().includes(search) ||
@@ -63,7 +64,27 @@ const RecentCheck = () => {
         <>
             <div className="row">
                 <div className="col-12">
-                    <h6 className="fw-semibold">Recent Check</h6>
+                    <div className='row'>
+                        <div className="col-4">
+                            <h6 className="fw-semibold">Recent Check</h6>
+                        </div>
+                        <div className="col-8">
+                                        <div className="d-flex position-relative" style={{ width: "100%" }}>
+                                            <input
+                                                className="form-control form-control-sm rounded-3 me-lg-2 shadow-none bg-F0F5F6"
+                                                value={searchTerm}
+                                                onChange={(e) => setSearchTerm(e.target.value)}
+                                                type="search"
+                                                placeholder="Search"
+                                                aria-label="Search"
+                                                style={{ paddingLeft: "35px" }}
+                                            />
+                                            <i className="fa fa-search text-445B64 position-absolute top-0 start-0" style={{ margin: "8px" }}></i>
+                                </div>
+                        </div>
+                    </div>
+
+
                     <div className="card rounded-4 mb-1 overflow-hidden">
                         <div className="card-body p-0">
                             {/* Table Starts Here */}
@@ -74,7 +95,7 @@ const RecentCheck = () => {
                                             <th>#</th>
                                             <th>Customer Name</th>
                                             <th>Company</th>
-                                            <th>License No</th>
+                                            <th>ID Number</th>
                                             <th>Type</th>
                                             <th>Amount</th>
                                             <th>Comment</th>
