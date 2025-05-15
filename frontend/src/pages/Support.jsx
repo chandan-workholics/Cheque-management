@@ -61,34 +61,39 @@ const Support = () => {
         setData((prevData) => ({ ...prevData, [name]: value }))
     }
 
-    const addTicket = async () => {
-        try {
-            const response = await axios.post(`${URL}/complain/tickets`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            },{
+   const addTicket = async () => {
+    try {
+        const response = await axios.post(
+            `${URL}/complain/tickets`,
+            {
                 subject: data?.subject || '',
                 category: data?.category || '',
                 description: data?.description || '',
                 checkImg: formData?.imageUrl || '',
                 vendorId: venderId || ''
-            });
-            if (response.status === 201) {
-                alert('Ticket raised successfully!');
-                setData({
-                    subject: '',
-                    category: '',
-                    description: '',
-                    checkImg: '',
-                    vendorId: '',
-                });
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             }
-        } catch (error) {
-            console.error(error);
-            alert('Failed to raise ticket. Please try again.');
+        );
+ 
+        if (response.status === 201) {
+            alert('Ticket raised successfully!');
+            setData({
+                subject: '',
+                category: '',
+                description: '',
+                checkImg: '',
+                vendorId: '',
+            });
         }
-    };
+    } catch (error) {
+        console.error(error);
+        alert('Failed to raise ticket. Please try again.');
+    }
+};
 
 
     return (

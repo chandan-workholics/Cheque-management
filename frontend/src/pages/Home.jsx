@@ -76,12 +76,13 @@ const Home = () => {
     formData.append('image', file);
     try {
       setLoading(true)
-      const response = await axios.post(`${URL}/scan-check`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${token}`
-        },
-      });
+      const response = await axios.post(`${URL}/scan-check`, formData)
+      //   , {
+      //   headers: {
+      //     'Content-Type': 'multipart/form-data',
+      //     Authorization: `Bearer ${token}`
+      //   },
+      // });
       setTimeout(() => {
         toast.success('Check front image upload successfully!');
       }, 1000);
@@ -124,12 +125,13 @@ const Home = () => {
     formData.append('image', file);
     try {
       setLoading1(true)
-      const response = await axios.post(`${URL}/scan-check`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-           Authorization: `Bearer ${token}`
-        },
-      });
+      const response = await axios.post(`${URL}/scan-check`, formData)
+      // , {
+      //   headers: {
+      //     'Content-Type': 'multipart/form-data',
+      //      Authorization: `Bearer ${token}`
+      //   },
+      // });
       setTimeout(() => {
         toast.success('Check Back image upload successfully!');
       }, 1000);
@@ -170,12 +172,13 @@ const Home = () => {
     formData.append('image', file);
     try {
       setLoading2(true)
-      const response = await axios.post(`${URL}/scan-license`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-           Authorization: `Bearer ${token}`
-        },
-      });
+      const response = await axios.post(`${URL}/scan-license`, formData)
+      //   , {
+      //   headers: {
+      //     'Content-Type': 'multipart/form-data',
+      //      Authorization: `Bearer ${token}`
+      //   },
+      // });
       setTimeout(() => {
         toast.success('License Front image upload successfully!');
       }, 1000);
@@ -216,12 +219,13 @@ const Home = () => {
     formData.append('image', file);
     try {
       setLoading3(true)
-      const response = await axios.post(`${URL}/scan-license`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-           Authorization: `Bearer ${token}`
-        },
-      });
+      const response = await axios.post(`${URL}/scan-license`, formData)
+      // , {
+      //   headers: {
+      //     'Content-Type': 'multipart/form-data',
+      //      Authorization: `Bearer ${token}`
+      //   },
+      // });
       setTimeout(() => {
         toast.success('License Back image upload successfully!');
       }, 1000);
@@ -271,58 +275,62 @@ const Home = () => {
     handleStatus();
   }, [])
 
+
   const handleSave = async (e) => {
-    e.preventDefault();
-    if (!formData.imageUrl || !licenseData.imageUrl) {
-      toast.error('Please upload both Check and License front images');
-      return;
-    }
-    if (!validateForm()) {
-      toast.error('Please fill all required fields');
-      return;
-    }
-    try {
-      const response = await axios.post(`${URL}/check/add-check`,{
-        headers:{
-           Authorization: `Bearer ${token}`
-        }
-      } ,{
-        imageUrl: formData.imageUrl || '',
-        imageUrl2: formDataback.imageUrl || '',
-        imageUrl3: licenseData.imageUrl || '',
-        imageUrl4: licenseDataback.imageUrl || '',
-        customerFirstName: formData.customerFirstName,
-        customerLastName: formData.customerLastName,
-        customerMiddleName: formData.customerMiddleName,
-        licenseNo: licenseData.licenseNo,
-        date: new Date(Date.now()).toLocaleString('en-GB', {
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit',
-          hour12: false
-        }),
-        company: formData.company,
-        checkType: formData.checkType || 'Personal',
-        amount: formData.amount,
-        status: formData.status,
-        extractedText: formData.extractedText,
-        comment: formData.comment,
-        venderId: venderId
-      });
-      console.log(response)
-      if (response.status >= 200 && response.status < 300) {
-        toast.success('Check added successfully!');
-      } else {
-        toast.error('Failed to add check');
+  e.preventDefault();
+
+  if (!formData.imageUrl || !licenseData.imageUrl) {
+    toast.error('Please upload both Check and License front images');
+    return;
+  }
+
+  if (!validateForm()) {
+    toast.error('Please fill all required fields');
+    return;
+  }
+
+  try {
+    const response = await axios.post(`${URL}/check/add-check`, {
+      imageUrl: formData.imageUrl || '',
+      imageUrl2: formDataback.imageUrl || '',
+      imageUrl3: licenseData.imageUrl || '',
+      imageUrl4: licenseDataback.imageUrl || '',
+      customerFirstName: formData.customerFirstName,
+      customerLastName: formData.customerLastName,
+      customerMiddleName: formData.customerMiddleName,
+      licenseNo: licenseData.licenseNo,
+      date: new Date(Date.now()).toLocaleString('en-GB', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      }),
+      company: formData.company,
+      checkType: formData.checkType || 'Personal',
+      amount: formData.amount,
+      status: formData.status,
+      extractedText: formData.extractedText,
+      comment: formData.comment,
+      venderId: venderId
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`
       }
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      toast.error('An error occurred while submitting the form');
+    });
+
+    if (response.status >= 200 && response.status < 300) {
+      toast.success('Check added successfully!');
+    } else {
+      toast.error('Failed to add check');
     }
-  };
+  } catch (error) {
+    console.error('Error submitting form:', error);
+    toast.error('An error occurred while submitting the form');
+  }
+};
 
 
 
@@ -622,7 +630,7 @@ const Home = () => {
                             </div>
                             <div className="col-md-3 mb-3">
                               <label className="form-label text-445B64">ID Number </label>
-                              <input type="text" className="form-control" value={licenseData.licenseNo || formData.licenseNo} onChange={(e) => setFormData({ ...licenseData, licenseNo: e.target.value })} />
+                              <input type="text" className="form-control" value={licenseData.licenseNo || formData.licenseNo} onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} />
                             </div>
                             <div className="col-md-3 mb-3">
                               <label className="form-label text-445B64"> Check Type </label>
