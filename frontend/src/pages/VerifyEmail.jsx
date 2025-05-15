@@ -1,11 +1,26 @@
-import React from 'react'
+// import React, { useEffect, useState } from 'react'
 import logoLeft from '../assets/images/logoLeft.png'
 import emailVerifyImg from '../assets/images/emailVerifyImg.png'
 import { Link } from 'react-router-dom'
+// import axios from 'axios';
 
-const email = localStorage.getItem('email');
+ const email = localStorage.getItem('email');
 
-const VerifyEmail = () => {
+ const VerifyEmail = () => {
+//     const [userData, setUserData] = useState(null);
+//      useEffect(() => {
+//         const fetchUser = async () => {
+//             try {
+//                 const userId = localStorage.getItem("userId")
+//                 const res = await axios.get(`${URL}/auth/get-venderById/${userId}`);
+//                 setUserData(res.data.data);
+//             } catch (error) {
+//                 console.error('Error fetching user data:', error);
+//             }
+//         };
+
+//         fetchUser();
+//     }, []);
     return (
         <>
             <div className="container-fluid sign-page">
