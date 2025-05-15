@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import signLogo from '../assets/images/signLogo.png'
 const URL = process.env.REACT_APP_URL;
 
 const Otp = () => {
@@ -105,14 +106,17 @@ const Otp = () => {
                 <div className="col-lg-6 sign-left-bg h-100 justify-content-center d-none d-lg-flex align-items-center">
                     <img src={logoLeft} alt="" className="" />
                 </div>
-                <div className="col-lg-6 h-100 bg-EEEEEE position-relative">
-                    <div className="row h-100">
+                <div className="col-lg-6 sign-right-bg h-100 bg-EEEEEE position-relative">
+                    <div className="row h-100 w-100">
                         <div className="col-lg-8 col-xl-7 col-xxl-6 mx-auto d-flex justify-content-center align-items-center">
                             <div className="w-100">
+                                <div className="text-center mb-5">
+                                    <img src={signLogo} alt="" className="sign-logo" />
+                                </div>
                                 <h3 className="fw-semibold">Welcome!</h3>
-                                <h6 className="mb-4 text-445B64">Please enter OTP to verify</h6>
+                                <h6 className="mb-4 text-445B64">Please enter code to verify</h6>
                                 <div className="text-center mb-3 text-danger">
-                                    OTP expires in {Math.floor(timeLeft / 60)}:{String(timeLeft % 60).padStart(2, '0')}
+                                    Code expires in {Math.floor(timeLeft / 60)}:{String(timeLeft % 60).padStart(2, '0')}
                                 </div>
                                 <form onSubmit={handleVerify}>
                                     <div className="d-flex justify-content-around">
@@ -131,7 +135,7 @@ const Otp = () => {
                                     <button type="submit" className="btn w-100 sign-btn mb-3">  {loading ? (
                                         <>
                                             <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                                            Verify OTP
+                                            Verify Code
                                         </>
                                     ) : (
                                         "Verify"
@@ -140,10 +144,10 @@ const Otp = () => {
                                 <button type="submit" className="btn w-100 sign-btn mb-3" onClick={handleResendOtp}> {loadingResent ? (
                                     <>
                                         <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                                        Resent OTP
+                                        Resent Code
                                     </>
                                 ) : (
-                                    "Resent OTP"
+                                    "Resent Code"
                                 )}</button>
                             </div>
                         </div>

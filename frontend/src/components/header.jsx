@@ -1,12 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import logo from '../assets/images/EzKash.png'
 import supportIconImg from '../assets/images/supportIconImg.png';
 import { NavLink, Link, useNavigate } from 'react-router-dom'
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import profileImg from '../assets/images/userImg.png'
+const URL = process.env.REACT_APP_URL;
+const token = localStorage.getItem('token')
 
 const Header = () => {
+
+    const [userData, setUserData] = useState(null);
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const userId = localStorage.getItem("userId")
+                const res = await axios.get(`${URL}/auth/get-venderById/${userId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                setUserData(res.data.data);
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        };
+
+        fetchUser();
+    }, []);
 
     const navigate = useNavigate();
 
@@ -77,8 +99,8 @@ const Header = () => {
                                 <div className="mb-2">
                                     <img src={profileImg} alt="" className="" />
                                 </div>
-                                <h5 className="text-white mb-1">Cody Fisher</h5>
-                                <h6 className="text-white fw-normal">alma.lawson@example.com</h6>
+                                <h5 className="text-white mb-1">{userData?.firstname} {userData?.lastname}</h5>
+                                <h6 className="text-white fw-normal">{userData?.email}</h6>
                             </li>
                             <li>
                                 <NavLink to="/check-management/dashboard" className="nav-link">
@@ -121,16 +143,16 @@ const Header = () => {
                                     <span className="">Profile</span>
                                 </NavLink>
                             </li>
-                            {/* <li>
-                                <NavLink to='/check-management/setting' className="nav-link">
+                            <li>
+                                <NavLink to='/check-management/support' className="nav-link">
                                     <div className="sidebar-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewBox="0 0 17 18" fill="none">
-                                            <path d="M6.08333 17.3333L5.75 14.6667C5.56944 14.5972 5.39931 14.5139 5.23958 14.4167C5.07986 14.3194 4.92361 14.2153 4.77083 14.1042L2.29167 15.1458L0 11.1875L2.14583 9.5625C2.13194 9.46527 2.125 9.37153 2.125 9.28125V8.71875C2.125 8.62847 2.13194 8.53472 2.14583 8.4375L0 6.8125L2.29167 2.85416L4.77083 3.89583C4.92361 3.78472 5.08333 3.68055 5.25 3.58333C5.41667 3.48611 5.58333 3.40278 5.75 3.33333L6.08333 0.666664H10.6667L11 3.33333C11.1806 3.40278 11.3507 3.48611 11.5104 3.58333C11.6701 3.68055 11.8264 3.78472 11.9792 3.89583L14.4583 2.85416L16.75 6.8125L14.6042 8.4375C14.6181 8.53472 14.625 8.62847 14.625 8.71875V9.28125C14.625 9.37153 14.6111 9.46527 14.5833 9.5625L16.7292 11.1875L14.4375 15.1458L11.9792 14.1042C11.8264 14.2153 11.6667 14.3194 11.5 14.4167C11.3333 14.5139 11.1667 14.5972 11 14.6667L10.6667 17.3333H6.08333ZM8.41667 11.9167C9.22222 11.9167 9.90972 11.6319 10.4792 11.0625C11.0486 10.4931 11.3333 9.80555 11.3333 9C11.3333 8.19444 11.0486 7.50694 10.4792 6.9375C9.90972 6.36805 9.22222 6.08333 8.41667 6.08333C7.59722 6.08333 6.90625 6.36805 6.34375 6.9375C5.78125 7.50694 5.5 8.19444 5.5 9C5.5 9.80555 5.78125 10.4931 6.34375 11.0625C6.90625 11.6319 7.59722 11.9167 8.41667 11.9167Z" fill="#000000" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="20" viewBox="0 0 17 20" fill="none">
+                                            <path d="M8.5 0C3.81 0 0 3.81 0 8.5C0 13.19 3.81 17 8.5 17H9V20C13.86 17.66 17 13 17 8.5C17 3.81 13.19 0 8.5 0ZM9.5 14.5H7.5V12.5H9.5V14.5ZM9.5 11H7.5C7.5 7.75 10.5 8 10.5 6C10.5 4.9 9.6 4 8.5 4C7.4 4 6.5 4.9 6.5 6H4.5C4.5 3.79 6.29 2 8.5 2C10.71 2 12.5 3.79 12.5 6C12.5 8.5 9.5 8.75 9.5 11Z" fill="white" />
                                         </svg>
                                     </div>
-                                    <span className="">Settings</span>
+                                    <span className="">Support</span>
                                 </NavLink>
-                            </li> */}
+                            </li>
                             <li>
                                 <button className="nav-link w-100" onClick={handleLogout}>
                                     <div className="sidebar-icon">
