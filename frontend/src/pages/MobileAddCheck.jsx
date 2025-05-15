@@ -154,7 +154,7 @@ const MobileAddCheck = () => {
             const response = await axios.post(`${URL}/scan-check`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                     Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${token}`
                 },
             });
             setTimeout(() => {
@@ -204,7 +204,7 @@ const MobileAddCheck = () => {
             const response = await axios.post(`${URL}/scan-license`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                     Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${token}`
                 },
             });
             setTimeout(() => {
@@ -254,7 +254,7 @@ const MobileAddCheck = () => {
             const response = await axios.post(`${URL}/scan-license`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                     Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${token}`
                 },
             });
             setTimeout(() => {
@@ -297,7 +297,7 @@ const MobileAddCheck = () => {
             return;
         }
         try {
-            const response = await axios.post(`${URL}/check/add-check`,{
+            const response = await axios.post(`${URL}/check/add-check`, {
                 imageUrl: formData.imageUrl || '',
                 imageUrl2: formDataback.imageUrl || '',
                 imageUrl3: licenseData.imageUrl || '',
@@ -322,8 +322,8 @@ const MobileAddCheck = () => {
                 extractedText: formData.extractedText,
                 comment: formData.comment,
                 venderId: venderId
-            },{
-                headers:{
+            }, {
+                headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
@@ -565,8 +565,8 @@ const MobileAddCheck = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="card position-static mt-4 bg-transparent start-0 bottom-0 w-100 border-0">
-                                <div className="card-body" style={{ padding: '12px 0' }}>
+                            <div className="card position-absolute mt-4 bg-transparent start-0 bottom-0 w-100 border-0">
+                                <div className="card-body" style={{ padding: '12px' }}>
                                     <button className='theme-btn w-100' onClick={nextStep}>Next</button>
                                 </div>
                             </div>
@@ -776,8 +776,8 @@ const MobileAddCheck = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="card position-static bg-transparent start-0 bottom-0 w-100 border-0">
-                                <div className="card-body bg-transparent" style={{ padding: '12px 0' }}>
+                            <div className="card position-absolute bg-transparent start-0 bottom-0 w-100 border-0">
+                                <div className="card-body bg-transparent" style={{ padding: '12px' }}>
                                     <button className='w-100 border-0 bg-transparent text-secondary mb-3 fw-semibold' onClick={skipStep}>Skip</button>
                                     <button className='theme-btn w-100' onClick={nextStep}>Next</button>
                                 </div>
@@ -800,11 +800,11 @@ const MobileAddCheck = () => {
                                 </div>
                                 <div className="card-body bg-transparent px-0">
                                     <div className="row">
-                                        <div className="col-12 mb-3">
-                                            <label className="form-label text-445B64">Customer Name <span className='text-danger'>*</span></label>
+                                        <div className="col-12 mb-3 input-wrapper">
+                                            {/* <label className="form-label text-445B64">Customer Name <span className='text-danger'>*</span></label> */}
                                             <input
                                                 type="text"
-                                                placeholder='First name'
+                                                placeholder=''
                                                 className={`form-control ${errors.customerFirstName ? 'border border-danger' : formData.customerFirstName ? 'border border-success' : ''}`}
                                                 value={formData.customerFirstName || ''}
                                                 onChange={(e) => {
@@ -815,25 +815,38 @@ const MobileAddCheck = () => {
                                                     }
                                                 }}
                                             />
+                                            <label className="floating-label">
+                                                First Name <span className="required">*</span>
+                                            </label>
                                             {errors.customerFirstName && (
                                                 <div className="text-danger mt-1" style={{ fontSize: '0.6rem' }}>
                                                     "Please fill the customer first name"
                                                 </div>
                                             )}
                                         </div>
-                                        <div className="col-12 mb-3">
-                                            <input type="text" className="form-control" placeholder='Middle Name' value={formData.customerMiddleName} onChange={(e) => setFormData({ ...formData, customerMiddleName: e.target.value })} />
+
+                                        <div className="col-12 mb-3 input-wrapper">
+                                            <input type="text" className="form-control" placeholder='' value={formData.customerMiddleName} onChange={(e) => setFormData({ ...formData, customerMiddleName: e.target.value })} />
+                                            <label className="floating-label">
+                                                Middle Name
+                                            </label>
                                         </div>
-                                        <div className="col-12 mb-3">
-                                            <input type="text" className="form-control" placeholder='Last Name' value={formData.customerLastName} onChange={(e) => setFormData({ ...formData, customerLastName: e.target.value })} />
+                                        <div className="col-12 mb-3 input-wrapper">
+                                            <input type="text" className="form-control" placeholder='' value={formData.customerLastName} onChange={(e) => setFormData({ ...formData, customerLastName: e.target.value })} />
+                                            <label className="floating-label">
+                                                Last Name <span className="required">*</span>
+                                            </label>
                                         </div>
-                                        <div className="col-12 mb-3">
-                                            <label className="form-label text-445B64">ID Number </label>
-                                            <input type="text" className="form-control" value={licenseData.licenseNo || formData.licenseNo} onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} />
+                                        <div className="col-12 mb-3 input-wrapper">
+                                            {/* <label className="form-label text-445B64">ID Number </label> */}
+                                            <input type="text" className="form-control" placeholder='' value={licenseData.licenseNo || formData.licenseNo} onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} />
+                                            <label className="floating-label">
+                                                ID Number
+                                            </label>
                                         </div>
                                         <div className="col-12 mb-3 position-relative">
-                                            <label className="form-label text-445B64"> Check Type </label>
-                                            <svg style={{ position: 'absolute', top: '36px', right: '24px' }} xmlns="http://www.w3.org/2000/svg" width="12" height="11" viewBox="0 0 12 11" fill="none">
+                                            {/* <label className="form-label text-445B64"> Check Type </label> */}
+                                            <svg style={{ position: 'absolute', top: '13px', right: '24px' }} xmlns="http://www.w3.org/2000/svg" width="12" height="11" viewBox="0 0 12 11" fill="none">
                                                 <path d="M4.869 10.1308C4.811 10.0743 4.563 9.86094 4.359 9.6622C3.076 8.49708 0.976 5.45762 0.335 3.86678C0.232 3.62518 0.014 3.01437 0 2.68802C0 2.3753 0.072 2.0772 0.218 1.79274C0.422 1.43814 0.743 1.15368 1.122 0.997808C1.385 0.897467 2.172 0.741598 2.186 0.741598C3.047 0.585728 4.446 0.5 5.992 0.5C7.465 0.5 8.807 0.585728 9.681 0.713346C9.695 0.727959 10.673 0.883829 11.008 1.05431C11.62 1.36702 12 1.97784 12 2.63151V2.68802C11.985 3.11374 11.605 4.00901 11.591 4.00901C10.949 5.51413 8.952 8.48344 7.625 9.67681C7.625 9.67681 7.284 10.0129 7.071 10.159C6.765 10.387 6.386 10.5 6.007 10.5C5.584 10.5 5.19 10.3724 4.869 10.1308Z" fill="#4E4E4E" />
                                             </svg>
                                             <select className="form-control" value={formData.checkType} onChange={(e) => { const value = e.target.value; setFormData({ ...formData, checkType: value }) }} >
@@ -842,10 +855,11 @@ const MobileAddCheck = () => {
                                                 <option value="Business">Business</option>
                                             </select>
                                         </div>
-                                        <div className="col-12 mb-3">
-                                            <label className="form-label text-445B64">Amount <span className='text-danger'>*</span></label>
+                                        <div className="col-12 mb-3 input-wrapper">
+                                            {/* <label className="form-label text-445B64">Amount <span className='text-danger'>*</span></label> */}
                                             <input
                                                 type="text"
+                                                placeholder=''
                                                 className={`form-control ${errors.amount ? 'border border-danger' : formData.amount ? 'border border-success' : ''}`}
                                                 value={formData.amount || ''}
                                                 onChange={(e) => {
@@ -856,16 +870,20 @@ const MobileAddCheck = () => {
                                                     }
                                                 }}
                                             />
+                                            <label className="floating-label">
+                                                Amount <span className="required">*</span>
+                                            </label>
                                             {errors.amount && (
                                                 <div className="text-danger mt-1" style={{ fontSize: '0.6rem' }}>
                                                     "Please fill the amount"
                                                 </div>
                                             )}
                                         </div>
-                                        <div className="col-12 mb-3">
-                                            <label className="form-label text-445B64">Comapny</label>
+                                        <div className="col-12 mb-3 input-wrapper">
+                                            {/* <label className="form-label text-445B64">Company</label> */}
                                             <input
                                                 type="text"
+                                                placeholder=''
                                                 className={`form-control ${errors.company ? 'border border-danger' : formData.company ? 'border border-success' : ''}`}
                                                 value={formData.company || ''}
                                                 onChange={(e) => {
@@ -876,6 +894,9 @@ const MobileAddCheck = () => {
                                                     }
                                                 }}
                                             />
+                                            <label className="floating-label">
+                                                Company <span className="required">*</span>
+                                            </label>
                                             {errors.amount && (
                                                 <div className="text-danger mt-1" style={{ fontSize: '0.6rem' }}>
                                                     "Please fill the amount"
@@ -883,26 +904,26 @@ const MobileAddCheck = () => {
                                             )}
                                         </div>
                                         <div className="col-12 mb-3">
-                                            <label className="form-label text-445B64">Comment</label>
-                                            <textarea className="form-control" placeholder='Write Your Comment... ' value={formData.comment || ''} onChange={(e) => setFormData({ ...formData, comment: e.target.value })} />
+                                            {/* <label className="form-label text-445B64">Comment</label> */}
+                                            <textarea className="form-control" placeholder='Comment' value={formData.comment || ''} onChange={(e) => setFormData({ ...formData, comment: e.target.value })} />
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                </div >
+                            </div >
                             <div className="card bg-transparent  w-100 border-0">
                                 <div className="card-body bg-transparent" style={{ padding: '12px 0' }}>
                                     <button type="submit" className='theme-btn w-100' onClick={handleSave}>Submit</button>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </div >
+                    </div >
                 )}
-            </div>
+            </div >
 
 
 
             {/* Modal for image preview */}
-            <div
+            < div
                 className="modal fade"
                 id="imagePreviewModal"
                 tabIndex="-1"
