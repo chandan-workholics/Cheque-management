@@ -90,7 +90,7 @@ const ReportExport = () => {
                                                                             <td className="text-01A99A">Active</td>
                                                                             <td className="">
                                                                                 <div className="d-flex justify-content-center">
-                                                                                    <Link to="/cheque-management/cheque-details" className="btn">
+                                                                                    <Link to="/check-management/check-details" className="btn">
                                                                                         <i className="fa-solid fa-eye text-445B64"></i>
                                                                                     </Link>
                                                                                     <button className="btn">

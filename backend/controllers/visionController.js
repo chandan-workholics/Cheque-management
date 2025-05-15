@@ -24,8 +24,6 @@ exports.scanCheck = async (req, res) => {
     const [result] = await client.documentTextDetection({
       image: { content: req.file.buffer },
     });
-
-
     const extractedText = result.fullTextAnnotation?.text || '';
     if (!extractedText) {
       return res.status(400).json({ error: 'No text extracted from image' });
@@ -39,8 +37,6 @@ exports.scanCheck = async (req, res) => {
       /Order\s+Of:\s+([\w\s\.\-&']+)/i,
       /\n([A-Z][\w\s\.\-&']{2,})\nTO\s+THE\s+ORDER/i
     ];
-
-
     // Try to find any payee name using the variations
     let payeeText = '';
     for (let pattern of payeePatterns) {
@@ -73,7 +69,7 @@ exports.scanCheck = async (req, res) => {
     const amountNumeric = amountMatch ? amountMatch[1].replace(',', '') : '';
 
     // === Amount in Words ===
-    const amountWordsMatch = extractedText.match(/([A-Z\s\-]+)\s+DOLLARS/i);
+    const amountWordsMatch = extractedText.match( /([A-Z][a-zA-Z\s\-]+(?:\s+and\s+\d{1,2}\/100)?)\s+(DOLLARS|AMOUNT)/i);
     const amountWords = amountWordsMatch ? amountWordsMatch[1].trim() + ' DOLLARS' : '';
 
     // === Date ===

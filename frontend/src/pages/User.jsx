@@ -99,7 +99,7 @@ const User = () => {
                                                         <div className="d-flex gap-5">
                                                             <div className="mb-3">
                                                                 <div className="d-flex justify-content-end">
-                                                                    <Link to="/cheque-management/export-report" className="btn btn-sm rounded-2 bg-E4FFFD text-01A99A">
+                                                                    <Link to="/check-management/export-report" className="btn btn-sm rounded-2 bg-E4FFFD text-01A99A">
                                                                         Logout
                                                                     </Link>
                                                                 </div>

@@ -69,7 +69,7 @@ const Home = () => {
     e.preventDefault();
     const file = e.target.files[0];
     if (!file) {
-      alert("Please upload a cheque image.");
+      alert("Please upload a check image.");
       return;
     }
     const formData = new FormData();
@@ -270,7 +270,7 @@ const Home = () => {
   const handleSave = async (e) => {
     e.preventDefault();
     if (!formData.imageUrl || !licenseData.imageUrl) {
-      toast.error('Please upload both Cheque and License front images');
+      toast.error('Please upload both Check and License front images');
       return;
     }
     if (!validateForm()) {
@@ -413,7 +413,7 @@ const Home = () => {
                       <h6 className='ms-2 mb-0 text-445B64'>New Checks</h6>
                     </div>
                     <div className="card-body">
-                      <div className="row g-3 new-cheque-form">
+                      <div className="row g-3 new-check-form">
                         <div className="col-md-6">
                           <label className="form-label text-445B64">Check Image</label>
                           <div className="d-flex gap-2 gap-lg-3">
@@ -704,7 +704,7 @@ const Home = () => {
         {/* <Header /> */}
         <div className="row mb-2 pt-5 mt-4 mt-md-5">
           <div className="col-12 mb-3">
-            <Link to='/cheque-management/upload-check' className="btn mob-addCheck-btn rounded-3 border w-100 text-start d-flex align-items-center">
+            <Link to='/check-management/upload-check' className="btn mob-addCheck-btn rounded-3 border w-100 text-start d-flex align-items-center">
               <i class="fa fa-plus text-white"></i>
               <span className="text-white fw-semibold ms-2 my-1">Add New Check</span>
             </Link>

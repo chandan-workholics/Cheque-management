@@ -8,28 +8,32 @@ const URL = process.env.REACT_APP_URL;
 
 const RecentCheck = () => {
     const navigate = useNavigate();
-    const [cheques, setCheques] = useState([]);
+    const [checks, setChecks] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
 
-    const fetchCheques = async () => {
+    const fetchChecks = async () => {
         try {
             const vendorId = localStorage.getItem('userId');
-            const response = await axios.get(`${URL}/check/get-checkByVenderId/${vendorId}`);
+            const response = await axios.get(`${URL}/check/get-checkByVenderId/${vendorId}`,{
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
+            });
             if (response.data.data) {
-                setCheques(response.data.data);
+                setChecks(response.data.data);
             }
         } catch (error) {
             console.error("Error fetching check:", error);
         }
     };
 
-    const handleDeleteCheque = async (id) => {
+    const handleDeleteCheck = async (id) => {
         if (!window.confirm("Are you sure you want to delete this check?")) return;
         try {
             const response = await axios.delete(`${URL}/check/delete-check/${id}`);
             if (response.status >= 200 && response.status < 300) {
                 toast.success("Check deleted successfully!");
-                fetchCheques();
+                fetchChecks();
             }
         } catch (error) {
             toast.error("Error in deleting check: " + error.message);
@@ -37,15 +41,16 @@ const RecentCheck = () => {
         }
     };
 
-    // const handleAddCheque = () => {
-    //     navigate("/cheque-management/dashboard");
+    // const handleAddCheck = () => {
+    //     navigate("/check-management/dashboard");
     // };
 
-    const filteredCheques = cheques.filter((item, index) => {
+    const filteredChecks = checks.filter((item, index) => {
         const search = searchTerm.toLowerCase();
         return (
             (index + 1).toString().includes(search) ||
-            item.customerName?.toLowerCase().includes(search) ||
+            item.customerFirstName?.toLowerCase().includes(search) ||
+            item.customerLastName?.toLowerCase().includes(search) ||
             item.company?.toLowerCase().includes(search) ||
             item.licenseNo?.toString().toLowerCase().includes(search) ||
             item.checkType?.toLowerCase().includes(search) ||
@@ -57,12 +62,34 @@ const RecentCheck = () => {
     });
 
     useEffect(() => {
-        fetchCheques();
+        fetchChecks();
     }, []);
     return (
         <>
             <div className="row">
                 <div className="col-12">
+                    <div className='row'>
+                        <div className="col-4">
+                            <h6 className="fw-semibold">Recent Check</h6>
+                        </div>
+                        <div className="col-8">
+                                        <div className="d-flex position-relative" style={{ width: "100%" }}>
+                                            <input
+                                                className="form-control form-control-sm rounded-3 me-lg-2 shadow-none bg-F0F5F6"
+                                                value={searchTerm}
+                                                onChange={(e) => setSearchTerm(e.target.value)}
+                                                type="search"
+                                                placeholder="Search"
+                                                aria-label="Search"
+                                                style={{ paddingLeft: "35px" }}
+                                            />
+                                            <i className="fa fa-search text-445B64 position-absolute top-0 start-0" style={{ margin: "8px" }}></i>
+                                </div>
+                        </div>
+                    </div>
+
+
+                    <div className="card rounded-4 mb-1 overflow-hidden">
                     <h6 className="fw-semibold">Recent Checks</h6>
                     <div className="card border-0 shadow rounded-4 mb-1 overflow-hidden">
                         <div className="card-body p-0">
@@ -84,8 +111,8 @@ const RecentCheck = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {filteredCheques.length > 0 ? (
-                                            filteredCheques.map((item, index) => (
+                                        {filteredChecks.length > 0 ? (
+                                            filteredChecks.map((item, index) => (
                                                 <tr key={item._id}>
                                                     <td>{index + 1}</td>
                                                     <td>{item.customerFirstName}</td>
@@ -108,9 +135,9 @@ const RecentCheck = () => {
                                                     <td>{item.status}</td>
                                                     <td>
                                                         <div className="d-flex justify-content-center">
-                                                            <Link to={`/cheque-management/cheque-details/${item?._id}`} className="btn py-0">
+                                                            <Link to={`/check-management/check-details/${item?._id}`} className="btn py-0">
                                                                 <i className="fa-solid fa-eye text-445B64"></i>
-                                                            </Link><button className="btn py-0" onClick={() => handleDeleteCheque(item._id)}>
+                                                            </Link><button className="btn py-0" onClick={() => handleDeleteCheck(item._id)}>
                                                                 <i className="fa-solid fa-trash-can text-danger"></i>
                                                             </button>
                                                         </div>
@@ -119,7 +146,7 @@ const RecentCheck = () => {
                                             ))
                                         ) : (
                                             <tr>
-                                                <td colSpan="10" className="text-center">No cheques found</td>
+                                                <td colSpan="10" className="text-center">No checks found</td>
                                             </tr>
                                         )}
                                     </tbody>
@@ -129,6 +156,7 @@ const RecentCheck = () => {
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </>
     )

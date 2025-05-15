@@ -22,7 +22,7 @@ const Report = () => {
                 setReport(response?.data);
             }
         } catch (error) {
-            console.error("Error fetching cheques:", error);
+            console.error("Error fetching checks:", error);
         }
     }
     useEffect(() => {
@@ -61,7 +61,7 @@ const Report = () => {
                                                         </div>
                                                         <div className="col-6 col-lg-6">
                                                             <div className="d-flex justify-content-end">
-                                                                <Link to="/cheque-management/export-report" className="btn btn-sm rounded-2 bg-E4FFFD text-01A99A">
+                                                                <Link to="/check-management/export-report" className="btn btn-sm rounded-2 bg-E4FFFD text-01A99A">
                                                                     Export Report
                                                                 </Link>
                                                             </div>
@@ -114,7 +114,7 @@ const Report = () => {
                                                                                 <td className="text-01A99A">Active</td>
                                                                                 <td>
                                                                                     <div className="d-flex justify-content-center">
-                                                                                        <Link to={`/cheque-management/cheque-details/${val?._id}`} className="btn">
+                                                                                        <Link to={`/check-management/check-details/${val?._id}`} className="btn">
                                                                                             <i className="fa-solid fa-eye text-445B64"></i>
                                                                                         </Link>
                                                                                         <button className="btn">

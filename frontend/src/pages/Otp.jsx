@@ -17,7 +17,7 @@ const Otp = () => {
 
     useEffect(() => {
         if (timeLeft <= 0) {
-            navigate('/cheque-management/email-verification-expired');
+            navigate('/check-management/email-verification-expired');
             return;
         }
         const timer = setInterval(() => {
@@ -51,7 +51,7 @@ const Otp = () => {
                     toast.success("OTP Verified Successfully!")
                 }, 1000);
                 setTimeout(() => {
-                    navigate('/cheque-management/email-verification-successfully');
+                    navigate('/check-management/email-verification-successfully');
                 }, 2000);
             }
         } catch (err) {

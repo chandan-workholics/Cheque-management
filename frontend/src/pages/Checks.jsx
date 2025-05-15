@@ -8,12 +8,12 @@ import "react-toastify/dist/ReactToastify.css";
 const token = localStorage.getItem('token')
 const URL = process.env.REACT_APP_URL;
 
-const Cheques = () => {
+const Checks = () => {
     const navigate = useNavigate();
-    const [cheques, setCheques] = useState([]);
+    const [checks, setChecks] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
 
-    const fetchCheques = async () => {
+    const fetchChecks = async () => {
         try {
             const vendorId = localStorage.getItem('userId');
             const response = await axios.get(`${URL}/check/get-checkByVenderId/${vendorId}`, {
@@ -22,14 +22,14 @@ const Cheques = () => {
                 }
             });
             if (response.data.data) {
-                setCheques(response.data.data);
+                setChecks(response.data.data);
             }
         } catch (error) {
             console.error("Error fetching check:", error);
         }
     };
 
-    const handleDeleteCheque = async (id) => {
+    const handleDeleteCheck = async (id) => {
         if (!window.confirm("Are you sure you want to delete this check?")) return;
         try {
             const response = await axios.delete(`${URL}/check/delete-check/${id}`, {
@@ -39,7 +39,7 @@ const Cheques = () => {
             });
             if (response.status >= 200 && response.status < 300) {
                 toast.success("Check deleted successfully!");
-                fetchCheques();
+                fetchChecks();
             }
         } catch (error) {
             toast.error("Error in deleting check: " + error.message);
@@ -47,14 +47,14 @@ const Cheques = () => {
         }
     };
 
-    const handleAddCheque = () => {
-        navigate("/cheque-management/upload-check");
+    const handleAddCheck = () => {
+        navigate("/check-management/dashboard");
     };
-    const handleAddChequeDesk = () => {
+    const handleAddCheckDesk = () => {
         navigate("/cheque-management/dashboard");
     };
 
-    const filteredCheques = cheques.filter((item, index) => {
+    const filteredCheck = checks.filter((item, index) => {
         const search = searchTerm.toLowerCase();
         return (
             (index + 1).toString().includes(search) ||
@@ -70,7 +70,7 @@ const Cheques = () => {
     });
 
     useEffect(() => {
-        fetchCheques();
+        fetchChecks();
     }, []);
 
     return (
@@ -100,7 +100,7 @@ const Cheques = () => {
                                                     </div>
                                                 </div>
                                                 <div className="col-6 d-flex justify-content-end align-items-center d-md-none">
-                                                    <button className='btn border-0 rounded-2 bg-E4FFFD text-01A99A py-1 px-2 fs-14 text-445B64 p-0 mb-2' onClick={handleAddCheque}>
+                                                    <button className='btn border-0 rounded-2 bg-E4FFFD text-01A99A py-1 px-2 fs-14 text-445B64 p-0 mb-2' onClick={handleAddCheck}>
                                                         <i className="fa fa-plus me-2"></i>Add Check
                                                     </button>
                                                 </div>
@@ -121,7 +121,7 @@ const Cheques = () => {
                                                             </div>
                                                         </div>
                                                         <div className="col-md-3 mt-3 mt-md-0 d-none d-md-flex justify-content-end align-items-center">
-                                                            <button className='btn btn-light py-1 px-2 fs-14 text-445B64 p-0' onClick={handleAddChequeDesk}>
+                                                            <button className='btn btn-light py-1 px-2 fs-14 text-445B64 p-0' onClick={handleAddCheckDesk}>
                                                                 <i className="fa fa-plus me-2"></i>Add Check
                                                             </button>
                                                         </div>
@@ -153,8 +153,8 @@ const Cheques = () => {
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        {filteredCheques.length > 0 ? (
-                                                            filteredCheques.map((item, index) => (
+                                                        {filteredCheck.length > 0 ? (
+                                                            filteredCheck.map((item, index) => (
                                                                 <tr key={item._id}>
                                                                     <td>{index + 1}</td>
                                                                     <td>{item.customerFirstName}</td>
@@ -170,9 +170,9 @@ const Cheques = () => {
                                                                     <td>{item.status}</td>
                                                                     <td>
                                                                         <div className=" justify-content-center">
-                                                                            <Link to={`/cheque-management/cheque-details/${item?._id}`} className="btn">
+                                                                            <Link to={`/check-management/check-details/${item?._id}`} className="btn">
                                                                                 <i className="fa-solid fa-eye text-445B64"></i>
-                                                                            </Link><button className="btn" onClick={() => handleDeleteCheque(item._id)}>
+                                                                            </Link><button className="btn" onClick={() => handleDeleteCheck(item._id)}>
                                                                                 <i className="fa-solid fa-trash-can text-danger"></i>
                                                                             </button>
                                                                         </div>
@@ -181,7 +181,7 @@ const Cheques = () => {
                                                             ))
                                                         ) : (
                                                             <tr>
-                                                                <td colSpan="10" className="text-center">No cheques found</td>
+                                                                <td colSpan="10" className="text-center">No checks found</td>
                                                             </tr>
                                                         )}
                                                     </tbody>
@@ -200,5 +200,5 @@ const Cheques = () => {
     );
 };
 
-export default Cheques;
+export default Checks;
 

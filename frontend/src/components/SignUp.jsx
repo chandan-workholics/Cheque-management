@@ -105,7 +105,7 @@ const SignUp = () => {
           toast.success('OTP send successfully');
         }, 1000);
         setTimeout(() => {
-          navigate('/cheque-management/verify-otp')
+          navigate('/check-management/verify-otp')
           localStorage.setItem("email", formData.email)
         }, 2000);
       } else {
@@ -178,7 +178,7 @@ const SignUp = () => {
                   ) : (
                     "Sign Up"
                   )}</button>
-                  <h6 className="text-center text-445B64 mb-3">Don't have an account? <Link to='/cheque-management/' className='text-00C7BE text-decoration-none'> Sign in</Link></h6>
+                  <h6 className="text-center text-445B64 mb-3">Don't have an account? <Link to='/check-management/' className='text-00C7BE text-decoration-none'> Sign in</Link></h6>
                 </div>
               </div>
             </div>

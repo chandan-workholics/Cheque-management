@@ -30,7 +30,7 @@ const ForgetPasswordVerification = () => {
       });
       toast.success(response.data.message);
       setTimeout(() => {
-        navigate('/cheque-management/forget-password');
+        navigate('/check-management/forget-password');
       }, 2000);
     } catch (error) {
       toast.error(error.response?.data?.message || "Invalid OTP");
