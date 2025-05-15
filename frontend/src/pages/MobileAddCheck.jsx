@@ -298,10 +298,6 @@ const MobileAddCheck = () => {
         }
         try {
             const response = await axios.post(`${URL}/check/add-check`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            }, {
                 imageUrl: formData.imageUrl || '',
                 imageUrl2: formDataback.imageUrl || '',
                 imageUrl3: licenseData.imageUrl || '',
@@ -326,6 +322,10 @@ const MobileAddCheck = () => {
                 extractedText: formData.extractedText,
                 comment: formData.comment,
                 venderId: venderId
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             });
             console.log(response)
             if (response.status >= 200 && response.status < 300) {
@@ -839,7 +839,7 @@ const MobileAddCheck = () => {
                                         </div>
                                         <div className="col-12 mb-3 input-wrapper">
                                             {/* <label className="form-label text-445B64">ID Number </label> */}
-                                            <input type="text" className="form-control" placeholder='' value={licenseData.licenseNo || formData.licenseNo} onChange={(e) => setFormData({ ...licenseData, licenseNo: e.target.value })} />
+                                            <input type="text" className="form-control" placeholder='' value={licenseData.licenseNo || formData.licenseNo} onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} />
                                             <label className="floating-label">
                                                 ID Number
                                             </label>
@@ -880,26 +880,50 @@ const MobileAddCheck = () => {
                                             )}
                                         </div>
                                         <div className="col-12 mb-3 input-wrapper">
+                                            {/* <label className="form-label text-445B64">Company</label> */}
+                                            <input
+                                                type="text"
+                                                placeholder=''
+                                                className={`form-control ${errors.company ? 'border border-danger' : formData.company ? 'border border-success' : ''}`}
+                                                value={formData.company || ''}
+                                                onChange={(e) => {
+                                                    const value = e.target.value;
+                                                    setFormData({ ...formData, company: value });
+                                                    if (value.trim() !== '') {
+                                                        setErrors((prev) => ({ ...prev, company: null }));
+                                                    }
+                                                }}
+                                            />
+                                            <label className="floating-label">
+                                                Company <span className="required">*</span>
+                                            </label>
+                                            {errors.amount && (
+                                                <div className="text-danger mt-1" style={{ fontSize: '0.6rem' }}>
+                                                    "Please fill the amount"
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div className="col-12 mb-3">
                                             {/* <label className="form-label text-445B64">Comment</label> */}
                                             <textarea className="form-control" placeholder='Comment' value={formData.comment || ''} onChange={(e) => setFormData({ ...formData, comment: e.target.value })} />
                                         </div>
                                     </div>
+                                </div >
+                            </div >
+                            <div className="card bg-transparent  w-100 border-0">
+                                <div className="card-body bg-transparent" style={{ padding: '12px 0' }}>
+                                    <button type="submit" className='theme-btn w-100' onClick={handleSave}>Submit</button>
                                 </div>
                             </div>
-                            <div className="card bg-transparent position-fixed start-0 bottom-0 w-100 border-0">
-                                <div className="card-body bg-transparent" style={{ padding: '12px' }}>
-                                    <button className='theme-btn w-100' onClick={handleSave}>Submit</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        </div >
+                    </div >
                 )}
-            </div>
+            </div >
 
 
 
             {/* Modal for image preview */}
-            <div
+            < div
                 className="modal fade"
                 id="imagePreviewModal"
                 tabIndex="-1"

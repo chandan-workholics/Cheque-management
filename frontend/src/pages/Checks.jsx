@@ -48,11 +48,11 @@ const Checks = () => {
     };
 
     const handleAddCheck = () => {
-        navigate("/check-management/dashboard");
+        navigate("/check-management/upload-check");
     };
     
     const handleAddCheckDesk = () => {
-        navigate("/cheque-management/dashboard");
+        navigate("/check-management/dashboard");
     };
 
     const filteredCheck = checks.filter((item, index) => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import {  Link } from 'react-router-dom';
 import axios from 'axios';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -8,7 +8,7 @@ const URL = process.env.REACT_APP_URL;
 const token = localStorage.getItem('token');
 
 const RecentCheck = () => {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [checks, setChecks] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
 
@@ -71,6 +71,7 @@ const RecentCheck = () => {
     }, []);
     return (
         <>
+         <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
             <div className="row">
                 <div className="col-12">
                     <div className='d-flex justify-content-between mb-3'>
