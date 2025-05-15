@@ -50,6 +50,9 @@ const Checks = () => {
     const handleAddCheck = () => {
         navigate("/check-management/dashboard");
     };
+    const handleAddCheckDesk = () => {
+        navigate("/cheque-management/dashboard");
+    };
 
     const filteredCheck = checks.filter((item, index) => {
         const search = searchTerm.toLowerCase();
@@ -118,7 +121,7 @@ const Checks = () => {
                                                             </div>
                                                         </div>
                                                         <div className="col-md-3 mt-3 mt-md-0 d-none d-md-flex justify-content-end align-items-center">
-                                                            <button className='btn btn-light py-1 px-2 fs-14 text-445B64 p-0' onClick={handleAddCheck}>
+                                                            <button className='btn btn-light py-1 px-2 fs-14 text-445B64 p-0' onClick={handleAddCheckDesk}>
                                                                 <i className="fa fa-plus me-2"></i>Add Check
                                                             </button>
                                                         </div>
@@ -139,9 +142,10 @@ const Checks = () => {
                                                         <tr>
                                                             <th>#</th>
                                                             <th>Customer Name</th>
-                                                            <th>ID Number</th>
-                                                            <th>Type</th>
                                                             <th>Amount</th>
+                                                            <th>ID Number</th>
+                                                            <th>Company</th>
+                                                            <th>Type</th>
                                                             <th>Comment</th>
                                                             <th>Date & Time</th>
                                                             <th>Status</th>
@@ -154,9 +158,10 @@ const Checks = () => {
                                                                 <tr key={item._id}>
                                                                     <td>{index + 1}</td>
                                                                     <td>{item.customerFirstName}</td>
-                                                                    <td>{item.licenseNo}</td>
-                                                                    <td>{item.checkType}</td>
                                                                     <td>{item.amount}</td>
+                                                                    <td>{item.licenseNo}</td>
+                                                                    <td>{item.company}</td>
+                                                                    <td>{item.checkType}</td>
                                                                     <td>{item.comment?.length > 10 ? item.comment.substring(0, 10) + '...' : item.comment}</td>
                                                                     <td>
                                                                         {item?.date }

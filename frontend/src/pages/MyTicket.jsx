@@ -125,7 +125,7 @@ const MyTicket = () => {
                                                 <div className="card-body p-2">
                                                     <div className="row">
                                                         <div className="col-6 col-lg-6">
-                                                            <div className="d-flex justify-content-between mb-3 mb-lg-0">
+                                                            <div className="d-flex justify-content-between mb-lg-0">
                                                                 <div className="d-flex align-items-center">
                                                                     <div className="table-circular-icon bg-F0F5F6 me-3"
                                                                         style={{ cursor: "pointer" }}>
@@ -155,28 +155,24 @@ const MyTicket = () => {
                                                 <div className="card-body p-2">
                                                     <div className="row">
                                                         <div className="col-12 col-lg-6">
-                                                            <div className="d-flex justify-content-between mb-3 mb-lg-0">
-
-                                                                <div className="d-flex align-items-center">
-                                                                    <div className="d-flex gap-4">
-                                                                        <div className="form-check align-items-center">
-                                                                            <input className="form-check-input table-checkbox"
-                                                                                type="checkbox" value="" id="flexCheckDefault" />
-                                                                            <label className="form-check-label ms-2" htmlFor="all">All</label>
-                                                                        </div>
-                                                                        <div className="form-check">
-                                                                            <input className="form-check-input table-checkbox"
-                                                                                type="checkbox" value="" id="flexCheckDefault" />
-                                                                            <label className="form-check-label ms-2" htmlFor="inprogress">In Progress</label>
-                                                                        </div>
-                                                                        <div className="form-check">
-                                                                            <input className="form-check-input table-checkbox"
-                                                                                type="checkbox" value="" id="flexCheckDefault" />
-                                                                            <label className="form-check-label ms-2" htmlFor="completed">Completed</label>
-                                                                        </div>
+                                                            <div className="d-flex justify-content-between mb-lg-0">
+                                                                <div className="d-flex">
+                                                                    <div className="form-check me-3 me-lg-4">
+                                                                        <input className="form-check-input table-checkbox"
+                                                                            type="checkbox" value="" id="flexCheckDefault" />
+                                                                        <label className="form-check-label ms-1 ms-lg-2" style={{ paddingTop: '2px' }} htmlFor="all">All</label>
+                                                                    </div>
+                                                                    <div className="form-check me-3 me-lg-4">
+                                                                        <input className="form-check-input table-checkbox"
+                                                                            type="checkbox" value="" id="flexCheckDefault" />
+                                                                        <label className="form-check-label ms-1 ms-lg-2" style={{ paddingTop: '2px' }} htmlFor="inprogress">In Progress</label>
+                                                                    </div>
+                                                                    <div className="form-check me-3 me-lg-4">
+                                                                        <input className="form-check-input table-checkbox"
+                                                                            type="checkbox" value="" id="flexCheckDefault" />
+                                                                        <label className="form-check-label ms-1 ms-lg-2" style={{ paddingTop: '2px' }} htmlFor="completed">Completed</label>
                                                                     </div>
                                                                 </div>
-
                                                             </div>
                                                         </div>
                                                     </div>
@@ -309,7 +305,7 @@ const MyTicket = () => {
 
             {/* Image Preview Modal */}
             <div className="modal fade" id="imagePreviewModal" tabIndex="-1" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered" style={{width:'fit-content'}}>
+                <div className="modal-dialog modal-dialog-centered" style={{ width: 'fit-content' }}>
                     <div className="modal-content bg-transparent border-0 shadow rounded-4">
                         <div className="modal-body text-center p-0">
                             {previewImage && (
