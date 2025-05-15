@@ -35,12 +35,12 @@ const ReportExport = () => {
                                                             </div>
                                                         </div>
                                                         <div className="col-12 col-lg-8">
-                                                            <div className="d-flex justify-content-end">
-                                                                <button className="btn btn-light btn-sm bg-F5F5F5 rounded-2 me-2">Export Report to 28/04/2025 to 28/04/2025 </button>
+                                                            <div className="d-block text-center d-lg-flex justify-content-end">
+                                                                <button className="btn btn-light btn-sm bg-F5F5F5 rounded-2 me-lg-2 mb-2 mb-lg-0">Export Report to 28/04/2025 to 28/04/2025 </button>
                                                                 <Link to="/" className="btn btn-sm rounded-2 bg-E4FFFD text-01A99A me-2">
                                                                     View
                                                                 </Link>
-                                                                <button className="btn btn-sm rounded-2 me-2">Downloads Now</button>
+                                                                <button className="btn btn-sm rounded-2 me-2 btn-primary">Downloads Now</button>
                                                                 <button className="btn btn-danger btn-sm rounded-2 me-2">PDF</button>
                                                                 <button className="btn btn-success btn-sm rounded-2">CSV</button>
                                                             </div>

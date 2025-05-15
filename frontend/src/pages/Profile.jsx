@@ -95,18 +95,18 @@ const Profile = () => {
                                                     <div className="d-flex justify-content-between">
                                                         <div className="d-flex gap-5">
                                                             <div>
-                                                                <h6 className="fs-14 mb-1">
-                                                                    <span className="text-445B64 fw-normal">Full Name : </span>
+                                                                <h6 className="fs-14 mb-2">
+                                                                    <span className="fw-normal" style={{color:'#445B64'}}>Full Name : </span> <br />
                                                                     <span className="text-0D161A fw-semibold">{userData?.firstname && userData?.lastname
                                                                         ? `${userData?.firstname} ${userData?.lastname}`
                                                                         : 'Loading...'}</span>
                                                                 </h6>
-                                                                <h6 className="fs-14 mb-1">
-                                                                    <span className="text-445B64 fw-normal">Mobile : </span>
+                                                                <h6 className="fs-14 mb-2">
+                                                                    <span className="fw-normal" style={{color:'#445B64'}}>Mobile : </span> <br />
                                                                     <span className="text-0D161A fw-semibold">+(1) {userData?.mobile} </span>
                                                                 </h6>
-                                                                <h6 className="fs-14 mb-1">
-                                                                    <span className="text-445B64 fw-normal">Email : </span>
+                                                                <h6 className="fs-14 mb-0">
+                                                                    <span className="fw-normal" style={{color:'#445B64'}}>Email : </span> <br />
                                                                     <span className="text-0D161A fw-semibold">{userData?.email || 'Loading...'}</span>
                                                                 </h6>
                                                             </div>

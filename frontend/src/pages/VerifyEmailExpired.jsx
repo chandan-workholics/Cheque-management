@@ -45,8 +45,8 @@ const VerifyEmailExpired = () => {
                 <div className="col-lg-6 sign-left-bg h-100 justify-content-center d-none d-lg-flex align-items-center">
                     <img src={logoLeft} alt="" className="" />
                 </div>
-                <div className="col-lg-6 h-100 bg-EEEEEE position-relative">
-                    <div className="row h-100">
+                <div className="col-lg-6 sign-right-bg h-100 bg-EEEEEE position-relative">
+                    <div className="row h-100 w-100">
                         <div className="col-lg-8 col-xl-7 col-xxl-6 mx-auto d-flex justify-content-center align-items-center">
                             <div className="w-100 text-center">
                                 <img src={emailVerifyExpired} alt="" className="mb-3" style={{ width: '70px' }} />
