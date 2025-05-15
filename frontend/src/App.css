@@ -103,6 +103,10 @@ body {
   background-color: #F8F8F8;
 }
 
+.bg-F4F4F4 {
+  background-color: #F4F4F4;
+}
+
 /* Background-Color-End */
 
 /* Text-Color-Start */
@@ -163,7 +167,7 @@ body {
 }
 
 .sign-logo {
-  width: 180px;
+  width: 170px;
 }
 
 .sign-left-bg {
@@ -248,6 +252,12 @@ body {
   left: 0;
   z-index: 11;
   background-color: #FFFFFF;
+}
+
+.navbar-brand img {
+  width: 150px;
+  height: 35px;
+  object-fit: contain;
 }
 
 .header-icon {
@@ -513,13 +523,44 @@ input::placeholder:after {
     tr:nth-child(odd) {
       background-color: #FAFAFA !important;
     }
-
   }
+
+  .input-wrapper {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+
+  .floating-label {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    color: #000000;
+    pointer-events: none;
+    transition: all 0.2s ease;
+    font-size: 14px;
+    background: white;
+    padding: 0 4px;
+  }
+
+  .floating-label .required {
+    color: red;
+  }
+
+  .input-wrapper input:focus+.floating-label,
+  .input-wrapper input:not(:placeholder-shown)+.floating-label {
+    top: -8px;
+    left: 8px;
+    font-size: 0.75rem;
+    display: none;
+  }
+
 }
 
-.mob-addCheck-btn{
+.mob-addCheck-btn {
   background: linear-gradient(0deg, rgba(0, 172, 238, 1) 0%, rgba(2, 126, 251, 1) 100%);
 }
+
 .MobSidebarBg {
   background-image: url('../src/assets/images/sidebarBG.png');
   background-position: right;

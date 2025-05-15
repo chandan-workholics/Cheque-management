@@ -3,12 +3,14 @@ import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import ExportModal from '../components/ExportModal';
 const token = localStorage.getItem('token')
 const URL = process.env.REACT_APP_URL;
 
 const Report = () => {
 
     const [report, setReport] = useState();
+    const [showModal, setShowModal] = useState(false);
 
     const fetchReport = async () => {
         try {
@@ -61,9 +63,15 @@ const Report = () => {
                                                         </div>
                                                         <div className="col-6 col-lg-6">
                                                             <div className="d-flex justify-content-end">
-                                                                <Link to="/check-management/export-report" className="btn btn-sm rounded-2 bg-E4FFFD text-01A99A">
+                                                                {/* <Link to="/check-management/export-report" className="btn btn-sm rounded-2 bg-E4FFFD text-01A99A">
                                                                     Export Report
-                                                                </Link>
+                                                                </Link> */}
+                                                                <div className="position-relative">
+                                                                    <button onClick={() => setShowModal(true)} className="btn btn-sm rounded-2 bg-E4FFFD text-01A99A">
+                                                                        Export Report
+                                                                    </button>
+                                                                    <ExportModal show={showModal} onClose={() => setShowModal(false)} />
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -50,6 +50,7 @@ const Checks = () => {
     const handleAddCheck = () => {
         navigate("/check-management/dashboard");
     };
+    
     const handleAddCheckDesk = () => {
         navigate("/cheque-management/dashboard");
     };
