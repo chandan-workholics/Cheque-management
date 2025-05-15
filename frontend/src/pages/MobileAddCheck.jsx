@@ -566,7 +566,7 @@ const MobileAddCheck = () => {
                                 </div>
                             </div>
                             <div className="card position-static mt-4 bg-transparent start-0 bottom-0 w-100 border-0">
-                                <div className="card-body" style={{ padding: '12px' }}>
+                                <div className="card-body" style={{ padding: '12px 0' }}>
                                     <button className='theme-btn w-100' onClick={nextStep}>Next</button>
                                 </div>
                             </div>
@@ -777,7 +777,7 @@ const MobileAddCheck = () => {
                                 </div>
                             </div>
                             <div className="card position-static bg-transparent start-0 bottom-0 w-100 border-0">
-                                <div className="card-body bg-transparent" style={{ padding: '12px' }}>
+                                <div className="card-body bg-transparent" style={{ padding: '12px 0' }}>
                                     <button className='w-100 border-0 bg-transparent text-secondary mb-3 fw-semibold' onClick={skipStep}>Skip</button>
                                     <button className='theme-btn w-100' onClick={nextStep}>Next</button>
                                 </div>
@@ -863,14 +863,34 @@ const MobileAddCheck = () => {
                                             )}
                                         </div>
                                         <div className="col-12 mb-3">
+                                            <label className="form-label text-445B64">Comapny</label>
+                                            <input
+                                                type="text"
+                                                className={`form-control ${errors.company ? 'border border-danger' : formData.company ? 'border border-success' : ''}`}
+                                                value={formData.company || ''}
+                                                onChange={(e) => {
+                                                    const value = e.target.value;
+                                                    setFormData({ ...formData, company: value });
+                                                    if (value.trim() !== '') {
+                                                        setErrors((prev) => ({ ...prev, company: null }));
+                                                    }
+                                                }}
+                                            />
+                                            {errors.amount && (
+                                                <div className="text-danger mt-1" style={{ fontSize: '0.6rem' }}>
+                                                    "Please fill the amount"
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div className="col-12 mb-3">
                                             <label className="form-label text-445B64">Comment</label>
                                             <textarea className="form-control" placeholder='Write Your Comment... ' value={formData.comment || ''} onChange={(e) => setFormData({ ...formData, comment: e.target.value })} />
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="card bg-transparent position-fixed start-0 bottom-0 w-100 border-0">
-                                <div className="card-body bg-transparent" style={{ padding: '12px' }}>
+                            <div className="card bg-transparent  w-100 border-0">
+                                <div className="card-body bg-transparent" style={{ padding: '12px 0' }}>
                                     <button className='theme-btn w-100' onClick={handleSave}>Submit</button>
                                 </div>
                             </div>

@@ -652,7 +652,11 @@ const Home = () => {
                                 </div>
                               )}
                             </div>
-                            <div className="col-md-6 mb-3 ">
+                            <div className="col-md-3 mb-3 ">
+                              <label className="form-label text-445B64">Company</label>
+                              <input className="form-control" value={formData.company || ''} onChange={(e) => setFormData({ ...formData, company: e.target.value })} />
+                            </div>
+                              <div className="col-md-3 mb-3 ">
                               <label className="form-label text-445B64">Comments</label>
                               <input className="form-control" value={formData.comment || ''} onChange={(e) => setFormData({ ...formData, comment: e.target.value })} />
                             </div>
