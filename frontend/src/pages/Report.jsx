@@ -83,12 +83,11 @@ const Report = () => {
                                                                             </th>
                                                                             <th scope="col" className="text-445B64">SNo.</th>
                                                                             <th scope="col" className="text-445B64">Customer Name</th>
-                                                                            <th scope="col" className="text-445B64">Company Name</th>
-                                                                            <th scope="col" className="text-445B64">License No</th>
+                                                                            <th scope="col" className="text-445B64">ID Number</th>
                                                                             <th scope="col" className="text-445B64 text-center">Check Type</th>
                                                                             <th scope="col" className="text-445B64">Amount</th>
                                                                             <th scope="col" className="text-445B64">Comment</th>
-                                                                            <th scope="col" className="text-445B64">Date
+                                                                            <th scope="col" className="text-445B64">Date & Time
                                                                             </th>
                                                                             <th scope="col" className="text-445B64 text-center">Status</th>
                                                                             <th scope="col" className="text-445B64 text-center">Actions</th>
@@ -107,7 +106,6 @@ const Report = () => {
                                                                                 </td>
                                                                                 <td>{index + 1}</td>
                                                                                 <td>{val?.subject}</td>
-                                                                                <td>State Bank of India</td>
                                                                                 <td>64644444</td>
                                                                                 <td>Self Check</td>
                                                                                 <td>$487441</td>
