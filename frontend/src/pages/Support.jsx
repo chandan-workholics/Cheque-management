@@ -16,7 +16,7 @@ const Support = () => {
         e.preventDefault();
         const file = e.target.files[0];
         if (!file) {
-            alert("Please upload a cheque image.");
+            alert("Please upload a check image.");
             return;
         }
         const formData = new FormData();
@@ -117,7 +117,7 @@ const Support = () => {
                                                         </div>
                                                         <div className="col-6 col-lg-6">
                                                             <div className="d-flex justify-content-end">
-                                                                <button className="btn btn-sm rounded-2 bg-FFF0F0 text-E84D4D" onClick={()=>navigate('/cheque-management/my-ticket')}>
+                                                                <button className="btn btn-sm rounded-2 bg-FFF0F0 text-E84D4D" onClick={()=>navigate('/check-management/my-ticket')}>
                                                                     My Ticket
                                                                 </button>
                                                             </div>
@@ -130,7 +130,7 @@ const Support = () => {
                                                     <h6 className='ms-2 mb-0 text-445B64 fs-14'>New Ticket</h6>
                                                 </div>
                                                 <div className="card-body">
-                                                    <div className="row g-3 new-cheque-form">
+                                                    <div className="row g-3 new-check-form">
                                                         <div className="col-lg-6">
                                                             <div className="row">
                                                                 <div className="col-md-6 mb-3">

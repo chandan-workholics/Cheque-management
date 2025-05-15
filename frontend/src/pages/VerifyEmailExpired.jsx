@@ -25,7 +25,7 @@ const VerifyEmailExpired = () => {
             if (res.status === 200) {
                 toast.success("OTP resent!");
                 setTimeout(() => {
-                    navigate('/cheque-management/verify-otp');
+                    navigate('/check-management/verify-otp');
                 }, 1500);
             } else {
                 toast.error("There is some issue in OTP resend!");

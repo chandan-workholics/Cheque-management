@@ -6,7 +6,7 @@ const ProtectedRoute = ({ element }) => {
     const token = localStorage.getItem("token"); 
 
     if (!token) {
-        return <Navigate to="/cheque-management/" />;
+        return <Navigate to="/check-management/" />;
     }
     return element;
 };

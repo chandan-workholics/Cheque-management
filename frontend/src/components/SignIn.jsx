@@ -64,7 +64,7 @@ const SignIn = () => {
 
         toast.success('Login successfully');
         setTimeout(() => {
-          navigate('/cheque-management/dashboard');
+          navigate('/check-management/dashboard');
         }, 2000);
       } else {
         toast.error("Failed to login");
@@ -90,7 +90,7 @@ const SignIn = () => {
         toast.success('OTP sent to your email.');
         localStorage.setItem("resetEmail", forgotEmail);
         setTimeout(() => {
-          navigate('/cheque-management/forget-password-verification');
+          navigate('/check-management/forget-password-verification');
         }, 2000);
       } else {
         toast.error('Failed to send OTP.');
@@ -191,7 +191,7 @@ const SignIn = () => {
                       </button>
                       <h6 className="text-center text-445B64">
                         Don't have an account?
-                        <Link to="/cheque-management/sign-up" className="text-00C7BE text-decoration-none"> Sign up</Link>
+                        <Link to="/check-management/sign-up" className="text-00C7BE text-decoration-none"> Sign up</Link>
                       </h6>
                     </>
                   )}

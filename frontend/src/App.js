@@ -3,8 +3,8 @@ import "./App.css";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import Home from "./pages/Home";
-import Cheques from "./pages/Cheques";
-import ChequeDetails from "./pages/ChequeDetails";
+import Checks from "./pages/Checks";
+import CheckDetails from "./pages/CheckDetails";
 import Report from "./pages/Report";
 import ReportExport from "./pages/ReportExport";
 import User from "./pages/User";
@@ -26,25 +26,25 @@ function App() {
     <>
       <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <Routes>
-          <Route path="/cheque-management/" element={<SignIn />} />
-          <Route path="/cheque-management/sign-up" element={<SignUp />} />
-          <Route path="/cheque-management/dashboard" element={<ProtectedRoute element={<Home />}/>} />
-          <Route path="/cheque-management/cheques" element={<ProtectedRoute element={<Cheques />}/>} />
-          <Route path="/cheque-management/cheque-details/:id" element={<ProtectedRoute element={<ChequeDetails />}/>} />
-          <Route path="/cheque-management/report" element={<ProtectedRoute element={<Report />}/>} />
-          <Route path="/cheque-management/export-report" element={<ProtectedRoute element={<ReportExport />}/>} />
-          {/* <Route path="/cheque-management/user" element={<ProtectedRoute element={<User />}/>} /> */}
-          <Route path="/cheque-management/support" element={<ProtectedRoute element={<Support />}/>} />
-          <Route path="/cheque-management/verify-otp" element={<Otp />} />
-          <Route path="/cheque-management/verify-email" element={<VerifyEmail />} />
-          <Route path="/cheque-management/email-verification-expired" element={<VerifyEmailExpired />} />
-          <Route path="/cheque-management/email-verification-successfully" element={<VerifyEmailSuccess />} />
-          <Route path="/cheque-management/my-ticket" element={<ProtectedRoute element={<MyTicket />}/>} />
-          {/* <Route path="/cheque-management/setting" element={<ProtectedRoute element={<Setting />}/>} /> */}
-          <Route path="/cheque-management/forget-password" element={<ForgetPassword/>}/>
-          <Route path="/cheque-management/forget-password-verification" element={<ForgetPasswordVerification/>}/>
-          <Route path="/cheque-management/profile" element={<Profile/>}/>
-          <Route path="/cheque-management/upload-check" element={<MobileAddCheck/>}/>
+          <Route path="/check-management/" element={<SignIn />} />
+          <Route path="/check-management/sign-up" element={<SignUp />} />
+          <Route path="/check-management/dashboard" element={<ProtectedRoute element={<Home />}/>} />
+          <Route path="/check-management/checks" element={<ProtectedRoute element={<Checks />}/>} />
+          <Route path="/check-management/check-details/:id" element={<ProtectedRoute element={<CheckDetails />}/>} />
+          <Route path="/check-management/report" element={<ProtectedRoute element={<Report />}/>} />
+          <Route path="/check-management/export-report" element={<ProtectedRoute element={<ReportExport />}/>} />
+          {/* <Route path="/check-management/user" element={<ProtectedRoute element={<User />}/>} /> */}
+          <Route path="/check-management/support" element={<ProtectedRoute element={<Support />}/>} />
+          <Route path="/check-management/verify-otp" element={<Otp />} />
+          <Route path="/check-management/verify-email" element={<VerifyEmail />} />
+          <Route path="/check-management/email-verification-expired" element={<VerifyEmailExpired />} />
+          <Route path="/check-management/email-verification-successfully" element={<VerifyEmailSuccess />} />
+          <Route path="/check-management/my-ticket" element={<ProtectedRoute element={<MyTicket />}/>} />
+          {/* <Route path="/check-management/setting" element={<ProtectedRoute element={<Setting />}/>} /> */}
+          <Route path="/check-management/forget-password" element={<ForgetPassword/>}/>
+          <Route path="/check-management/forget-password-verification" element={<ForgetPasswordVerification/>}/>
+          <Route path="/check-management/profile" element={<Profile/>}/>
+          <Route path="/check-management/upload-check" element={<MobileAddCheck/>}/>
         </Routes>
       </BrowserRouter>
     </>

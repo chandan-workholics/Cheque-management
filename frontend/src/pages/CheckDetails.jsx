@@ -7,12 +7,12 @@ import axios from 'axios';
 const URL = process.env.REACT_APP_URL;
 const token = localStorage.getItem('token')
 
-const ChequeDetails = () => {
-    const [chequeDetails, setChequeDetails] = useState('');
+const CheckDetails = () => {
+    const [checkDetails, setCheckDetails] = useState('');
     const { id } = useParams()
     const navigate = useNavigate()
 
-    const fetchChequeDetails = async () => {
+    const fetchCheckDetails = async () => {
         try {
 
             const response = await axios.get(`${URL}/check/get-checkById/${id}`, {
@@ -21,7 +21,7 @@ const ChequeDetails = () => {
                 }
             });
             if (response.status >= 200 && response.status < 300) {
-                setChequeDetails(response?.data?.data)
+                setCheckDetails(response?.data?.data)
             }
         } catch (error) {
             console.log("Error in fetching check:" + error.message);
@@ -29,7 +29,7 @@ const ChequeDetails = () => {
     }
 
     useEffect(() => {
-        fetchChequeDetails();// eslint-disable-next-line react-hooks/exhaustive-deps
+        fetchCheckDetails();// eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const handleBack = () => {
@@ -87,38 +87,38 @@ const ChequeDetails = () => {
                                                             <div className="d-block d-lg-flex gap-5 flex-wrap">
                                                                 <div className="mb-3">
                                                                     <h6 className="text-445B64 fs-14 mb-1" style={{color:'#445B64'}}>Customer Name</h6>
-                                                                    <h6 className="text-0D161A fw-semibold fs-14">{chequeDetails?.customerFirstName}</h6>
+                                                                    <h6 className="text-0D161A fw-semibold fs-14">{checkDetails?.customerFirstName}</h6>
                                                                 </div>
                                                                 <div className="mb-3">
                                                                     <h6 className="text-445B64 fs-14 mb-1" style={{color:'#445B64'}}>ID Number</h6>
-                                                                    <h6 className="text-0D161A fw-semibold fs-14">{chequeDetails?.licenseNo}</h6>
+                                                                    <h6 className="text-0D161A fw-semibold fs-14">{checkDetails?.licenseNo}</h6>
                                                                 </div>
                                                                 {/* <div className="mb-3">
                                                                     <h6 className="text-445B64 fs-14 mb-1">Company</h6>
-                                                                    <h6 className="text-0D161A fw-semibold fs-14">{chequeDetails?.company}</h6>
+                                                                    <h6 className="text-0D161A fw-semibold fs-14">{checkDetails?.company}</h6>
                                                                 </div> */}
                                                                 <div className="mb-3">
                                                                     <h6 className="text-445B64 fs-14 mb-1" style={{color:'#445B64'}}>Check Type</h6>
-                                                                    <h6 className="text-0D161A fw-semibold fs-14">{chequeDetails?.checkType}</h6>
+                                                                    <h6 className="text-0D161A fw-semibold fs-14">{checkDetails?.checkType}</h6>
                                                                 </div>
                                                                 <div className="mb-3">
                                                                     <h6 className="text-445B64 fs-14 mb-1" style={{color:'#445B64'}}>Amount</h6>
-                                                                    <h6 className="text-0D161A fw-semibold fs-14">${chequeDetails?.amount}</h6>
+                                                                    <h6 className="text-0D161A fw-semibold fs-14">${checkDetails?.amount}</h6>
                                                                 </div>
                                                                 <div className="mb-3">
                                                                     <h6 className="text-445B64 fs-14 mb-1" style={{color:'#445B64'}}>Date & Time</h6>
                                                                     <h6 className="text-0D161A fw-semibold mb-0 fs-14">
-                                                                        {chequeDetails?.date}
+                                                                        {checkDetails?.date}
                                                                     </h6>
 
                                                                 </div>
                                                             </div>
-                                                            <div className="d-block d-lg-flex gap-3 align-chequeDetails?s-start">
+                                                            <div className="d-block d-lg-flex gap-3 align-checkDetails?s-start">
                                                                 <div className="mb-3">
                                                                     <h6 className="text-445B64 fs-14 mb-1" style={{color:'#445B64'}}>Status</h6>
                                                                     <div>
-                                                                        <button className={`btn btn-sm rounded-2 lh-1 text-white ${chequeDetails?.isActive ? "bg-4FD1C5" : "bg-E84D4D"}`}>
-                                                                            {chequeDetails?.isActive ? "Active" : "Deactive"}
+                                                                        <button className={`btn btn-sm rounded-2 lh-1 text-white ${checkDetails?.isActive ? "bg-4FD1C5" : "bg-E84D4D"}`}>
+                                                                            {checkDetails?.isActive ? "Active" : "Deactive"}
                                                                         </button>
                                                                     </div>
                                                                 </div>
@@ -130,7 +130,7 @@ const ChequeDetails = () => {
                                                                 <h6 className="text-445B64 fs-14 mb-1" style={{color:'#445B64'}}>Comments</h6>
                                                                 <div className="card rounded-3">
                                                                     <div className="card-body p-2">
-                                                                        <p className="text-0D161A fw-light fs-13 mb-0">{chequeDetails?.comment || "No comments available."}</p>
+                                                                        <p className="text-0D161A fw-light fs-13 mb-0">{checkDetails?.comment || "No comments available."}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -148,15 +148,15 @@ const ChequeDetails = () => {
                                                                 <div className="row">
                                                                     <div className="col-lg-6 mb-3 mb-lg-0">
                                                                         <label className="form-label text-445B64">Front Image</label>
-                                                                        {chequeDetails?.imageUrl ?
-                                                                            <img src={chequeDetails?.imageUrl} alt='Profile' className='w-100 border rounded-4 overflow-hidden' /> :
+                                                                        {checkDetails?.imageUrl ?
+                                                                            <img src={checkDetails?.imageUrl} alt='Profile' className='w-100 border rounded-4 overflow-hidden' /> :
                                                                             <h6 className="text-secondary fs-14">Image not Available</h6>
                                                                         }
                                                                     </div>
                                                                     <div className="col-lg-6">
                                                                         <label className="form-label text-445B64">Back Image</label>
-                                                                        {chequeDetails?.imageUrl2 ?
-                                                                            <img src={chequeDetails?.imageUrl2} alt='Profile' className='w-100 border rounded-4 overflow-hidden' /> :
+                                                                        {checkDetails?.imageUrl2 ?
+                                                                            <img src={checkDetails?.imageUrl2} alt='Profile' className='w-100 border rounded-4 overflow-hidden' /> :
                                                                             <h6 className="text-secondary fs-14">Image not Available</h6>
                                                                         }
                                                                     </div>
@@ -171,15 +171,15 @@ const ChequeDetails = () => {
                                                                 <div className="row">
                                                                     <div className="col-lg-6 mb-3 mb-lg-0">
                                                                         <label className="form-label text-445B64">Front Image</label>
-                                                                        {chequeDetails?.imageUrl3 ?
-                                                                            <img src={chequeDetails?.imageUrl3} alt='Profile' className='w-100 border rounded-4 overflow-hidden' /> :
+                                                                        {checkDetails?.imageUrl3 ?
+                                                                            <img src={checkDetails?.imageUrl3} alt='Profile' className='w-100 border rounded-4 overflow-hidden' /> :
                                                                             <h6 className="text-secondary fs-14">Image not Found</h6>
                                                                         }
                                                                     </div>
                                                                     <div className="col-lg-6">
                                                                         <label className="form-label text-445B64">Back Image</label>
-                                                                        {chequeDetails?.imageUrl4 ?
-                                                                            <img src={chequeDetails?.imageUrl4} alt='Profile' className='w-100 border rounded-4 overflow-hidden' /> :
+                                                                        {checkDetails?.imageUrl4 ?
+                                                                            <img src={checkDetails?.imageUrl4} alt='Profile' className='w-100 border rounded-4 overflow-hidden' /> :
                                                                             <h6 className="text-secondary fs-14">Image not Found</h6>
                                                                         }
                                                                     </div>
@@ -201,4 +201,4 @@ const ChequeDetails = () => {
     )
 }
 
-export default ChequeDetails
+export default CheckDetails
