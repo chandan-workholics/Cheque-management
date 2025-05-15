@@ -1,12 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import logo from '../assets/images/EzKash.png'
 import supportIconImg from '../assets/images/supportIconImg.png';
 import { NavLink, Link, useNavigate } from 'react-router-dom'
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import profileImg from '../assets/images/userImg.png'
+const URL = process.env.REACT_APP_URL;
+const token = localStorage.getItem('token')
 
 const Header = () => {
+
+    const [userData, setUserData] = useState(null);
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const userId = localStorage.getItem("userId")
+                const res = await axios.get(`${URL}/auth/get-venderById/${userId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                setUserData(res.data.data);
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        };
+
+        fetchUser();
+    }, []);
 
     const navigate = useNavigate();
 
@@ -77,8 +99,8 @@ const Header = () => {
                                 <div className="mb-2">
                                     <img src={profileImg} alt="" className="" />
                                 </div>
-                                <h5 className="text-white mb-1">Cody Fisher</h5>
-                                <h6 className="text-white fw-normal">alma.lawson@example.com</h6>
+                                <h5 className="text-white mb-1">{userData?.firstname} {userData?.lastname}</h5>
+                                <h6 className="text-white fw-normal">{userData?.email}</h6>
                             </li>
                             <li>
                                 <NavLink to="/cheque-management/dashboard" className="nav-link">
