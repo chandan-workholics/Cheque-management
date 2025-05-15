@@ -14,8 +14,8 @@ const RecentCheck = () => {
     const fetchChecks = async () => {
         try {
             const vendorId = localStorage.getItem('userId');
-            const response = await axios.get(`${URL}/check/get-checkByVenderId/${vendorId}`,{
-                headers:{
+            const response = await axios.get(`${URL}/check/get-checkByVenderId/${vendorId}`, {
+                headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
@@ -68,29 +68,25 @@ const RecentCheck = () => {
         <>
             <div className="row">
                 <div className="col-12">
-                    <div className='row'>
-                        <div className="col-4">
-                            <h6 className="fw-semibold">Recent Check</h6>
+                    <div className='d-flex justify-content-between mb-3'>
+                        <div className="d-flex align-items-center">
+                            <h6 className="fw-semibold mb-0">Recent Checks</h6>
                         </div>
-                        <div className="col-8">
-                                        <div className="d-flex position-relative" style={{ width: "100%" }}>
-                                            <input
-                                                className="form-control form-control-sm rounded-3 me-lg-2 shadow-none bg-F0F5F6"
-                                                value={searchTerm}
-                                                onChange={(e) => setSearchTerm(e.target.value)}
-                                                type="search"
-                                                placeholder="Search"
-                                                aria-label="Search"
-                                                style={{ paddingLeft: "35px" }}
-                                            />
-                                            <i className="fa fa-search text-445B64 position-absolute top-0 start-0" style={{ margin: "8px" }}></i>
-                                </div>
+                        <div className="">
+                            <div className="d-flex position-relative" style={{ width: "100%" }}>
+                                <input
+                                    className="form-control form-control-sm rounded-3 me-lg-2 shadow-none bg-F0F5F6"
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                    type="search"
+                                    placeholder="Search"
+                                    aria-label="Search"
+                                    style={{ paddingLeft: "35px" }}
+                                />
+                                <i className="fa fa-search text-445B64 position-absolute top-0 start-0" style={{ margin: "8px" }}></i>
+                            </div>
                         </div>
                     </div>
-
-
-                    <div className="card rounded-4 mb-1 overflow-hidden">
-                    <h6 className="fw-semibold">Recent Checks</h6>
                     <div className="card border-0 shadow rounded-4 mb-1 overflow-hidden">
                         <div className="card-body p-0">
                             {/* Table Starts Here */}
@@ -156,7 +152,6 @@ const RecentCheck = () => {
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
         </>
     )
