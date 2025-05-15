@@ -5,6 +5,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const URL = process.env.REACT_APP_URL;
+const token = localStorage.getItem('token');
 
 const RecentCheck = () => {
     const navigate = useNavigate();
@@ -30,7 +31,11 @@ const RecentCheck = () => {
     const handleDeleteCheck = async (id) => {
         if (!window.confirm("Are you sure you want to delete this check?")) return;
         try {
-            const response = await axios.delete(`${URL}/check/delete-check/${id}`);
+            const response = await axios.delete(`${URL}/check/delete-check/${id}`,{
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
+            });
             if (response.status >= 200 && response.status < 300) {
                 toast.success("Check deleted successfully!");
                 fetchChecks();

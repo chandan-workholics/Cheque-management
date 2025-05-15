@@ -43,7 +43,11 @@ const MyTicket = () => {
     const getChat = async (id) => {
         try {
             setTicketsId(id)
-            const response = await axios.get(`${URL}/complain/tickets/chat/${id}`);
+            const response = await axios.get(`${URL}/complain/tickets/chat/${id}`,{
+                headers: {
+                     Authorization: `Bearer ${token}`
+                }
+            });
 
             if (response.status >= 200 && response.status < 300) {
                 setData(response?.data || []);
@@ -66,7 +70,8 @@ const MyTicket = () => {
         try {
             const response = await axios.post(`${URL}/complain/tickets/chat/`, payload, {
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                     Authorization: `Bearer ${token}`
                 }
             });
 
@@ -93,6 +98,7 @@ const MyTicket = () => {
             const response = await axios.post(`${URL}/upload-image`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
+                     Authorization: `Bearer ${token}`
                 },
             });
             const result = response.data;

@@ -79,6 +79,7 @@ const Home = () => {
       const response = await axios.post(`${URL}/scan-check`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`
         },
       });
       setTimeout(() => {
@@ -126,6 +127,7 @@ const Home = () => {
       const response = await axios.post(`${URL}/scan-check`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
+           Authorization: `Bearer ${token}`
         },
       });
       setTimeout(() => {
@@ -171,6 +173,7 @@ const Home = () => {
       const response = await axios.post(`${URL}/scan-license`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
+           Authorization: `Bearer ${token}`
         },
       });
       setTimeout(() => {
@@ -216,6 +219,7 @@ const Home = () => {
       const response = await axios.post(`${URL}/scan-license`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
+           Authorization: `Bearer ${token}`
         },
       });
       setTimeout(() => {
@@ -278,7 +282,11 @@ const Home = () => {
       return;
     }
     try {
-      const response = await axios.post(`${URL}/check/add-check`, {
+      const response = await axios.post(`${URL}/check/add-check`,{
+        headers:{
+           Authorization: `Bearer ${token}`
+        }
+      } ,{
         imageUrl: formData.imageUrl || '',
         imageUrl2: formDataback.imageUrl || '',
         imageUrl3: licenseData.imageUrl || '',

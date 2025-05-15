@@ -4,6 +4,7 @@ import Header from '../components/header';
 import Sidebar from '../components/Sidebar';
 import { useNavigate } from 'react-router-dom';
 const URL = process.env.REACT_APP_URL;
+const token = localStorage.getItem('token')
 
 const Support = () => {
     const navigate = useNavigate();
@@ -25,6 +26,7 @@ const Support = () => {
             const response = await axios.post(`${URL}/scan-check`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
+                     Authorization: `Bearer ${token}`
                 },
             });
 
@@ -62,6 +64,10 @@ const Support = () => {
     const addTicket = async () => {
         try {
             const response = await axios.post(`${URL}/complain/tickets`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            },{
                 subject: data?.subject || '',
                 category: data?.category || '',
                 description: data?.description || '',
