@@ -298,10 +298,6 @@ const MobileAddCheck = () => {
         }
         try {
             const response = await axios.post(`${URL}/check/add-check`,{
-             headers:{
-                Authorization: `Bearer ${token}`
-             }
-            } ,{
                 imageUrl: formData.imageUrl || '',
                 imageUrl2: formDataback.imageUrl || '',
                 imageUrl3: licenseData.imageUrl || '',
@@ -326,6 +322,10 @@ const MobileAddCheck = () => {
                 extractedText: formData.extractedText,
                 comment: formData.comment,
                 venderId: venderId
+            },{
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
             });
             console.log(response)
             if (response.status >= 200 && response.status < 300) {
@@ -829,7 +829,7 @@ const MobileAddCheck = () => {
                                         </div>
                                         <div className="col-12 mb-3">
                                             <label className="form-label text-445B64">ID Number </label>
-                                            <input type="text" className="form-control" value={licenseData.licenseNo || formData.licenseNo} onChange={(e) => setFormData({ ...licenseData, licenseNo: e.target.value })} />
+                                            <input type="text" className="form-control" value={licenseData.licenseNo || formData.licenseNo} onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} />
                                         </div>
                                         <div className="col-12 mb-3 position-relative">
                                             <label className="form-label text-445B64"> Check Type </label>
@@ -891,7 +891,7 @@ const MobileAddCheck = () => {
                             </div>
                             <div className="card bg-transparent  w-100 border-0">
                                 <div className="card-body bg-transparent" style={{ padding: '12px 0' }}>
-                                    <button className='theme-btn w-100' onClick={handleSave}>Submit</button>
+                                    <button type="submit" className='theme-btn w-100' onClick={handleSave}>Submit</button>
                                 </div>
                             </div>
                         </div>
